@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8p87t4ex6hyc"]
+
+[ext_resource type="Script" uid="uid://diayjifta0gwr" path="res://Inventory/Item/pick_up/pick_up.gd" id="1_n850y"]
+[ext_resource type="ArrayMesh" uid="uid://0esnh01r80tl" path="res://Inventory/Item/Items/Tools/Axe/axe_mesh.res" id="3_aroi8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y3fo0"]
+radius = 1.3657227
+height = 9.198486
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_y3fo0"]
+radius = 5.8713574
+
+[sub_resource type="Animation" id="Animation_y3fo0"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ovudm"]
+resource_name = "anim"
+length = 0.75
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(0, -0.235, 0, 0.235, 0, 0, -0.06333333, 0, 0, 0, 0, -0.050000004, 0, 0, 0, 0, -0.046666663, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.38, 0.55333334, 0.73333335)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(4.500303, -0.235, 0, 0.235, 0, 0, -0.06333333, 0.7500505, 0, 0, 2.503501, -0.050000004, -0.4172502, 0, 0, 0, -0.046666663, 0.41725016, 0, 0),
+"times": PackedFloat32Array(0, 0.38, 0.55333334, 0.73333335)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2, 0, 0),
+"points": PackedFloat32Array(0, -0.235, 0, 0.235, 0, 0, -0.06333333, 0, 0, 0, 0, -0.050000004, 0, 0, 0, 0, -0.046666663, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.38, 0.55333334, 0.73333335)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y3fo0"]
+_data = {
+&"RESET": SubResource("Animation_y3fo0"),
+&"anim": SubResource("Animation_ovudm")
+}
+
+[node name="PickUp" type="StaticBody3D"]
+collision_layer = 2
+script = ExtResource("1_n850y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4129639, 0)
+shape = SubResource("CapsuleShape3D_y3fo0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_aroi8")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_y3fo0")
+debug_color = Color(0.9077461, 0.00012321472, 0.74074787, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_y3fo0")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 100.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

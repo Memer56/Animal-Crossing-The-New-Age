@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhlfrgbt4uaru"]
+
+[ext_resource type="ArrayMesh" uid="uid://0esnh01r80tl" path="res://Inventory/Item/Items/Tools/Axe/axe_mesh.res" id="1_f08ae"]
+
+[sub_resource type="Skin" id="Skin_2y24t"]
+resource_name = "Skin"
+bind_count = 2
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, -1, 4.371139e-08, 0, -4.371139e-08, -1, 0, 0, 0)
+bind/1/name = &"Mdl_Root"
+bind/1/bone = -1
+bind/1/pose = Transform3D(1, 0, 0, 0, -1.0000001, 4.3711392e-08, 0, -4.371139e-08, -1, -0.01802923, -3.0749323, -0.01272027)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f08ae"]
+size = Vector3(103.10327, 468.10693, 86.68335)
+
+[node name="Axe" type="Node3D"]
+
+[node name="pCube4__mTool" type="MeshInstance3D" parent="."]
+transform = Transform3D(60.000004, 0, 0, 0, 60, 0, 0, 0, 60.000004, 0, 0, 0)
+mesh = ExtResource("1_f08ae")
+skin = SubResource("Skin_2y24t")
+skeleton = NodePath("")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -256.68268, 137.23517, 6.904907)
+shape = SubResource("BoxShape3D_f08ae")
+debug_color = Color(0.46958673, 0.2830777, 1, 0.41960785)

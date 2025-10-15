@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://tmwkjijb24q8"]
+
+[ext_resource type="ArrayMesh" uid="uid://0esnh01r80tl" path="res://Inventory/Item/Items/Tools/Axe/axe_mesh.res" id="1_deckl"]
+[ext_resource type="Script" uid="uid://chww475xli04w" path="res://Inventory/Item/item_data.gd" id="1_nv81u"]
+[ext_resource type="Texture2D" uid="uid://b4ghx2im1lupb" path="res://Inventory/Item/Items/Tools/Nintendo Switch - Animal Crossing_ New Horizons - Storage Icons - Tools and Handheld Items Icons.png" id="2_mxbwo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_deckl"]
+atlas = ExtResource("2_mxbwo")
+region = Rect2(296, 272, 80, 112)
+
+[resource]
+script = ExtResource("1_nv81u")
+name = "Axe"
+description = "Chop down the trees, don't tell Treebeard"
+texture = SubResource("AtlasTexture_deckl")
+mesh = ExtResource("1_deckl")
+metadata/_custom_type_script = "uid://chww475xli04w"
