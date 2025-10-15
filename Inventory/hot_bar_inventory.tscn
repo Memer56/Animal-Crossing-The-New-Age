@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8wdc4tvskx4f"]
+
+[ext_resource type="Script" uid="uid://bdcnioghlsaoo" path="res://Inventory/hot_bar_inventory.gd" id="1_0du2l"]
+[ext_resource type="Texture2D" uid="uid://chquc6ykux6ek" path="res://Inventory/UI/item_slot_highlight.png" id="2_ary8l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5s44"]
+bg_color = Color(0.914063, 0.820313, 0.671875, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 10
+
+[node name="HotBarInventory" type="PanelContainer"]
+offset_right = 34.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c5s44")
+script = ExtResource("1_0du2l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 0
+
+[node name="ItemSlotHighlight" type="Sprite2D" parent="."]
+scale = Vector2(2.8, 2.8)
+texture = ExtResource("2_ary8l")
+centered = false
+offset = Vector2(1.5, 1.5)
