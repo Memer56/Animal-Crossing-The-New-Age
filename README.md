@@ -1,1 +1,3 @@
-Nintendo will sue me.
+ANC : The New Age 
+
+Alpha version : 1.0
