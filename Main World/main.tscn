@@ -1,0 +1,159 @@
+[gd_scene load_steps=20 format=3 uid="uid://bvftnysq4rp8u"]
+
+[ext_resource type="PackedScene" uid="uid://c5pmfoxxqus5u" path="res://Player/player.tscn" id="1_bu67d"]
+[ext_resource type="Script" uid="uid://cvuw6go0bxmna" path="res://Main World/main.gd" id="1_ogax8"]
+[ext_resource type="Script" uid="uid://chnm0638og0bs" path="res://Inventory/inventory_interface.gd" id="2_i07l7"]
+[ext_resource type="PackedScene" uid="uid://bdtqvbf7i3opd" path="res://Inventory/inventory.tscn" id="2_nf8f0"]
+[ext_resource type="PackedScene" uid="uid://ehe4pj2atsxh" path="res://NPC's/Bunny Npc's/rabbit_00.tscn" id="3_5mtb5"]
+[ext_resource type="PackedScene" uid="uid://c8wdc4tvskx4f" path="res://Inventory/hot_bar_inventory.tscn" id="3_ipw8k"]
+[ext_resource type="Environment" uid="uid://xvk60om2yxmu" path="res://Environment Resource/beautiful_sky.tres" id="3_nf8f0"]
+[ext_resource type="PackedScene" uid="uid://cvyftmwfpksm5" path="res://Inventory/slot.tscn" id="5_ccpwn"]
+[ext_resource type="PackedScene" uid="uid://c1sfbvd3rjb32" path="res://Islands/Island 1/island_1.tscn" id="6_4517d"]
+[ext_resource type="Shader" uid="uid://x2eoj7cj6nqs" path="res://Shaders/water.gdshader" id="6_nf8f0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i07l7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipw8k"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i07l7"]
+points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_nf8f0"]
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nf8f0"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i07l7"]
+noise = SubResource("FastNoiseLite_nf8f0")
+seamless = true
+as_normal_map = true
+bump_strength = 13.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ipw8k"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ccpwn"]
+noise = SubResource("FastNoiseLite_ipw8k")
+seamless = true
+as_normal_map = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7n1vu"]
+render_priority = 0
+shader = ExtResource("6_nf8f0")
+shader_parameter/water_color = Color(0, 0.7490196, 0.9411765, 0.6745098)
+shader_parameter/fresnel_color = Color(0.34117648, 0.7490196, 0.99215686, 0.5019608)
+shader_parameter/depth_color = Color(0.039215688, 0.46666667, 0.7254902, 0.4862745)
+shader_parameter/roughness = 12.135
+shader_parameter/normalmap_a_str = 0.87999998033024
+shader_parameter/normalmap_b_str = 0.31999999284736
+shader_parameter/normalmap_a = SubResource("NoiseTexture2D_i07l7")
+shader_parameter/normalmap_b = SubResource("NoiseTexture2D_ccpwn")
+shader_parameter/movement_direction = Vector2(-0.12, -0.055)
+shader_parameter/movement_strength = 0.025
+shader_parameter/time_scale = 0.1999999955296
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/fresnel_scale = -0.1
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/uv_scale = 1.0
+shader_parameter/depth_distance = 14.30000021308716
+shader_parameter/beers_law = 1.0
+shader_parameter/water_transparency = 0.1
+shader_parameter/refraction_strength = 0.05
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ogax8")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_i07l7")
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("2_nf8f0")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 84.0
+offset_right = 20.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HotBarInventory" parent="UI/InventoryInterface" instance=ExtResource("3_ipw8k")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -64.0
+offset_right = 17.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("5_ccpwn")]
+layout_mode = 0
+offset_left = -78.0
+offset_right = -14.0
+offset_bottom = 64.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.4524347, 0.51660156, 0.72692895, 0, -0.8151278, 0.5792812, 0.89179754, 0.26208693, 0.3687921, -5.4254284, 223.46521, 64.717896)
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_nf8f0")
+
+[node name="Sky" type="Node3D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_bu67d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -334.41638, 45.085213, 396.15637)
+
+[node name="Rabbit_00" parent="." instance=ExtResource("3_5mtb5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.239902, 21.670853, 176.62321)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7040643, 0.71013623, 0, -0.71013623, 0.7040643, -18.08294, 342.70877, 557.779)
+
+[node name="WorldUnderlay" type="MeshInstance3D" parent="."]
+transform = Transform3D(800, 0, 0, 0, 800, 0, 0, 0, 800, 0, -13.532639, 0)
+visible = false
+mesh = SubResource("PlaneMesh_i07l7")
+surface_material_override/0 = SubResource("ShaderMaterial_ipw8k")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WorldUnderlay"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldUnderlay/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_i07l7")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(10000, 0, 0, 0, 1, 0, 0, 0, 10000, -241.13441, -3.7987938, 0.1505549)
+mesh = SubResource("QuadMesh_nf8f0")
+surface_material_override/0 = SubResource("ShaderMaterial_7n1vu")
+
+[node name="Island1" parent="." instance=ExtResource("6_4517d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.29, 0)
+
+[connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

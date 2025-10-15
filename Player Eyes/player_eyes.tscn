@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=4 uid="uid://divvxjy5la0oe"]
+
+[ext_resource type="Script" uid="uid://bh4g2chmocfi4" path="res://Player/external_body_part.gd" id="1_df6dt"]
+[ext_resource type="Texture2D" uid="uid://cubvbj2ihcxlo" path="res://Player Eyes/Textures/Eyes_Albedo.png" id="1_gwrko"]
+[ext_resource type="Texture2D" uid="uid://kh52wg6tbd4a" path="res://Player Eyes/Textures/Eyes_Roughness.png" id="2_ts6w2"]
+[ext_resource type="Texture2D" uid="uid://0e7qfw25lipy" path="res://Player Eyes/Textures/Eyes_Normal.png" id="3_jpxyi"]
+[ext_resource type="Shader" uid="uid://10it47r2wi6k" path="res://Shaders/colour_swap.gdshader" id="4_ts6w2"]
+[ext_resource type="Texture2D" uid="uid://c18g2ef7fohm8" path="res://Player Eyes/Textures/Eyes_Skin_Mask.png" id="5_jpxyi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm8hl"]
+resource_name = "mEye"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_gwrko")
+metallic_texture = ExtResource("2_ts6w2")
+metallic_texture_channel = 2
+roughness = 0.5
+roughness_texture = ExtResource("2_ts6w2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = ExtResource("3_jpxyi")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_x3vf3"]
+_surfaces = [{
+"aabb": AABB(-2.931488, 0.72278, -13.39627, 5.862976, 1.8475199, 2.5993004),
+"format": 34896613377,
+"index_count": 234,
+"index_data": PackedByteArray("AAABAAIAIAABAAAAAQAgAAYAAAADACAABgAgACEAIQAJAAYAIAADACIAIgAhACAABQAiAAMABAAiAAUABAAjACIAIwAhACIACAAjAAQAJAAJACEAIwAkACEAJAAKAAkACAAlACMAJQAkACMABwAlAAgAJgAKACQAJQAmACQAJgALAAoABwAnACUAJwAmACUADgAnAAcAKAALACYAJwAoACYAKAANAAsADgApACcAKQAoACcADwApAA4AKgANACgAKQAqACgAKgAQAA0ADwArACkAKwAqACkADAArAA8ALAAQACoALAAqACsAFwArAAwALQAQACwALAArAC0AEQAQAC0ALgArABcAKwAuAC0AFgAuABcALQAvABEALQAuAC8AEQAvABIAMAAuABYAMAAvAC4AGAAwABYAMQASAC8AMQAvADAAEwASADEAMgAwABgAMAAyADEAGQAyABgAMQAzABMAMQAyADMAEwAzABQANAAyABkANAAzADIAGwA0ABkANQAUADMANQAzADQAFQAUADUANgA0ABsANgA1ADQAHAA2ABsAGgA2ABwANwA1ADYANgAaADcANQA3ABUANwAaAB4AFQA3AB0AHgAdADcAHwAdAB4A"),
+"lods": [0.6654449, PackedByteArray("AAABAAIAAAADAAEAAQADAAQABQAEAAMABAAGAAEABAAHAAYACAAHAAQABwAJAAYABwAKAAkABwALAAoADAALAAcADAANAAsADgAMAAcADwAMAA4ADAAQAA0AEQAQAAwAEQAMABIAEwASAAwAEwAMABQAFQAUAAwAFgAMABcAGAAMABYAGQAMABgAFQAMABkAGgAVABkAGgAZABsAHAAaABsAHQAVABoAHQAaAB4AHwAdAB4A")],
+"name": "mEye",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("EgFEFKvhAACqEL5gmfEAAAAAxRj//wAARwLpDiOQAADQGB1OYSsAAMUEAADCQwAA9CTHmDblAADkPLCnTRAAAI0q34FaGwAAjjoZwlLcAAD7Te/d5NUAAEpg0O1d0QAA/3/k3AAAAAAadb/5SM4AAIlQ98NKCAAAJmJA0ukDAAD/f///q8wAAOSKv/lIzgAAtJ/Q7V3RAAADsu/d5NUAAHDFGcJS3AAACtvHmDblAAB1r/fDSggAANidQNLpAwAAGsOwp00QAABx1d+BWhsAALf96Q4jkAAALucdTmErAAA5+wAAwkMAAFTvvmCZ8QAA7P5EFKvhAAD//8UY//8AAHQSPV0x0gAAMyZDkz7GAADrFElVzH4AAGkoe4k0cQAAOzvEu6m9AABEPC2x6mcAAK5OVdV4twAAe09+y7RhAACwYFnlOLQAADthTtsAXgAAPXgv9EyxAAD/f0zpD1sAAP9/0fQ8sAAAwYcv9EyxAADDnk7bAF4AAE6fWeU4tAAAg7B+y7RhAABQsVXVeLcAALrDLbHqZwAAw8TEu6m9AACV13uJNHEAAMvZQ5M+xgAAE+tJVcx+AACK7T1dMdIAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_def42"]
+resource_name = "Player eye test_Body__mEye"
+_surfaces = [{
+"aabb": AABB(-2.931488, 0.72278, -13.39627, 5.862976, 1.8475199, 2.5993004),
+"attribute_data": PackedByteArray("/////zkFdaL/////1Rbju/////9HAy2//////w0HB2L/////liDIG/////98ChAk/////7Arqbj/////z0O/E/////94M5MW/////5NArbb/////M1Jstf////90Y7m0/////9h/Vw7/////V3ZntP/////JVeoR/////9RldxD/////2H9PtP////+oiWe0/////4ucubT/////y61stf////9rv622/////0/Uqbj/////NqrqEf////8rmncQ/////y+8vxP/////h8yTFv/////y+Adi/////2jfyBv/////gvUQJP////8q6eO7/////8T6daL/////uPwtv/////9MGdGf/////4wtnp3/////dxwlX/////+hMG5b/////0FBTpz/////VUPsWf////8YU26b/////31UR1n/////z2Ofmv/////0ZO9Y/////+94mJr/////2H8aWP/////Yfxmb/////w+HmJr/////C5vvWP////8wnJ+a/////4GrR1n/////56xum/////+qvOxZ/////72+Tpz/////Xs9uW/////9z0p6d/////4jjJV//////s+bRnw=="),
+"format": 34896613407,
+"index_count": 234,
+"index_data": PackedByteArray("AAABAAIAIAABAAAAAQAgAAYAAAADACAABgAgACEAIQAJAAYAIAADACIAIgAhACAABQAiAAMABAAiAAUABAAjACIAIwAhACIACAAjAAQAJAAJACEAIwAkACEAJAAKAAkACAAlACMAJQAkACMABwAlAAgAJgAKACQAJQAmACQAJgALAAoABwAnACUAJwAmACUADgAnAAcAKAALACYAJwAoACYAKAANAAsADgApACcAKQAoACcADwApAA4AKgANACgAKQAqACgAKgAQAA0ADwArACkAKwAqACkADAArAA8ALAAQACoALAAqACsAFwArAAwALQAQACwALAArAC0AEQAQAC0ALgArABcAKwAuAC0AFgAuABcALQAvABEALQAuAC8AEQAvABIAMAAuABYAMAAvAC4AGAAwABYAMQASAC8AMQAvADAAEwASADEAMgAwABgAMAAyADEAGQAyABgAMQAzABMAMQAyADMAEwAzABQANAAyABkANAAzADIAGwA0ABkANQAUADMANQAzADQAFQAUADUANgA0ABsANgA1ADQAHAA2ABsAGgA2ABwANwA1ADYANgAaADcANQA3ABUANwAaAB4AFQA3AB0AHgAdADcAHwAdAB4A"),
+"lods": [0.6654449, PackedByteArray("AAABAAIAAAADAAEAAQADAAQABQAEAAMABAAGAAEABAAHAAYACAAHAAQABwAJAAYABwAKAAkABwALAAoADAALAAcADAANAAsADgAMAAcADwAMAA4ADAAQAA0AEQAQAAwAEQAMABIAEwASAAwAEwAMABQAFQAUAAwAFgAMABcAGAAMABYAGQAMABgAFQAMABkAGgAVABkAGgAZABsAHAAaABsAHQAVABoAHQAaAB4AHwAdAB4A")],
+"material": SubResource("StandardMaterial3D_pm8hl"),
+"name": "mEye",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("EgFEFKvhUdCqEL5gmfEUzgAAxRj//w7QRwLpDiOQRtHQGB1OYSvV0MUEAADCQ0DV9CTHmDbl+8vkPLCnTRCoy40q34FaG63NjjoZwlLc1Mr7Te/d5NUtykpg0O1d0fLI/3/k3AAAFckadb/5SM5dyIlQ98NKCF7KJmJA0ukDRcn/f///q8yex+SKv/lIzl3ItJ/Q7V3R8sgDsu/d5NUtynDFGcJS3NTKCtvHmDbl/Mt1r/fDSgheytidQNLpA0XJGsOwp00QqMtx1d+BWhuszbf96Q4jkEbRLucdTmEr1dA5+wAAwkNA1VTvvmCZ8RTO7P5EFKvhUdD//8UY//8O0HQSPV0x0uPMMyZDkz7GGsrrFElVzH4RzWkoe4k0cZ/JOzvEu6m99sdEPC2x6mf0xq5OVdV4t2bGe09+y7RhDcWwYFnlOLSOxTthTtsAXhfEPXgv9EyxmsX/f0zpD1vUw/9/0fQ8sBXGwYcv9EyxmsXDnk7bAF4XxE6fWeU4tI7Fg7B+y7RhDcVQsVXVeLdmxrrDLbHqZ/TGw8TEu6m99seV13uJNHGfycvZQ5M+xhrKE+tJVcx+Ec2K7T1dMdLjzATjcMKg5tm5K+IvxBjkHMGY5ue4FONewJvqybDL7s6oseo+sU3usKjZ8q+fGfdulf///39d+euQ0/IWn9j3UpL///9/Eu9deZDqGndO4NpyTtdNbjXPnGro4NNyrO3YdzDXy27BzrJq4r4ZZBfHmWafvxVjJMagZo29BGPPuytikOc9uS7rILH/5924eeuKsSPvBqmi73OpDfP6n5TzPKAO9/WVKfg3lAb7X5D///9/////f57vBnvH6yl4COoPd8LflXMD4A1zitajb/jWI29zznpr3c4vayDHAGjAxpFn")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_x3vf3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jpxyi"]
+render_priority = 0
+shader = ExtResource("4_ts6w2")
+shader_parameter/albedo_texture = ExtResource("1_gwrko")
+shader_parameter/mask_texture = ExtResource("5_jpxyi")
+shader_parameter/recolor = Color(0.98055154, 0.76681703, 0.9116107, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.5
+shader_parameter/specular = 0.0
+
+[node name="PlayerEyes" type="Node3D" node_paths=PackedStringArray("node_to_change")]
+script = ExtResource("1_df6dt")
+node_to_change = NodePath("Body__mEye")
+
+[node name="Body__mEye" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_def42")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_jpxyi")

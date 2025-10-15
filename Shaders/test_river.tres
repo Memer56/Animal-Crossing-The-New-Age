@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://4vlc7fkpf2ym"]
+
+[ext_resource type="Shader" uid="uid://c1f5c767lfjc8" path="res://Shaders/River.gdshader" id="1_jhlvn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ccpwn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jhlvn")
+shader_parameter/water_tex = SubResource("NoiseTexture2D_ccpwn")
+shader_parameter/flow_speed = 0.2

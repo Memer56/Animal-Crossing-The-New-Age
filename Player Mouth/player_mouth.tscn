@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=4 uid="uid://dr4nwrntlsfhq"]
+
+[ext_resource type="Script" uid="uid://bh4g2chmocfi4" path="res://Player/external_body_part.gd" id="1_arhap"]
+[ext_resource type="Texture2D" uid="uid://blhkh3ttpj6s5" path="res://Player Mouth/Mouth_Albedo.png" id="1_vyc3n"]
+[ext_resource type="Texture2D" uid="uid://xt5b2xjwl0gw" path="res://Player Mouth/Mouth_Roughness.png" id="2_k8jny"]
+[ext_resource type="Texture2D" uid="uid://bkkrfy62rdeyh" path="res://Player Mouth/Mouth_Normal.png" id="3_gbacb"]
+[ext_resource type="Shader" uid="uid://10it47r2wi6k" path="res://Shaders/colour_swap.gdshader" id="4_k8jny"]
+[ext_resource type="Texture2D" uid="uid://ccov6hp61a2wn" path="res://Player Mouth/Mouth_Mask.png" id="5_gbacb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2218k"]
+resource_name = "mMouth"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_vyc3n")
+metallic_texture = ExtResource("2_k8jny")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_k8jny")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_gbacb")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h6fot"]
+_surfaces = [{
+"aabb": AABB(-1.161676, 1.516043, -11.31813, 2.323352, 1.1256111, 2.1223812),
+"format": 34896613377,
+"index_count": 150,
+"index_data": PackedByteArray("AAABAAIAFgABAAAABAAWAAAAFgADAAEAFwAWAAQACwAXAAQAGAADABYAFwAYABYAGQAXAAsAGgADABgACwAMABkABgADABoABQAGABoABwAGAAUABQAaAAgACAAaABsAGgAYABsACAAbAAkACQAbABwAGwAYAB0AHQAYABcAHQAcABsAGQAdABcACQAcAAoAHgAdABkAHgAcAB0AGQAfAB4AHwAcAB4ACgAcACAAIAAcAB8AIAAPAAoAIQAPACAAIAAfACEADwAhABUAFQAhABQAIQATABQAIgATACEAIQAfACIAIgAOABMAIgAQAA4AIgAjABAAIgAfACMAEAAjABEAEQAjABIAEgAjAA0AIwAfACQAJAANACMAJAAfABkADAANACQAGQAMACQA"),
+"lods": [0.30244452, PackedByteArray("AAABAAIAAAADAAEABAADAAAABQADAAQABgADAAUABwAGAAUABQAEAAgABAAJAAgACgAJAAQACgAEAAsADAAKAAsADQAKAAwADgAKAA0ADwAKAA4ADgANABAAEAANABEAEQANABIADgATAA8ADwATABQAFQAPABQA")],
+"name": "mMouth",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 37,
+"vertex_data": PackedByteArray("DgyHXCHhAABSQBMf//8AALgXAABg/wAA/3/oNUD/AACCBHip+7MAAPDzh1wh4QAArL8TH///AABG6AAAYP8AAHz7eKn7swAAvf08w/OSAAD//5zL7HEAAEECPMPzkgAAAACcy+xxAABqAL3GKjIAAP9/xO8AAAAAlP+9xioyAACCZIPl+QEAAP0v7dG/BQAAyAHct0sLAAB8m4Pl+QEAAAHQ7dG/BQAANv7ct0sLAAB8OjOBHeAAAJg1HsmZsgAA/3/SlvTfAAADM/Xg8ZAAAILFM4Ed4AAAZsoeyZmyAAD7zPXg8ZAAAP9/PuBusgAA/3+r96GPAAD/f///1GwAAJDPb+lJbwAAI9J14x0tAAD/f236GykAANstdeMdLQAAbjBv6UlvAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o7ya6"]
+resource_name = "Player mouth_Body__mMouth"
+_surfaces = [{
+"aabb": AABB(-1.161676, 1.516043, -11.31813, 2.323352, 1.1256111, 2.1223812),
+"attribute_data": PackedByteArray("/////zkeibn/////p0OW6P////85HoPo/////31/sej/////OR5HjP////9N4bi5/////1K7sej/////TeGx6P////9N4XSM/////03hcXT/////TeFwXP////85HkV0/////zkeRFz/////OR7EKP////9JgCMI/////03h7yj/////SW0bCP////9VRAoI/////10c+Qf/////R5MjCP////+8uiMI/////03hIwj/////akSduf////9kRVqM/////6d/uLn/////U0VXdP/////luri5/////zy6dIz/////d7pxdP/////Gf3SM/////7p/cXT/////sX9wXP////+1unBc/////+K67yj/////mH/vKP////90Re8o/////0RFVVw="),
+"format": 34896613407,
+"index_count": 150,
+"index_data": PackedByteArray("AAABAAIAFgABAAAABAAWAAAAFgADAAEAFwAWAAQACwAXAAQAGAADABYAFwAYABYAGQAXAAsAGgADABgACwAMABkABgADABoABQAGABoABwAGAAUABQAaAAgACAAaABsAGgAYABsACAAbAAkACQAbABwAGwAYAB0AHQAYABcAHQAcABsAGQAdABcACQAcAAoAHgAdABkAHgAcAB0AGQAfAB4AHwAcAB4ACgAcACAAIAAcAB8AIAAPAAoAIQAPACAAIAAfACEADwAhABUAFQAhABQAIQATABQAIgATACEAIQAfACIAIgAOABMAIgAQAA4AIgAjABAAIgAfACMAEAAjABEAEQAjABIAEgAjAA0AIwAfACQAJAANACMAJAAfABkADAANACQAGQAMACQA"),
+"lods": [0.30244452, PackedByteArray("AAABAAIAAAADAAEABAADAAAABQADAAQABgADAAUABwAGAAUABQAEAAgABAAJAAgACgAJAAQACgAEAAsADAAKAAsADQAKAAwADgAKAA0ADwAKAA4ADgANABAAEAANABEAEQANABIADgATAA8ADwATABQAFQAPABQA")],
+"material": SubResource("StandardMaterial3D_2218k"),
+"name": "mMouth",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 37,
+"vertex_data": PackedByteArray("DgyHXCHhb6BSQBMf//9olLgXAABg/36W/3/oNUD/2pGCBHip+7NZq/Dzh1wh4WegrL8TH///XpRG6AAAYP9xlnz7eKn7s1Orvf08w/OS4bX//5zL7HHxwEECPMPzkua1AACcy+xx9MBqAL3GKjJQxv9/xO8AAJ3HlP+9xioyScaCZIPl+QFgyP0v7dG/BRDJyAHct0sLUcp8m4Pl+QFgyAHQ7dG/BQ7JNv7ct0sLTMp8OjOBHeDZnpg1HsmZsp6p/3/SlvTfWJ0DM/Xg8ZBctoLFM4Ed4NOeZsoeyZmymqn7zPXg8ZBatv9/PuBushqp/3+r96GPF7b/f///1Gxwv5DPb+lJb8m/I9J14x0tw8T/f236GylZw9stdeMdLcbEbjBv6UlvzL/q7++2//b2t53uJ8Xw/61/E+9brR7J1W8qyOp27rqHbqzS/W7R2L5vHt+6cdTvMafO8d+gVfMeoPT/63/b3ytzkvnikGD4NZW584afGu+JecXqTHhx4JVzdffmpvX2xp3x/8x/rPefly7ZX3dG4t12Y+iUd/D/13/w/95/9f/sf9/q5Hd969t4/P/7f/j4fpT99x+V")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_h6fot")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbacb"]
+render_priority = 0
+shader = ExtResource("4_k8jny")
+shader_parameter/albedo_texture = ExtResource("1_vyc3n")
+shader_parameter/mask_texture = ExtResource("5_gbacb")
+shader_parameter/recolor = Color(0.21508536, 0.52551913, 0.94817144, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.5
+shader_parameter/specular = 0.1
+
+[node name="PlayerMouth" type="Node3D" node_paths=PackedStringArray("node_to_change")]
+script = ExtResource("1_arhap")
+node_to_change = NodePath("Body__mMouth")
+
+[node name="Body__mMouth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_o7ya6")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_gbacb")
