@@ -62,6 +62,7 @@ func _physics_process(delta: float) -> void:
 func idle(input_dir):
 	var anim_state = animation_tree.get("parameters/playback")
 	anim_state.travel("Idle")
+	EventBus.update_clothes_anim.emit("Idle", anim_speed)
 	velocity.x = move_toward(velocity.x, 0, speed)
 	velocity.z = move_toward(velocity.z, 0, speed)
 	
@@ -74,6 +75,7 @@ func idle(input_dir):
 func move_player(delta, _direction, input_dir):
 	var anim_state = animation_tree.get("parameters/playback")
 	anim_state.travel("Walk")
+	EventBus.update_clothes_anim.emit("Walk", anim_speed)
 	if is_on_floor():
 		if direction :
 			velocity.x = _direction.x * speed
@@ -94,6 +96,7 @@ func do_action():
 	anim_speed = 2.0
 	var anim_state = animation_tree.get("parameters/playback")
 	anim_state.travel("Action")
+	EventBus.update_clothes_anim.emit("Action", anim_speed)
 
 func exit_state():
 	anim_speed = 1.0
@@ -117,7 +120,7 @@ func set_skin_colour(colour : Color):
 	#var mat = body__m_eye.mesh.surface_get_material(0)
 	#mat.albedo_color = colour
 	for node in skeleton_3d.get_children():
-		if !node.name == "Nose00__mNose" and !node.name == "Nose01__mNose" and !node.name == "Nose02__mNose" and !node.name == "Body__mEye" and !node.name == "Body__mMouth" and !node.name == "ModifierBoneTarget3D":
+		if !node.name == "Nose00__mNose" and !node.name == "Nose01__mNose" and !node.name == "Nose02__mNose" and !node.name == "Body__mEye" and !node.name == "Body__mMouth" and !node.name == "ModifierBoneTarget3D" and !node.name == "Hair":
 			node.set_surface_override_material(0, material_override)
 	
 	eyes_mesh_setter.set_body_part_colour(colour)
@@ -126,20 +129,26 @@ func set_skin_colour(colour : Color):
 func eat_consumable():
 	pass
 
+func use_slot_data(slot_data : SlotData):
+	pass
+
 func get_drop_point() -> Vector3:
 	return item_drop_point.global_position
 
 func set_item_in_hand(slot_data):
-	if slot_data != null:
+	# this is broken
+	var current_held_item = hand_item_spawn.get_children()
+	
+	if current_held_item:
+		for child in current_held_item:
+			child.queue_free()
+	
+	if slot_data:
 		var item_name = slot_data.item_data.name
 		var item = held_items[item_name].instantiate()
 		hand_item_spawn.add_child(item)
-		item.global_rotation.x = hand_item_spawn.global_rotation.x
-		item.global_rotation.y = hand_item_spawn.global_rotation.y
-	else:
-		var held_item = hand_item_spawn.get_child(0)
-		if held_item:
-			held_item.queue_free()
+		#item.global_rotation.x = hand_item_spawn.global_rotation.x
+		#item.global_rotation.y = hand_item_spawn.global_rotation.y
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Inventory"):
@@ -147,5 +156,5 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "swing/swing":
+	if anim_name == "Swing/swing":
 		exit_state()
