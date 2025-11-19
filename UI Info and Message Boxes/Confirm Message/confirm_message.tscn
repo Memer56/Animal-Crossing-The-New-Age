@@ -1,0 +1,148 @@
+[gd_scene load_steps=9 format=3 uid="uid://btn78ebu7dnjd"]
+
+[ext_resource type="Script" uid="uid://budurn3h45jne" path="res://UI Info and Message Boxes/Confirm Message/confirm_message.gd" id="1_ki38l"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="1_yoyj5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_incbq"]
+bg_color = Color(0.87522477, 0.74652106, 0.5406403, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.6627451, 0.5294118, 0.3137255, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_ki38l"]
+font = ExtResource("1_yoyj5")
+font_size = 40
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_yoyj5"]
+base_font = ExtResource("1_yoyj5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yoyj5"]
+bg_color = Color(0.29124942, 0.7080054, 0.90810347, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d14ve"]
+bg_color = Color(0.5151207, 0.81497663, 0.97345036, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61923856, 0.5804031, 0.9825607, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki38l"]
+bg_color = Color(0.29124942, 0.7080054, 0.90810347, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61923856, 0.5804031, 0.9825607, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="ConfirmMessage" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ki38l")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -555.5
+offset_top = -265.5
+offset_right = 555.5
+offset_bottom = 265.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_incbq")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 47.5
+offset_top = 54.5
+offset_right = -47.5
+offset_bottom = -171.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Example Text"
+label_settings = SubResource("LabelSettings_ki38l")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxButtons" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -118.5
+offset_bottom = -48.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="Confirm" type="Button" parent="Panel/HBoxButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontVariation_yoyj5")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_yoyj5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d14ve")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ki38l")
+text = "Confirm"
+
+[node name="Cancel" type="Button" parent="Panel/HBoxButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = SubResource("FontVariation_yoyj5")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_yoyj5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d14ve")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ki38l")
+text = "Cancel"
+
+[connection signal="pressed" from="Panel/HBoxButtons/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="Panel/HBoxButtons/Cancel" to="." method="_on_cancel_pressed"]

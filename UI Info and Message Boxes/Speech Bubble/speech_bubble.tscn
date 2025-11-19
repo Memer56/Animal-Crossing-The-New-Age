@@ -1,0 +1,270 @@
+[gd_scene load_steps=18 format=3 uid="uid://4jy5g0g32q3n"]
+
+[ext_resource type="Script" uid="uid://f2fsv6gr8qyp" path="res://UI Info and Message Boxes/Speech Bubble/speech_bubble.gd" id="1_51jv1"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="1_jfv2r"]
+[ext_resource type="Shader" uid="uid://dk1pvmy68qoa" path="res://Shaders/speech_bubble_edge_manipulation.gdshader" id="3_mq4yd"]
+[ext_resource type="Texture2D" uid="uid://bd56pfpk1tc0m" path="res://UI Info and Message Boxes/Speech Bubble/speech bubble.png" id="3_xtv2h"]
+[ext_resource type="Texture2D" uid="uid://dp5iihwp2tqf8" path="res://UI Info and Message Boxes/Speech Bubble/speech_bubble_arrow.png" id="5_t2rkx"]
+[ext_resource type="Texture2D" uid="uid://dmgxugdx32nls" path="res://UI Info and Message Boxes/Speech Bubble/arrow_shadow.png" id="6_5l8eq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mq4yd"]
+shader = ExtResource("3_mq4yd")
+shader_parameter/amplitude = 2.0
+shader_parameter/speed = 1.0
+shader_parameter/edge_size = 0.70000003325
+shader_parameter/frequency1 = 6.0
+shader_parameter/frequency2 = 12.0
+
+[sub_resource type="FontVariation" id="FontVariation_jxy7t"]
+base_font = ExtResource("1_jfv2r")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mq4yd"]
+bg_color = Color(2.5027991e-06, 0.6427785, 0.92585933, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="FontVariation" id="FontVariation_mq4yd"]
+base_font = ExtResource("1_jfv2r")
+
+[sub_resource type="LabelSettings" id="LabelSettings_t2rkx"]
+font = SubResource("FontVariation_mq4yd")
+font_size = 20
+
+[sub_resource type="Animation" id="Animation_xtv2h"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(603, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1114.9996, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_mq4yd"]
+resource_name = "anim"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(603, -0.25, 0, 0.25, 0, 603, -0.083333336, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1114.9996, -0.25, 0, 0.25, 0, 739, -0.083333336, 62.666607, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t2rkx"]
+_data = {
+&"RESET": SubResource("Animation_xtv2h"),
+&"anim": SubResource("Animation_mq4yd")
+}
+
+[sub_resource type="Animation" id="Animation_2nhcj"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(347.25, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(192.00024, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_5l8eq"]
+resource_name = "arrow"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(347.25, -0.25, 0, 0.25, 0, 347.25, -0.083333336, 0, 0, 0, 347.25, -0.083333336, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(192.00024, -0.25, 0, 0.25, 0, 188.00024, -0.083333336, 0.6666667, 0, 0, 192, -0.083333336, -0.666626, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2nhcj"]
+_data = {
+&"RESET": SubResource("Animation_2nhcj"),
+&"arrow": SubResource("Animation_5l8eq")
+}
+
+[node name="SpeechBubble" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_51jv1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mq4yd")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = 34.999634
+offset_right = 357.0
+offset_bottom = 279.99988
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_xtv2h")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 66.00037
+offset_right = -54.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.8260661, 0.6570313, 6.545782e-06, 1)
+theme_override_colors/selection_color = Color(0.1, 0.1, 1, 0.8)
+theme_override_constants/line_separation = 10
+theme_override_fonts/normal_font = SubResource("FontVariation_jxy7t")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+theme_override_font_sizes/mono_font_size = 40
+bbcode_enabled = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NameTag" type="Panel" parent="TextureRect"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 28.000368
+offset_right = 190.0
+offset_bottom = 68.00037
+rotation = -0.15533431
+theme_override_styles/panel = SubResource("StyleBoxFlat_mq4yd")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="TextureRect/NameTag"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_t2rkx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArrowShadow" type="TextureRect" parent="TextureRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -9.75
+offset_top = -51.0
+offset_right = 9.75
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("6_5l8eq")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Arrow" type="TextureRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -9.75
+offset_top = -53.0
+offset_right = 9.75
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("5_t2rkx")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_t2rkx")
+}
+
+[node name="ArrowAnim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../TextureRect/Arrow")
+libraries = {
+&"": SubResource("AnimationLibrary_2nhcj")
+}
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
