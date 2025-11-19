@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://drmak2qqvtijw"]
+
+[ext_resource type="Script" uid="uid://cn2mt61l8fk4m" path="res://Exit Door Area/exit_door_area.gd" id="1_aof5a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wj6v5"]
+size = Vector3(20.718872, 14.214844, 10.494492)
+
+[node name="ExitDoorArea" type="Area3D"]
+collision_layer = 0
+gravity_space_override = 3
+script = ExtResource("1_aof5a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_wj6v5")
+debug_color = Color(0.96104735, 0, 0.5153212, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
