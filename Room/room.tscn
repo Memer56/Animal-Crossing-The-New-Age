@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://bg5ihqhfb4qtx"]
+
+[ext_resource type="Script" uid="uid://bqf55kxpmtwys" path="res://Room/room.gd" id="1_i7vs8"]
+[ext_resource type="PackedScene" uid="uid://j57i0n4p5ltj" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room.tscn" id="2_0j4tc"]
+[ext_resource type="PackedScene" uid="uid://bdtqvbf7i3opd" path="res://Inventory/inventory.tscn" id="3_01f5y"]
+[ext_resource type="PackedScene" uid="uid://um3cwpuunhy0" path="res://Player House interior Scenes/Tent Interior/tent_interior.tscn" id="3_hjiva"]
+[ext_resource type="PackedScene" uid="uid://c5pmfoxxqus5u" path="res://Player/player.tscn" id="3_vdjvi"]
+[ext_resource type="Script" uid="uid://chnm0638og0bs" path="res://Inventory/inventory_interface.gd" id="3_x07kc"]
+[ext_resource type="PackedScene" uid="uid://cc3te203t4sp8" path="res://Player House interior Scenes/player_house_interior.tscn" id="4_2bgig"]
+[ext_resource type="PackedScene" uid="uid://c8wdc4tvskx4f" path="res://Inventory/hot_bar_inventory.tscn" id="4_ly80p"]
+[ext_resource type="PackedScene" uid="uid://cvyftmwfpksm5" path="res://Inventory/slot.tscn" id="5_yplge"]
+[ext_resource type="PackedScene" uid="uid://cbbtgce3tp5l5" path="res://Fade Canvas Layer/fade_canvas_layer.tscn" id="8_hjiva"]
+
+[sub_resource type="Environment" id="Environment_i7vs8"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.641934, 0.641934, 0.641934, 1)
+tonemap_mode = 2
+
+[node name="Room" type="Node3D"]
+script = ExtResource("1_i7vs8")
+rooms = Dictionary[String, PackedScene]({
+"House Room": ExtResource("4_2bgig"),
+"Tent Room": ExtResource("3_hjiva"),
+"Town Hall": ExtResource("2_0j4tc")
+})
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_x07kc")
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("3_01f5y")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 84.0
+offset_right = 20.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HotBarInventory" parent="UI/InventoryInterface" instance=ExtResource("4_ly80p")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -54.0
+offset_right = 17.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("5_yplge")]
+layout_mode = 0
+offset_left = -88.0
+offset_right = -24.0
+offset_bottom = 64.0
+
+[node name="FadeCanvasLayer" parent="." instance=ExtResource("8_hjiva")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i7vs8")
+
+[node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29043508, 48.274952)
+
+[node name="Player" parent="." instance=ExtResource("3_vdjvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.523972)
+
+[connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
