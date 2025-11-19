@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbbtgce3tp5l5"]
+
+[ext_resource type="Script" uid="uid://c103pdsycn4dl" path="res://Fade Canvas Layer/fade_canvas_layer.gd" id="1_4nwfv"]
+[ext_resource type="Shader" uid="uid://dpe4xfa6krxg3" path="res://Shaders/circle_shrink_transition.gdshader" id="1_qjg0o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4nwfv"]
+shader = ExtResource("1_qjg0o")
+shader_parameter/transition_progress = 0.0
+shader_parameter/shrink = true
+shader_parameter/edge = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r408e"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_4nwfv"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/FadePanel:material:shader_parameter/transition_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_r408e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/FadePanel:material:shader_parameter/transition_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_u4w1y"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/FadePanel:material:shader_parameter/transition_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r408e"]
+_data = {
+&"RESET": SubResource("Animation_r408e"),
+&"fade_in": SubResource("Animation_u4w1y"),
+&"fade_out": SubResource("Animation_4nwfv")
+}
+
+[node name="FadeCanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_4nwfv")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FadePanel" type="Panel" parent="Control"]
+material = SubResource("ShaderMaterial_4nwfv")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_r408e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r408e")
+}
