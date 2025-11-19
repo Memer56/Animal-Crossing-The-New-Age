@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkaqsg7aftxh2"]
+
+[ext_resource type="PackedScene" uid="uid://tfi6na8ye7f7" path="res://Player House/House Walls/standard_walls_1.tscn" id="1_m0y7o"]
+[ext_resource type="Script" uid="uid://bascdpue40ys" path="res://Player House/player_house.gd" id="1_v50iv"]
+[ext_resource type="PackedScene" uid="uid://bflhaa0ka8xcu" path="res://Player House/House Roofs/standard_roof_1.tscn" id="2_6dfwh"]
+[ext_resource type="PackedScene" uid="uid://chal0rp7a2if4" path="res://Player House/House Doors/standard_door_1.tscn" id="2_r0chk"]
+
+[node name="PlayerHouse" type="Node3D"]
+script = ExtResource("1_v50iv")
+
+[node name="HouseWalls" type="Node3D" parent="."]
+
+[node name="StandardWalls1" parent="HouseWalls" instance=ExtResource("1_m0y7o")]
+
+[node name="HouseRoof" type="Node3D" parent="."]
+
+[node name="StandardRoof1" parent="HouseRoof" instance=ExtResource("2_6dfwh")]
+
+[node name="HouseDoor" type="Node3D" parent="."]
+
+[node name="StandardDoor1" parent="HouseDoor" instance=ExtResource("2_r0chk")]
