@@ -1,0 +1,587 @@
+[gd_scene load_steps=30 format=4 uid="uid://cc3te203t4sp8"]
+
+[ext_resource type="Texture2D" uid="uid://718vywx0ow7b" path="res://Player House interior Scenes/House Interior Raw Files/huse_floor_RoomSpFloorVolcano00_Alb.png" id="1_5o3m6"]
+[ext_resource type="Texture2D" uid="uid://ct54b3n84isxt" path="res://Player House interior Scenes/Floor Default Texture/RoomTexFloorSimple00_Alb.png" id="1_ubofm"]
+[ext_resource type="Texture2D" uid="uid://b0q7fy3ln0vvj" path="res://Player House interior Scenes/Floor Default Texture/RoomTexFloorSimple00_Nrm.png" id="2_obkk4"]
+[ext_resource type="Texture2D" uid="uid://c6e5emlka84cj" path="res://Player House interior Scenes/House Interior Raw Files/huse_floor_RoomSpFloorVolcano00_EmmOry.png" id="2_ubofm"]
+[ext_resource type="Texture2D" uid="uid://ceguih1pgdlia" path="res://Player House interior Scenes/Wall Default Texture/RoomTexWallSimple00_Alb.png" id="5_b6hiy"]
+[ext_resource type="Texture2D" uid="uid://b871nvy5e24pk" path="res://Player House interior Scenes/House Interior Raw Files/house_wall_RoomSpWallTrain00_Emi.png" id="6_iglx0"]
+[ext_resource type="Texture2D" uid="uid://3n8kg8wu7tn2" path="res://Player House interior Scenes/Wall Default Texture/RoomTexWallSimple00_Nrm.png" id="7_iglx0"]
+[ext_resource type="Texture2D" uid="uid://cqlviy0tgsod" path="res://Player House interior Scenes/RoomTexStairsWood00_Alb.png" id="8_yxyg2"]
+[ext_resource type="Texture2D" uid="uid://c4u5up10tklpp" path="res://Player House interior Scenes/RoomTexStairsWood00_Nrm.png" id="9_i8rft"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cxxh"]
+resource_name = "mFloor.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_ubofm")
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("2_obkk4")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_oqqai"]
+resource_name = "huse_floor_Floor__mFloor_001"
+_surfaces = [{
+"aabb": AABB(-30, -2.264937e-06, -30, 60, 1e-05, 60),
+"attribute_data": PackedByteArray("gYAAPuDfXz+BgAA+gIAAPuDfXz/g318/4N9fP4CAAD4="),
+"bone_aabbs": [AABB(-30, -2.264937e-06, -30, 60, 1.4529873e-05, 60.000008)],
+"format": 34359745559,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgABAAMA"),
+"material": SubResource("StandardMaterial3D_0cxxh"),
+"name": "mFloor.001",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAA=="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AADwwVL/FzYAAPBBAADwwVL/F7YAAPDBAADwQVL/FzYAAPBBAADwQVL/F7YAAPDB/3///////7//f///////v/9///////+//3///////78=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Skin" id="Skin_88wwg"]
+resource_name = "Skin"
+bind_count = 1
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 1, -7.54979e-08, 0, 7.54979e-08, 1, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mbbp"]
+resource_name = "mOutside.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_5o3m6")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3g0br"]
+resource_name = "huse_floor_Outside__mOutside_001"
+_surfaces = [{
+"aabb": AABB(-30, -3.0000021, -30, 60, 3.0000043, 60),
+"attribute_data": PackedByteArray("7gBwOQAAgDoAAIBAAAAAAO4AcDkAAAAAAACAQAAAgD/5APg5AACAOgAAQEAAAAAA+QD4OQAAAAAAAEBAAOB/P+4AcDkAAAAAAAAAAAAAgD/uAHA5AACAOgAAAAAAAAAAAAAAAAAAAAAAAIA/AOB/PwAAAAAAAIA6AACAPwAAAAC7ADw6AAAAAAAAAEAA4H8/uwA8OgAAgDoAAABAAAAAAPkA+DkAAAAAAABAQADgfz/5APg5AACAOgAAQEAAAAAAuwA8OgAAgDoAAABAAAAAALsAPDoAAAAAAAAAQADgfz+AAIA6AACAOgAAgD8AAAAAgACAOgAAAAAAAIA/AOB/Pw=="),
+"bone_aabbs": [AABB(-30, -3.0000021, -30, 60.000008, 3.0000043, 60)],
+"format": 34359745591,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8A"),
+"material": SubResource("StandardMaterial3D_7mbbp"),
+"name": "mOutside.001",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAA=="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AADwQQkAQMAAAPDBAADwQVL/F7YAAPDBAADwwQkAQMAAAPDBAADwwVL/F7YAAPDBAADwQVL/F7YAAPDBAADwQQkAQMAAAPDBAADwQVL/FzYAAPBBAADwQff/P8AAAPBBAADwwVL/FzYAAPBBAADwwff/P8AAAPBBAADwwVL/F7YAAPDBAADwwQkAQMAAAPDBAADwwff/P8AAAPBBAADwwVL/FzYAAPBBAADwQff/P8AAAPBBAADwQVL/FzYAAPBB//8AAAAA/7///wAAAAD/v///AAAAAP+///8AAAAA/7////9///8AgP///3///wCA////f///AID///9///8AgAAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+//3//f////7//f/9/////v/9//3////+//3//f////78=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl81x"]
+resource_name = "mFloor.002"
+cull_mode = 2
+albedo_texture = ExtResource("1_ubofm")
+roughness = 0.5
+emission_operator = 1
+emission_on_uv2 = true
+emission_texture = ExtResource("2_ubofm")
+normal_enabled = true
+normal_texture = ExtResource("2_obkk4")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vy2eg"]
+resource_name = "huse_floor_Floor__mFloor_002"
+_surfaces = [{
+"aabb": AABB(-40, -3.019916e-06, -40, 80, 1e-05, 80),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAA="),
+"bone_aabbs": [AABB(-40, -3.019916e-06, -40, 80, 1.6039832e-05, 80.000015)],
+"format": 34359745559,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgABAAMA"),
+"material": SubResource("StandardMaterial3D_jl81x"),
+"name": "mFloor.002",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAA=="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAgwsOpSjYAACBCAAAgwsOpSrYAACDCAAAgQsOpSjYAACBCAAAgQsOpSrYAACDC/3///////7//f///////v/9///////+//3///////78=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0sq2"]
+resource_name = "mOutside.002"
+cull_mode = 2
+albedo_texture = ExtResource("1_5o3m6")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c80hy"]
+resource_name = "huse_floor_Outside__mOutside_002"
+_surfaces = [{
+"aabb": AABB(-40, -3.000003, -40, 80, 3.0000062, 80),
+"attribute_data": PackedByteArray("AACAPwAAAAAAAIA/AACAPwAAAD8AAAAAAAAAPwAAgD8AAIA/AACAPwAAgD8AAAAAAADAPwAAgD8AAMA/AAAAAAAAQEAA4H8/AABAQAAAAAAAAGBAAOB/PwAAYEAAAAAAAABAQAAAAAAAAEBAAOB/PwAAIEAAAAAAAAAgQADgfz//H2PAAAAAAAHAXMAAAAAA/x9jwAAAgD8BwFzAAOB/PwAAYEAAAAAAAACAQAAAAAAAAGBAAOB/PwAAgEAA4H8/AADAPwAAAAAAAABAAAAAAAAAwD8A4H8/AAAAQADgfz8DYMa/AAAAAAKAub8AAAAAA2DGvwDgfz8CgLm/AOB/PwDgH0AA4H8/AAAAQADgfz8AACBAAAAAAAAAAEAAAAAAAWCOwAAAgD8AgJHAAOB/PwFgjsAAAAAAAICRwAAAAAABwBzAAOB/P/8fI8AA4H8/AcAcwAAAAAD/HyPAAAAAAAAAkEAA4H8/AACAQADgfz8AAJBAAAAAAAAAgEAAAAAA"),
+"bone_aabbs": [AABB(-40, -3.000003, -40, 80.000015, 3.0000062, 80)],
+"format": 34359745559,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8A"),
+"material": SubResource("StandardMaterial3D_p0sq2"),
+"name": "mOutside.002",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAA"),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AAAgQg0AQMAAACDCAAAgQsOpSrYAACDCAAAgQQ0AQMAAACDCAAAgQcOpSrYAACDCAAAgQsOpSrYAACDCAAAgQg0AQMAAACDCAAAgQsOpSrUAACDBAAAgQgMAQMAAACDBAAAgwsOpSjYAACBCAAAgwvP/P8AAACBCAAAgwsOpyjUAAKBBAAAgwvr/P8AAAKBBAAAgwvP/P8AAACBCAAAgwsOpSjYAACBCAAAgwfP/P8AAACBCAAAgwcOpSjYAACBCAAAgQgMAQMAAACDBAAAgQvr/P8AAAKBBAAAgQsOpSrUAACDBAAAgQsOpyjUAAKBBAAAgwgMAQMAAACDBAAAgwg0AQMAAACDCAAAgwsOpSrUAACDBAAAgwsOpSrYAACDCAAAgQvr/P8AAAKBBAAAgQvP/P8AAACBCAAAgQsOpyjUAAKBBAAAgQsOpSjYAACBCAAAgwvr/P8AAAKBBAAAgwgMAQMAAACDBAAAgwsOpyjUAAKBBAAAgwsOpSrUAACDBAAAgQcOpSjYAACBCAAAgQsOpSjYAACBCAAAgQfP/P8AAACBCAAAgQvP/P8AAACBCAAAgQcOpSrYAACDCAAAgwcOpSrYAACDCAAAgQQ0AQMAAACDCAAAgwQ0AQMAAACDCAAAgwcOpSjYAACBCAAAgQcOpSjYAACBCAAAgwfP/P8AAACBCAAAgQfP/P8AAACBCAAAgwcOpSrYAACDCAAAgwsOpSrYAACDCAAAgwQ0AQMAAACDCAAAgwg0AQMAAACDC//8AAP///7///wAA////v///AAD///+///8AAP///7////9//3//v////3//f/+/////f/9//7////9//3//vwAA/3///wCAAAD/f///AIAAAP9///8AgAAA/3///wCA/3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7////9//3//v////3//fwDA////f/9//7////9//38AwAAA/3///wCAAAD/f///AIAAAP9///8AgAAA/3///wCA////f/9//7////9//3//v////3//f/+/////f/9//78AAP9///8AgAAA/3///wCAAAD/f///AIAAAP9///8AgP9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+///8AAPz//r///wAA/v//v///AAD8//6///8AAP///7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v///AAD///+///8AAP///7///wAA////v///AAD///+/")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gw8ye"]
+resource_name = "mFloor.003"
+cull_mode = 2
+albedo_texture = ExtResource("1_ubofm")
+roughness = 0.5
+emission_operator = 1
+emission_on_uv2 = true
+emission_texture = ExtResource("2_ubofm")
+normal_enabled = true
+normal_texture = ExtResource("2_obkk4")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_thwpg"]
+resource_name = "huse_floor_FloorMain__mFloor"
+_surfaces = [{
+"aabb": AABB(-50, -3.774895e-06, -50, 100, 1e-05, 100),
+"attribute_data": PackedByteArray("AACQPwAAAL4AAJA/AAAAAAAAgD8AAAC+AAAAAAAAAL4AAAC+AAAAvgXg/70AAAAAAACQPwAAgD8F4P+9AACAPwAAAL4AAJA/AAAAAAAAkD8AAIA/AACQPwAAkD8AAJA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAACAPw=="),
+"bone_aabbs": [AABB(-50, -3.774895e-06, -50, 100.000015, 1e-05, 100)],
+"format": 34359745559,
+"index_count": 54,
+"index_data": PackedByteArray("DAANAA4ADgANAA8AAAABAAIAAgABABAAAQAGABAAEAADAAIAEQADABAAEQAEAAMABQAEABEAEAAGABIABgALABIAEgALAAoACgAJABIAEwAFABEAEgAJABMABwAFABMACQAIABMAEwAIAAcA"),
+"lods": [8.339016e-06, PackedByteArray("AAABAAIAAQADAAIAAQAEAAMABQAEAAEABgAFAAEABwAFAAYABgAIAAcACQAIAAYACgAJAAYABgALAAoA")],
+"material": SubResource("StandardMaterial3D_gw8ye"),
+"name": "mFloor.003",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAA="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AABIQjRUfbYAAEjCAABIQsOpSrYAACDCAAAgQjRUfbYAAEjCAAAgwjRUfbYAAEjCAABIwjRUfbYAAEjCAABIwsOpSrYAACDCAABIQsOpSjYAACBCAABIwsOpSjYAACBCAABIwjRUfTYAAEhCAAAgwjRUfTYAAEhCAAAgQjRUfTYAAEhCAABIQjRUfTYAAEhCAAAgwsOpSjYAACBCAAAgwsOpSrYAACDCAAAgQsOpSjYAACBCAAAgQsOpSrYAACDCAAAgQsOpSrYAACDCAAAgwsOpSrYAACDCAAAgQsOpSjYAACBCAAAgwsOpSjYAACBC/3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////vw==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7pbt"]
+resource_name = "mOutside.003"
+cull_mode = 2
+albedo_texture = ExtResource("1_5o3m6")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1ewbo"]
+resource_name = "huse_floor_Outside__mOutside_003"
+_surfaces = [{
+"aabb": AABB(-50, -3.0000038, -50, 100, 3.0000076, 100),
+"attribute_data": PackedByteArray("AACgQAAAAAAAAKBAAACAPwAAkEAAAAAAAACQQAAAgD8AAABAAAAAAAAAAEAA4H8/AADAPwAAAAAAAMA/AOB/PwAAgEAAAAAAAACAQADgfz8AAGBAAAAAAAAAYEAA4H8/AABAQAAAAAAAAEBAAOB/PwAAIEAAAAAAAAAgQADgfz8A4B9AAOB/PwAAAEAA4H8/AAAgQAAAAAAAAABAAAAAAAFg5r4AAIA/AMAMvwDgfz8BYOa+AAAAAADADL8AAAAAAcAcwADgfz//HyPAAOB/PwHAHMAAAAAA/x8jwAAAAAAAAJBAAOB/PwAAgEAA4H8/AACQQAAAAAAAAIBAAAAAAAAAsEAAAIA/AACgQAAAgD8AALBAAAAAAAAAoEAAAAAA/x+zvwDgfz8AAMC/AOB/P/8fs78AAAAAAADAvwAAAAABwFzAAOB/P/8fY8AAAIA/AcBcwAAAAAD/H2PAAAAAAAAAYEAA4H8/AABAQADgfz8AAGBAAAAAAAAAQEAAAAAA"),
+"bone_aabbs": [AABB(-50, -3.0000038, -50, 100.000015, 3.0000076, 100)],
+"format": 34359745559,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8A"),
+"material": SubResource("StandardMaterial3D_s7pbt"),
+"name": "mOutside.003",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAA"),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("AABIQhAAQMAAAEjCAABIQjRUfbYAAEjCAACgQRAAQMAAAEjCAACgQTRUfbYAAEjCAABIQvD/P8AAAEhCAABIQjRUfTYAAEhCAABIQvr/P8AAAKBBAABIQsOpyjUAAKBBAABIwhAAQMAAAEjCAABIwjRUfbYAAEjCAABIwgYAQMAAAKDBAABIwsOpyrUAAKDBAABIwvD/P8AAAEhCAABIwjRUfTYAAEhCAACgwfD/P8AAAEhCAACgwTRUfTYAAEhCAACgQTRUfTYAAEhCAABIQjRUfTYAAEhCAACgQfD/P8AAAEhCAABIQvD/P8AAAEhCAACgQTRUfbYAAEjCAACgwTRUfbYAAEjCAACgQRAAQMAAAEjCAACgwRAAQMAAAEjCAACgwTRUfTYAAEhCAACgQTRUfTYAAEhCAACgwfD/P8AAAEhCAACgQfD/P8AAAEhCAACgwTRUfbYAAEjCAABIwjRUfbYAAEjCAACgwRAAQMAAAEjCAABIwhAAQMAAAEjCAABIQsOpyrUAAKDBAABIQjRUfbYAAEjCAABIQgYAQMAAAKDBAABIQhAAQMAAAEjCAABIwsOpyrUAAKDBAABIwsOpyjUAAKBBAABIwgYAQMAAAKDBAABIwvr/P8AAAKBBAABIQsOpyjUAAKBBAABIQsOpyrUAAKDBAABIQvr/P8AAAKBBAABIQgYAQMAAAKDBAABIwsOpyjUAAKBBAABIwjRUfTYAAEhCAABIwvr/P8AAAKBBAABIwvD/P8AAAEhC//8AAP///7///wAA////v///AAD///+///8AAP///7////9//3//v////3//f/+/////f/9//7////9//3//vwAA/3///wCAAAD/f///AIAAAP9///8AgAAA/3///wCA/3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7//f/9/AAD/v///AAD9//6///8AAP7//7///wAA/f/+v///AAD///+//3//fwAA/7//f/9/AAD/v/9//38AAP+//3//fwAA/7///wAA////v///AAD///+///8AAP///7///wAA////v////3//f/+/////f/9//7////9//3//v////3//f/+/AAD/f///AIAAAP9///8AgAAA/3///wCAAAD/f///AID///9//3//v////3//f/+/////f/9//7////9//3//vwAA/3///wCAAAD/f///AIAAAP9///8AgAAA/3///wCA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkari"]
+resource_name = "mDummyWall"
+cull_mode = 2
+albedo_texture = ExtResource("5_b6hiy")
+roughness = 0.5
+emission_texture = ExtResource("6_iglx0")
+normal_enabled = true
+normal_texture = ExtResource("7_iglx0")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1ecw7"]
+resource_name = "house_wall_RMdlWall__mDummyWall"
+_surfaces = [{
+"aabb": AABB(0, 0, -3.019916e-06, 20, 40, 1e-05),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAAAA="),
+"bone_aabbs": [AABB(0, 0, -3.019916e-06, 20.00001, 40, 1.3019916e-05)],
+"format": 34359745559,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgABAAMA"),
+"material": SubResource("StandardMaterial3D_tkari"),
+"name": "mDummyWall",
+"primitive": 3,
+"skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAA=="),
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AACgQQAAAAAAAACAAAAAAAAAAAAAAACAAACgQQAAIELDqUq2AAAAAAAAIELDqUq2/3//f////7//f/9/////v/9//3////+//3//f////78=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="Skin" id="Skin_n4lbf"]
+resource_name = "Skin"
+bind_count = 1
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 1, -7.54979e-08, 0, 7.54979e-08, 1, 0, 0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5o3m6"]
+size = Vector3(343.41458, 4.279419, 314.64618)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y1ir5"]
+resource_name = "mDummyStairs.001"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_texture = ExtResource("8_yxyg2")
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("9_i8rft")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_viip0"]
+_surfaces = [{
+"aabb": AABB(-10, 0, 0, 20, 35, 3),
+"format": 34896613377,
+"index_count": 102,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAAAAQABAADAAEABAAAAAUABgACAAMABgADAAQABwACAAYABQAIAAQABgAJAAcACgAJAAYACgALAAkACQALAAwADAALAA0ABAAIAA4ADwAOAAgABAAQAAYAEQAOAA8ADQALABIAEgALABAAEgATAA0AFAATABIAFAASABAAFQAUABAAEAAWABUAFwAQAAQAFwAWABAAFwAYABYAFwARABkAFwAZABgADwAZABEAGgAZAA8AGgAYABkAGwAYABoA"),
+"name": "mDummyStairs.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("jwL/////AACPAv//AAAAAG/9/////wAAb/3//wAAAACPAkiSAAAAAI8CSJL//wAAb/1IkgAAAABv/UiS//8AAI8C8RX//wAAb/3xFf//AABv/fEVAAAAAFv/8RUAAAAAW//xFf//AAD//5MV//8AAI8C8RUAAAAAowDxFf//AABv/fEVAAAAAKMA8RUAAAAA//+TFQAAAAD//wAA//8AAP//AAAAAAAAb/0AAAAAAACPAgAAAAAAAI8C8RUAAAAAAAAAAAAAAAAAAJMVAAAAAAAAkxX//wAAAAAAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u01ia"]
+resource_name = "house_exit_MatOutside__mDummyStairs_001"
+_surfaces = [{
+"aabb": AABB(-10, 0, 0, 20, 35, 3),
+"attribute_data": PackedByteArray("//////2ph6P//////alrmf/////m04ej/////+bTa5n/////Uvlzjf////9S+Y+X/////9rUc43/////2tSPl/////+2tI+X/////7a0c43//////an5i//////9qdyB/////4uw+Yv/////i7Dcgf////+psPmL/////6mw3IH/////qbDcgf////+psPmL////////c43///////+Pl/////9m+XON/////2b5j5f/////Uvlzjf////9S+Y+X/////1L5j5f/////Uvlzjf////9F9dyB/////0X1+Yv/////F9Xcgf////8X1fmL/////6mw+Yv/////qbDcgf////+oqE/2//////9/T/b/////qKj3v///////f/e///////9//Y//////qKj9j//////5f/////////l/f/b/////w4BP9v/////np0/2/////3+oT/b/////qKh/9v////+oqP///////+en////////w4BP9v/////DgO////////l/////////+X9/9v////8pgE/2/////+enT/b/////qKh/9v////+oqP//"),
+"format": 34896613407,
+"index_count": 102,
+"index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcABwAIAAYABgAIAAkACgALAAwADAALAA0ADAANAA4ADgANAA8ADwAQAA4ADgAQABEAEgATABQAFAATABUAFQAWABQAFwAWABUAGAAWABcAGQAWABgAGgAbABwAHAAbAB0AHQAeABwAHAAeAB8AIAAhACIAIgAhACMAIwAkACIAIgAkACUAJgAnACgAKQAqACsAKQAsAC0AKQAtAC4ALgAtAC8ALwAwAC4AMQAyAC4AMwA0ADUA"),
+"material": SubResource("StandardMaterial3D_y1ir5"),
+"name": "mDummyStairs.001",
+"primitive": 3,
+"uv_scale": Vector4(1.5732422, 2, 0, 0),
+"vertex_count": 54,
+"vertex_data": PackedByteArray("jwL//////7+PAv//AAD/v2/9//////+/b/3//wAA/79v/fEVAABU1W/98RX//1TVb/1IkgAAVNVv/UiS//9U1W/9/////1TVb/3//wAAVNUAAAAA//9U1QAAAAAAAFTVAACTFf//6dQAAJMVAADq1KMA8RX//5vAowDxFQAAmsCPAvEVAAD/v48C8RX///+///8AAAAAVNX//wAA//9U1f//kxUAAOnU//+TFf//6tRb//EVAACbwFv/8RX//5rAb/3xFf///79v/fEVAAD/v48C//8AAFTVjwL/////VNWPAkiSAABU1Y8CSJL//1TVjwLxFf//VNWPAvEVAABU1Y8C8RUAAP//b/3xFQAA//+PAkiSAAD//2/9SJIAAP//b/3//wAA//+PAv//AAD/////AAAAAP////+TFQAA//9v/fEVAAD//48C8RUAAP//owDxFQAA//8AAJMVAAD//wAAAAAAAP//jwIAAAAA//9v/fEVAAD//2/9AAAAAP////8AAAAA/////5MVAAD//1v/8RUAAP//jwLxFQAA//8AAJMVAAD//wAAAAAAAP//////f////3////9/////f6qqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVVTVVNVU1VTVlNXU1JXV09RZ80qZWvNImf///3////9/qqpUVaqqVFUqq5VVK6uVVbPmWXO15lpz////f////39U1VTVVNVU1VTVVNVU1VTVVNVU1VTVVNX/f////3////9/////f////3////9///80ejT6AH4A/tl+2f4LgfP+/3////6B//0cgOL/AID+/9l+2f7+fP78NHo0+gB+AP7/f/7/C4Hz/v6B//0cgOL/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_viip0")
+
+[node name="PlayerHouseInterior" type="Node3D"]
+
+[node name="6x6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Floor__mFloor_001" type="MeshInstance3D" parent="6x6"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_oqqai")
+skin = SubResource("Skin_88wwg")
+skeleton = NodePath("")
+
+[node name="Outside__mOutside_001" type="MeshInstance3D" parent="6x6"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_3g0br")
+skin = SubResource("Skin_88wwg")
+skeleton = NodePath("")
+
+[node name="8x8" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+visible = false
+
+[node name="Floor__mFloor_002" type="MeshInstance3D" parent="8x8"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_vy2eg")
+skin = SubResource("Skin_88wwg")
+skeleton = NodePath("")
+
+[node name="Outside__mOutside_002" type="MeshInstance3D" parent="8x8"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_c80hy")
+skin = SubResource("Skin_88wwg")
+skeleton = NodePath("")
+
+[node name="10x10" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+visible = false
+
+[node name="FloorMain__mFloor" type="MeshInstance3D" parent="10x10"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_thwpg")
+skin = SubResource("Skin_88wwg")
+skeleton = NodePath("")
+
+[node name="Outside__mOutside_003" type="MeshInstance3D" parent="10x10"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ewbo")
+skin = SubResource("Skin_88wwg")
+skeleton = NodePath("")
+
+[node name="6x6Wall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="NorthWall" type="Node3D" parent="6x6Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 30, 0)
+
+[node name="Wall" type="MeshInstance3D" parent="6x6Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall2" type="MeshInstance3D" parent="6x6Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 20, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall3" type="MeshInstance3D" parent="6x6Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 40, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="EastWall" type="Node3D" parent="6x6Wall"]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 30, 30, 0)
+
+[node name="Wall4" type="MeshInstance3D" parent="6x6Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall5" type="MeshInstance3D" parent="6x6Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 20, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall6" type="MeshInstance3D" parent="6x6Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 40, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="WestWall" type="Node3D" parent="6x6Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -30, 0)
+
+[node name="Wall7" type="MeshInstance3D" parent="6x6Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall8" type="MeshInstance3D" parent="6x6Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 20, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall9" type="MeshInstance3D" parent="6x6Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 40, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="8x8Wall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+visible = false
+
+[node name="NorthWall" type="Node3D" parent="8x8Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 40, 0)
+
+[node name="Wall" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall2" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 20, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall3" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 40, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall4" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 60, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="EastWall" type="Node3D" parent="8x8Wall"]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 40, 40, 0)
+
+[node name="Wall4" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall5" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 20, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall6" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 40, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall7" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 60, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="WestWall" type="Node3D" parent="8x8Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, -40, 0)
+
+[node name="Wall7" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall8" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 20, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall9" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 40, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall10" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 60, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="10x10Wall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+visible = false
+
+[node name="NorthWall" type="Node3D" parent="10x10Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 50, 0)
+
+[node name="Wall" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall2" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 20, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall3" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 40, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall4" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 60, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall5" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 80, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="EastWall" type="Node3D" parent="10x10Wall"]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 50, 50, 0)
+
+[node name="Wall4" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall5" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 20, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall6" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 40, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall7" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 60, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall8" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 80, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="WestWall" type="Node3D" parent="10x10Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, -50, 0)
+
+[node name="Wall7" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall8" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 20, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall9" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 40, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall10" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 60, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Wall11" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 80, 0)
+mesh = SubResource("ArrayMesh_1ecw7")
+skin = SubResource("Skin_n4lbf")
+skeleton = NodePath("")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4170685, -1.967102, -1.7720032)
+shape = SubResource("BoxShape3D_5o3m6")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.026595632, 0.99964625, 0, -0.99964625, 0.026595632, 0, 76.84599, 1.10077)
+light_energy = 16.0
+spot_range = 120.08204
+spot_attenuation = 0.5
+
+[node name="house_exit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+
+[node name="MatOutside__mDummyStairs" type="MeshInstance3D" parent="house_exit"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_u01ia")
+skeleton = NodePath("")
