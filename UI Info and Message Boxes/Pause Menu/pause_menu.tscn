@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3xtid1feoyvh"]
+[gd_scene load_steps=8 format=3 uid="uid://b3xtid1feoyvh"]
 
 [ext_resource type="Script" uid="uid://c1f7w3qp30rml" path="res://UI Info and Message Boxes/Pause Menu/pause_menu.gd" id="1_k4qc0"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="2_t0jb4"]
+[ext_resource type="StyleBox" uid="uid://b2uekixfds4px" path="res://Button Styles/normal_button.tres" id="3_50hdw"]
+[ext_resource type="StyleBox" uid="uid://dlusgwld66go8" path="res://Button Styles/pressed_button.tres" id="4_vxoot"]
+[ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="4_yr8c4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4qc0"]
+bg_color = Color(0.87522477, 0.74652106, 0.5406403, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.6627451, 0.5294118, 0.3137255, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="FontVariation" id="FontVariation_50hdw"]
+base_font = ExtResource("2_t0jb4")
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -12,6 +31,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k4qc0")
 
+[node name="BG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -20,18 +48,72 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -225.0
-offset_top = -404.0
+offset_top = -248.0
 offset_right = 225.0
-offset_bottom = 404.0
+offset_bottom = 248.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k4qc0")
 
-[node name="Button" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 200.0
-offset_right = 413.0
-offset_bottom = 351.0
-text = "Save Game"
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = 40.0
+offset_right = -49.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
 
-[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[node name="Resume" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_50hdw")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_50hdw")
+theme_override_styles/pressed = ExtResource("4_vxoot")
+theme_override_styles/hover = ExtResource("4_yr8c4")
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_50hdw")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_50hdw")
+theme_override_styles/pressed = ExtResource("4_vxoot")
+theme_override_styles/hover = ExtResource("4_yr8c4")
+text = "Settings"
+
+[node name="Save" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_50hdw")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_50hdw")
+theme_override_styles/pressed = ExtResource("4_vxoot")
+theme_override_styles/hover = ExtResource("4_yr8c4")
+text = "Save"
+
+[node name="SaveAndQuit" type="Button" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_50hdw")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_50hdw")
+theme_override_styles/pressed = ExtResource("4_vxoot")
+theme_override_styles/hover = ExtResource("4_yr8c4")
+text = "Save and Quit"
+
+[connection signal="pressed" from="Panel/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/SaveAndQuit" to="." method="_on_save_and_quit_pressed"]
