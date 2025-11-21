@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://c7qq7rpwmswon"]
+
+[ext_resource type="Script" uid="uid://vkytpcgma4w4" path="res://UI Info and Message Boxes/Load Screen/load_screen.gd" id="1_wjef7"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="2_3u801"]
+[ext_resource type="Texture2D" uid="uid://q2rnqhc2y7lt" path="res://NpcSpSzo.png" id="2_ug6i3"]
+
+[sub_resource type="FontVariation" id="FontVariation_1cpex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t24w7"]
+bg_color = Color(0, 0, 0, 0.270588)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="FontVariation" id="FontVariation_1fsxa"]
+base_font = ExtResource("2_3u801")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8j5bu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_syqla"]
+bg_color = Color(0, 0.65098, 0.878431, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="LoadScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wjef7")
+
+[node name="Panel" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ug6i3")
+
+[node name="BackgroundBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -904.0
+offset_top = -232.0
+offset_right = 904.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_1cpex")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/background = SubResource("StyleBoxFlat_t24w7")
+show_percentage = false
+
+[node name="LoadingBar" type="ProgressBar" parent="BackgroundBar"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -904.0
+offset_top = -112.0
+offset_right = 904.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_1fsxa")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/background = SubResource("StyleBoxFlat_8j5bu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_syqla")

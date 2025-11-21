@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://d4dbaiqcga11c"]
+
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="1_hfxjv"]
+[ext_resource type="StyleBox" uid="uid://b2uekixfds4px" path="res://Button Styles/normal_button.tres" id="2_wogfh"]
+[ext_resource type="StyleBox" uid="uid://dlusgwld66go8" path="res://Button Styles/pressed_button.tres" id="3_ty472"]
+[ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="4_3lfvt"]
+[ext_resource type="Script" uid="uid://da3trbrnnuadu" path="res://UI Info and Message Boxes/Save Slot Button/save_slot.gd" id="5_wogfh"]
+
+[sub_resource type="FontVariation" id="FontVariation_am42e"]
+base_font = ExtResource("1_hfxjv")
+
+[sub_resource type="FontVariation" id="FontVariation_wogfh"]
+base_font = ExtResource("1_hfxjv")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wogfh"]
+bg_color = Color(0.7691496, 0, 0.24184877, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ty472"]
+bg_color = Color(0.9999575, 0.211447, 0.3721852, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61923856, 0.5804031, 0.9825607, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lfvt"]
+bg_color = Color(0.76862746, 0, 0.24313726, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61923856, 0.5804031, 0.9825607, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[node name="SaveSlot" type="Button"]
+custom_minimum_size = Vector2(430, 50)
+offset_right = 173.0
+offset_bottom = 50.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_am42e")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("2_wogfh")
+theme_override_styles/pressed = ExtResource("3_ty472")
+theme_override_styles/hover = ExtResource("4_3lfvt")
+text = "New Game"
+script = ExtResource("5_wogfh")
+
+[node name="DeleteSave" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 237.0
+offset_top = -25.0
+offset_right = 414.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_wogfh")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_wogfh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ty472")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3lfvt")
+text = "Delete Save"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="DeleteSave" to="." method="_on_delete_save_pressed"]
