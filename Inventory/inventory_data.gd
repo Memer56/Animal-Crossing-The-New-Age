@@ -7,6 +7,8 @@ signal inventory_interact(inventory_data: InventoryData, index : int, button : i
 @export var slot_datas : Array[SlotData]
 @export var duplicate_slot_data : bool = false
 
+var clicked_slot_index : int
+
 func grab_slot_data(grabbed_slot_data : SlotData, index : int) -> SlotData:
 	var slot_data = slot_datas[index]
 	grabbed_slot_data = slot_data
@@ -72,8 +74,9 @@ func use_slot_data(index: int) -> void:
 		EventBus.coins += slot_data.quantity
 		slot_datas[index] = null
 	
-	EventBus.player.use_slot_data(slot_data)
-	
+	# Sometimes items need to hold off of being removed due to confirmation message box
+	# So the function below needs inventory data
+	EventBus.player.use_slot_data(slot_data, self, index)
 	inventory_updated.emit(self)
 
 
@@ -152,6 +155,8 @@ func get_slot_data_copy(slot_data : SlotData) -> SlotData:
 		new_slot_data.item_data = ItemDataConsumable.new()
 	elif slot_data.item_data is ItemDataCurrency:
 		new_slot_data.item_data = ItemDataCurrency.new()
+	elif slot_data.item_data is ItemDataPositioning:
+		new_slot_data.item_data = ItemDataPositioning.new()
 	else:
 		new_slot_data.item_data = ItemData.new()
 	duplicate_slot_data = false
@@ -268,6 +273,7 @@ func return_empty_slots() -> Array:
 
 func on_slot_clicked(index : int, button : int) -> void:
 	inventory_interact.emit(self, index, button)
+	clicked_slot_index = index
 
 func index_value(index : int):
 	print(index)
