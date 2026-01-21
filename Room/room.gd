@@ -6,11 +6,17 @@ const PICK_UP = preload("uid://c8p87t4ex6hyc")
 @onready var hot_bar_inventory: PanelContainer = $UI/InventoryInterface/HotBarInventory
 @export var rooms : Dictionary[String, PackedScene]
 @onready var player_spawn_point: Marker3D = $PlayerSpawnPoint
+@onready var build_camera: Camera3D = $BuildCamera
+@onready var transition_camera: Camera3D = $TransitionCamera
 
 var lights : Array
+var save : SaveGame
+var save_json_ids : SaveGame
+var characters  = "abcdefghijklmnopqrstuvwxyz"
 
 func _ready() -> void:
 	EventBus.player.toggle_inventory.connect(toggle_inventory_interface)
+	EventBus.save_game_data.connect(save_game_data)
 	hot_bar_inventory.send_held_slot_data.connect(EventBus.player.set_item_in_hand)
 	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
@@ -20,7 +26,11 @@ func _ready() -> void:
 	EventBus.player.player_node.global_rotation_degrees = Vector3(0, 180, 0)
 	FadeCanvasLayer.trigger_scene_change_fade(false)
 	EventBus.is_in_overworld = false
-	#begin_river_generation()
+	EventBus.player_can_leave_nav_mesh = true
+	BuildManager.build_camera = build_camera
+	BuildManager.transition_camera = transition_camera
+	BuildManager.speed = 1.0 # For build camera movement speed
+	load_game_data()
 
 func spawn_room():
 	var room_to_spawn
@@ -72,3 +82,49 @@ func _on_inventory_interface_drop_slot_data(slot_data):
 
 func grab_light_sources():
 	pass
+
+func save_game_data():
+	var save = SaveGame.new()
+	save.inventory = EventBus.player.inventory_data
+	save.hotbar_inventory = EventBus.player.hotbar_inventory_data
+	
+	if EventBus.game_is_new_save:
+		EventBus.game_is_new_save = false
+		EventBus.current_save_file_id = generate_save_file_id()
+	
+	for node in get_tree().get_nodes_in_group("SaveObject"):
+		save.interior_object_info[node.self_slot_data.item_data.name] = node.global_position
+		save.exterior_object_info = BuildManager.exterior_objects
+	
+	save.write_savegame_data(EventBus.current_save_file_id)
+
+func load_game_data():
+	if SaveGame.save_exists(EventBus.current_save_file_id) == false:
+		EventBus.display_speech_bubble.emit(["Error loading save file!"], "Error")
+		return
+	
+	save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
+	EventBus.player.inventory_data.slot_datas = save.inventory.slot_datas
+	EventBus.player.hotbar_inventory_data.slot_datas = save.hotbar_inventory.slot_datas
+	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
+	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
+	load_object_data()
+
+func load_object_data():
+	if EventBus.current_save_file_id:
+		save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
+		var object
+		for new_object in save.interior_object_info:
+			BuildManager.current_object_name_to_spawn = new_object
+			object = BuildManager.get_object_to_spawn()
+			add_child(object)
+			object.global_position = save.interior_object_info[new_object]
+			print("Placed object: ", BuildManager.current_object_name_to_spawn)
+			EventBus.save_game_data.emit()
+
+func generate_save_file_id() -> String:
+	var id : String
+	var random_letter_int : int = len(characters)
+	for i in range(4):
+		id += characters[randi()%random_letter_int]
+	return " " + id + " " # empty quotes add empty spacing around id tag

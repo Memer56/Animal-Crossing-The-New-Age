@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bg5ihqhfb4qtx"]
+[gd_scene load_steps=16 format=3 uid="uid://bg5ihqhfb4qtx"]
 
 [ext_resource type="Script" uid="uid://bqf55kxpmtwys" path="res://Room/room.gd" id="1_i7vs8"]
 [ext_resource type="PackedScene" uid="uid://j57i0n4p5ltj" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room.tscn" id="2_0j4tc"]
@@ -8,8 +8,12 @@
 [ext_resource type="Script" uid="uid://chnm0638og0bs" path="res://Inventory/inventory_interface.gd" id="3_x07kc"]
 [ext_resource type="PackedScene" uid="uid://cc3te203t4sp8" path="res://Player House interior Scenes/player_house_interior.tscn" id="4_2bgig"]
 [ext_resource type="PackedScene" uid="uid://c8wdc4tvskx4f" path="res://Inventory/hot_bar_inventory.tscn" id="4_ly80p"]
+[ext_resource type="Script" uid="uid://c8dp6n4xrjx2" path="res://UI Info and Message Boxes/ui.gd" id="5_d2jpr"]
 [ext_resource type="PackedScene" uid="uid://cvyftmwfpksm5" path="res://Inventory/slot.tscn" id="5_yplge"]
 [ext_resource type="PackedScene" uid="uid://cbbtgce3tp5l5" path="res://Fade Canvas Layer/fade_canvas_layer.tscn" id="8_hjiva"]
+[ext_resource type="PackedScene" uid="uid://b3xtid1feoyvh" path="res://UI Info and Message Boxes/Pause Menu/pause_menu.tscn" id="9_qgm3m"]
+[ext_resource type="PackedScene" uid="uid://4jy5g0g32q3n" path="res://UI Info and Message Boxes/Speech Bubble/speech_bubble.tscn" id="11_8um3o"]
+[ext_resource type="PackedScene" uid="uid://bq1efipsxf0bf" path="res://UI Info and Message Boxes/Build Menu UI/build_menu_ui.tscn" id="12_ka5ae"]
 
 [sub_resource type="Environment" id="Environment_i7vs8"]
 background_mode = 1
@@ -26,6 +30,7 @@ rooms = Dictionary[String, PackedScene]({
 })
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("5_d2jpr")
 
 [node name="InventoryInterface" type="Control" parent="UI"]
 layout_mode = 3
@@ -69,7 +74,13 @@ grow_vertical = 0
 layout_mode = 0
 offset_left = -88.0
 offset_right = -24.0
-offset_bottom = 64.0
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("9_qgm3m")]
+visible = false
+
+[node name="SpeechBubble" parent="UI" instance=ExtResource("11_8um3o")]
+
+[node name="BuildMenuUI" parent="UI" instance=ExtResource("12_ka5ae")]
 
 [node name="FadeCanvasLayer" parent="." instance=ExtResource("8_hjiva")]
 
@@ -81,6 +92,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29043508, 48.274952)
 
 [node name="Player" parent="." instance=ExtResource("3_vdjvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.523972)
+
+[node name="BuildCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9392561, 0.34321713, 0, -0.34321713, 0.9392561, 0, 33.84727, 62.1798)
+
+[node name="TransitionCamera" type="Camera3D" parent="."]
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
