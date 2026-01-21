@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlk1501txn687"]
+
+[ext_resource type="Script" uid="uid://c3lfrqg3rwb6b" path="res://Save Didn't Load Scene/save_didnt_load.gd" id="1_cl4ix"]
+[ext_resource type="PackedScene" uid="uid://dhvnwgofhxw1i" path="res://NPC's/Tom Nook/tom_nook.tscn" id="1_dskne"]
+
+[node name="SaveDidntLoad" type="Node3D"]
+script = ExtResource("1_cl4ix")
+
+[node name="TomNook" parent="." instance=ExtResource("1_dskne")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.14546138, 0.9893639, 0, -0.9893639, 0.14546138, 0, 31.148907, 2.875914)
+light_color = Color(0.9180122, 0.8703391, 0.35458016, 1)
+light_energy = 5.0
+spot_range = 49.197796
+spot_attenuation = 0.35
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.98561513, 0.16900547, 0, -0.16900547, 0.98561513, 0, 16.6663, 24.768202)
