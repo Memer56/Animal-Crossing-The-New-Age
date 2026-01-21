@@ -13,7 +13,6 @@ signal save_player_data
 @export var forced_rotation_y : float = 0.0
 @export var is_entering_building : bool = true
 @export var should_force_rotation_for_entry : bool = true
-@export var mainland_nav_mesh : NavigationRegion3D
 @onready var skeleton_3d: Skeleton3D = $PlayerNode/Armature/Skeleton3D
 @onready var eyes_mesh_setter: Node3D = $EyesMeshSetter
 @onready var mouth_mesh_setter: Node3D = $MouthMeshSetter
@@ -27,6 +26,9 @@ signal save_player_data
 @onready var doorway_entry_anim: AnimationPlayer = $DoorwayEntryAnim
 @onready var object_drop_point: Marker3D = $PlayerNode/ObjectDropPoint
 @onready var ground_detection_raycasts: Node3D = $PlayerNode/ObjectDropPoint/GroundDetectionRaycasts
+@onready var item_ground_raycasts: Node3D = $PlayerNode/ItemDropPoint/ItemGroundRaycasts
+@onready var item_collision_checker: Area3D = $PlayerNode/ItemDropPoint/ItemCollisionChecker
+@onready var collision_checker: Area3D = $PlayerNode/ObjectDropPoint/CollisionChecker
 
 var speed = 80.0 #30.0
 var direction = Vector3.ZERO
@@ -42,6 +44,7 @@ var doorway_events_can_trigger : bool = false
 var raycasted_door_found : StaticBody3D
 var map_rid : RID
 var edge_push_strength : float = 50.0
+var player_nav_mesh : NavigationRegion3D
 
 enum {
 	IDLE,
@@ -57,19 +60,28 @@ func _ready() -> void:
 	EventBus.player = self
 	state = IDLE
 	set_skin_colour(skin_colour)
-	disable_and_enable_nav_mesh_limit()
-	if mainland_nav_mesh:
-		map_rid = mainland_nav_mesh.get_navigation_map()
+	BuildManager.camera = camera_3d
 	if EventBus.trigger_building_exit_event:
 		state = RE_ENTER_OVERWORLD
 		EventBus.trigger_building_exit_event = false
+		disable_and_enable_nav_mesh_limit(6.0)
+	else:
+		disable_and_enable_nav_mesh_limit(1.0)
 	if doorway_events_can_trigger == false:
 		doorway_events_can_trigger = true
+	
+	# Timer give the below a chance for is_in_overworld to be in correct state
+	await get_tree().create_timer(0.4).timeout
+	if EventBus.is_in_overworld:
+		player_nav_mesh = get_tree().root.get_node("PlayerNavBoundry")
+		if player_nav_mesh:
+			map_rid = player_nav_mesh.get_navigation_map()
+			#player_nav_mesh.bake_navigation_mesh(true)
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Backwards")
 	direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), acceleration * delta)
-
+	
 	match state:
 		IDLE:
 			idle(input_dir)
@@ -88,14 +100,17 @@ func _physics_process(delta: float) -> void:
 	
 	animation_tree.advance(delta * anim_speed)
 	detect_raycast_collision()
-	is_player_on_nav_mesh(delta)
-	#jump()
+	
+	if EventBus.is_in_overworld:
+		is_player_on_nav_mesh()
+
 	apply_gravity(delta)
 	move_and_slide()
 
-func disable_and_enable_nav_mesh_limit():
-	await get_tree().create_timer(0.2).timeout
-	EventBus.player_can_leave_nav_mesh = false
+func disable_and_enable_nav_mesh_limit(time : float):
+	await get_tree().create_timer(time).timeout
+	if EventBus.is_in_overworld:
+		EventBus.player_can_leave_nav_mesh = false
 
 func idle(input_dir):
 	var anim_state = animation_tree.get("parameters/playback")
@@ -139,13 +154,13 @@ func do_action():
 
 func enter_door():
 	if doorway_events_can_trigger:
-		doorway_events_can_trigger = false
 		velocity = Vector3.ZERO
 		anim_speed = 1.0
 		allow_gravity = false
 		var anim_state = animation_tree.get("parameters/playback")
 		anim_state.travel("Walk")
 		EventBus.update_clothes_anim.emit("Walk", anim_speed)
+		EventBus.save_game_data.emit()
 		if should_force_rotation_for_entry:
 			#Makes player face forward
 			forced_rotation_y = 180 if player_node.rotation.y > 0 else -180.0
@@ -159,11 +174,12 @@ func enter_door():
 			doorway_entry_anim.play("Enter Building")
 		else:
 			doorway_entry_anim.play("Leave Building")
-		forced_rotation_y = deg_to_rad(forced_rotation_y)
-		player_node.rotation.y = lerp_angle(player_node.rotation.y, forced_rotation_y, 0.25)
+		player_node.rotation.y = lerp_angle(player_node.rotation.y, deg_to_rad(forced_rotation_y), 0.25)
 		camera_3d.top_level = true
 		await get_tree().create_timer(2.1).timeout # Move player for 2 secs
 		state = FREEZE_PLAYER
+		doorway_events_can_trigger = false
+		
 		if !scene_change_fade_called:
 			FadeCanvasLayer.trigger_scene_change_fade(true)
 			scene_change_fade_called =  true
@@ -177,7 +193,6 @@ func enter_door():
 
 func leave_building_doorway():
 	if doorway_events_can_trigger:
-		EventBus.player_can_leave_nav_mesh = true
 		toggle_collisions(2, false)
 		allow_gravity = false
 		global_position = EventBus.last_building_entered["building pos"]
@@ -197,6 +212,7 @@ func leave_building_doorway():
 		state = IDLE
 		allow_gravity = true
 		toggle_collisions(2, true)
+		EventBus.player_can_leave_nav_mesh = false
 
 func exit_state():
 	anim_speed = 1.0
@@ -232,24 +248,53 @@ func eat_consumable():
 
 func use_slot_data(slot_data : SlotData, inventory_data : InventoryData, slot_index : int):
 	if slot_data.item_data is ItemDataPositioning:
-		toggle_ground_raycasts(true)
+		var spawn_point : Marker3D
+		var raycast_variable : bool
+		var y_spawn_pos : float
+
+		if slot_data.item_data.item_type == 1: # Building type
+			spawn_point = object_drop_point
+			raycast_variable = true
+		elif slot_data.item_data.item_type == 0: # Furniture and stuff
+			spawn_point = item_drop_point
+			raycast_variable = false
+		
+		if EventBus.is_in_overworld:
+			y_spawn_pos = 16.0
+		else:
+			y_spawn_pos = 0.0
+		
+		toggle_ground_raycasts(true, raycast_variable)
 		await get_tree().create_timer(0.1).timeout
-		check_ground_raycast_collisions()
+		check_ground_raycast_collisions(raycast_variable)
 		BuildManager.current_object_name_to_spawn = slot_data.item_data.name
-		BuildManager.object_spawn_position = Vector3(object_drop_point.global_position.x, 16.0, object_drop_point.global_position.z)
-		BuildManager.trigger_confirm_message_for_building()
+		BuildManager.object_spawn_position = Vector3(spawn_point.global_position.x, y_spawn_pos, spawn_point.global_position.z)
 		BuildManager.item_to_remove_inventory_data = inventory_data
 		BuildManager.item_to_remove_slot_index = slot_index
-		toggle_ground_raycasts(false)
+		toggle_ground_raycasts(false, raycast_variable)
+		EventBus.trigger_confirm_message.emit("Would you like to place this here?")
 
-func toggle_ground_raycasts(value : bool):
-	for ray in ground_detection_raycasts.get_children():
+func toggle_ground_raycasts(value : bool, is_building_object : bool):
+	var raycasts
+	if is_building_object:
+		raycasts = ground_detection_raycasts
+	else:
+		raycasts = item_ground_raycasts
+	
+	for ray in raycasts.get_children():
 		ray.enabled = value
 
-func check_ground_raycast_collisions():
+func check_ground_raycast_collisions(is_building_object : bool):
 	var raycasts_that_are_colliding : Array = [false, false, false, false]
 	var index : int = 0
-	for ray in ground_detection_raycasts.get_children():
+	var raycast
+	
+	if is_building_object:
+		raycast = ground_detection_raycasts
+	else:
+		raycast = item_ground_raycasts
+	
+	for ray in raycast.get_children():
 		if ray.is_colliding():
 			raycasts_that_are_colliding[index] = true
 			index += 1
@@ -262,14 +307,14 @@ func check_ground_raycast_collisions():
 func get_drop_point() -> Vector3:
 	return item_drop_point.global_position
 
-func set_item_in_hand(slot_data):
+func set_item_in_hand(slot_data : SlotData):
 	# this is broken
 	var current_held_item = hand_item_spawn.get_children()
 	if current_held_item:
 		for child in current_held_item:
 			child.queue_free()
 	
-	if slot_data:
+	if slot_data and slot_data.item_data.can_display_in_hand:
 		var item_name = slot_data.item_data.name
 		var item = held_items[item_name].instantiate()
 		hand_item_spawn.add_child(item)
@@ -288,23 +333,33 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 func detect_raycast_collision():
 	if shape_cast_3d.is_colliding():
 		var collider = shape_cast_3d.get_collider(0)
-		if collider.is_in_group("Door"):
-			raycasted_door_found = collider
-			print("Set raycasted door")
-			if Input.is_action_just_pressed("Interact"):
-				doorway_events_can_trigger = true
-				toggle_collisions(2, false)
-				EventBus.last_building_entered["building pos"] = collider.return_spawn_point()
-				EventBus.last_building_entered["building node"] = collider
-				state = ENTER_DOOR
-				collider.play_anim()
-		if collider.is_in_group("ThisNPCTalks"):
-			if Input.is_action_just_pressed("Interact"):
-				collider.speak_to_player()
+		if collider:
+			if collider.is_in_group("Door"):
+				raycasted_door_found = collider
+				if Input.is_action_just_pressed("Interact"):
+					doorway_events_can_trigger = true
+					toggle_collisions(2, false)
+					EventBus.last_building_entered["building pos"] = collider.return_spawn_point()
+					EventBus.last_building_entered["building node"] = collider
+					state = ENTER_DOOR
+					collider.play_anim()
+			
+			if collider.is_in_group("ThisNPCTalks"):
+				if Input.is_action_just_pressed("Interact"):
+					collider.speak_to_player()
+			
+			if collider.is_in_group("CanBePickedUp"):
+				if Input.is_action_just_pressed("Interact"):
+					collider.add_self_to_player_inventory()
+				if Input.is_action_pressed("ChangeObjectTransform"):
+					if Input.is_action_just_pressed("MouseWheelDown"):
+						collider.rotate_self(90.0)
+					elif Input.is_action_just_pressed("MouseWheelUp"):
+						collider.rotate_self(-90.0)
 
-func is_player_on_nav_mesh(delta : float):
+func is_player_on_nav_mesh():
 	# All this prevents the player from falling off the edges of rivers and such
-	if !EventBus.player_can_leave_nav_mesh and EventBus.is_in_overworld:
+	if !EventBus.player_can_leave_nav_mesh and EventBus.is_in_overworld and player_nav_mesh:
 		var player_pos = global_position
 		var closest_nav_point = NavigationServer3D.map_get_closest_point(map_rid, player_pos)
 		var distance = player_pos.distance_to(closest_nav_point)
@@ -329,3 +384,11 @@ func _on_collision_checker_body_exited(body: Node3D) -> void:
 
 func toggle_camera_zoom_in():
 	pass
+
+
+func _on_item_collision_checker_body_entered(body: Node3D) -> void:
+	BuildManager.colliding_with_another_object = true
+
+
+func _on_item_collision_checker_body_exited(body: Node3D) -> void:
+	BuildManager.colliding_with_another_object = false
