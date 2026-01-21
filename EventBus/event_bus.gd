@@ -3,9 +3,6 @@ extends Node
 const DRESS_1 = preload("uid://duepwdb7eo68a")
 const DRESS_2 = preload("uid://npvkb08frqdy")
 
-## Buildings constsssssssss
-const PLAYER_TENT = preload("uid://du1vi2sn7tjhm")
-
 
 signal create_overflow_slot_data(slot_data : SlotData)
 signal duplicate_slot_data_info
@@ -17,6 +14,8 @@ signal bake_nav_mesh
 signal display_speech_bubble(speech_text_array : Array[String], npc_name : String)
 signal save_game_data
 signal load_game_data
+signal load_player_island_nav_mesh_bounds(island : String, node : Node)
+signal send_nav_region(nav_region : NavigationRegion3D)
 
 var player
 var can_place : bool = true
@@ -28,10 +27,14 @@ var is_in_overworld : bool = true
 var trigger_building_exit_event : bool = false
 var player_can_leave_nav_mesh : bool = true # Defaulted to true to allow correct spanwing placement
 var game_in_start_up : bool = true
+var game_is_new_save : bool = true
+var current_save_file_id : String
+var is_returning_to_main_menu : bool = false
 var last_building_entered : Dictionary = {
 	"building pos": Vector3.ZERO,
 	"building node": null
 }
+var found_save_file_ids : Array
 
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
@@ -43,11 +46,3 @@ func return_clothing_scene(clothing_name : String) -> PackedScene:
 			clothing = DRESS_2
 	
 	return clothing
-
-func return_building_to_spawn(building_name : String) -> Node:
-	var building : Node
-	match building_name:
-		"PlayerTent":
-			building = PLAYER_TENT.instantiate()
-	
-	return building
