@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDataPositioning" load_steps=5 format=3 uid="uid://crs6qbagtqlbh"]
+
+[ext_resource type="Script" uid="uid://cfopfw52fqiud" path="res://Inventory/Item/item_data_positioning.gd" id="1_4icwo"]
+[ext_resource type="ArrayMesh" uid="uid://b3eh4m0igk55v" path="res://Inventory/Item/Items/Positioning Item/item_mesh.res" id="1_5vmws"]
+[ext_resource type="Texture2D" uid="uid://brptr764yddtq" path="res://Inventory/Item/Items/Positioning Item/TentWhite.png" id="2_sgwdf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vmws"]
+atlas = ExtResource("2_sgwdf")
+
+[resource]
+script = ExtResource("1_4icwo")
+item_type = 1
+name = "Tent"
+description = "Place this item down to place something"
+texture = SubResource("AtlasTexture_5vmws")
+mesh = ExtResource("1_5vmws")
+metadata/_custom_type_script = "uid://cfopfw52fqiud"

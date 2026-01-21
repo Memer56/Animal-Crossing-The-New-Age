@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8m3m81u8vkq4"]
+
+[ext_resource type="ArrayMesh" uid="uid://b3eh4m0igk55v" path="res://Inventory/Item/Items/Positioning Item/item_mesh.res" id="1_chckx"]
+
+[sub_resource type="Skin" id="Skin_6edan"]
+resource_name = "Skin"
+bind_count = 1
+bind/0/name = &"Root"
+bind/0/bone = -1
+bind/0/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+
+[node name="PositioningTent" type="Node3D"]
+
+[node name="positioning_item" type="Node3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 139.08923)
+
+[node name="Armature" type="Node3D" parent="positioning_item"]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="positioning_item/Armature"]
+bones/0/name = "Root"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
+bones/0/scale = Vector3(1, 1, 1)
+
+[node name="Body__mBody" type="MeshInstance3D" parent="positioning_item/Armature/Skeleton3D"]
+mesh = ExtResource("1_chckx")
+skin = SubResource("Skin_6edan")
