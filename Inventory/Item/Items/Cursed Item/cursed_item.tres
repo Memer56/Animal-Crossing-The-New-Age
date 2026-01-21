@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemDataPositioning" load_steps=5 format=3 uid="uid://bp554kqh6cbmy"]
+
+[ext_resource type="Script" uid="uid://cfopfw52fqiud" path="res://Inventory/Item/item_data_positioning.gd" id="1_e4tcg"]
+[ext_resource type="ArrayMesh" uid="uid://na6kdldhq4n6" path="res://Inventory/Item/Items/Generic Dropped Item leaf Mesh/dropped_item_mesh.res" id="1_ehn6n"]
+[ext_resource type="Texture2D" uid="uid://dkjiyhv1qcrno" path="res://Inventory/Item/Items/Cursed Item/cursed_item_icon.png" id="3_xikvo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehn6n"]
+atlas = ExtResource("3_xikvo")
+
+[resource]
+script = ExtResource("1_e4tcg")
+item_type = 0
+name = "Cursed Item"
+description = "DON'T PLACE THIS DOWN!"
+texture = SubResource("AtlasTexture_ehn6n")
+mesh = ExtResource("1_ehn6n")
+metadata/_custom_type_script = "uid://cfopfw52fqiud"
