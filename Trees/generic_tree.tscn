@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dc2iy76lfy0ow"]
+
+[ext_resource type="Script" uid="uid://cah14rxbslt0t" path="res://Trees/generic_tree.gd" id="1_2t0cu"]
+[ext_resource type="PackedScene" uid="uid://cen8qp58r4s0r" path="res://Trees/Tree 1/tree_1.tscn" id="2_aexgc"]
+[ext_resource type="PackedScene" uid="uid://dn8s8myfeonyu" path="res://Trees/Tree 2/tree_2.tscn" id="3_gbnye"]
+[ext_resource type="PackedScene" uid="uid://dfc0hjdqcl7k5" path="res://Trees/Tree 3/tree_3.tscn" id="4_bnyr4"]
+[ext_resource type="PackedScene" uid="uid://b3jui6a2lhjhl" path="res://Trees/Special Tree 1/special_tree_1.tscn" id="5_vlekx"]
+[ext_resource type="Script" uid="uid://bxpjsv4jkvmv4" path="res://Inventory/slot_data.gd" id="6_2aa8y"]
+[ext_resource type="Resource" uid="uid://bd0jdrordyhms" path="res://Inventory/Item/Items/Wood/wood.tres" id="7_dup4o"]
+[ext_resource type="Resource" uid="uid://bjvf5kbrpxeku" path="res://Inventory/Item/Items/Wood/softwood.tres" id="8_q8aan"]
+[ext_resource type="Resource" uid="uid://giyy320ucqqg" path="res://Inventory/Item/Items/Wood/hardwood.tres" id="9_kilwy"]
+
+[sub_resource type="Resource" id="Resource_sloex"]
+script = ExtResource("6_2aa8y")
+item_data = ExtResource("7_dup4o")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="Resource" id="Resource_rqkpi"]
+script = ExtResource("6_2aa8y")
+item_data = ExtResource("8_q8aan")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="Resource" id="Resource_t7s4f"]
+script = ExtResource("6_2aa8y")
+item_data = ExtResource("9_kilwy")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="Animation" id="Animation_4opay"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TreeNode:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vlekx"]
+resource_name = "TreeFall"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TreeNode:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 1.4179579)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fade_tree"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4opay"]
+_data = {
+&"RESET": SubResource("Animation_4opay"),
+&"TreeFall": SubResource("Animation_vlekx")
+}
+
+[node name="GenericTree" type="Node3D" unique_id=758572058 node_paths=PackedStringArray("spawn_positions")]
+script = ExtResource("1_2t0cu")
+normal_trees = Array[PackedScene]([ExtResource("2_aexgc"), ExtResource("3_gbnye"), ExtResource("4_bnyr4")])
+special_trees = Array[PackedScene]([ExtResource("5_vlekx")])
+wood_types = Array[ExtResource("6_2aa8y")]([SubResource("Resource_sloex"), SubResource("Resource_rqkpi"), SubResource("Resource_t7s4f")])
+spawn_positions = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3")]
+
+[node name="TreeNode" type="Node3D" parent="." unique_id=1195712532]
+transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1637887903]
+libraries/ = SubResource("AnimationLibrary_4opay")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=1275252298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -26.42723)
+
+[node name="Marker3D2" type="Marker3D" parent="." unique_id=968330849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.789001, 0, 11.4412)
+
+[node name="Marker3D3" type="Marker3D" parent="." unique_id=1499329592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.73372, 0, 10.314411)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b3jui6a2lhjhl"]
+
+[ext_resource type="ArrayMesh" uid="uid://dj8mtdtrt1ayt" path="res://Trees/Special Tree 1/Birch_1.obj" id="1_b8nos"]
+[ext_resource type="Script" uid="uid://dl0yvj0kufrte" path="res://Trees/tree.gd" id="1_chikk"]
+[ext_resource type="Texture2D" uid="uid://bx37jx8dxj7jf" path="res://Trees/Textures/Birch_Bark.png" id="2_kbx1x"]
+[ext_resource type="Texture2D" uid="uid://c65qlpi2wc3q7" path="res://Trees/Textures/Birch_Leaves_Yellow.png" id="3_uglnf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uglnf"]
+albedo_texture = ExtResource("2_kbx1x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chikk"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("3_uglnf")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uglnf"]
+height = 23.249084
+radius = 2.275879
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_chikk"]
+height = 31.101593
+radius = 2.275879
+
+[node name="SpecialTree1" type="StaticBody3D" unique_id=1164854701 node_paths=PackedStringArray("tree_mesh") groups=["Destructable"]]
+collision_layer = 18
+script = ExtResource("1_chikk")
+tree_mesh = NodePath("Birch1")
+
+[node name="Birch1" type="MeshInstance3D" parent="." unique_id=480257057]
+transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0.13935721, 0, 0.16215181)
+mesh = ExtResource("1_b8nos")
+surface_material_override/0 = SubResource("StandardMaterial3D_uglnf")
+surface_material_override/1 = SubResource("StandardMaterial3D_chikk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=970394147]
+transform = Transform3D(0.9931788, -0.11660139, 0, 0.11660139, 0.9931788, 0, 0, 0, 1, -2.4275575, 10.557369, 0)
+shape = SubResource("CylinderShape3D_uglnf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=104316658]
+transform = Transform3D(0.9999016, -0.014031984, 0, 0.014031984, 0.9999016, 0, 0, 0, 1, -3.9597447, 37.435722, 0)
+shape = SubResource("CylinderShape3D_chikk")
