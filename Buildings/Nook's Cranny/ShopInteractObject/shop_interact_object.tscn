@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://47lfgiilmfuq"]
+
+[ext_resource type="Script" uid="uid://ldsqcamiha46" path="res://Buildings/Nook's Cranny/ShopInteractObject/shop_interact_object.gd" id="1_f7yb2"]
+[ext_resource type="PackedScene" uid="uid://xvb3jlwolmqe" path="res://Buildings/Nook's Cranny/ShopInteractObject/Sold Out Sign/sold out sign model.glb" id="2_lwpuk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f7yb2"]
+size = Vector3(11.908142, 13.7438965, 12.192932)
+
+[node name="ShopInteractObject" type="StaticBody3D" unique_id=436815643 groups=["ShopObject"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_f7yb2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=232462328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.88, 0)
+shape = SubResource("BoxShape3D_f7yb2")
+
+[node name="sold out sign model" parent="." unique_id=393199863 instance=ExtResource("2_lwpuk")]
+visible = false
