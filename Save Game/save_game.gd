@@ -8,10 +8,14 @@ var time = Time.get_datetime_dict_from_system()
 ## Things to save
 @export var inventory : InventoryData
 @export var hotbar_inventory : InventoryData
-@export var bells : int
+@export var player_balance : int
+@export var savings_balance : int
+@export var loan_balance : int
+@export var player_is_debt_free : bool
 @export var house_level : int # 0 = Tent, 1 = House etc
-@export var exterior_object_info : Dictionary[String, Vector3]
-@export var interior_object_info : Dictionary[String, Vector3]
+@export var exterior_object_info : Dictionary[String, Transform3D]
+@export var interior_object_info : Dictionary[String, Transform3D]
+@export var trees : Array[Array]
 @export var this_save_date = str("%02d:%02d:%02d %02d:%02d:%02d" % [time.day, time.month, time.year, time.hour, time.minute, time.second])
 @export var game_version = ProjectSettings.get_setting("application/config/version")
 
