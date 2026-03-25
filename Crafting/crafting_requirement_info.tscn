@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://c7d7aqgfexg0x"]
+
+[ext_resource type="Script" uid="uid://dahd2bgd5x7pm" path="res://Crafting/crafting_requirement_info.gd" id="1_22tou"]
+[ext_resource type="Texture2D" uid="uid://b4ghx2im1lupb" path="res://Inventory/Item/Items/Tools/Nintendo Switch - Animal Crossing_ New Horizons - Storage Icons - Tools and Handheld Items Icons.png" id="2_iebyu"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="3_3kych"]
+
+[sub_resource type="FontVariation" id="FontVariation_3kych"]
+base_font = ExtResource("3_3kych")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3kych"]
+font = SubResource("FontVariation_3kych")
+font_size = 20
+font_color = Color(0.5058824, 0.34509805, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqio6"]
+atlas = ExtResource("2_iebyu")
+region = Rect2(172, 1207, 53, 96)
+
+[sub_resource type="FontVariation" id="FontVariation_ujw7s"]
+base_font = ExtResource("3_3kych")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kych"]
+bg_color = Color(0.5077835, 0.3470183, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="CraftingRequirementInfo" type="Control" unique_id=1904599198]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_22tou")
+
+[node name="DottedLine" type="Label" parent="." unique_id=983141054]
+layout_mode = 0
+offset_right = 544.0
+offset_bottom = 48.0
+text = " - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
+label_settings = SubResource("LabelSettings_3kych")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=283610405]
+layout_mode = 1
+offset_right = 544.0
+offset_bottom = 46.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1151893694]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("AtlasTexture_gqio6")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CountLabel" type="RichTextLabel" parent="HBoxContainer" unique_id=543156484]
+custom_minimum_size = Vector2(109.875, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_fonts/normal_font = SubResource("FontVariation_ujw7s")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_3kych")
+bbcode_enabled = true
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1

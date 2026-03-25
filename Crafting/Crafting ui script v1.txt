@@ -1,0 +1,170 @@
+extends Control
+
+const CRAFTING_REQUIREMENT_INFO = preload("res://Crafting/crafting_requirement_info.tscn")
+
+@onready var tab_container: HBoxContainer = $BG/Panel/TabContainer
+@onready var materials_container: GridContainer = $BG/Panel/MaterialsContainer
+@onready var materials_container_2: GridContainer = $BG/Panel/MaterialsContainer2
+@onready var item_info_display: TextureRect = $BG/VBoxContainer/ItemInfoDisplay
+@onready var required_items_list: VBoxContainer = $BG/VBoxContainer/RequiredItemsList
+@onready var output_count: Label = $BG/VBoxContainer/ItemInfoDisplay/OutputCount
+@onready var player: CharacterBody2D = $"../../Player"
+@onready var craft: Button = $BG/Panel/Craft
+
+var tab_buttons : Array
+var item_name : String
+var required_items_in_inventory : Dictionary
+var required_items_needed : Dictionary
+var required_items_values : Array
+var hot_bar_item_data_array : Array
+var inventory_item_data_array : Array
+var item : SlotData
+var button_that_was_fired
+var can_begin_process : bool = true
+
+func _ready() -> void:
+	for buttons in tab_container.get_children():
+		tab_buttons.append(buttons)
+
+func _on_tab_button_clicked(button_name : String) -> void:
+	match button_name:
+		"Materials":
+			tab_buttons[0].set_theme_to_focused()
+			tab_buttons[1].set_theme_to_unfocused()
+			materials_container.show()
+		"Tools":
+			tab_buttons[0].set_theme_to_unfocused()
+			tab_buttons[1].set_theme_to_focused()
+			materials_container.hide()
+
+
+func _on_crafting_option_display_button_send_crafting_data(crafting_requirements: Dictionary, button_texture, output_count_value : int, result_item : SlotData, button) -> void:
+	if can_begin_process:
+		print("Beginning process")
+		can_begin_process = false
+		var child_node = required_items_list.get_children()
+		if child_node:
+			for child in child_node:
+				child.queue_free()
+		required_items_in_inventory.clear()
+		required_items_needed.clear()
+		
+		item = result_item
+		button_that_was_fired = button
+		
+		
+
+func organise_inventory_data(crafting_requirements, button_texture):
+	var required_count_value_1 : int
+	var required_item_texture_1
+	var quantity_1 : int
+	var fetched_inventory_data : Array
+	
+	for key in crafting_requirements:
+		item_name = key
+		required_count_value_1 = crafting_requirements[key][0]
+		required_item_texture_1 = crafting_requirements[key][1]
+		# within the below arrays, the first number = quantity and the second = index and so on
+		fetched_inventory_data = player.inventory_data.locate_item_in_inventory_by_name(key)
+		if fetched_inventory_data:
+			inventory_item_data_array = fetched_inventory_data
+	
+			quantity_1 = sum_of_array_even(inventory_item_data_array)
+			required_items_needed[key] = crafting_requirements[key][0]
+			spawn_and_load_requirement_info_button(required_count_value_1, required_item_texture_1, quantity_1)
+
+func organise_hot_bar_inventory(crafting_requirements: Dictionary, button_texture, output_count_value : int, result_item : SlotData, button):
+	var required_count_value_2 : int
+	var required_item_texture_2
+	var quantity_2 : int
+	var fetched_hot_bar_data : Array
+	
+	for key in crafting_requirements:
+		item_name = key
+		required_count_value_2 = crafting_requirements[key][0]
+		required_item_texture_2 = crafting_requirements[key][1]
+		# within the below arrays, the first number = quantity and the second = index and so on
+		fetched_hot_bar_data = player.hot_bar_inventory_data.locate_item_in_inventory_by_name(item_name)
+		if fetched_hot_bar_data and required_items_list:
+			hot_bar_item_data_array = fetched_hot_bar_data
+	
+			quantity_2 = sum_of_array_even(hot_bar_item_data_array)
+			required_items_needed[key] = crafting_requirements[key][0]
+			spawn_and_load_requirement_info_button(required_count_value_2, required_item_texture_2, quantity_2)
+
+func spawn_and_load_requirement_info_button(_required_count_value : int, _texture, _total_quantity : int):
+	var info = CRAFTING_REQUIREMENT_INFO.instantiate()
+	required_items_list.add_child(info)
+	info.load_data(_total_quantity, _required_count_value, _texture)
+
+func can_item_be_crafted():
+	var keys : Array = required_items_needed.keys() 
+	var required_items_value_total : int
+	var hot_bar_total = sum_of_array_even(hot_bar_item_data_array)
+	var inventory_total = sum_of_array_even(inventory_item_data_array)
+	var total_items_value_in_entire_inventory : int
+	
+	for key in keys:
+		required_items_value_total += required_items_needed[key]
+	
+	total_items_value_in_entire_inventory = hot_bar_total + inventory_total
+	
+	if total_items_value_in_entire_inventory >= required_items_value_total:
+		craft.disabled = false
+	else:
+		craft.disabled = true
+
+func return_true(boolean) -> bool:
+	return boolean == true
+
+func _on_craft_pressed() -> void:
+	# needs to target highest stack amount
+	var count = int(output_count.text)
+	var quantity_to_remove : int
+	var hot_bar_indexes : Array = return_array_values_at_odd_indexes(hot_bar_item_data_array)
+	var inventory_indexes : Array = return_array_values_at_odd_indexes(inventory_item_data_array)
+
+	if !player.hot_bar_inventory_data.add_to_inventory_with_quantity(item, count):
+		player.inventory_data.add_to_inventory_with_quantity(item, count)
+
+	for key in required_items_needed:
+		quantity_to_remove = required_items_needed[key]
+
+	if !hot_bar_item_data_array.is_empty():
+		print(hot_bar_item_data_array)
+		for index in hot_bar_indexes:
+			player.hot_bar_inventory_data.remove_item_if_quantity_is_higher(index, quantity_to_remove)
+	
+	if !inventory_item_data_array.is_empty():
+		for index in inventory_indexes:
+			player.inventory_data.remove_item_if_quantity_is_higher(index, quantity_to_remove)
+
+	button_that_was_fired.resend_crafting_data()
+
+func sum_of_array_even(array : Array) -> int:
+	var sum : int
+	for i in array.size():
+		if i % 2 == 0:
+			sum += array[i]
+	return sum
+
+func return_array_values_at_odd_indexes(array : Array) -> Array:
+	var return_array : Array
+	for i in range(array.size()):
+		if i % 2 != 0:
+			return_array.append(array[i])
+	return return_array
+
+func sum_of_all_array(array : Array) -> int:
+	var sum : int
+	for i in array:
+		sum += array[i]
+	return sum
+
+func reset_everything():
+	required_items_in_inventory.clear()
+	required_items_needed.clear()
+	required_items_values.clear()
+	hot_bar_item_data_array.clear()
+	inventory_item_data_array.clear()
+	craft.disabled = true

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjkid3umw828c"]
+
+[ext_resource type="FontFile" uid="uid://f8vnvhyhrv5q" path="res://font/Arcadepix Plus.ttf" id="1_j020x"]
+[ext_resource type="Script" uid="uid://d0mvhs2v33310" path="res://Crafting/crafting_tab_button.gd" id="2_5enxb"]
+
+[sub_resource type="FontVariation" id="FontVariation_bh2f1"]
+base_font = ExtResource("1_j020x")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dsisb"]
+bg_color = Color(0.894118, 0.788235, 0.615686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fyqf"]
+bg_color = Color(0.894118, 0.788235, 0.615686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8d2ue"]
+bg_color = Color(0.601516, 0.486036, 0.289797, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="Tab" type="Button" groups=["Tab Button"]]
+custom_minimum_size = Vector2(100, 1)
+focus_mode = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_bh2f1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dsisb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dsisb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_dsisb")
+text = "Tab"
+script = ExtResource("2_5enxb")
+focused_button_theme = SubResource("StyleBoxFlat_5fyqf")
+unfocused_button_theme = SubResource("StyleBoxFlat_8d2ue")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

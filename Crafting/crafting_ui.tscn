@@ -1,0 +1,328 @@
+[gd_scene format=3 uid="uid://c6tkag6x3tc7h"]
+
+[ext_resource type="Script" uid="uid://dahsxqbqbmtkw" path="res://Crafting/crafting_ui.gd" id="1_lwlmp"]
+[ext_resource type="Shader" uid="uid://eq5qprednxti" path="res://Shaders/scrolling_texure.gdshader" id="2_6teyu"]
+[ext_resource type="PackedScene" uid="uid://c5afvfdm0pit6" path="res://Crafting/crafting_option_display_button.tscn" id="3_nda7p"]
+[ext_resource type="Texture2D" uid="uid://byhuk1x0n453r" path="res://UI Info and Message Boxes/ATM UI/Download Seamless background with yellow stars pattern on pastel purple background_ for free.jpg" id="3_oivol"]
+[ext_resource type="Texture2D" uid="uid://bfwmm51nag5fs" path="res://Crafting/Icons/All Icon.png" id="4_4hsek"]
+[ext_resource type="Texture2D" uid="uid://dkxjkt2fq0vbr" path="res://Crafting/Icons/Tools Icon.png" id="5_nxwn1"]
+[ext_resource type="Texture2D" uid="uid://byyw3kn7vd83b" path="res://Crafting/Icons/Clothing Icon.png" id="6_ku6pr"]
+[ext_resource type="Texture2D" uid="uid://cyupty3byhkc7" path="res://Crafting/Icons/Wallpaper Icon.png" id="7_wkcuw"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="9_laq0p"]
+[ext_resource type="Texture2D" uid="uid://b4ghx2im1lupb" path="res://Inventory/Item/Items/Tools/Nintendo Switch - Animal Crossing_ New Horizons - Storage Icons - Tools and Handheld Items Icons.png" id="9_qvhb5"]
+[ext_resource type="Script" uid="uid://bxpjsv4jkvmv4" path="res://Inventory/slot_data.gd" id="10_jn6bw"]
+[ext_resource type="StyleBox" uid="uid://b2uekixfds4px" path="res://Button Styles/normal_button.tres" id="10_kictx"]
+[ext_resource type="Resource" uid="uid://dt351v7xcoswo" path="res://Inventory/Item/Items/Tools/Flimsy Axe/flimsy_axe.tres" id="10_n2olq"]
+[ext_resource type="Texture2D" uid="uid://iveuq2uc0ptb" path="res://Inventory/Item/Items/Wood/Wood icon.png" id="10_wn6a7"]
+[ext_resource type="StyleBox" uid="uid://dlusgwld66go8" path="res://Button Styles/pressed_button.tres" id="11_y13by"]
+[ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="12_vuido"]
+[ext_resource type="StyleBox" uid="uid://cl3ccir8k8uju" path="res://Button Styles/disabled_button.tres" id="13_sgdi5"]
+[ext_resource type="StyleBox" uid="uid://d1i0p8d83a5df" path="res://Button Styles/focus_button.tres" id="13_syvga"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oivol"]
+shader = ExtResource("2_6teyu")
+shader_parameter/scroll_speed = 0.050000002375
+shader_parameter/angle_degrees = 218.2330103660675
+shader_parameter/repeat_x = 10.0000004275
+shader_parameter/repeat_y = 10.0000004275
+shader_parameter/row_offset = 0.0
+shader_parameter/texture_to_scroll = ExtResource("3_oivol")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mjj7"]
+bg_color = Color(0.894118, 0.788235, 0.615686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sgdi5"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn6bw"]
+atlas = ExtResource("9_qvhb5")
+region = Rect2(451, 160, 39, 87)
+
+[sub_resource type="Resource" id="Resource_n2olq"]
+script = ExtResource("10_jn6bw")
+item_data = ExtResource("10_n2olq")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="FontVariation" id="FontVariation_kictx"]
+base_font = ExtResource("9_laq0p")
+
+[sub_resource type="LabelSettings" id="LabelSettings_y13by"]
+font = SubResource("FontVariation_kictx")
+font_size = 40
+font_color = Color(0.552478, 0.44405624, 0.2593184, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_laq0p"]
+bg_color = Color(0.8355834, 0.70932835, 0.50049764, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="FontVariation" id="FontVariation_sgdi5"]
+base_font = ExtResource("9_laq0p")
+
+[sub_resource type="FontVariation" id="FontVariation_syvga"]
+base_font = ExtResource("9_laq0p")
+
+[sub_resource type="LabelSettings" id="LabelSettings_syvga"]
+font = ExtResource("9_laq0p")
+font_size = 30
+
+[node name="CraftingUI" type="Control" unique_id=504809646]
+process_mode = 3
+visible = false
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lwlmp")
+
+[node name="BG" type="Panel" parent="." unique_id=713368757]
+material = SubResource("ShaderMaterial_oivol")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="BG" unique_id=1863598818]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -850.0
+offset_top = -477.0
+offset_right = 850.0
+offset_bottom = 477.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mjj7")
+
+[node name="TabsBG" type="Panel" parent="BG/Panel" unique_id=2082130820]
+custom_minimum_size = Vector2(368, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -184.0
+offset_top = 16.0
+offset_right = 184.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sgdi5")
+metadata/_edit_group_ = true
+
+[node name="TabButtons" type="HBoxContainer" parent="BG/Panel/TabsBG" unique_id=1701236610]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -37.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="AllTabButton" type="TextureRect" parent="BG/Panel/TabsBG/TabButtons" unique_id=459767772 groups=["TabButton"]]
+modulate = Color(0.64114755, 0.5210933, 0.31738797, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("4_4hsek")
+expand_mode = 3
+
+[node name="ToolTabButton" type="TextureRect" parent="BG/Panel/TabsBG/TabButtons" unique_id=1547955551 groups=["TabButton"]]
+modulate = Color(0.6392157, 0.52156866, 0.31764707, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("5_nxwn1")
+expand_mode = 3
+
+[node name="FurnitureTabButton" type="TextureRect" parent="BG/Panel/TabsBG/TabButtons" unique_id=1484409588 groups=["TabButton"]]
+modulate = Color(0.6392157, 0.52156866, 0.31764707, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("6_ku6pr")
+expand_mode = 3
+
+[node name="WallpaperAndFlooringTabButton" type="TextureRect" parent="BG/Panel/TabsBG/TabButtons" unique_id=2117879940 groups=["TabButton"]]
+modulate = Color(0.6392157, 0.52156866, 0.31764707, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("7_wkcuw")
+expand_mode = 3
+
+[node name="CraftableButtonsScroll" type="ScrollContainer" parent="BG/Panel" unique_id=920212526]
+custom_minimum_size = Vector2(14.57, 0)
+layout_mode = 0
+offset_left = 63.0
+offset_top = 214.0
+offset_right = 798.0
+offset_bottom = 895.0
+
+[node name="CraftableButtons" type="GridContainer" parent="BG/Panel/CraftableButtonsScroll" unique_id=1937585869]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 150
+theme_override_constants/v_separation = 220
+columns = 5
+
+[node name="CraftingOptionDisplayButton" parent="BG/Panel/CraftableButtonsScroll/CraftableButtons" unique_id=1157705809 instance=ExtResource("3_nda7p")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jn6bw")
+item_name = "Flimsy Axe"
+crafting_requirements = Dictionary[String, Array]({
+"Wood": [40, ExtResource("10_wn6a7")]
+})
+output_quantity = 1
+result_item = SubResource("Resource_n2olq")
+
+[node name="CraftingRequirements" type="VBoxContainer" parent="BG/Panel" unique_id=633741579]
+layout_mode = 0
+offset_left = 1035.0
+offset_top = 178.0
+offset_right = 1627.0
+offset_bottom = 909.0
+
+[node name="ItemName" type="Label" parent="BG/Panel/CraftingRequirements" unique_id=591412126]
+layout_mode = 2
+text = "Item Name"
+label_settings = SubResource("LabelSettings_y13by")
+vertical_alignment = 1
+
+[node name="Seperator" type="Label" parent="BG/Panel/CraftingRequirements" unique_id=2106153764]
+layout_mode = 2
+text = "---------------------------------------------------"
+label_settings = SubResource("LabelSettings_y13by")
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="BG/Panel/CraftingRequirements" unique_id=1469586406]
+custom_minimum_size = Vector2(0, 44.84)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_laq0p")
+
+[node name="RequiredItemsList" type="VBoxContainer" parent="BG/Panel/CraftingRequirements/Panel" unique_id=1579819866]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -297.5
+offset_right = 272.0
+offset_bottom = 230.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Craft" type="Button" parent="BG/Panel/CraftingRequirements/Panel" unique_id=2135962723]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = -68.0
+offset_right = 254.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_sgdi5")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("10_kictx")
+theme_override_styles/pressed = ExtResource("11_y13by")
+theme_override_styles/hover = ExtResource("12_vuido")
+theme_override_styles/disabled = ExtResource("13_sgdi5")
+theme_override_styles/focus = ExtResource("13_syvga")
+disabled = true
+text = "Craft"
+
+[node name="Plus" type="Button" parent="BG/Panel/CraftingRequirements/Panel" unique_id=916998167]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -258.0
+offset_top = -68.0
+offset_right = -162.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_syvga")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("10_kictx")
+theme_override_styles/pressed = ExtResource("11_y13by")
+theme_override_styles/hover = ExtResource("12_vuido")
+theme_override_styles/focus = ExtResource("13_syvga")
+text = "+"
+
+[node name="QuantityLabel" type="Label" parent="BG/Panel/CraftingRequirements/Panel" unique_id=283642081]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 585.0
+offset_right = 223.0
+offset_bottom = 625.0
+text = "1"
+label_settings = SubResource("LabelSettings_syvga")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minus" type="Button" parent="BG/Panel/CraftingRequirements/Panel" unique_id=1343580025]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -68.0
+offset_right = 30.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_syvga")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("10_kictx")
+theme_override_styles/pressed = ExtResource("11_y13by")
+theme_override_styles/hover = ExtResource("12_vuido")
+theme_override_styles/focus = ExtResource("13_syvga")
+text = "-"
+
+[connection signal="gui_input" from="BG/Panel/TabsBG/TabButtons/AllTabButton" to="." method="_on_tab_button_gui_input" flags=18]
+[connection signal="mouse_entered" from="BG/Panel/TabsBG/TabButtons/AllTabButton" to="." method="_on_tab_button_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="BG/Panel/TabsBG/TabButtons/AllTabButton" to="." method="_on_tab_button_mouse_exited" flags=18]
+[connection signal="gui_input" from="BG/Panel/TabsBG/TabButtons/ToolTabButton" to="." method="_on_tab_button_gui_input" flags=18]
+[connection signal="mouse_entered" from="BG/Panel/TabsBG/TabButtons/ToolTabButton" to="." method="_on_tab_button_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="BG/Panel/TabsBG/TabButtons/ToolTabButton" to="." method="_on_tab_button_mouse_exited" flags=18]
+[connection signal="gui_input" from="BG/Panel/TabsBG/TabButtons/FurnitureTabButton" to="." method="_on_tab_button_gui_input" flags=18]
+[connection signal="mouse_entered" from="BG/Panel/TabsBG/TabButtons/FurnitureTabButton" to="." method="_on_tab_button_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="BG/Panel/TabsBG/TabButtons/FurnitureTabButton" to="." method="_on_tab_button_mouse_exited" flags=18]
+[connection signal="gui_input" from="BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton" to="." method="_on_tab_button_gui_input" flags=18]
+[connection signal="mouse_entered" from="BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton" to="." method="_on_tab_button_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton" to="." method="_on_tab_button_mouse_exited" flags=18]
+[connection signal="send_crafting_data" from="BG/Panel/CraftableButtonsScroll/CraftableButtons/CraftingOptionDisplayButton" to="." method="_on_crafting_option_display_button_send_crafting_data"]
+[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Craft" to="." method="_on_craft_pressed"]
+[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Plus" to="." method="_on_plus_pressed"]
+[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Minus" to="." method="_on_minus_pressed"]
