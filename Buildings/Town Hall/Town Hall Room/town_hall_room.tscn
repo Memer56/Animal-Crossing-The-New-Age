@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://j57i0n4p5ltj"]
+[gd_scene format=4 uid="uid://j57i0n4p5ltj"]
 
 [ext_resource type="Texture2D" uid="uid://dr3xv8yhdpl8y" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room_mWall_Alb.png" id="1_6satt"]
 [ext_resource type="Texture2D" uid="uid://b30vuswuiybep" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room_mDeskETC_Alb.png" id="2_lejd6"]
@@ -368,19 +368,26 @@ size = Vector3(29.996735, 35.098877, 20.36139)
 [sub_resource type="BoxShape3D" id="BoxShape3D_lejd6"]
 size = Vector3(81.05448, 35.098877, 9.153385)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gfyya"]
+height = 3.2974854
+radius = 3.6220703
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gfyya"]
+size = Vector3(9.893005, 8.566956, 8.495789)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_0ahp1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ahp1"]
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="TownHallRoom" type="Node3D"]
+[node name="TownHallRoom" type="Node3D" unique_id=1389367643]
 
-[node name="town_hall_room" type="Node3D" parent="."]
+[node name="town_hall_room" type="Node3D" parent="." unique_id=224670349]
 
-[node name="Armature" type="Node3D" parent="town_hall_room"]
+[node name="Armature" type="Node3D" parent="town_hall_room" unique_id=1346675667]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="town_hall_room/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="town_hall_room/Armature" unique_id=431628057]
 bones/0/name = "Root"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
@@ -389,133 +396,133 @@ bones/0/position = Vector3(0, 0, 0)
 bones/0/rotation = Quaternion(-0.70710677, 0, 0, 0.70710677)
 bones/0/scale = Vector3(1, 1, 1)
 
-[node name="archB_low10__mWall" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="archB_low10__mWall" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1445415343]
 mesh = SubResource("ArrayMesh_j7r0q")
 skin = SubResource("Skin_28j43")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall"]
+[node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall" unique_id=1054480494]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0)
 visible = false
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=209842766]
 shape = SubResource("ConvexPolygonShape3D_kugge")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1104589502]
 shape = SubResource("ConvexPolygonShape3D_1gj1x")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=535827190]
 shape = SubResource("ConvexPolygonShape3D_plh0f")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1744851922]
 shape = SubResource("ConvexPolygonShape3D_6gm2u")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1612911591]
 shape = SubResource("ConvexPolygonShape3D_12l5i")
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=42523026]
 shape = SubResource("ConvexPolygonShape3D_kx5cq")
 
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=538504714]
 shape = SubResource("ConvexPolygonShape3D_uhln3")
 
-[node name="CollisionShape3D8" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1727889397]
 shape = SubResource("ConvexPolygonShape3D_r1grx")
 
-[node name="CollisionShape3D9" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1741889577]
 shape = SubResource("ConvexPolygonShape3D_mmc12")
 
-[node name="CollisionShape3D10" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1234161593]
 shape = SubResource("ConvexPolygonShape3D_i5y0w")
 
-[node name="CollisionShape3D11" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1839624927]
 shape = SubResource("ConvexPolygonShape3D_t344p")
 
-[node name="CollisionShape3D12" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1764269639]
 shape = SubResource("ConvexPolygonShape3D_0wjn7")
 
-[node name="CollisionShape3D13" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=249450597]
 shape = SubResource("ConvexPolygonShape3D_ydgva")
 
-[node name="CollisionShape3D14" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=177656932]
 shape = SubResource("ConvexPolygonShape3D_7xcan")
 
-[node name="CollisionShape3D15" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=787423188]
 shape = SubResource("ConvexPolygonShape3D_lwyi3")
 
-[node name="CollisionShape3D16" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D16" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=386531528]
 shape = SubResource("ConvexPolygonShape3D_qhvx1")
 
-[node name="CollisionShape3D17" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D"]
+[node name="CollisionShape3D17" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=1091971279]
 shape = SubResource("ConvexPolygonShape3D_m3bb7")
 
-[node name="balloon__mDeskETC" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="balloon__mDeskETC" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1820521537]
 mesh = SubResource("ArrayMesh_a1cit")
 skin = SubResource("Skin_28j43")
 
-[node name="blackbox__mBlackBox" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="blackbox__mBlackBox" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=469955321]
 mesh = SubResource("ArrayMesh_cbw8y")
 skin = SubResource("Skin_28j43")
 
-[node name="doorA_low__mDoor" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="doorA_low__mDoor" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=354724530]
 mesh = SubResource("ArrayMesh_coyrt")
 skin = SubResource("Skin_28j43")
 
-[node name="Env_map__mOfficeMap" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="Env_map__mOfficeMap" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1133376748]
 visible = false
 mesh = SubResource("ArrayMesh_gf0r2")
 skin = SubResource("Skin_28j43")
 
-[node name="magStackFront_low__mObjSet00" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="magStackFront_low__mObjSet00" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1192505225]
 mesh = SubResource("ArrayMesh_ytoi1")
 skin = SubResource("Skin_28j43")
 
-[node name="nurbsToPoly3__mWindow" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="nurbsToPoly3__mWindow" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1766726811]
 mesh = SubResource("ArrayMesh_vonq3")
 skin = SubResource("Skin_28j43")
 
-[node name="nurbsToPoly47__mGlass" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="nurbsToPoly47__mGlass" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=149578401]
 mesh = SubResource("ArrayMesh_yjk26")
 skin = SubResource("Skin_28j43")
 
-[node name="Paper1__mObjSet00" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="Paper1__mObjSet00" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1750869344]
 mesh = SubResource("ArrayMesh_uip2f")
 skin = SubResource("Skin_28j43")
 
-[node name="pCube583__mFloor" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="pCube583__mFloor" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1345103406]
 mesh = SubResource("ArrayMesh_6aopk")
 skin = SubResource("Skin_28j43")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor" unique_id=1089435022]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.8123468e-08, 1.1009367)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=618953250]
 shape = SubResource("ConvexPolygonShape3D_6satt")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=407203994]
 shape = SubResource("ConvexPolygonShape3D_lejd6")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=1786798700]
 shape = SubResource("ConvexPolygonShape3D_0ahp1")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=1443711614]
 shape = SubResource("ConvexPolygonShape3D_gfyya")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=1825942678]
 shape = SubResource("ConvexPolygonShape3D_epwpy")
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=409953952]
 shape = SubResource("ConvexPolygonShape3D_es8bx")
 
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D"]
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=408116598]
 shape = SubResource("ConvexPolygonShape3D_tgg51")
 
-[node name="test_pCube352__mRackAlpha" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D"]
+[node name="test_pCube352__mRackAlpha" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=62077136]
 mesh = SubResource("ArrayMesh_guikm")
 skin = SubResource("Skin_28j43")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1328249933]
 transform = Transform3D(1, 0, 0, 0, -0.15557247, 0.9878245, 0, -0.9878245, -0.15557247, 0, 75.21158, -18.676765)
 light_color = Color(0.83948, 0.69247156, 0.5176808, 1)
 light_energy = 5.0
@@ -527,58 +534,77 @@ spot_attenuation = 0.0
 spot_angle = 43.70083
 metadata/_edit_lock_ = true
 
-[node name="Collisions" type="StaticBody3D" parent="."]
+[node name="Collisions" type="StaticBody3D" parent="." unique_id=2141034163]
 visible = false
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Collisions"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collisions" unique_id=1285254086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.996933, 17.049438, 45.71052)
 shape = SubResource("BoxShape3D_6satt")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Collisions"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Collisions" unique_id=10176762]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.226463, 17.049438, 45.71052)
 shape = SubResource("BoxShape3D_6satt")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Collisions"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Collisions" unique_id=1548024833]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.062021255, 17.049438, 65.06844)
 shape = SubResource("BoxShape3D_6satt")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Collisions"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Collisions" unique_id=1751676473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33094215, 17.049438, -0.060453415)
 shape = SubResource("BoxShape3D_lejd6")
 
-[node name="ATM" parent="." instance=ExtResource("8_lejd6")]
+[node name="InteractableCollisions" type="StaticBody3D" parent="." unique_id=814102476]
+collision_layer = 18
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCollisions" unique_id=1040652895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97346, 1.7294312, 10.054869)
+shape = SubResource("CylinderShape3D_gfyya")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="InteractableCollisions" unique_id=826734844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.00034, 1.7294312, 10.054869)
+shape = SubResource("CylinderShape3D_gfyya")
+
+[node name="CraftingTable" type="StaticBody3D" parent="." unique_id=2075047021]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="CraftingTable" unique_id=1198177386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.710632, 3.7834778, 0.9744911)
+shape = SubResource("BoxShape3D_gfyya")
+
+[node name="ATM" parent="." unique_id=1398164909 instance=ExtResource("8_lejd6")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 34.696835, 0, 30.20054)
 
-[node name="ExitDoorArea" parent="." instance=ExtResource("9_0ahp1")]
+[node name="ExitDoorArea" parent="." unique_id=1708385608 instance=ExtResource("9_0ahp1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045915604, 6.3012085, 49.576355)
 
-[node name="BlackPlanes" type="Node3D" parent="."]
+[node name="BlackPlanes" type="Node3D" parent="." unique_id=326437142]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BlackPlanes"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlackPlanes" unique_id=1901807944]
 transform = Transform3D(1.5078146, 0, 0, 0, -4.371139e-08, -1.9250201, 0, 1, -8.4145306e-08, -41.79853, 1.0594279, 35.00975)
 mesh = SubResource("PlaneMesh_0ahp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ahp1")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="BlackPlanes"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BlackPlanes" unique_id=1879729371]
 transform = Transform3D(1.5078146, 0, 0, 0, -4.371139e-08, -16.568195, 0, 1, -7.2421886e-07, -42.263645, 18.460403, 35.00975)
 mesh = SubResource("PlaneMesh_0ahp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ahp1")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="BlackPlanes"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="BlackPlanes" unique_id=2084051606]
 transform = Transform3D(1.5078146, 0, 0, 0, -4.371139e-08, -1.4805756, 0, 1, -6.4718016e-08, -41.738686, 33.489773, 35.00975)
 mesh = SubResource("PlaneMesh_0ahp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ahp1")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="BlackPlanes"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="BlackPlanes" unique_id=681475271]
 transform = Transform3D(1.5078146, 0, 0, 0, -4.371139e-08, -0.43659204, 0, 1, -1.9084046e-08, -41.47744, 9.551661, 35.00975)
 mesh = SubResource("PlaneMesh_0ahp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ahp1")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="BlackPlanes"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="BlackPlanes" unique_id=861929111]
 transform = Transform3D(0.54878473, 0, 0, 0, -4.371139e-08, -1.0889237, 0, 1, -4.7598373e-08, -40.8213, 8.378988, 35.00975)
 mesh = SubResource("PlaneMesh_0ahp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ahp1")
 
-[node name="TomNook" parent="." instance=ExtResource("10_gfyya")]
+[node name="TomNook" parent="." unique_id=1150279467 instance=ExtResource("10_gfyya")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.739708, 0, -14.240871)
