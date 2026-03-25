@@ -4,6 +4,8 @@ extends Node3D
 # Objects/Items that can be placed
 const SIMPLE_BED = preload("uid://c0ws7r3aiyogq")
 const CURSED_ITEM = preload("uid://b2h3ug1uscfdj")
+const GAZEBO = preload("uid://gm6h1bjrubvd")
+const LANTERN = preload("uid://cr88p8v5t1hdy")
 
 # Buildings that can spawn
 const PLAYER_TENT = preload("uid://du1vi2sn7tjhm")
@@ -27,11 +29,22 @@ var acceleration = 10.0
 var camera_is_transitioning : bool = false
 var current_selectable : Object
 var allow_object_dragging : bool = false
-var exterior_objects : Dictionary[String, Vector3]
-var interior_objects : Dictionary[String, Vector3]
+var exterior_objects : Dictionary[String, Transform3D]
+var interior_objects : Dictionary[String, Transform3D]
+var list_of_objects : Array[String] = [
+	"Simple Bed",
+	"Cursed Item",
+	"Gazebo",
+	"Tent"
+]
+var gizmo : Gizmo3D
+
 
 func _ready() -> void:
 	set_physics_process(false)
+	var edge_mesh_node = Node3D.new()
+	edge_mesh_node.name = "Gizmo"
+	get_tree().root.add_child.call_deferred(edge_mesh_node)
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Backwards")
@@ -41,8 +54,8 @@ func _physics_process(delta: float) -> void:
 		build_camera.global_position.x += direction.x * speed
 		build_camera.global_position.z += direction.z * speed
 	
-	if allow_object_dragging:
-		drag_selected_object()
+	#if allow_object_dragging:
+		#drag_selected_object()
 
 
 func spawn_object():
@@ -59,21 +72,34 @@ func spawn_object():
 		remotely_remove_item(item_to_remove_inventory_data, item_to_remove_slot_index)
 		if EventBus.is_in_overworld:
 			EventBus.bake_nav_mesh.emit()
-			exterior_objects[current_object_name_to_spawn] = object.global_position
-		else:
-			interior_objects[current_object_name_to_spawn] = object.global_position
+			if !exterior_objects.has(current_object_name_to_spawn):
+				exterior_objects[current_object_name_to_spawn] = object.global_transform
+		
+		elif EventBus.is_in_player_house:
+			if !interior_objects.has(current_object_name_to_spawn):
+				interior_objects[current_object_name_to_spawn] = object.global_transform
+
 	else:
-		EventBus.display_speech_bubble.emit(["Sorry this can't be placed [color=red]here[/color]"], "Sorry!")
+		EventBus.display_speech_bubble.emit(["Sorry this can't be placed [color=red]here[/color]"], "Sorry!", [false, null])
 
 func get_object_to_spawn() -> Object:
 	var object
-	match current_object_name_to_spawn:
+	var current_object = current_object_name_to_spawn
+	for item_name in list_of_objects:
+		if current_object.contains(item_name):
+			current_object = item_name
+	
+	match current_object:
 		###### Objects ######
 		
 		"Simple Bed":
 			object = SIMPLE_BED.instantiate()
 		"Cursed Item":
 			object = CURSED_ITEM.instantiate()
+		"Gazebo":
+			object = GAZEBO.instantiate()
+		"Lantern":
+			object = LANTERN.instantiate()
 		
 		###### Buildings ######
 		"Tent":
@@ -81,8 +107,9 @@ func get_object_to_spawn() -> Object:
 	return object
 
 func verify_valid_placement() -> bool:
-	if all_ground_ray_casts_collide and !colliding_with_another_object:
-		return true
+	if EventBus.is_in_overworld or EventBus.is_in_player_house:
+		if all_ground_ray_casts_collide and !colliding_with_another_object:
+			return true
 	return false
 
 func remotely_remove_item(inventory_data : InventoryData, slot_index : int):
@@ -155,40 +182,21 @@ func select_object():
 		var node = result.collider
 		if node.has_meta("Selectable"):
 			deselect_object()
-			node.highlight_object()
+			#node.display_aabb_bounding()
 			current_selectable = node
+			gizmo.select(current_selectable)
 			send_data_to_ui.emit(current_selectable.self_slot_data)
-			#current_selectable.position.x = round(result.position.x)
-			#current_selectable.position.z = round(result.position.z)
-		else:
-			deselect_object()
-
-func drag_selected_object():
-	# For allowing objects to follw cursor, only collides with ground
-	if current_selectable:
-		const RAY_LENGTH = 5000.0
-		
-		var mouse_position = get_viewport().get_mouse_position()
-		var space_state = get_world_3d().direct_space_state
-		var _camera = get_viewport().get_camera_3d()
-		var ray_origin = _camera.project_ray_origin(mouse_position)
-		var ray_end = ray_origin + _camera.project_ray_normal(mouse_position) * RAY_LENGTH
-		
-		var result = space_state.intersect_ray(PhysicsRayQueryParameters3D.create(ray_origin, ray_end))
-		if result:
-			var node = result.collider
-			if node.has_meta("Ground"):
-				current_selectable.position.x = lerpf(current_selectable.position.x, result.position.x, 0.1)
-				current_selectable.position.z = lerpf(current_selectable.position.z, result.position.z, 0.1)
-				#current_selectable.position.x = result.position.x
-				#current_selectable.position.z = result.position.z
 
 func rotate_current_selectable(_direction : int):
 	if current_selectable:
 		current_selectable.rotate_y(deg_to_rad(-22.5 * _direction))
+		if EventBus.is_in_overworld:
+			exterior_objects[current_selectable.self_slot_data.item_data.name] = current_selectable.global_transform
+		else:
+			interior_objects[current_selectable.self_slot_data.item_data.name] = current_selectable.global_transform
 
 func deselect_object():
 	if current_selectable:
-		current_selectable.remove_object_highlight()
+		gizmo.deselect(current_selectable)
 		current_selectable = null
 		send_data_to_ui.emit(null)
