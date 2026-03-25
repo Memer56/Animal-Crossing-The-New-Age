@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bg5ihqhfb4qtx"]
+[gd_scene format=3 uid="uid://bg5ihqhfb4qtx"]
 
 [ext_resource type="Script" uid="uid://bqf55kxpmtwys" path="res://Room/room.gd" id="1_i7vs8"]
 [ext_resource type="PackedScene" uid="uid://j57i0n4p5ltj" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room.tscn" id="2_0j4tc"]
@@ -9,11 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://cc3te203t4sp8" path="res://Player House interior Scenes/player_house_interior.tscn" id="4_2bgig"]
 [ext_resource type="PackedScene" uid="uid://c8wdc4tvskx4f" path="res://Inventory/hot_bar_inventory.tscn" id="4_ly80p"]
 [ext_resource type="Script" uid="uid://c8dp6n4xrjx2" path="res://UI Info and Message Boxes/ui.gd" id="5_d2jpr"]
+[ext_resource type="PackedScene" uid="uid://bp5cb4ewdl7q0" path="res://Buildings/Nook's Cranny/Nook's Cranny Room/nooks_cranny_room.tscn" id="5_qo4ke"]
 [ext_resource type="PackedScene" uid="uid://cvyftmwfpksm5" path="res://Inventory/slot.tscn" id="5_yplge"]
+[ext_resource type="Texture2D" uid="uid://kib1q6llu564" path="res://Inventory/UI/cursor_highlight.png" id="7_3o5qk"]
 [ext_resource type="PackedScene" uid="uid://cbbtgce3tp5l5" path="res://Fade Canvas Layer/fade_canvas_layer.tscn" id="8_hjiva"]
 [ext_resource type="PackedScene" uid="uid://b3xtid1feoyvh" path="res://UI Info and Message Boxes/Pause Menu/pause_menu.tscn" id="9_qgm3m"]
 [ext_resource type="PackedScene" uid="uid://4jy5g0g32q3n" path="res://UI Info and Message Boxes/Speech Bubble/speech_bubble.tscn" id="11_8um3o"]
 [ext_resource type="PackedScene" uid="uid://bq1efipsxf0bf" path="res://UI Info and Message Boxes/Build Menu UI/build_menu_ui.tscn" id="12_ka5ae"]
+[ext_resource type="PackedScene" uid="uid://cunbvriatu5gt" path="res://UI Info and Message Boxes/ATM UI/atm_ui.tscn" id="14_gvnox"]
+[ext_resource type="Script" uid="uid://e3f1ox6y6cvg" path="res://addons/Gizmo3DScript/gizmo3D.gd" id="16_44dum"]
+[ext_resource type="PackedScene" uid="uid://c6tkag6x3tc7h" path="res://Crafting/crafting_ui.tscn" id="16_dc8au"]
 
 [sub_resource type="Environment" id="Environment_i7vs8"]
 background_mode = 1
@@ -21,18 +26,19 @@ ambient_light_source = 2
 ambient_light_color = Color(0.641934, 0.641934, 0.641934, 1)
 tonemap_mode = 2
 
-[node name="Room" type="Node3D"]
+[node name="Room" type="Node3D" unique_id=1528088948]
 script = ExtResource("1_i7vs8")
 rooms = Dictionary[String, PackedScene]({
 "House Room": ExtResource("4_2bgig"),
+"Nook's Cranny": ExtResource("5_qo4ke"),
 "Tent Room": ExtResource("3_hjiva"),
 "Town Hall": ExtResource("2_0j4tc")
 })
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=2112600620]
 script = ExtResource("5_d2jpr")
 
-[node name="InventoryInterface" type="Control" parent="UI"]
+[node name="InventoryInterface" type="Control" parent="UI" unique_id=1777918953]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,8 +46,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_x07kc")
+controller_cursor = ExtResource("7_3o5qk")
 
-[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("3_01f5y")]
+[node name="PlayerInventory" parent="UI/InventoryInterface" unique_id=1491284485 instance=ExtResource("3_01f5y")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -56,7 +63,7 @@ offset_bottom = 124.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HotBarInventory" parent="UI/InventoryInterface" instance=ExtResource("4_ly80p")]
+[node name="HotBarInventory" parent="UI/InventoryInterface" unique_id=886016512 instance=ExtResource("4_ly80p")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -70,33 +77,43 @@ offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("5_yplge")]
+[node name="GrabbedSlot" parent="UI/InventoryInterface" unique_id=585285447 instance=ExtResource("5_yplge")]
 layout_mode = 0
 offset_left = -88.0
 offset_right = -24.0
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("9_qgm3m")]
+[node name="PauseMenu" parent="UI" unique_id=1077459076 instance=ExtResource("9_qgm3m")]
 visible = false
 
-[node name="SpeechBubble" parent="UI" instance=ExtResource("11_8um3o")]
+[node name="SpeechBubble" parent="UI" unique_id=1320974294 instance=ExtResource("11_8um3o")]
 
-[node name="BuildMenuUI" parent="UI" instance=ExtResource("12_ka5ae")]
+[node name="BuildMenuUI" parent="UI" unique_id=931941325 instance=ExtResource("12_ka5ae")]
 
-[node name="FadeCanvasLayer" parent="." instance=ExtResource("8_hjiva")]
+[node name="ATM_UI" parent="UI" unique_id=2134215228 instance=ExtResource("14_gvnox")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="CraftingUI" parent="UI" unique_id=504809646 instance=ExtResource("16_dc8au")]
+
+[node name="FadeCanvasLayer" parent="." unique_id=1684301726 instance=ExtResource("8_hjiva")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1634441865]
 environment = SubResource("Environment_i7vs8")
 
-[node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+[node name="PlayerSpawnPoint" type="Marker3D" parent="." unique_id=1592068862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29043508, 48.274952)
 
-[node name="Player" parent="." instance=ExtResource("3_vdjvi")]
+[node name="Player" parent="." unique_id=124302209 instance=ExtResource("3_vdjvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.523972)
 
-[node name="BuildCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9392561, 0.34321713, 0, -0.34321713, 0.9392561, 0, 33.84727, 62.1798)
+[node name="BuildCamera" type="Camera3D" parent="." unique_id=1605814520]
+transform = Transform3D(1, 0, 0, 0, 0.83068335, 0.5567452, 0, -0.5567452, 0.83068335, 0, 43.01233, 58.12649)
 
-[node name="TransitionCamera" type="Camera3D" parent="."]
+[node name="TransitionCamera" type="Camera3D" parent="." unique_id=1063896968]
+
+[node name="Gizmo3D" type="Node3D" parent="." unique_id=197209988]
+script = ExtResource("16_44dum")
+mode = 1
+_selection_box_color = Color(0.64705884, 0.3529412, 1, 1)
+metadata/_custom_type_script = "uid://e3f1ox6y6cvg"
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
