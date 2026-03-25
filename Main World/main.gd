@@ -3,7 +3,9 @@ extends Node3D
 ######## ADD PIANO THAT PLAYS SONGS YOU RECORDED #####################
 const PICK_UP = preload("uid://c8p87t4ex6hyc")
 const TOM_NOOK = preload("uid://dhvnwgofhxw1i")
+const GENERIC_TREE = preload("uid://dc2iy76lfy0ow")
 
+###### Navigaton and boundry bullshit
 const PLAYER_NAV_BOUNDRY = preload("uid://cixmss1j0ygbm")
 
 ### Spawmed if save didn't load ###
@@ -19,11 +21,16 @@ const BLACK_SKY = preload("uid://dxvl6jpkjyy33")
 @export var navigation_mesh : NavigationRegion3D
 @onready var build_camera: Camera3D = $BuildCamera
 @onready var transition_camera: Camera3D = $TransitionCamera
+@export var gizmo : Gizmo3D
 
 var save : SaveGame
 var characters  = "abcdefghijklmnopqrstuvwxyz"
+var map_rid : RID
+var max_attempts : int = 10
+var min_distance : float = 50.0
 
 func _ready() -> void:
+	trigger_fade()
 	EventBus.player.toggle_inventory.connect(toggle_inventory_interface)
 	EventBus.bake_nav_mesh.connect(bake_nav_mesh)
 	EventBus.save_game_data.connect(save_game_data)
@@ -34,15 +41,18 @@ func _ready() -> void:
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
 	load_player_nav_refrence_island("Island 1")
 	connect_toggle_external_inventory_signal()
-	trigger_fade()
 	send_nav_region_to_npcs()
 	BuildManager.build_camera = build_camera
 	BuildManager.transition_camera = transition_camera
 	BuildManager.speed = 10.0 # For build camera movement speed
 	EventBus.is_in_overworld = true
-	load_game_data()
-	#else:
-		#init_new_savegame_events()
+	EventBus.is_in_player_house = false
+	if EventBus.game_is_new_save:
+		spawn_trees()
+	else:
+		load_game_data()
+	
+	bake_nav_mesh()
 
 func init_new_savegame_events():
 	var tom = TOM_NOOK.instantiate()
@@ -62,11 +72,13 @@ func toggle_inventory_interface(external_inventory_owner = null) -> void:
 		#get_tree().paused = true
 		inventory_interface.player_inventory.visible = true
 		#inventory_interface.equip_inventory.visible = true
+		EventBus.player.state = EventBus.player.FREEZE_PLAYER
 	else:
 #		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		EventBus.game_paused = false
 		inventory_interface.player_inventory.visible = false
 		#inventory_interface.equip_inventory.visible = false
+		EventBus.player.state = EventBus.player.IDLE
 	
 	if external_inventory_owner and inventory_interface.visible:
 		inventory_interface.set_external_inventory(external_inventory_owner)
@@ -75,28 +87,40 @@ func toggle_inventory_interface(external_inventory_owner = null) -> void:
 
 
 func _on_inventory_interface_drop_slot_data(slot_data):
-	var pick_up = PICK_UP.instantiate()
-	pick_up.slot_data = slot_data
-	pick_up.position = EventBus.player.get_drop_point()
-	add_child(pick_up)
-	pick_up.label_3d.text = slot_data.item_data.name
+	if slot_data:
+		var pick_up = PICK_UP.instantiate()
+		pick_up.slot_data = slot_data
+		pick_up.position = EventBus.player.get_drop_point()
+		add_child(pick_up)
+		pick_up.label_3d.text = slot_data.item_data.name
 
 func trigger_fade():
-	if !EventBus.is_in_overworld:
-		FadeCanvasLayer.trigger_scene_change_fade(false)
+	FadeCanvasLayer.trigger_scene_change_fade(false)
 
 func bake_nav_mesh():
 	main_island_nav_mesh.bake_navigation_mesh(true)
 
 func save_game_data():
 	var save = SaveGame.new()
+	var value : int = 2
 
 	for node in get_tree().get_nodes_in_group("SaveObject"):
-		save.exterior_object_info[node.self_slot_data.item_data.name] = node.global_position
-		save.interior_object_info = BuildManager.interior_objects
+		if save.exterior_object_info.has(node.self_slot_data.item_data.name):
+			save.exterior_object_info[node.self_slot_data.item_data.name + " " + str(value)] = node.global_transform
+			value += 1
+		else:
+			save.exterior_object_info[node.self_slot_data.item_data.name] = node.global_transform
+	
+	BuildManager.exterior_objects = save.exterior_object_info
+	save.interior_object_info = BuildManager.interior_objects
 	
 	save.inventory = EventBus.player.inventory_data
 	save.hotbar_inventory = EventBus.player.hotbar_inventory_data
+	save.player_balance = EventBus.player_balance
+	save.savings_balance = EventBus.savings_balance
+	save.loan_balance = EventBus.loan_balance
+	save.player_is_debt_free = EventBus.player_is_debt_free
+	save.trees = EventBus.current_trees
 	
 	if EventBus.game_is_new_save:
 		EventBus.game_is_new_save = false
@@ -105,18 +129,19 @@ func save_game_data():
 	save.write_savegame_data(EventBus.current_save_file_id)
 
 func load_game_data():
-	print("Loading game data")
 	if SaveGame.save_exists(EventBus.current_save_file_id) == true:
 		load_player_data()
 		load_object_data()
-	else:
-		print("Failed to fetch any data with id --- ", EventBus.current_save_file_id)
 
 func load_player_data():
 	if EventBus.current_save_file_id:
 		save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
 		EventBus.player.inventory_data.slot_datas = save.inventory.slot_datas
 		EventBus.player.hotbar_inventory_data.slot_datas = save.hotbar_inventory.slot_datas
+		EventBus.player_balance = save.player_balance
+		EventBus.savings_balance = save.savings_balance
+		EventBus.loan_balance = save.loan_balance
+		EventBus.player_is_debt_free = save.player_is_debt_free
 		inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 		inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
 
@@ -131,7 +156,16 @@ func load_object_data():
 				main_island_nav_mesh.add_child(object)
 			else:
 				add_child(object)
-			object.global_position = save.exterior_object_info[new_object]
+			object.global_transform = save.exterior_object_info[new_object]
+			
+		for index in save.trees:
+			var new_tree = index[0].instantiate()
+			main_island_nav_mesh.add_child(new_tree)
+			new_tree.global_position = index[1]
+		
+		BuildManager.interior_objects = save.interior_object_info
+		BuildManager.exterior_objects = save.exterior_object_info
+		EventBus.current_trees = save.trees
 
 
 func generate_save_file_id() -> String:
@@ -141,6 +175,7 @@ func generate_save_file_id() -> String:
 		id += characters[randi()%random_letter_int]
 	return id
 
+## Used for the player's navigtion, it's needed to reference a clean nav mesh
 func load_player_nav_refrence_island(island : String):
 	var i
 	match island:
@@ -164,3 +199,37 @@ func trigger_save_fail_events():
 
 func send_nav_region_to_npcs():
 	EventBus.send_nav_region.emit(navigation_mesh)
+
+func spawn_trees():
+	var save_objects = get_tree().get_nodes_in_group("SaveObject")
+	var buildings = get_tree().get_nodes_in_group("Building")
+	var objects_to_avoid : Array
+	
+	objects_to_avoid.append_array(save_objects)
+	objects_to_avoid.append_array(buildings)
+
+	for i in range(40):
+		var spawn_point : Vector3 = await get_random_point_on_nav_mesh()
+		
+		if !is_too_close(spawn_point, objects_to_avoid):
+			var new_tree = GENERIC_TREE.instantiate()
+			main_island_nav_mesh.add_child(new_tree)
+			new_tree.global_position = spawn_point
+			objects_to_avoid.append(new_tree)
+
+func get_random_point_on_nav_mesh() -> Vector3:
+	await get_tree().process_frame
+	var random_point : Vector3
+	
+	if EventBus.tree_nav_mesh:
+		map_rid = EventBus.tree_nav_mesh.get_region_rid()
+		random_point = NavigationServer3D.region_get_random_point(map_rid, 2, false)
+	
+	return random_point
+
+
+func is_too_close(new_point : Vector3, world_objects : Array) -> bool:
+	for point in world_objects:
+		if new_point.distance_to(point.global_position) < min_distance:
+			return true
+	return false
