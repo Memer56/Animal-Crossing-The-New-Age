@@ -38,10 +38,14 @@ func spawn_room():
 	match EventBus.room_to_spawn:
 		"Town Hall":
 			room_to_spawn = rooms["Town Hall"].instantiate()
+		"Nook's Cranny":
+			room_to_spawn = rooms["Nook's Cranny"].instantiate()
 		"Tent Room":
 			room_to_spawn = rooms["Tent Room"].instantiate()
+			EventBus.is_in_player_house = true
 		"House Room":
 			room_to_spawn = rooms["House Room"].instantiate()
+			EventBus.is_in_player_house = true
 	
 	if room_to_spawn:
 		add_child(room_to_spawn)
@@ -84,7 +88,9 @@ func grab_light_sources():
 	pass
 
 func save_game_data():
+	# thus is slightly altered from the Main script to prevent incorrect saving and loading
 	var save = SaveGame.new()
+	var value : int = 2
 	save.inventory = EventBus.player.inventory_data
 	save.hotbar_inventory = EventBus.player.hotbar_inventory_data
 	
@@ -92,15 +98,30 @@ func save_game_data():
 		EventBus.game_is_new_save = false
 		EventBus.current_save_file_id = generate_save_file_id()
 	
-	for node in get_tree().get_nodes_in_group("SaveObject"):
-		save.interior_object_info[node.self_slot_data.item_data.name] = node.global_position
-		save.exterior_object_info = BuildManager.exterior_objects
+	if EventBus.is_in_player_house:
+		for node in get_tree().get_nodes_in_group("SaveObject"):
+			if save.interior_object_info.has(node.self_slot_data.item_data.name):
+				save.interior_object_info[node.self_slot_data.item_data.name + " " + str(value)] = node.global_transform
+				value += 1
+			else:
+				save.interior_object_info[node.self_slot_data.item_data.name] = node.global_transform
+
+		BuildManager.interior_objects = save.interior_object_info
+	else:
+		save.interior_object_info = BuildManager.interior_objects
+	
+	save.exterior_object_info = BuildManager.exterior_objects
+	save.player_balance = EventBus.player_balance
+	save.savings_balance = EventBus.savings_balance
+	save.loan_balance = EventBus.loan_balance
+	save.player_is_debt_free = EventBus.player_is_debt_free
+	save.trees = EventBus.current_trees
 	
 	save.write_savegame_data(EventBus.current_save_file_id)
 
 func load_game_data():
 	if SaveGame.save_exists(EventBus.current_save_file_id) == false:
-		EventBus.display_speech_bubble.emit(["Error loading save file!"], "Error")
+		EventBus.display_speech_bubble.emit(["Error loading save file!"], "Error", [false, null])
 		return
 	
 	save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
@@ -111,16 +132,16 @@ func load_game_data():
 	load_object_data()
 
 func load_object_data():
-	if EventBus.current_save_file_id:
+	if EventBus.current_save_file_id and EventBus.is_in_player_house:
 		save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
 		var object
-		for new_object in save.interior_object_info:
-			BuildManager.current_object_name_to_spawn = new_object
-			object = BuildManager.get_object_to_spawn()
-			add_child(object)
-			object.global_position = save.interior_object_info[new_object]
-			print("Placed object: ", BuildManager.current_object_name_to_spawn)
-			EventBus.save_game_data.emit()
+		if save.interior_object_info:
+			for new_object in save.interior_object_info:
+				BuildManager.current_object_name_to_spawn = new_object
+				object = BuildManager.get_object_to_spawn()
+				add_child(object)
+				object.global_transform = save.interior_object_info[new_object]
+				EventBus.save_game_data.emit()
 
 func generate_save_file_id() -> String:
 	var id : String
