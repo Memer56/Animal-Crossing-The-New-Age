@@ -11,19 +11,26 @@ signal armour_piece_unequipped(inventory_data : InventoryDataEquip, grabbed_slot
 signal update_clothes_anim(anim_name : String, anim_speed : float)
 signal trigger_confirm_message(main_text : String)
 signal bake_nav_mesh
-signal display_speech_bubble(speech_text_array : Array[String], npc_name : String)
+## Arg 1 = Speech to send, Arg 2 = NPC Name, Arg 3 = Array[is there a question?, If so at what index, shop object to fetch slot data and set display to sold]
+signal display_speech_bubble(speech_text_array : Array[String], npc_name : String, question_at_index : Array)
 signal save_game_data
 signal load_game_data
 signal load_player_island_nav_mesh_bounds(island : String, node : Node)
 signal send_nav_region(nav_region : NavigationRegion3D)
+signal toggle_atm_ui
+signal toggle_crafting_ui
 
 var player
+var player_balance : int = 0
+var savings_balance : int = 999999999
+var loan_balance : int = 100
+var player_is_debt_free : bool = false
 var can_place : bool = true
 var held_item_slot_data : SlotData
-var coins : int
 var game_paused : bool = false
 var room_to_spawn : String
 var is_in_overworld : bool = true
+var is_in_player_house : bool = false
 var trigger_building_exit_event : bool = false
 var player_can_leave_nav_mesh : bool = true # Defaulted to true to allow correct spanwing placement
 var game_in_start_up : bool = true
@@ -35,6 +42,12 @@ var last_building_entered : Dictionary = {
 	"building node": null
 }
 var found_save_file_ids : Array
+var controller_found : bool = false
+var nooks_cranny_has_set_items : bool = false
+var nooks_cranny_displays : Dictionary[String, Array]
+var item_was_bought_during_visit : bool = false
+var tree_nav_mesh : NavigationRegion3D
+var current_trees : Array[Array]
 
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
