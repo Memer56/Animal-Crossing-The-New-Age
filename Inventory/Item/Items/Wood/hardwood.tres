@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://giyy320ucqqg"]
+
+[ext_resource type="ArrayMesh" uid="uid://ptsg1dlunkkt" path="res://Inventory/Item/Items/Wood/Hardwood Mesh.res" id="1_0mp2g"]
+[ext_resource type="Script" uid="uid://chww475xli04w" path="res://Inventory/Item/item_data.gd" id="1_eeixi"]
+[ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="3_0mp2g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0nf6"]
+atlas = ExtResource("3_0mp2g")
+region = Rect2(279, 948, 102, 84)
+
+[resource]
+script = ExtResource("1_eeixi")
+name = "Hardwood"
+stackable = true
+texture = SubResource("AtlasTexture_q0nf6")
+mesh = ExtResource("1_0mp2g")
+ID = 2
+metadata/_custom_type_script = "uid://chww475xli04w"

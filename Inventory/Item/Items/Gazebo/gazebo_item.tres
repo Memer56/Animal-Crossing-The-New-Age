@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDataPositioning" format=3 uid="uid://kwin7thjkdv3"]
+
+[ext_resource type="Script" uid="uid://cfopfw52fqiud" path="res://Inventory/Item/item_data_positioning.gd" id="1_3x5ij"]
+[ext_resource type="ArrayMesh" uid="uid://na6kdldhq4n6" path="res://Inventory/Item/Items/Generic Dropped Item leaf Mesh/dropped_item_mesh.res" id="1_rmynu"]
+[ext_resource type="Texture2D" uid="uid://cixkcj240y88x" path="res://Inventory/Item/Items/Leaf.png" id="3_rmynu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm3hd"]
+atlas = ExtResource("3_rmynu")
+
+[resource]
+script = ExtResource("1_3x5ij")
+item_type = 0
+name = "Gazebo"
+description = "A Gazebo"
+texture = SubResource("AtlasTexture_tm3hd")
+mesh = ExtResource("1_rmynu")
+price = 400000
+metadata/_custom_type_script = "uid://cfopfw52fqiud"

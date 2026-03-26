@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDataCurrency" format=3 uid="uid://bcq6meneybdqa"]
+
+[ext_resource type="ArrayMesh" uid="uid://bornjhk5hkywq" path="res://Inventory/Item/Items/Bells/bells_mesh.tres" id="1_1d31h"]
+[ext_resource type="Script" uid="uid://c6wdytg25ar30" path="res://Inventory/Item/item_data_currency.gd" id="1_hhjg6"]
+[ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="3_1d31h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dacui"]
+atlas = ExtResource("3_1d31h")
+region = Rect2(1206, 2258, 96, 104)
+
+[resource]
+script = ExtResource("1_hhjg6")
+value = 5000
+name = "Bells"
+description = "5,000 Bells"
+texture = SubResource("AtlasTexture_dacui")
+mesh = ExtResource("1_1d31h")
+metadata/_custom_type_script = "uid://c6wdytg25ar30"

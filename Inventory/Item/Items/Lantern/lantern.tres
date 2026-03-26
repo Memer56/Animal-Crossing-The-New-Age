@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDataPositioning" format=3 uid="uid://d2mjr64tc2c4j"]
+
+[ext_resource type="ArrayMesh" uid="uid://na6kdldhq4n6" path="res://Inventory/Item/Items/Generic Dropped Item leaf Mesh/dropped_item_mesh.res" id="1_gt2hs"]
+[ext_resource type="Script" uid="uid://cfopfw52fqiud" path="res://Inventory/Item/item_data_positioning.gd" id="1_yk6gr"]
+[ext_resource type="Texture2D" uid="uid://cixkcj240y88x" path="res://Inventory/Item/Items/Leaf.png" id="3_kxhbo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sp2m"]
+atlas = ExtResource("3_kxhbo")
+
+[resource]
+script = ExtResource("1_yk6gr")
+item_type = 0
+name = "Lantern"
+description = "Place inside your home for light"
+texture = SubResource("AtlasTexture_2sp2m")
+mesh = ExtResource("1_gt2hs")
+price = 200
+metadata/_custom_type_script = "uid://cfopfw52fqiud"

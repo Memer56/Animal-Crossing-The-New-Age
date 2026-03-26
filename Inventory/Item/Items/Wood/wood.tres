@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bd0jdrordyhms"]
+
+[ext_resource type="Script" uid="uid://chww475xli04w" path="res://Inventory/Item/item_data.gd" id="1_346wr"]
+[ext_resource type="ArrayMesh" uid="uid://dtpgvqjbi84el" path="res://Inventory/Item/Items/Wood/Wood Mesh.res" id="1_pf5ov"]
+[ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="3_pf5ov"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwraj"]
+atlas = ExtResource("3_pf5ov")
+region = Rect2(411, 948, 102, 84)
+
+[resource]
+script = ExtResource("1_346wr")
+name = "Wood"
+stackable = true
+texture = SubResource("AtlasTexture_bwraj")
+mesh = ExtResource("1_pf5ov")
+metadata/_custom_type_script = "uid://chww475xli04w"
