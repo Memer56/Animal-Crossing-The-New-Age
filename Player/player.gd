@@ -7,12 +7,12 @@ signal save_player_data
 
 @export var inventory_data : InventoryData
 @export var hotbar_inventory_data : InventoryData
-
 @export var skin_colour : Color
 @export var held_items : Dictionary[String, PackedScene]
 @export var forced_rotation_y : float = 0.0
 @export var is_entering_building : bool = true
 @export var should_force_rotation_for_entry : bool = true
+
 @onready var skeleton_3d: Skeleton3D = $PlayerNode/Armature/Skeleton3D
 @onready var eyes_mesh_setter: Node3D = $EyesMeshSetter
 @onready var mouth_mesh_setter: Node3D = $MouthMeshSetter
@@ -82,6 +82,12 @@ func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Backwards")
 	direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), acceleration * delta)
 	
+	if Input.get_connected_joypads() and !EventBus.controller_found:
+		EventBus.controller_found = true
+		Input.set_joy_light(0, Color(0.964, 0.89, 0.353, 1.0))
+	else:
+		EventBus.controller_found = false
+	
 	match state:
 		IDLE:
 			idle(input_dir)
@@ -94,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		ENTER_DOOR:
 			enter_door()
 		FREEZE_PLAYER:
-			pass
+			velocity = Vector3.ZERO
 		RE_ENTER_OVERWORLD:
 			leave_building_doorway()
 	
@@ -122,9 +128,11 @@ func idle(input_dir):
 	if input_dir:
 		state = WALK
 	
-	if Input.is_action_just_pressed("use tool") and EventBus.held_item_slot_data:
-		# Need to specify what item can be swung!!!!!
-		state = ACTION
+	#if Input.is_action_just_pressed("use tool") and EventBus.held_item_slot_data:
+		#if EventBus.held_item_slot_data.item_data.can_do_action:
+			#if EventBus.held_item_slot_data.item_data.item_type == 0: # Axe
+				#pass
+			#state = ACTION
 
 func move_player(delta, _direction, input_dir):
 	var anim_state = animation_tree.get("parameters/playback")
@@ -317,6 +325,7 @@ func set_item_in_hand(slot_data : SlotData):
 	if slot_data and slot_data.item_data.can_display_in_hand:
 		var item_name = slot_data.item_data.name
 		var item = held_items[item_name].instantiate()
+		print(item_name)
 		hand_item_spawn.add_child(item)
 		#item.global_rotation.x = hand_item_spawn.global_rotation.x
 		#item.global_rotation.y = hand_item_spawn.global_rotation.y
@@ -350,12 +359,41 @@ func detect_raycast_collision():
 			
 			if collider.is_in_group("CanBePickedUp"):
 				if Input.is_action_just_pressed("Interact"):
-					collider.add_self_to_player_inventory()
+					if !collider.disable_interaction:
+						collider.add_self_to_player_inventory()
+						if EventBus.is_in_overworld:
+							BuildManager.exterior_objects.erase(collider.self_slot_data.item_data.name)
+						else:
+							BuildManager.interior_objects.erase(collider.self_slot_data.item_data.name)
+				
 				if Input.is_action_pressed("ChangeObjectTransform"):
 					if Input.is_action_just_pressed("MouseWheelDown"):
 						collider.rotate_self(90.0)
 					elif Input.is_action_just_pressed("MouseWheelUp"):
 						collider.rotate_self(-90.0)
+			
+			if collider.is_in_group("ATM"):
+				if Input.is_action_just_pressed("Interact"):
+					EventBus.toggle_atm_ui.emit()
+			
+			if collider.is_in_group("ShopObject"):
+				if Input.is_action_just_pressed("Interact"):
+					collider.display_object_information()
+			
+			if collider.is_in_group("ItemCanBeToggled"):
+				if Input.is_action_just_pressed("ToggleItem"):
+					collider.toggle_self()
+			
+			if collider.get_collision_layer() == 18:
+				if Input.is_action_just_pressed("Interact"):
+					EventBus.toggle_crafting_ui.emit()
+			
+			if collider.is_in_group("Destructable"):
+				if Input.is_action_just_pressed("use tool") and EventBus.held_item_slot_data:
+					if EventBus.held_item_slot_data.item_data.can_do_action:
+						if EventBus.held_item_slot_data.item_data.item_type == 0:
+							collider.damage_object(EventBus.held_item_slot_data)
+						state = ACTION
 
 func is_player_on_nav_mesh():
 	# All this prevents the player from falling off the edges of rivers and such
