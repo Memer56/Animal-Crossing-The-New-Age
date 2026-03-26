@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://div4xixst6eek"]
+
+[ext_resource type="ArrayMesh" uid="uid://dw2npnm3uvrp8" path="res://Inventory/Item/Items/Tree Branch/Tree Branch Model.res" id="1_0awyq"]
+[ext_resource type="Script" uid="uid://chww475xli04w" path="res://Inventory/Item/item_data.gd" id="1_ywgau"]
+[ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="3_8f0x3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0awyq"]
+atlas = ExtResource("3_8f0x3")
+region = Rect2(945, 688, 90, 79)
+
+[resource]
+script = ExtResource("1_ywgau")
+name = "Tree Branch"
+description = "Used to craft"
+stackable = true
+texture = SubResource("AtlasTexture_0awyq")
+mesh = ExtResource("1_0awyq")
+ID = 3
+metadata/_custom_type_script = "uid://chww475xli04w"

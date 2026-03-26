@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://801bd84rk176"]
+
+[ext_resource type="ArrayMesh" uid="uid://cc0m8vvymqe52" path="res://Inventory/Item/Items/Stone/Stone Mesh.res" id="1_crfj3"]
+[ext_resource type="Script" uid="uid://chww475xli04w" path="res://Inventory/Item/item_data.gd" id="1_yo0l5"]
+[ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="3_eygpp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8cr3"]
+atlas = ExtResource("3_eygpp")
+region = Rect2(2405, 1745, 74, 74)
+
+[resource]
+script = ExtResource("1_yo0l5")
+name = "Stone"
+description = "Used to craft tools"
+stackable = true
+texture = SubResource("AtlasTexture_p8cr3")
+mesh = ExtResource("1_crfj3")
+metadata/_custom_type_script = "uid://chww475xli04w"

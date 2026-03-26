@@ -1,0 +1,54 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://hri6agxchep3"
+path="res://.godot/imported/Tree Branch Model.glb-6a8303168dabc898c4c0668cf44aa5bd.scn"
+
+[deps]
+
+source_file="res://Inventory/Item/Items/Tree Branch/Tree Branch Model.glb"
+dest_files=["res://.godot/imported/Tree Branch Model.glb-6a8303168dabc898c4c0668cf44aa5bd.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
+_subresources={
+"meshes": {
+"Tree Branch Model_Branch1__mTool": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://Inventory/Item/Items/Tree Branch/Tree Branch Model.res",
+"save_to_file/path": "uid://dw2npnm3uvrp8"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1
