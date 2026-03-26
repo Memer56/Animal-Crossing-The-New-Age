@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ItemDataPositioning" load_steps=5 format=3 uid="uid://6h2skx11an10"]
+[gd_resource type="Resource" script_class="ItemDataPositioning" format=3 uid="uid://6h2skx11an10"]
 
 [ext_resource type="ArrayMesh" uid="uid://na6kdldhq4n6" path="res://Inventory/Item/Items/Generic Dropped Item leaf Mesh/dropped_item_mesh.res" id="1_iqkij"]
 [ext_resource type="Script" uid="uid://cfopfw52fqiud" path="res://Inventory/Item/item_data_positioning.gd" id="1_t7up6"]
-[ext_resource type="Texture2D" uid="uid://d3bimbt4dlxpl" path="res://Inventory/Item/Items/Furniture/Beds/Simple Bed/item_icon.png" id="2_jg6n7"]
+[ext_resource type="Texture2D" uid="uid://cixkcj240y88x" path="res://Inventory/Item/Items/Leaf.png" id="3_iqkij"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iqkij"]
-atlas = ExtResource("2_jg6n7")
+atlas = ExtResource("3_iqkij")
 
 [resource]
 script = ExtResource("1_t7up6")
@@ -14,4 +14,5 @@ name = "Simple Bed"
 description = "Right click to place"
 texture = SubResource("AtlasTexture_iqkij")
 mesh = ExtResource("1_iqkij")
+price = 500
 metadata/_custom_type_script = "uid://cfopfw52fqiud"
