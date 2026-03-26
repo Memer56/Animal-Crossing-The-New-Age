@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bd0jdrordyhms" path="res://Inventory/Item/Items/Wood/wood.tres" id="7_dup4o"]
 [ext_resource type="Resource" uid="uid://bjvf5kbrpxeku" path="res://Inventory/Item/Items/Wood/softwood.tres" id="8_q8aan"]
 [ext_resource type="Resource" uid="uid://giyy320ucqqg" path="res://Inventory/Item/Items/Wood/hardwood.tres" id="9_kilwy"]
+[ext_resource type="Resource" uid="uid://div4xixst6eek" path="res://Inventory/Item/Items/Tree Branch/tree_branch_item.tres" id="10_dup4o"]
 
 [sub_resource type="Resource" id="Resource_sloex"]
 script = ExtResource("6_2aa8y")
@@ -23,6 +24,11 @@ metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 [sub_resource type="Resource" id="Resource_t7s4f"]
 script = ExtResource("6_2aa8y")
 item_data = ExtResource("9_kilwy")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="Resource" id="Resource_2aa8y"]
+script = ExtResource("6_2aa8y")
+item_data = ExtResource("10_dup4o")
 metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
 [sub_resource type="Animation" id="Animation_4opay"]
@@ -76,12 +82,14 @@ _data = {
 &"TreeFall": SubResource("Animation_vlekx")
 }
 
-[node name="GenericTree" type="Node3D" unique_id=758572058 node_paths=PackedStringArray("spawn_positions")]
+[node name="GenericTree" type="Node3D" unique_id=758572058 node_paths=PackedStringArray("spawn_positions", "tree_branches_spawn_positions")]
 script = ExtResource("1_2t0cu")
 normal_trees = Array[PackedScene]([ExtResource("2_aexgc"), ExtResource("3_gbnye"), ExtResource("4_bnyr4")])
 special_trees = Array[PackedScene]([ExtResource("5_vlekx")])
 wood_types = Array[ExtResource("6_2aa8y")]([SubResource("Resource_sloex"), SubResource("Resource_rqkpi"), SubResource("Resource_t7s4f")])
+tree_branch = SubResource("Resource_2aa8y")
 spawn_positions = [NodePath("Marker3D"), NodePath("Marker3D2"), NodePath("Marker3D3")]
+tree_branches_spawn_positions = [NodePath("TreeBranchesMarker"), NodePath("TreeBranchesMarker2")]
 
 [node name="TreeNode" type="Node3D" parent="." unique_id=1195712532]
 transform = Transform3D(0.9999998, 0, 0, 0, 0.9999998, 0, 0, 0, 1, 0, 0, 0)
@@ -97,5 +105,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.789001, 0, 11.4412)
 
 [node name="Marker3D3" type="Marker3D" parent="." unique_id=1499329592]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.73372, 0, 10.314411)
+
+[node name="TreeBranchesMarker" type="Marker3D" parent="." unique_id=1217673723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6908245, 0.2360177, 6.26468)
+
+[node name="TreeBranchesMarker2" type="Marker3D" parent="." unique_id=1856668379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.509384, 0.2360177, 7.0940647)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
