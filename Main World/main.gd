@@ -12,6 +12,9 @@ const PLAYER_NAV_BOUNDRY = preload("uid://cixmss1j0ygbm")
 const SAVE_DIDNT_LOAD = preload("uid://dlk1501txn687")
 const BLACK_SKY = preload("uid://dxvl6jpkjyy33")
 
+#### Item data resources #####
+const STONE_ITEM = preload("uid://801bd84rk176")
+
 @onready var inventory_interface: Control = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/InventoryInterface/HotBarInventory
 @onready var main_island_nav_mesh: NavigationRegion3D = $MainIslandNavMesh
@@ -28,6 +31,7 @@ var characters  = "abcdefghijklmnopqrstuvwxyz"
 var map_rid : RID
 var max_attempts : int = 10
 var min_distance : float = 50.0
+var objects_to_avoid : Array
 
 func _ready() -> void:
 	trigger_fade()
@@ -48,10 +52,11 @@ func _ready() -> void:
 	EventBus.is_in_overworld = true
 	EventBus.is_in_player_house = false
 	if EventBus.game_is_new_save:
+		EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
 		spawn_trees()
 	else:
 		load_game_data()
-	
+	spawn_stones()
 	bake_nav_mesh()
 
 func init_new_savegame_events():
@@ -203,7 +208,6 @@ func send_nav_region_to_npcs():
 func spawn_trees():
 	var save_objects = get_tree().get_nodes_in_group("SaveObject")
 	var buildings = get_tree().get_nodes_in_group("Building")
-	var objects_to_avoid : Array
 	
 	objects_to_avoid.append_array(save_objects)
 	objects_to_avoid.append_array(buildings)
@@ -216,6 +220,22 @@ func spawn_trees():
 			main_island_nav_mesh.add_child(new_tree)
 			new_tree.global_position = spawn_point
 			objects_to_avoid.append(new_tree)
+
+func spawn_stones():
+	# Allows objects_to_avoid to be filled first
+	await get_tree().create_timer(0.2).timeout
+	for i in range(10):
+		var spawn_point : Vector3 = await get_random_point_on_nav_mesh()
+		
+		if !is_too_close(spawn_point, objects_to_avoid):
+			var slot_data : SlotData = SlotData.new()
+			var new_stone = PICK_UP.instantiate()
+			slot_data.item_data = STONE_ITEM
+			new_stone.slot_data = slot_data
+			add_child(new_stone)
+			new_stone.label_3d.text = STONE_ITEM.name
+			new_stone.global_position = spawn_point
+			objects_to_avoid.append(new_stone)
 
 func get_random_point_on_nav_mesh() -> Vector3:
 	await get_tree().process_frame
