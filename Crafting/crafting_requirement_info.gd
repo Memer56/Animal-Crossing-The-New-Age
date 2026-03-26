@@ -3,19 +3,21 @@ extends Control
 @onready var count_label: RichTextLabel = $HBoxContainer/CountLabel
 @onready var texture_rect: TextureRect = $HBoxContainer/TextureRect
 @onready var h_box_container: HBoxContainer = $HBoxContainer
+@onready var item_name_label: Label = $HBoxContainer/ItemNameLabel
 
 
-func load_data(_known_count : int, _required_count : int, texture : Texture2D, can_craft_item):
+func load_data(item_name : String, _known_count : int, _required_count : int, texture : Texture2D, can_craft_item):
 	#update tooltip
 	var text_colour : String
 	if can_craft_item:
 		text_colour = "[color=lightgreen]"
 	else:
-		text_colour = "[color=indianred]"
+		text_colour = "[color=red]"
 	
 	count_label.clear()
 	count_label.append_text(text_colour + str(_known_count) + "[/color]" + "/" + str(_required_count))
 	texture_rect.texture = texture
+	item_name_label.text = item_name
 
 func set_ui_scale(_size : Vector2):
 	await get_tree().create_timer(1).timeout

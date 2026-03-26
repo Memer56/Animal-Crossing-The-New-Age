@@ -16,6 +16,16 @@ font_color = Color(0.5058824, 0.34509805, 0, 1)
 atlas = ExtResource("2_iebyu")
 region = Rect2(172, 1207, 53, 96)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ujw7s"]
+bg_color = Color(0.8352941, 0.70980394, 0.5019608, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_7uyp8"]
+base_font = ExtResource("3_3kych")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ujw7s"]
+font = SubResource("FontVariation_7uyp8")
+font_size = 20
+
 [sub_resource type="FontVariation" id="FontVariation_ujw7s"]
 base_font = ExtResource("3_3kych")
 
@@ -46,6 +56,7 @@ vertical_alignment = 1
 layout_mode = 1
 offset_right = 544.0
 offset_bottom = 46.0
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1151893694]
@@ -54,6 +65,14 @@ size_flags_horizontal = 8
 texture = SubResource("AtlasTexture_gqio6")
 expand_mode = 3
 stretch_mode = 5
+
+[node name="ItemNameLabel" type="Label" parent="HBoxContainer" unique_id=1503411851]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ujw7s")
+text = "Wood"
+label_settings = SubResource("LabelSettings_ujw7s")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CountLabel" type="RichTextLabel" parent="HBoxContainer" unique_id=543156484]
 custom_minimum_size = Vector2(109.875, 0)
