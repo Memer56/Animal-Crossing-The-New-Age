@@ -19,28 +19,33 @@ var can_take_damage : bool = true
 var tree_branches_have_been_dropped : bool = false
 
 func _ready() -> void:
-	begin_tree_selection_process()
+	load_tree_model()
 
-func begin_tree_selection_process():
+func load_tree_model():
 	var value = randi_range(0, 100)
 	var chosen_tree_packedscene : PackedScene
 	
-	if value <= 80:
-		var chosen_tree = normal_trees.pick_random()
-		chosen_tree_packedscene = chosen_tree
-		tree = chosen_tree.instantiate()
-	elif value >=81:
-		var chosen_tree = special_trees.pick_random()
-		chosen_tree_packedscene = chosen_tree
-		tree = chosen_tree.instantiate()
+	if !selected_tree:
+		if value <= 80:
+			var chosen_tree = normal_trees.pick_random()
+			chosen_tree_packedscene = chosen_tree
+			tree = chosen_tree.instantiate()
+		elif value >=81:
+			var chosen_tree = special_trees.pick_random()
+			chosen_tree_packedscene = chosen_tree
+			tree = chosen_tree.instantiate()
+		
+		selected_tree = chosen_tree_packedscene
+	else:
+		tree = selected_tree.instantiate()
 	
 	tree_node.add_child(tree)
 	tree.send_damage.connect(damage_object)
-	selected_tree = chosen_tree_packedscene
 	selected_position = global_position
-	## Allows time for position to be set before saving it
-	await get_tree().create_timer(0.2).timeout
-	EventBus.current_trees.append([selected_tree, global_position])
+	if EventBus.game_is_new_save:
+		## Allows time for position to be set before saving it
+		await get_tree().create_timer(0.2).timeout
+		EventBus.current_trees.append([selected_tree, global_position])
 
 func damage_object(tool_slot_data : SlotData):
 	if can_take_damage:
@@ -54,6 +59,11 @@ func damage_object(tool_slot_data : SlotData):
 			can_take_damage = false
 			animation_player.play("TreeFall")
 			drop_loot()
+			
+			for index in EventBus.current_trees.size():
+				if EventBus.current_trees[index][1].distance_to(global_position) < 50.0:
+					EventBus.current_trees.remove_at(index)
+					break
 
 func drop_loot():
 	for point in spawn_positions:
