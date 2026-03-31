@@ -18,6 +18,8 @@
 [ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="12_vuido"]
 [ext_resource type="StyleBox" uid="uid://cl3ccir8k8uju" path="res://Button Styles/disabled_button.tres" id="13_sgdi5"]
 [ext_resource type="StyleBox" uid="uid://d1i0p8d83a5df" path="res://Button Styles/focus_button.tres" id="13_syvga"]
+[ext_resource type="Texture2D" uid="uid://d2aobunmu6imk" path="res://Inventory/Item/Items/Furniture/Wooden Chest/WoodenChestIcon.png" id="13_wn6a7"]
+[ext_resource type="Resource" uid="uid://bum067ik8wvox" path="res://Inventory/Item/Items/Furniture/Wooden Chest/wooden_chest_item.tres" id="14_5jbxu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oivol"]
 shader = ExtResource("2_6teyu")
@@ -48,17 +50,33 @@ corner_radius_bottom_left = 40
 atlas = ExtResource("9_qvhb5")
 region = Rect2(451, 160, 39, 87)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wn6a7"]
-atlas = ExtResource("10_wn6a7")
-region = Rect2(945, 688, 90, 79)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jbxu"]
 atlas = ExtResource("10_wn6a7")
 region = Rect2(2405, 1745, 74, 74)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn6a7"]
+atlas = ExtResource("10_wn6a7")
+region = Rect2(945, 688, 90, 79)
+
 [sub_resource type="Resource" id="Resource_n2olq"]
 script = ExtResource("10_jn6bw")
 item_data = ExtResource("10_n2olq")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_riabd"]
+atlas = ExtResource("13_wn6a7")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v2xq"]
+atlas = ExtResource("10_wn6a7")
+region = Rect2(411, 948, 102, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m8xj"]
+atlas = ExtResource("10_wn6a7")
+region = Rect2(543, 948, 102, 84)
+
+[sub_resource type="Resource" id="Resource_riabd"]
+script = ExtResource("10_jn6bw")
+item_data = ExtResource("14_5jbxu")
 metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
 [sub_resource type="FontVariation" id="FontVariation_kictx"]
@@ -203,6 +221,19 @@ crafting_requirements = Dictionary[String, Array]({
 })
 output_quantity = 1
 result_item = SubResource("Resource_n2olq")
+category_index = 1
+
+[node name="CraftingOptionDisplayButton2" parent="BG/Panel/CraftableButtonsScroll/CraftableButtons" unique_id=938809167 instance=ExtResource("3_nda7p")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_riabd")
+item_name = "Wooden Chest"
+crafting_requirements = Dictionary[String, Array]({
+"Softwood": [20, SubResource("AtlasTexture_2m8xj")],
+"Wood": [40, SubResource("AtlasTexture_8v2xq")]
+})
+output_quantity = 1
+result_item = SubResource("Resource_riabd")
+category_index = 2
 
 [node name="CraftingRequirements" type="VBoxContainer" parent="BG/Panel" unique_id=633741579]
 layout_mode = 0
@@ -213,7 +244,6 @@ offset_bottom = 909.0
 
 [node name="ItemName" type="Label" parent="BG/Panel/CraftingRequirements" unique_id=591412126]
 layout_mode = 2
-text = "Item Name"
 label_settings = SubResource("LabelSettings_y13by")
 vertical_alignment = 1
 
@@ -333,6 +363,7 @@ text = "-"
 [connection signal="mouse_entered" from="BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton" to="." method="_on_tab_button_mouse_entered" flags=18]
 [connection signal="mouse_exited" from="BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton" to="." method="_on_tab_button_mouse_exited" flags=18]
 [connection signal="send_crafting_data" from="BG/Panel/CraftableButtonsScroll/CraftableButtons/CraftingOptionDisplayButton" to="." method="_on_crafting_option_display_button_send_crafting_data"]
+[connection signal="send_crafting_data" from="BG/Panel/CraftableButtonsScroll/CraftableButtons/CraftingOptionDisplayButton2" to="." method="_on_crafting_option_display_button_send_crafting_data"]
 [connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Craft" to="." method="_on_craft_pressed"]
 [connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Plus" to="." method="_on_plus_pressed"]
 [connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Minus" to="." method="_on_minus_pressed"]

@@ -10,6 +10,9 @@ signal send_crafting_data(crafting_requirements : Dictionary, button_texture, ou
 @export var result_item : SlotData
 @export var unfocused_button_theme : StyleBoxFlat
 @export var focused_button_theme : StyleBoxFlat
+##Realates to which catagory this button belongs to e.g Furniture(index 2), be default all buttons will show in ALL,
+## therefor, index 0 is not used
+@export var category_index : int
 @onready var panel: Panel = $Panel
 
 func _ready() -> void:

@@ -1,6 +1,7 @@
 extends Control
 
 const CRAFTING_REQUIREMENT_INFO = preload("res://Crafting/crafting_requirement_info.tscn")
+const CRAFTING_OPTION_DISPLAY_BUTTON = preload("uid://c5afvfdm0pit6")
 
 
 @onready var required_items_list: VBoxContainer = $BG/Panel/CraftingRequirements/Panel/RequiredItemsList
@@ -11,6 +12,7 @@ const CRAFTING_REQUIREMENT_INFO = preload("res://Crafting/crafting_requirement_i
 @onready var wallpaper_and_flooring_tab_button: TextureRect = $BG/Panel/TabButtons/WallpaperAndFlooringTabButton
 @onready var craft: Button = $BG/Panel/CraftingRequirements/Panel/Craft
 @onready var quantity_label: Label = $BG/Panel/CraftingRequirements/Panel/QuantityLabel
+@onready var craftable_buttons: GridContainer = $BG/Panel/CraftableButtonsScroll/CraftableButtons
 
 
 var tab_buttons : Array
@@ -33,6 +35,7 @@ var quantity_multiplier : int = 1
 var normal_button_colour : Color = Color("a38551")
 var hover_and_selected_button_colour : Color = Color("ffa21dff")
 var tab_button_that_was_pressed : TextureRect
+var craftable_buttons_info : Array[Array]
 
 
 func _ready() -> void:
@@ -42,6 +45,7 @@ func _ready() -> void:
 	player = EventBus.player
 	player_inventory = EventBus.player.inventory_data
 	player_hotbar = EventBus.player.hotbar_inventory_data
+	fill_button_info_array()
 	for buttons in get_tree().get_nodes_in_group("TabButton"):
 		tab_buttons.append(buttons)
 
@@ -106,7 +110,7 @@ func can_craft(crafting_requirements, inventory, hotbar_inventory):
 		else:
 			#print("Item: %s, Required: %d, Found: %d" % [item, required_quantity, total_quantity])
 			can_craft_item = false
-		spawn_and_load_requirement_info_button(total_quantity, required_quantity, crafting_requirements[item][1], can_craft_item)
+		spawn_and_load_requirement_info_button(item, total_quantity, required_quantity, crafting_requirements[item][1], can_craft_item)
 
 	if can_craft_item:
 		#print("You have all the required items for crafting.")
@@ -130,10 +134,10 @@ func get_total_quantity(item_name, inventory, hotbar_inventory) -> int:
 	return total_quantity
 
 
-func spawn_and_load_requirement_info_button(_known_count : int, _required_count_value : int, _texture, can_be_crafted : bool):
+func spawn_and_load_requirement_info_button(_item_name : String, _known_count : int, _required_count_value : int, _texture, can_be_crafted : bool):
 	var info = CRAFTING_REQUIREMENT_INFO.instantiate()
 	required_items_list.add_child(info)
-	info.load_data(_known_count, _required_count_value, _texture, can_be_crafted)
+	info.load_data(_item_name, _known_count, _required_count_value, _texture, can_be_crafted)
 
 
 func sum_of_array_even(array : Array) -> int:
@@ -331,7 +335,53 @@ func _on_tab_button_gui_input(event: InputEvent, source: Control) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			for tab in tab_buttons:
 				if tab.name == source.name:
+					var index_value = get_category_index(tab.name)
 					tab.modulate = hover_and_selected_button_colour
 					tab_button_that_was_pressed = tab
+					display_craftable_buttons(index_value)
 				else:
 					tab.modulate = normal_button_colour
+
+func fill_button_info_array():
+	var buttons = craftable_buttons.get_children()
+	for button in buttons:
+		var button_info = [button.texture, button.item_name, button.crafting_requirements, button.output_quantity, button.result_item, button.category_index]
+		craftable_buttons_info.append(button_info)
+
+func display_craftable_buttons(index_to_match : int):
+	for button in craftable_buttons.get_children():
+		button.queue_free()
+	
+	if index_to_match == 0:
+		for button_data in craftable_buttons_info:
+			spawn_button(button_data)
+	else:
+		for button_data in craftable_buttons_info:
+			if button_data[5] == index_to_match:
+				spawn_button(button_data)
+
+func spawn_button(button_data : Array):
+	var new_button = CRAFTING_OPTION_DISPLAY_BUTTON.instantiate()
+	new_button.texture = button_data[0]
+	new_button.item_name = button_data[1]
+	new_button.crafting_requirements = button_data[2]
+	new_button.output_quantity = button_data[3]
+	new_button.result_item = button_data[4]
+	new_button.category_index = button_data[5]
+	craftable_buttons.add_child(new_button)
+	new_button.send_crafting_data.connect(_on_crafting_option_display_button_send_crafting_data)
+
+func get_category_index(tab_name : String) -> int:
+	var index : int
+	
+	match tab_name:
+		"AllTabButton":
+			index = 0
+		"ToolTabButton":
+			index = 1
+		"FurnitureTabButton":
+			index = 2
+		"WallpaperAndFlooringTabButton":
+			index = 3
+	
+	return index
