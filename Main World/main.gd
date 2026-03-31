@@ -51,6 +51,7 @@ func _ready() -> void:
 	BuildManager.speed = 10.0 # For build camera movement speed
 	EventBus.is_in_overworld = true
 	EventBus.is_in_player_house = false
+	EventBus.current_trees.clear()
 	if EventBus.game_is_new_save:
 		EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
 		spawn_trees()
@@ -164,7 +165,8 @@ func load_object_data():
 			object.global_transform = save.exterior_object_info[new_object]
 			
 		for index in save.trees:
-			var new_tree = index[0].instantiate()
+			var new_tree = GENERIC_TREE.instantiate()
+			new_tree.selected_tree = index[0]
 			main_island_nav_mesh.add_child(new_tree)
 			new_tree.global_position = index[1]
 		
