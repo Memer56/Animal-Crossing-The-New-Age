@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDataPositioning" format=3 uid="uid://bum067ik8wvox"]
+
+[ext_resource type="ArrayMesh" uid="uid://na6kdldhq4n6" path="res://Inventory/Item/Items/Generic Dropped Item leaf Mesh/dropped_item_mesh.res" id="1_ibdbx"]
+[ext_resource type="Script" uid="uid://cfopfw52fqiud" path="res://Inventory/Item/item_data_positioning.gd" id="1_sxwah"]
+[ext_resource type="Texture2D" uid="uid://cixkcj240y88x" path="res://Inventory/Item/Items/Leaf.png" id="2_qs7ps"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibdbx"]
+atlas = ExtResource("2_qs7ps")
+
+[resource]
+script = ExtResource("1_sxwah")
+item_type = 0
+name = "Wooden Chest"
+texture = SubResource("AtlasTexture_ibdbx")
+mesh = ExtResource("1_ibdbx")
+metadata/_custom_type_script = "uid://cfopfw52fqiud"
