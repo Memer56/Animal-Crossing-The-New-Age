@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dv2xbptq155wa" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room_mGlass_Alb.png" id="5_epwpy"]
 [ext_resource type="Texture2D" uid="uid://bago710su4n3q" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room_mFloor_Alb.png" id="6_es8bx"]
 [ext_resource type="Texture2D" uid="uid://c4hg78fe2f04o" path="res://Buildings/Town Hall/Town Hall Room/town_hall_room_mRackAlpha_Alb.png" id="7_tgg51"]
+[ext_resource type="Script" uid="uid://dfudb1l4jvg5s" path="res://Buildings/Town Hall/Town Hall Room/interactable_collisions.gd" id="8_epwpy"]
 [ext_resource type="PackedScene" uid="uid://bblft3vxccobu" path="res://ATM/atm.tscn" id="8_lejd6"]
 [ext_resource type="PackedScene" uid="uid://drmak2qqvtijw" path="res://Exit Door Area/exit_door_area.tscn" id="9_0ahp1"]
 [ext_resource type="PackedScene" uid="uid://dhvnwgofhxw1i" path="res://NPC's/Tom Nook/tom_nook.tscn" id="10_gfyya"]
@@ -290,6 +291,10 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_epwpy"]
+vertices = PackedVector3Array(36.416668, 0.5, -36.08333, 27.166668, 0.5, -50.33333, 11.916668, 0.5, -50.33333, 37.166668, 0.5, -35.33333, 40.166668, 0.5, -3.5833282, 40.166668, 0.5, -35.33333, 39.666668, 0.5, -3.3333282, -10.083332, 0.5, -35.83333, -12.583332, 0.5, -35.33333, -12.333332, 0.5, -0.58332825, 39.666668, 0.5, -0.58332825, -39.583332, 0.5, -3.3333282, -39.583332, 0.5, -0.58332825, -40.583332, 0.5, -3.5833282, -40.583332, 0.5, -35.33333, -12.333332, 0.5, 35.41667, -12.083332, 0.5, 0.66667175, -40.583332, 0.5, 0.66667175, -40.583332, 0.5, 35.41667, -10.583332, 0.5, 35.66667, -10.583332, 0.5, 37.66667, 11.666668, 0.5, 37.91667, 11.916668, 0.5, 35.66667, 13.666668, 0.5, 35.41667, 13.416668, 0.5, 0.66667175, 40.166668, 0.5, 35.41667, 40.166668, 0.5, 0.66667175, -10.583332, 0.5, 55.41667, 10.166668, 0.5, 55.41667)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(4, 6, 5), PackedInt32Array(5, 6, 3), PackedInt32Array(9, 8, 7), PackedInt32Array(6, 10, 3), PackedInt32Array(3, 10, 2), PackedInt32Array(2, 10, 7), PackedInt32Array(7, 10, 9), PackedInt32Array(9, 12, 11), PackedInt32Array(11, 13, 9), PackedInt32Array(9, 13, 14), PackedInt32Array(9, 14, 8), PackedInt32Array(18, 17, 15), PackedInt32Array(15, 17, 16), PackedInt32Array(20, 19, 21), PackedInt32Array(21, 19, 22), PackedInt32Array(19, 15, 22), PackedInt32Array(22, 15, 23), PackedInt32Array(23, 15, 16), PackedInt32Array(23, 16, 24), PackedInt32Array(25, 23, 26), PackedInt32Array(26, 23, 24), PackedInt32Array(27, 20, 28), PackedInt32Array(28, 20, 21)]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvtlt"]
 resource_name = "mFloor"
 cull_mode = 2
@@ -382,6 +387,18 @@ albedo_color = Color(0, 0, 0, 1)
 
 [node name="TownHallRoom" type="Node3D" unique_id=1389367643]
 
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1328249933]
+transform = Transform3D(1, 0, 0, 0, -0.15557247, 0.9878245, 0, -0.9878245, -0.15557247, 0, 75.21158, -18.676765)
+light_color = Color(0.83948, 0.69247156, 0.5176808, 1)
+light_energy = 5.0
+shadow_enabled = true
+shadow_bias = 6.078
+shadow_opacity = 0.33
+spot_range = 131.98148
+spot_attenuation = 0.0
+spot_angle = 43.70083
+metadata/_edit_lock_ = true
+
 [node name="town_hall_room" type="Node3D" parent="." unique_id=224670349]
 
 [node name="Armature" type="Node3D" parent="town_hall_room" unique_id=1346675667]
@@ -402,7 +419,6 @@ skin = SubResource("Skin_28j43")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall" unique_id=1054480494]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 0, 0)
-visible = false
 collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/archB_low10__mWall/StaticBody3D" unique_id=209842766]
@@ -489,50 +505,44 @@ skin = SubResource("Skin_28j43")
 mesh = SubResource("ArrayMesh_uip2f")
 skin = SubResource("Skin_28j43")
 
-[node name="pCube583__mFloor" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1345103406]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=1293459686]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_epwpy")
+
+[node name="pCube583__mFloor" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D" unique_id=1345103406]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_6aopk")
 skin = SubResource("Skin_28j43")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor" unique_id=1089435022]
+[node name="StaticBody3D" type="StaticBody3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor" unique_id=1089435022]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 4.8123468e-08, 1.1009367)
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=618953250]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=618953250]
 shape = SubResource("ConvexPolygonShape3D_6satt")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=407203994]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=407203994]
 shape = SubResource("ConvexPolygonShape3D_lejd6")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=1786798700]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=1786798700]
 shape = SubResource("ConvexPolygonShape3D_0ahp1")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=1443711614]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=1443711614]
 shape = SubResource("ConvexPolygonShape3D_gfyya")
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=1825942678]
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=1825942678]
 shape = SubResource("ConvexPolygonShape3D_epwpy")
 
-[node name="CollisionShape3D6" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=409953952]
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=409953952]
 shape = SubResource("ConvexPolygonShape3D_es8bx")
 
-[node name="CollisionShape3D7" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/pCube583__mFloor/StaticBody3D" unique_id=408116598]
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="town_hall_room/Armature/Skeleton3D/NavigationRegion3D/pCube583__mFloor/StaticBody3D" unique_id=408116598]
 shape = SubResource("ConvexPolygonShape3D_tgg51")
 
 [node name="test_pCube352__mRackAlpha" type="MeshInstance3D" parent="town_hall_room/Armature/Skeleton3D" unique_id=62077136]
 mesh = SubResource("ArrayMesh_guikm")
 skin = SubResource("Skin_28j43")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1328249933]
-transform = Transform3D(1, 0, 0, 0, -0.15557247, 0.9878245, 0, -0.9878245, -0.15557247, 0, 75.21158, -18.676765)
-light_color = Color(0.83948, 0.69247156, 0.5176808, 1)
-light_energy = 5.0
-shadow_enabled = true
-shadow_bias = 6.078
-shadow_opacity = 0.33
-spot_range = 131.98148
-spot_attenuation = 0.0
-spot_angle = 43.70083
-metadata/_edit_lock_ = true
 
 [node name="Collisions" type="StaticBody3D" parent="." unique_id=2141034163]
 visible = false
@@ -554,8 +564,10 @@ shape = SubResource("BoxShape3D_6satt")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33094215, 17.049438, -0.060453415)
 shape = SubResource("BoxShape3D_lejd6")
 
-[node name="InteractableCollisions" type="StaticBody3D" parent="." unique_id=814102476]
+[node name="InteractableCollisions" type="StaticBody3D" parent="." unique_id=814102476 node_paths=PackedStringArray("tom") groups=["Chair"]]
 collision_layer = 18
+script = ExtResource("8_epwpy")
+tom = NodePath("../TomNook")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCollisions" unique_id=1040652895]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.97346, 1.7294312, 10.054869)
@@ -565,7 +577,7 @@ shape = SubResource("CylinderShape3D_gfyya")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.00034, 1.7294312, 10.054869)
 shape = SubResource("CylinderShape3D_gfyya")
 
-[node name="CraftingTable" type="StaticBody3D" parent="." unique_id=2075047021]
+[node name="CraftingTable" type="StaticBody3D" parent="." unique_id=2075047021 groups=["Crafting Table"]]
 collision_layer = 16
 collision_mask = 0
 
@@ -606,5 +618,9 @@ transform = Transform3D(0.54878473, 0, 0, 0, -4.371139e-08, -1.0889237, 0, 1, -4
 mesh = SubResource("PlaneMesh_0ahp1")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ahp1")
 
-[node name="TomNook" parent="." unique_id=1150279467 instance=ExtResource("10_gfyya")]
+[node name="TomNook" parent="." unique_id=1150279467 node_paths=PackedStringArray("predetermined_points") instance=ExtResource("10_gfyya")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.739708, 0, -14.240871)
+predetermined_points = NodePath("../Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=748834653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.915081, 0, -8.769285)
