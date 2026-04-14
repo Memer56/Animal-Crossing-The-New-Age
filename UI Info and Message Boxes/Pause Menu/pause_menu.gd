@@ -1,5 +1,8 @@
 extends Control
 
+@onready var resume: Button = $Panel/VBoxContainer/Resume
+
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Pause"):
 		toggle_game_pause()
@@ -16,6 +19,8 @@ func toggle_self():
 		visible = false
 	else:
 		visible = true
+	
+	resume.grab_focus()
 
 
 func _on_resume_pressed() -> void:
@@ -30,7 +35,7 @@ func _on_settings_pressed() -> void:
 func _on_save_pressed() -> void:
 	EventBus.save_game_data.emit()
 	toggle_self()
-	EventBus.display_speech_bubble.emit(["Game saved [color=green]successfully[/color]"], "Yayy")
+	EventBus.display_speech_bubble.emit(["Game saved [color=green]successfully[/color]"], "Yayy", [], null)
 	toggle_game_pause()
 
 
