@@ -11,8 +11,8 @@ signal armour_piece_unequipped(inventory_data : InventoryDataEquip, grabbed_slot
 signal update_clothes_anim(anim_name : String, anim_speed : float)
 signal trigger_confirm_message(main_text : String)
 signal bake_nav_mesh
-## Arg 1 = Speech to send, Arg 2 = NPC Name, Arg 3 = Array[is there a question?, If so at what index, shop object to fetch slot data and set display to sold]
-signal display_speech_bubble(speech_text_array : Array[String], npc_name : String, question_at_index : Array)
+## Arg 1 = Speech to send, Arg 2 = NPC Name, Arg 3 = Array[at what indexes do questions occur], Arg 4 = The item that is to be given if there is one
+signal display_speech_bubble(speech_text_array : Array[String], npc_name : String, questions_at_index : Array, item_to_be_given : SlotData)
 signal save_game_data
 signal load_game_data
 signal load_player_island_nav_mesh_bounds(island : String, node : Node)
@@ -45,6 +45,7 @@ var found_save_file_ids : Array
 var controller_found : bool = false
 var nooks_cranny_has_set_items : bool = false
 var nooks_cranny_displays : Dictionary[String, Array]
+var current_shop_interact_object : StaticBody3D
 var item_was_bought_during_visit : bool = false
 var tree_nav_mesh : NavigationRegion3D
 var current_trees : Array[Array]
@@ -59,3 +60,9 @@ func return_clothing_scene(clothing_name : String) -> PackedScene:
 			clothing = DRESS_2
 	
 	return clothing
+
+func deduct_funds_from_account(amount : int):
+	pass
+
+func add_funds_to_account(amount : int):
+	pass
