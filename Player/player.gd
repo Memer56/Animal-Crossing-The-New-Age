@@ -215,6 +215,7 @@ func leave_building_doorway():
 		#EventBus.last_building_entered["building node"].play_anim()
 		doorway_entry_anim.play("Leave Building")
 		await get_tree().create_timer(1.5).timeout
+		global_position = player_node.global_position
 		doorway_entry_anim.stop()
 		velocity = Vector3.ZERO
 		state = IDLE
@@ -263,9 +264,13 @@ func use_slot_data(slot_data : SlotData, inventory_data : InventoryData, slot_in
 		if slot_data.item_data.item_type == 1: # Building type
 			spawn_point = object_drop_point
 			raycast_variable = true
+			collision_checker.call_deferred("set_monitoring", true)
+			item_collision_checker.call_deferred("set_monitoring", false)
 		elif slot_data.item_data.item_type == 0: # Furniture and stuff
 			spawn_point = item_drop_point
 			raycast_variable = false
+			item_collision_checker.call_deferred("set_monitoring", true)
+			collision_checker.call_deferred("set_monitoring", false)
 		
 		if EventBus.is_in_overworld:
 			y_spawn_pos = 16.0
@@ -325,7 +330,6 @@ func set_item_in_hand(slot_data : SlotData):
 	if slot_data and slot_data.item_data.can_display_in_hand:
 		var item_name = slot_data.item_data.name
 		var item = held_items[item_name].instantiate()
-		print(item_name)
 		hand_item_spawn.add_child(item)
 		#item.global_rotation.x = hand_item_spawn.global_rotation.x
 		#item.global_rotation.y = hand_item_spawn.global_rotation.y
@@ -384,9 +388,13 @@ func detect_raycast_collision():
 				if Input.is_action_just_pressed("ToggleItem"):
 					collider.toggle_self()
 			
-			if collider.get_collision_layer() == 18:
+			if collider.is_in_group("Crafting Table"):
 				if Input.is_action_just_pressed("Interact"):
 					EventBus.toggle_crafting_ui.emit()
+			
+			if collider.is_in_group("Chair"):
+				if Input.is_action_just_pressed("Interact"):
+					collider.trigger_dialogue()
 			
 			if collider.is_in_group("Destructable"):
 				if Input.is_action_just_pressed("use tool") and EventBus.held_item_slot_data:
