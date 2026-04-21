@@ -1,5 +1,6 @@
-[gd_scene load_steps=30 format=4 uid="uid://cc3te203t4sp8"]
+[gd_scene format=4 uid="uid://cc3te203t4sp8"]
 
+[ext_resource type="Script" uid="uid://duhxdqnvkq6it" path="res://Player House interior Scenes/player_house_interior.gd" id="1_04gcq"]
 [ext_resource type="Texture2D" uid="uid://718vywx0ow7b" path="res://Player House interior Scenes/House Interior Raw Files/huse_floor_RoomSpFloorVolcano00_Alb.png" id="1_5o3m6"]
 [ext_resource type="Texture2D" uid="uid://ct54b3n84isxt" path="res://Player House interior Scenes/Floor Default Texture/RoomTexFloorSimple00_Alb.png" id="1_ubofm"]
 [ext_resource type="Texture2D" uid="uid://b0q7fy3ln0vvj" path="res://Player House interior Scenes/Floor Default Texture/RoomTexFloorSimple00_Nrm.png" id="2_obkk4"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://3n8kg8wu7tn2" path="res://Player House interior Scenes/Wall Default Texture/RoomTexWallSimple00_Nrm.png" id="7_iglx0"]
 [ext_resource type="Texture2D" uid="uid://cqlviy0tgsod" path="res://Player House interior Scenes/RoomTexStairsWood00_Alb.png" id="8_yxyg2"]
 [ext_resource type="Texture2D" uid="uid://c4u5up10tklpp" path="res://Player House interior Scenes/RoomTexStairsWood00_Nrm.png" id="9_i8rft"]
+[ext_resource type="PackedScene" uid="uid://drmak2qqvtijw" path="res://Exit Door Area/exit_door_area.tscn" id="10_i8rft"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cxxh"]
 resource_name = "mFloor.001"
@@ -99,12 +101,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0sq2"]
-resource_name = "mOutside.002"
-cull_mode = 2
-albedo_texture = ExtResource("1_5o3m6")
-roughness = 0.5
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_c80hy"]
 resource_name = "huse_floor_Outside__mOutside_002"
 _surfaces = [{
@@ -114,7 +110,7 @@ _surfaces = [{
 "format": 34359745559,
 "index_count": 72,
 "index_data": PackedByteArray("AAABAAIAAgABAAMABAAFAAYABgAFAAcACAAJAAoACgAJAAsADAANAA4ADgANAA8AEAARABIAEgARABMAFAAVABYAFgAVABcAGAAZABoAGgAZABsAHAAdAB4AHgAdAB8AIAAhACIAIgAhACMAJAAlACYAJgAlACcAKAApACoAKgApACsALAAtAC4ALgAtAC8A"),
-"material": SubResource("StandardMaterial3D_p0sq2"),
+"material": SubResource("StandardMaterial3D_jl81x"),
 "name": "mOutside.002",
 "primitive": 3,
 "skin_data": PackedByteArray("AAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAP//AAAAAAAA"),
@@ -215,8 +211,14 @@ bind/0/name = &"Root"
 bind/0/bone = -1
 bind/0/pose = Transform3D(1, 0, 0, 0, 1, -7.54979e-08, 0, 7.54979e-08, 1, 0, 0, 0)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_5o3m6"]
-size = Vector3(343.41458, 4.279419, 314.64618)
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxyg2"]
+size = Vector3(1.4996338, 60.14084, 41.264038)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_04gcq"]
+size = Vector3(2.104004, 80.26672, 40.631287)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5mh3"]
+size = Vector3(2.3052368, 99.70715, 64.03699)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y1ir5"]
 resource_name = "mDummyStairs.001"
@@ -260,328 +262,406 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_viip0")
 
-[node name="PlayerHouseInterior" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5o3m6"]
+size = Vector3(343.41458, 4.279419, 314.64618)
 
-[node name="6x6" type="Node3D" parent="."]
+[sub_resource type="BoxShape3D" id="BoxShape3D_i8rft"]
+size = Vector3(45.13983, 32.01776, 35.164673)
+
+[node name="PlayerHouseInterior" type="Node3D" unique_id=791232660]
+script = ExtResource("1_04gcq")
+
+[node name="6x6" type="Node3D" parent="." unique_id=1249373012]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
-[node name="Floor__mFloor_001" type="MeshInstance3D" parent="6x6"]
+[node name="Floor__mFloor_001" type="MeshInstance3D" parent="6x6" unique_id=1663983700]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_oqqai")
 skin = SubResource("Skin_88wwg")
 skeleton = NodePath("")
 
-[node name="Outside__mOutside_001" type="MeshInstance3D" parent="6x6"]
+[node name="Outside__mOutside_001" type="MeshInstance3D" parent="6x6" unique_id=1679575460]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3g0br")
 skin = SubResource("Skin_88wwg")
 skeleton = NodePath("")
 
-[node name="8x8" type="Node3D" parent="."]
+[node name="8x8" type="Node3D" parent="." unique_id=1730477960]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 visible = false
 
-[node name="Floor__mFloor_002" type="MeshInstance3D" parent="8x8"]
+[node name="Floor__mFloor_002" type="MeshInstance3D" parent="8x8" unique_id=1383869331]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_vy2eg")
 skin = SubResource("Skin_88wwg")
 skeleton = NodePath("")
 
-[node name="Outside__mOutside_002" type="MeshInstance3D" parent="8x8"]
+[node name="Outside__mOutside_002" type="MeshInstance3D" parent="8x8" unique_id=695828156]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_c80hy")
 skin = SubResource("Skin_88wwg")
 skeleton = NodePath("")
 
-[node name="10x10" type="Node3D" parent="."]
+[node name="10x10" type="Node3D" parent="." unique_id=923796475]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 visible = false
 
-[node name="FloorMain__mFloor" type="MeshInstance3D" parent="10x10"]
+[node name="FloorMain__mFloor" type="MeshInstance3D" parent="10x10" unique_id=960803346]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_thwpg")
 skin = SubResource("Skin_88wwg")
 skeleton = NodePath("")
 
-[node name="Outside__mOutside_003" type="MeshInstance3D" parent="10x10"]
+[node name="Outside__mOutside_003" type="MeshInstance3D" parent="10x10" unique_id=960249902]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ewbo")
 skin = SubResource("Skin_88wwg")
 skeleton = NodePath("")
 
-[node name="6x6Wall" type="Node3D" parent="."]
+[node name="6x6Wall" type="Node3D" parent="." unique_id=1398979434]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 
-[node name="NorthWall" type="Node3D" parent="6x6Wall"]
+[node name="NorthWall" type="Node3D" parent="6x6Wall" unique_id=24002198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 30, 0)
 
-[node name="Wall" type="MeshInstance3D" parent="6x6Wall/NorthWall"]
+[node name="Wall" type="MeshInstance3D" parent="6x6Wall/NorthWall" unique_id=392568819]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall2" type="MeshInstance3D" parent="6x6Wall/NorthWall"]
+[node name="Wall2" type="MeshInstance3D" parent="6x6Wall/NorthWall" unique_id=293299373]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 20, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall3" type="MeshInstance3D" parent="6x6Wall/NorthWall"]
+[node name="Wall3" type="MeshInstance3D" parent="6x6Wall/NorthWall" unique_id=1559503242]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 40, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="EastWall" type="Node3D" parent="6x6Wall"]
+[node name="EastWall" type="Node3D" parent="6x6Wall" unique_id=986255804]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 30, 30, 0)
 
-[node name="Wall4" type="MeshInstance3D" parent="6x6Wall/EastWall"]
+[node name="Wall4" type="MeshInstance3D" parent="6x6Wall/EastWall" unique_id=415177289]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall5" type="MeshInstance3D" parent="6x6Wall/EastWall"]
+[node name="Wall5" type="MeshInstance3D" parent="6x6Wall/EastWall" unique_id=1226645163]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 20, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall6" type="MeshInstance3D" parent="6x6Wall/EastWall"]
+[node name="Wall6" type="MeshInstance3D" parent="6x6Wall/EastWall" unique_id=986745983]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 40, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="WestWall" type="Node3D" parent="6x6Wall"]
+[node name="WestWall" type="Node3D" parent="6x6Wall" unique_id=822806178]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, -30, 0)
 
-[node name="Wall7" type="MeshInstance3D" parent="6x6Wall/WestWall"]
+[node name="Wall7" type="MeshInstance3D" parent="6x6Wall/WestWall" unique_id=912673448]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall8" type="MeshInstance3D" parent="6x6Wall/WestWall"]
+[node name="Wall8" type="MeshInstance3D" parent="6x6Wall/WestWall" unique_id=110514254]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 20, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall9" type="MeshInstance3D" parent="6x6Wall/WestWall"]
+[node name="Wall9" type="MeshInstance3D" parent="6x6Wall/WestWall" unique_id=1364137451]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 40, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="8x8Wall" type="Node3D" parent="."]
+[node name="6x6WallCollision" type="StaticBody3D" parent="6x6Wall" unique_id=554135457]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="6x6Wall/6x6WallCollision" unique_id=1906215767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.400564, 0.031539865, 20.132019)
+shape = SubResource("BoxShape3D_yxyg2")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="6x6Wall/6x6WallCollision" unique_id=1650189368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.644756, 0.031539865, 20.132019)
+shape = SubResource("BoxShape3D_yxyg2")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="6x6Wall/6x6WallCollision" unique_id=3629962]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.10312748, 30.707405, 20.132019)
+shape = SubResource("BoxShape3D_yxyg2")
+
+[node name="8x8Wall" type="Node3D" parent="." unique_id=2065675599]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 visible = false
 
-[node name="NorthWall" type="Node3D" parent="8x8Wall"]
+[node name="NorthWall" type="Node3D" parent="8x8Wall" unique_id=950727299]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 40, 0)
 
-[node name="Wall" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+[node name="Wall" type="MeshInstance3D" parent="8x8Wall/NorthWall" unique_id=450023671]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall2" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+[node name="Wall2" type="MeshInstance3D" parent="8x8Wall/NorthWall" unique_id=1877071774]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 20, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall3" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+[node name="Wall3" type="MeshInstance3D" parent="8x8Wall/NorthWall" unique_id=1225889211]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 40, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall4" type="MeshInstance3D" parent="8x8Wall/NorthWall"]
+[node name="Wall4" type="MeshInstance3D" parent="8x8Wall/NorthWall" unique_id=937430033]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 60, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="EastWall" type="Node3D" parent="8x8Wall"]
+[node name="EastWall" type="Node3D" parent="8x8Wall" unique_id=1689153719]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 40, 40, 0)
 
-[node name="Wall4" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+[node name="Wall4" type="MeshInstance3D" parent="8x8Wall/EastWall" unique_id=953823715]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall5" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+[node name="Wall5" type="MeshInstance3D" parent="8x8Wall/EastWall" unique_id=977238029]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 20, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall6" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+[node name="Wall6" type="MeshInstance3D" parent="8x8Wall/EastWall" unique_id=662774623]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 40, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall7" type="MeshInstance3D" parent="8x8Wall/EastWall"]
+[node name="Wall7" type="MeshInstance3D" parent="8x8Wall/EastWall" unique_id=1083664028]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 60, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="WestWall" type="Node3D" parent="8x8Wall"]
+[node name="WestWall" type="Node3D" parent="8x8Wall" unique_id=1307157021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, -40, 0)
 
-[node name="Wall7" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+[node name="Wall7" type="MeshInstance3D" parent="8x8Wall/WestWall" unique_id=453430607]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall8" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+[node name="Wall8" type="MeshInstance3D" parent="8x8Wall/WestWall" unique_id=1861134604]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 20, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall9" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+[node name="Wall9" type="MeshInstance3D" parent="8x8Wall/WestWall" unique_id=640463615]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 40, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall10" type="MeshInstance3D" parent="8x8Wall/WestWall"]
+[node name="Wall10" type="MeshInstance3D" parent="8x8Wall/WestWall" unique_id=1177665609]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 60, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="10x10Wall" type="Node3D" parent="."]
+[node name="8x8WallCollision" type="StaticBody3D" parent="8x8Wall" unique_id=1155338150]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="8x8Wall/8x8WallCollision" unique_id=180547859]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.637627, -0.2499392, 19.815643)
+shape = SubResource("BoxShape3D_04gcq")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="8x8Wall/8x8WallCollision" unique_id=1598680967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.32097, -0.2499392, 19.815643)
+shape = SubResource("BoxShape3D_04gcq")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="8x8Wall/8x8WallCollision" unique_id=1645220830]
+transform = Transform3D(-4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0, 1, -0.06327854, 40.213726, 19.815643)
+shape = SubResource("BoxShape3D_04gcq")
+
+[node name="10x10Wall" type="Node3D" parent="." unique_id=168217212]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 visible = false
 
-[node name="NorthWall" type="Node3D" parent="10x10Wall"]
+[node name="NorthWall" type="Node3D" parent="10x10Wall" unique_id=844443487]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 50, 0)
 
-[node name="Wall" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+[node name="Wall" type="MeshInstance3D" parent="10x10Wall/NorthWall" unique_id=415342040]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall2" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+[node name="Wall2" type="MeshInstance3D" parent="10x10Wall/NorthWall" unique_id=1592310232]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 20, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall3" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+[node name="Wall3" type="MeshInstance3D" parent="10x10Wall/NorthWall" unique_id=1490002370]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 40, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall4" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+[node name="Wall4" type="MeshInstance3D" parent="10x10Wall/NorthWall" unique_id=1581480818]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 60, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall5" type="MeshInstance3D" parent="10x10Wall/NorthWall"]
+[node name="Wall5" type="MeshInstance3D" parent="10x10Wall/NorthWall" unique_id=1427322153]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 80, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="EastWall" type="Node3D" parent="10x10Wall"]
+[node name="EastWall" type="Node3D" parent="10x10Wall" unique_id=500730204]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 50, 50, 0)
 
-[node name="Wall4" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+[node name="Wall4" type="MeshInstance3D" parent="10x10Wall/EastWall" unique_id=1509546857]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall5" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+[node name="Wall5" type="MeshInstance3D" parent="10x10Wall/EastWall" unique_id=930717539]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 20, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall6" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+[node name="Wall6" type="MeshInstance3D" parent="10x10Wall/EastWall" unique_id=2026509483]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 40, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall7" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+[node name="Wall7" type="MeshInstance3D" parent="10x10Wall/EastWall" unique_id=1721515025]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 60, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall8" type="MeshInstance3D" parent="10x10Wall/EastWall"]
+[node name="Wall8" type="MeshInstance3D" parent="10x10Wall/EastWall" unique_id=1266074331]
 transform = Transform3D(-4.371139e-08, 0, 1, 1, 0, 4.371139e-08, 0, 1, 0, 0, 80, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="WestWall" type="Node3D" parent="10x10Wall"]
+[node name="WestWall" type="Node3D" parent="10x10Wall" unique_id=1198828988]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, -50, 0)
 
-[node name="Wall7" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+[node name="Wall7" type="MeshInstance3D" parent="10x10Wall/WestWall" unique_id=2002617903]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall8" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+[node name="Wall8" type="MeshInstance3D" parent="10x10Wall/WestWall" unique_id=1250978689]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 20, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall9" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+[node name="Wall9" type="MeshInstance3D" parent="10x10Wall/WestWall" unique_id=107226025]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 40, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall10" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+[node name="Wall10" type="MeshInstance3D" parent="10x10Wall/WestWall" unique_id=1752116329]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 60, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Wall11" type="MeshInstance3D" parent="10x10Wall/WestWall"]
+[node name="Wall11" type="MeshInstance3D" parent="10x10Wall/WestWall" unique_id=569976865]
 transform = Transform3D(-8.742278e-08, -4.3711392e-08, 1, 1, 4.371139e-08, 8.742278e-08, -4.3711392e-08, 1, 4.371139e-08, 0, 80, 0)
 mesh = SubResource("ArrayMesh_1ecw7")
 skin = SubResource("Skin_n4lbf")
 skeleton = NodePath("")
 
-[node name="Node3D" type="Node3D" parent="."]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="10x10WallCollision" type="StaticBody3D" parent="10x10Wall" unique_id=1997418911]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4170685, -1.967102, -1.7720032)
-shape = SubResource("BoxShape3D_5o3m6")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="10x10Wall/10x10WallCollision" unique_id=2116524577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.268444, -0.19549578, 20.251831)
+shape = SubResource("BoxShape3D_s5mh3")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.026595632, 0.99964625, 0, -0.99964625, 0.026595632, 0, 76.84599, 1.10077)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="10x10Wall/10x10WallCollision" unique_id=1571989300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.00913, -0.19549578, 11.996826)
+shape = SubResource("BoxShape3D_s5mh3")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="10x10Wall/10x10WallCollision" unique_id=1667207137]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.12033683, 50.16216, 7.7439575)
+shape = SubResource("BoxShape3D_s5mh3")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1270877180]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1554373480]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 91.7686, 2.4846592)
+light_color = Color(0.9702522, 0.9465603, 0.88526237, 1)
 light_energy = 16.0
-spot_range = 120.08204
-spot_attenuation = 0.5
+spot_range = 169.01532
+spot_attenuation = 0.4
+spot_angle = 63.355846
 
-[node name="house_exit" type="Node3D" parent="."]
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=2032650752]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 10.79161, 105.660805)
+light_color = Color(0.9702522, 0.9465603, 0.88526237, 1)
+light_energy = 5.0
+spot_range = 148.93167
+spot_attenuation = 0.4
+spot_angle = 35.61039
+
+[node name="house_exit" type="Node3D" parent="." unique_id=82117749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
 
-[node name="MatOutside__mDummyStairs" type="MeshInstance3D" parent="house_exit"]
+[node name="MatOutside__mDummyStairs" type="MeshInstance3D" parent="house_exit" unique_id=1362718726]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_u01ia")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="house_exit" unique_id=720390363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="house_exit/StaticBody3D" unique_id=558968227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4170685, -1.967102, -1.7720032)
+shape = SubResource("BoxShape3D_5o3m6")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="house_exit/StaticBody3D" unique_id=1604816502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.388977, 15.508881, 47.57025)
+shape = SubResource("BoxShape3D_i8rft")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="house_exit/StaticBody3D" unique_id=649536968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.420242, 15.508881, 47.57025)
+shape = SubResource("BoxShape3D_i8rft")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="house_exit/StaticBody3D" unique_id=1909747058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015598297, 15.508881, 82.54413)
+shape = SubResource("BoxShape3D_i8rft")
+
+[node name="ExitDoorArea" parent="house_exit" unique_id=1534297052 instance=ExtResource("10_i8rft")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.035695, 24.76213)
