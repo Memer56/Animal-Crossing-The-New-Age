@@ -24,6 +24,7 @@ var player
 var player_balance : int = 0
 var savings_balance : int = 999999999
 var loan_balance : int = 100
+var previous_loan_balance : int = 0
 var player_is_debt_free : bool = false
 var can_place : bool = true
 var held_item_slot_data : SlotData
@@ -49,6 +50,7 @@ var current_shop_interact_object : StaticBody3D
 var item_was_bought_during_visit : bool = false
 var tree_nav_mesh : NavigationRegion3D
 var current_trees : Array[Array]
+var house_level : int = 0
 
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
