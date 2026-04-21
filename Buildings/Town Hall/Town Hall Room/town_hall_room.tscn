@@ -390,14 +390,25 @@ albedo_color = Color(0, 0, 0, 1)
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1328249933]
 transform = Transform3D(1, 0, 0, 0, -0.15557247, 0.9878245, 0, -0.9878245, -0.15557247, 0, 75.21158, -18.676765)
 light_color = Color(0.83948, 0.69247156, 0.5176808, 1)
-light_energy = 5.0
+light_energy = 7.0
 shadow_enabled = true
 shadow_bias = 6.078
 shadow_opacity = 0.33
 spot_range = 131.98148
 spot_attenuation = 0.0
-spot_angle = 43.70083
+spot_angle = 47.559364
 metadata/_edit_lock_ = true
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1032234033]
+transform = Transform3D(1, 0, 0, 0, 0.9461702, 0.32366973, 0, -0.32366973, 0.9461702, 0, 36.40774, 87.21703)
+light_color = Color(0.83948, 0.69247156, 0.5176808, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 6.078
+shadow_opacity = 0.33
+spot_range = 131.98148
+spot_attenuation = 0.0
+spot_angle = 29.683853
 
 [node name="town_hall_room" type="Node3D" parent="." unique_id=224670349]
 
