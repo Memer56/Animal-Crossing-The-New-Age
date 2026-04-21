@@ -51,6 +51,7 @@ var item_was_bought_during_visit : bool = false
 var tree_nav_mesh : NavigationRegion3D
 var current_trees : Array[Array]
 var house_level : int = 0
+var world_time : float = 0.3
 
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
