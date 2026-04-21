@@ -114,8 +114,11 @@ func save_game_data():
 	save.player_balance = EventBus.player_balance
 	save.savings_balance = EventBus.savings_balance
 	save.loan_balance = EventBus.loan_balance
+	save.previous_loan_balance = EventBus.previous_loan_balance
 	save.player_is_debt_free = EventBus.player_is_debt_free
 	save.trees = EventBus.current_trees
+	save.house_level = EventBus.house_level
+	save.world_time = EventBus.world_time
 	
 	save.write_savegame_data(EventBus.current_save_file_id)
 
@@ -127,6 +130,12 @@ func load_game_data():
 	save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
 	EventBus.player.inventory_data.slot_datas = save.inventory.slot_datas
 	EventBus.player.hotbar_inventory_data.slot_datas = save.hotbar_inventory.slot_datas
+	EventBus.player_balance = save.player_balance
+	EventBus.savings_balance = save.savings_balance
+	EventBus.loan_balance = save.loan_balance
+	EventBus.previous_loan_balance = save.previous_loan_balance
+	EventBus.player_is_debt_free = save.player_is_debt_free
+	EventBus.house_level = save.house_level
 	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
 	load_object_data()

@@ -20,11 +20,27 @@
 [ext_resource type="Script" uid="uid://e3f1ox6y6cvg" path="res://addons/Gizmo3DScript/gizmo3D.gd" id="16_44dum"]
 [ext_resource type="PackedScene" uid="uid://c6tkag6x3tc7h" path="res://Crafting/crafting_ui.tscn" id="16_dc8au"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dc8au"]
+sky_top_color = Color(0, 0.11811624, 0.2664124, 1)
+sky_horizon_color = Color(0.0006650727, 0.00069574005, 0.0007595852, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_rqfgh"]
+sky_material = SubResource("ProceduralSkyMaterial_dc8au")
+
 [sub_resource type="Environment" id="Environment_i7vs8"]
-background_mode = 1
-ambient_light_source = 2
-ambient_light_color = Color(0.641934, 0.641934, 0.641934, 1)
+background_mode = 2
+sky = SubResource("Sky_rqfgh")
+reflected_light_source = 2
 tonemap_mode = 2
+tonemap_exposure = 0.7
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_bounce_feedback = 1.99
+sdfgi_cascades = 8
+sdfgi_energy = 1.5
 
 [node name="Room" type="Node3D" unique_id=1528088948]
 script = ExtResource("1_i7vs8")
@@ -97,6 +113,10 @@ visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1634441865]
 environment = SubResource("Environment_i7vs8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=41551474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 111.4364, 67.651505)
+light_energy = 0.3
 
 [node name="PlayerSpawnPoint" type="Marker3D" parent="." unique_id=1592068862]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29043508, 48.274952)
