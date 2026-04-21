@@ -1,0 +1,783 @@
+[gd_scene format=3 uid="uid://cunbvriatu5gt"]
+
+[ext_resource type="Shader" uid="uid://eq5qprednxti" path="res://Shaders/scrolling_texure.gdshader" id="1_gdwu2"]
+[ext_resource type="Script" uid="uid://ccb5hoxfpyy8l" path="res://UI Info and Message Boxes/ATM UI/atm_ui.gd" id="1_lsxn2"]
+[ext_resource type="Texture2D" uid="uid://byhuk1x0n453r" path="res://UI Info and Message Boxes/ATM UI/Download Seamless background with yellow stars pattern on pastel purple background_ for free.jpg" id="1_pg5ip"]
+[ext_resource type="Texture2D" uid="uid://d4ddfokle5ll3" path="res://UI Info and Message Boxes/ATM UI/10000Bell.png" id="3_cfhk2"]
+[ext_resource type="StyleBox" uid="uid://b2uekixfds4px" path="res://Button Styles/normal_button.tres" id="4_3gkyp"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="4_gxaq5"]
+[ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="5_oerxs"]
+[ext_resource type="StyleBox" uid="uid://dlusgwld66go8" path="res://Button Styles/pressed_button.tres" id="5_tob50"]
+[ext_resource type="StyleBox" uid="uid://d1i0p8d83a5df" path="res://Button Styles/focus_button.tres" id="7_hdlqe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfhk2"]
+shader = ExtResource("1_gdwu2")
+shader_parameter/scroll_speed = 0.050000002375
+shader_parameter/angle_degrees = 218.2330103660675
+shader_parameter/repeat_x = 10.0000004275
+shader_parameter/repeat_y = 10.0000004275
+shader_parameter/row_offset = 0.0
+shader_parameter/texture_to_scroll = ExtResource("1_pg5ip")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cn7w"]
+bg_color = Color(0.9430043, 0.8582339, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="FontVariation" id="FontVariation_3gkyp"]
+base_font = ExtResource("4_gxaq5")
+
+[sub_resource type="LabelSettings" id="LabelSettings_lsxn2"]
+font = SubResource("FontVariation_3gkyp")
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdwu2"]
+bg_color = Color(0.9999997, 0.82348734, 0.51264894, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cfhk2"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_oerxs"]
+font = SubResource("FontVariation_3gkyp")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxaq5"]
+bg_color = Color(0.6551267, 0.47723597, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxcow"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.43957156, 0.9373959, 0, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdhv5"]
+bg_color = Color(0.4392157, 0.9372549, 0, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="FontVariation" id="FontVariation_jcr3n"]
+base_font = ExtResource("4_gxaq5")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1n7y0"]
+font = SubResource("FontVariation_jcr3n")
+font_size = 20
+
+[sub_resource type="FontVariation" id="FontVariation_1n7y0"]
+base_font = ExtResource("4_gxaq5")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lsxn2"]
+
+[sub_resource type="FontVariation" id="FontVariation_cfhk2"]
+base_font = ExtResource("4_gxaq5")
+
+[sub_resource type="FontVariation" id="FontVariation_lsxn2"]
+base_font = ExtResource("4_gxaq5")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsxn2"]
+bg_color = Color(0.10529692, 0.43930683, 0.58510053, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcr3n"]
+bg_color = Color(0.20720142, 0.63701713, 0.8291165, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61923856, 0.5804031, 0.9825607, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1n7y0"]
+bg_color = Color(0.18020087, 0.6025469, 0.7915529, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61923856, 0.5804031, 0.9825607, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dq6vd"]
+bg_color = Color(0.6424558, 0.59625936, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkb1r"]
+bg_color = Color(0.76891756, 0.75138736, 1, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61960787, 0.5803922, 0.9843137, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ubm28"]
+bg_color = Color(0.7081427, 0.6793432, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0n5nw"]
+bg_color = Color(0.33407384, 0.35352525, 0.30051807, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuexe"]
+bg_color = Color(0.5080994, 0.53303844, 0.46855468, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61960787, 0.5803922, 0.9843137, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwyvd"]
+bg_color = Color(0.434596, 0.45785654, 0.39754117, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8tun"]
+bg_color = Color(1.2513996e-06, 0.7846823, 0.4655431, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4obl"]
+bg_color = Color(2.4065375e-06, 0.9449024, 0.56647915, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.61960787, 0.5803922, 0.9843137, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vya2g"]
+bg_color = Color(0, 0.8952633, 0.5356265, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tob50"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_hdlqe"]
+font = SubResource("FontVariation_3gkyp")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[node name="ATM_UI" type="Control" unique_id=2134215228]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lsxn2")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1135421458]
+material = SubResource("ShaderMaterial_cfhk2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_pg5ip")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="Background" unique_id=513575720]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -593.5
+offset_top = 16.0
+offset_right = 593.5
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3cn7w")
+text = "Select an option below"
+label_settings = SubResource("LabelSettings_lsxn2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Background" unique_id=2139859972]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -631.5
+offset_top = -441.0
+offset_right = 631.5
+offset_bottom = 441.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gdwu2")
+
+[node name="BalanceBG" type="Panel" parent="Background/Panel" unique_id=899178585]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.25
+offset_top = -388.0
+offset_right = 351.25
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cfhk2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/Panel/BalanceBG" unique_id=562398648]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Panel/BalanceBG/VBoxContainer" unique_id=1563167593]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Label" type="Label" parent="Background/Panel/BalanceBG/VBoxContainer/HBoxContainer" unique_id=245016958]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Loan Balance"
+label_settings = SubResource("LabelSettings_oerxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoanBalance" type="Label" parent="Background/Panel/BalanceBG/VBoxContainer/HBoxContainer" unique_id=2065387728]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1,000,000"
+label_settings = SubResource("LabelSettings_oerxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Background/Panel/BalanceBG/VBoxContainer" unique_id=747196785]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="Label" type="Label" parent="Background/Panel/BalanceBG/VBoxContainer/HBoxContainer2" unique_id=1703377434]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Savings Balance"
+label_settings = SubResource("LabelSettings_oerxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SavingsBalance" type="Label" parent="Background/Panel/BalanceBG/VBoxContainer/HBoxContainer2" unique_id=365521694]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1,000,000"
+label_settings = SubResource("LabelSettings_oerxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seperator" type="Panel" parent="Background/Panel/BalanceBG" unique_id=1813169127]
+custom_minimum_size = Vector2(628, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -6.0
+offset_right = 314.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gxaq5")
+
+[node name="InputBG" type="Panel" parent="Background/Panel" unique_id=274952955]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.5
+offset_top = -83.5
+offset_right = 352.5
+offset_bottom = -12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pxcow")
+
+[node name="Label" type="Label" parent="Background/Panel/InputBG" unique_id=1395344006]
+layout_mode = 0
+offset_left = 648.5
+offset_top = 50.5
+offset_right = 720.0
+offset_bottom = 76.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_xdhv5")
+text = "Bells"
+label_settings = SubResource("LabelSettings_1n7y0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputField" type="LineEdit" parent="Background/Panel/InputBG" unique_id=1103758284]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.75
+offset_top = -29.25
+offset_right = 157.75
+offset_bottom = 29.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_1n7y0")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_lsxn2")
+alignment = 1
+max_length = 9
+editable = false
+virtual_keyboard_enabled = false
+
+[node name="MainButtons" type="VBoxContainer" parent="Background/Panel" unique_id=423355056]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -229.5
+offset_top = 56.5
+offset_right = 229.5
+offset_bottom = 311.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="LoanPayment" type="Button" parent="Background/Panel/MainButtons" unique_id=1570786981]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_cfhk2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Loan Payment"
+
+[node name="Deposit" type="Button" parent="Background/Panel/MainButtons" unique_id=412408627]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_cfhk2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Deposit"
+
+[node name="Withdraw" type="Button" parent="Background/Panel/MainButtons" unique_id=715865765]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_cfhk2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Withdrawal"
+
+[node name="NumPad" type="Control" parent="Background/Panel" unique_id=1001479897]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Panel/NumPad" unique_id=644422169]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.0
+offset_top = 8.0
+offset_right = 322.0
+offset_bottom = 424.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/Panel/NumPad/HBoxContainer" unique_id=299610871]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer" unique_id=409544348]
+layout_mode = 2
+
+[node name="Clear" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2065976955]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_lsxn2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jcr3n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1n7y0")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "c
+"
+
+[node name="FullAmount" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=7381866]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_dq6vd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wkb1r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ubm28")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Full Amount
+"
+
+[node name="NumPadContainer" type="GridContainer" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer" unique_id=797514249]
+layout_mode = 2
+columns = 3
+
+[node name="NumButton" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=1984311392]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "1"
+
+[node name="NumButton2" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=104203119]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "2"
+
+[node name="NumButton3" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=43505664]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "3"
+
+[node name="NumButton4" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=1354346585]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "4"
+
+[node name="NumButton5" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=724846316]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "5"
+
+[node name="NumButton6" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=717163964]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "6"
+
+[node name="NumButton7" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=1788773145]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "7"
+
+[node name="NumButton8" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=345396169]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "8"
+
+[node name="NumButton9" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer" unique_id=1348188873]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "9"
+
+[node name="NumButton0" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer" unique_id=688179246]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "0"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Background/Panel/NumPad/HBoxContainer" unique_id=1166540409]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Delete" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer2" unique_id=424888012]
+custom_minimum_size = Vector2(128, 80)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_0n5nw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tuexe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pwyvd")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Delete
+"
+
+[node name="Confirm" type="Button" parent="Background/Panel/NumPad/HBoxContainer/VBoxContainer2" unique_id=684322917]
+custom_minimum_size = Vector2(128, 160)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_lsxn2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_k8tun")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c4obl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vya2g")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Confirm"
+
+[node name="Back" type="Button" parent="Background/Panel/NumPad" unique_id=1182155]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -92.0
+offset_right = 254.0
+offset_bottom = -32.0
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_cfhk2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Back"
+
+[node name="PlayerBalanceBG" type="Panel" parent="Background/Panel" unique_id=132150066]
+layout_mode = 0
+offset_left = 1019.832
+offset_top = 9.342293
+offset_right = 1250.3867
+offset_bottom = 86.10181
+rotation = 0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_tob50")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Panel/PlayerBalanceBG" unique_id=214427995]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -28.25
+offset_right = 56.5
+offset_bottom = 28.25
+grow_vertical = 2
+texture = ExtResource("3_cfhk2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PlayerBalance" type="Label" parent="Background/Panel/PlayerBalanceBG" unique_id=1671784972]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.5
+offset_top = -10.0
+offset_right = 44.5
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "99,000"
+label_settings = SubResource("LabelSettings_hdlqe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="Button" parent="Background" unique_id=6250583]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1338.5
+offset_top = -191.0
+offset_right = 1573.5
+offset_bottom = -131.0
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_cfhk2")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_3gkyp")
+theme_override_styles/pressed = ExtResource("5_tob50")
+theme_override_styles/hover = ExtResource("5_oerxs")
+theme_override_styles/focus = ExtResource("7_hdlqe")
+text = "Exit"
+
+[connection signal="pressed" from="Background/Panel/MainButtons/LoanPayment" to="." method="_on_loan_payment_pressed"]
+[connection signal="pressed" from="Background/Panel/MainButtons/Deposit" to="." method="_on_deposit_pressed"]
+[connection signal="pressed" from="Background/Panel/MainButtons/Withdraw" to="." method="_on_withdraw_pressed"]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/HBoxContainer/Clear" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/HBoxContainer/FullAmount" to="." method="_on_full_amount_pressed"]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton2" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton3" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton4" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton5" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton6" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton7" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton8" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumPadContainer/NumButton9" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer/NumButton0" to="." method="_on_num_button_pressed" flags=18]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer2/Delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="Background/Panel/NumPad/HBoxContainer/VBoxContainer2/Confirm" to="." method="_on_confirm_pressed"]
+[connection signal="pressed" from="Background/Panel/NumPad/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Background/Exit" to="." method="_on_exit_pressed"]
