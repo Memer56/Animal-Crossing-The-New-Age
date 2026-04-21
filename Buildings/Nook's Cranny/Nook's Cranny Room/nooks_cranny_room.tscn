@@ -545,11 +545,21 @@ affect_navigation_mesh = true
 [node name="SpotLight3D" type="SpotLight3D" parent="nook\'s cranny room model" unique_id=1115099513]
 transform = Transform3D(1, 0, 0, 0, -0.19613442, 0.980577, 0, -0.980577, -0.19613442, 0, 75, 0)
 light_color = Color(0.8392157, 0.69411767, 0.5176471, 1)
-light_energy = 5.0
+light_energy = 7.268
 shadow_enabled = true
 shadow_bias = 6.078
 shadow_opacity = 0.33
 spot_range = 125.75463
+spot_attenuation = 0.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="nook\'s cranny room model" unique_id=395244034]
+transform = Transform3D(1, 0, 0, 0, 0.98843837, 0.1516231, 0, -0.1516231, 0.98843837, 0, 27.552874, 81.313866)
+light_color = Color(0.8392157, 0.69411767, 0.5176471, 1)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 6.078
+shadow_opacity = 0.33
+spot_range = 166.32143
 spot_attenuation = 0.0
 
 [node name="ExitDoorArea" parent="." unique_id=1336531336 instance=ExtResource("8_ql6ei")]
