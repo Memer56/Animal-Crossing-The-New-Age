@@ -19,8 +19,8 @@ const STONE_ITEM = preload("uid://801bd84rk176")
 @onready var hot_bar_inventory: PanelContainer = $UI/InventoryInterface/HotBarInventory
 @onready var main_island_nav_mesh: NavigationRegion3D = $MainIslandNavMesh
 @onready var town_hall: StaticBody3D = $MainIslandNavMesh/TownHall
-@onready var world_environment: WorldEnvironment = $WorldEnvironment
-@onready var directional_light_3d: DirectionalLight3D = $DirectionalLight3D
+@onready var world_environment: WorldEnvironment = $Sky/WorldEnvironment
+@onready var sun: DirectionalLight3D = $Sky/Sun
 @export var navigation_mesh : NavigationRegion3D
 @onready var build_camera: Camera3D = $BuildCamera
 @onready var transition_camera: Camera3D = $TransitionCamera
@@ -54,9 +54,13 @@ func _ready() -> void:
 	EventBus.current_trees.clear()
 	if EventBus.game_is_new_save:
 		EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
+		EventBus.loan_balance = 140000
+		EventBus.previous_loan_balance = EventBus.loan_balance
 		spawn_trees()
 	else:
 		load_game_data()
+		if BuildManager.home_can_upgrade:
+			BuildManager.upgrade_home()
 	spawn_stones()
 	bake_nav_mesh()
 
@@ -125,8 +129,11 @@ func save_game_data():
 	save.player_balance = EventBus.player_balance
 	save.savings_balance = EventBus.savings_balance
 	save.loan_balance = EventBus.loan_balance
+	save.previous_loan_balance = EventBus.previous_loan_balance
 	save.player_is_debt_free = EventBus.player_is_debt_free
+	save.house_level = EventBus.house_level
 	save.trees = EventBus.current_trees
+	save.world_time = EventBus.world_time
 	
 	if EventBus.game_is_new_save:
 		EventBus.game_is_new_save = false
@@ -147,7 +154,9 @@ func load_player_data():
 		EventBus.player_balance = save.player_balance
 		EventBus.savings_balance = save.savings_balance
 		EventBus.loan_balance = save.loan_balance
+		EventBus.previous_loan_balance = save.previous_loan_balance
 		EventBus.player_is_debt_free = save.player_is_debt_free
+		EventBus.house_level = save.house_level
 		inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 		inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
 
@@ -197,7 +206,7 @@ func load_player_nav_refrence_island(island : String):
 func trigger_save_fail_events():
 	var scene = SAVE_DIDNT_LOAD.instantiate()
 	world_environment.environment = BLACK_SKY
-	directional_light_3d.hide()
+	sun.hide()
 	EventBus.player.state =  EventBus.player.FREEZE_PLAYER
 	inventory_interface.hide()
 	EventBus.player.hide()
