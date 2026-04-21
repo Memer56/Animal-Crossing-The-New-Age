@@ -10,7 +10,13 @@ func _on_body_entered(body: Node3D) -> void:
 		body.state = body.ENTER_DOOR
 		body.toggle_collisions(2, false)
 		EventBus.trigger_building_exit_event = true
+		EventBus.save_game_data.emit()
+		EventBus.item_was_bought_during_visit = false
 
 
 func _on_body_exited(_body: Node3D) -> void:
+	allow_player_to_exit = true
+
+
+func _on_timer_timeout() -> void:
 	allow_player_to_exit = true
