@@ -1,6 +1,7 @@
 extends Control
 
 signal send_crafting_data(crafting_requirements : Dictionary, button_texture, output_qty, result_item, button)
+signal send_data(item_texture : AtlasTexture, slot_data : SlotData)
 
 @export var texture : AtlasTexture
 @export var item_name : String
@@ -31,7 +32,10 @@ func _on_panel_mouse_exited() -> void:
 func _on_panel_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MASK_LEFT:
-			send_crafting_data.emit(crafting_requirements, texture, output_quantity, result_item, self)
+			if CheatManager.cheat_menu_displayed:
+				send_data.emit(texture, result_item)
+			else:
+				send_crafting_data.emit(crafting_requirements, texture, output_quantity, result_item, self)
 
 func resend_crafting_data():
 	send_crafting_data.emit(crafting_requirements, texture, output_quantity, result_item, self)
