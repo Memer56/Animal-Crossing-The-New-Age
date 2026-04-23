@@ -1,0 +1,323 @@
+[gd_scene format=3 uid="uid://ww7phe1tiqck"]
+
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="1_b4q0j"]
+[ext_resource type="Script" uid="uid://cuijyau4cxkng" path="res://Cheat Manager/cheat_menu_ui.gd" id="1_fljah"]
+[ext_resource type="PackedScene" uid="uid://dguikd6g4jhl8" path="res://Cheat Manager/cheat_option_input.tscn" id="3_ip40x"]
+[ext_resource type="PackedScene" uid="uid://bampkycphxq12" path="res://Cheat Manager/cheat_option_button.tscn" id="4_inb0o"]
+[ext_resource type="PackedScene" uid="uid://c5afvfdm0pit6" path="res://Crafting/crafting_option_display_button.tscn" id="5_doi5t"]
+[ext_resource type="Resource" uid="uid://bcq6meneybdqa" path="res://Inventory/Item/Items/Bells/bells_item.tres" id="6_f301a"]
+[ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="6_qlb3v"]
+[ext_resource type="Script" uid="uid://bxpjsv4jkvmv4" path="res://Inventory/slot_data.gd" id="7_qlb3v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4whup"]
+bg_color = Color(0.894118, 0.788235, 0.615686, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 10
+
+[sub_resource type="FontVariation" id="FontVariation_fljah"]
+base_font = ExtResource("1_b4q0j")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4q0j"]
+bg_color = Color(0.6048404, 0.51441437, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip40x"]
+bg_color = Color(0.74295014, 0.7067081, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.52754533, 0.1259115, 0.99999994, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fljah"]
+bg_color = Color(0.6694125, 0.61080545, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_inb0o"]
+base_font = ExtResource("1_b4q0j")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f301a"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qlb3v"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.6902899, 0.43105528, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f301a"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(1206, 2258, 96, 104)
+
+[sub_resource type="Resource" id="Resource_25cnh"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("6_f301a")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25cnh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.6039216, 0.5137255, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_doi5t"]
+base_font = ExtResource("1_b4q0j")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inb0o"]
+bg_color = Color(0.6048404, 0.51441437, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_doi5t"]
+bg_color = Color(0.74295014, 0.7067081, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.52754533, 0.1259115, 0.99999994, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_72u12"]
+bg_color = Color(0.6694125, 0.61080545, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CheatMenuUI" type="Control" unique_id=444421694 node_paths=PackedStringArray("options_list_buttons")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fljah")
+options_list_buttons = [NodePath("BG/OptionsBG/OptionsList/GeneralCheats"), NodePath("BG/OptionsBG/OptionsList/GiveItems")]
+
+[node name="BG" type="Panel" parent="." unique_id=640589578]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -587.5
+offset_top = -467.5
+offset_right = 587.5
+offset_bottom = 467.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4whup")
+
+[node name="OptionsBG" type="Panel" parent="BG" unique_id=1100702650]
+layout_mode = 0
+offset_left = -3.0
+offset_right = 327.0
+offset_bottom = 934.5
+
+[node name="OptionsList" type="VBoxContainer" parent="BG/OptionsBG" unique_id=320752859]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="GeneralCheats" type="Button" parent="BG/OptionsBG/OptionsList" unique_id=1758577151]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fljah")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_b4q0j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ip40x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fljah")
+toggle_mode = true
+text = "General Cheats"
+
+[node name="GiveItems" type="Button" parent="BG/OptionsBG/OptionsList" unique_id=889734311]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontVariation_fljah")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_b4q0j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ip40x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fljah")
+toggle_mode = true
+text = "Give Items"
+
+[node name="GeneralCheatsContainer" type="VBoxContainer" parent="BG" unique_id=1101161665]
+visible = false
+layout_mode = 0
+offset_left = 428.5
+offset_top = 6.5
+offset_right = 1077.5
+offset_bottom = 928.5
+theme_override_constants/separation = 90
+alignment = 1
+
+[node name="CheatOptionInput" parent="BG/GeneralCheatsContainer" unique_id=492674475 instance=ExtResource("3_ip40x")]
+layout_mode = 2
+cheat_name = "Set Money"
+placeholder_text = "Enter Money Amount"
+
+[node name="CheatOptionInput2" parent="BG/GeneralCheatsContainer" unique_id=1844460574 instance=ExtResource("3_ip40x")]
+layout_mode = 2
+cheat_name = "Add Money"
+placeholder_text = "Enter Amount To Add"
+
+[node name="CheatOptionInput3" parent="BG/GeneralCheatsContainer" unique_id=531236223 instance=ExtResource("3_ip40x")]
+layout_mode = 2
+cheat_name = "Set Time"
+placeholder_text = "Set Time"
+
+[node name="CheatOptionButton" parent="BG/GeneralCheatsContainer" unique_id=1680543003 instance=ExtResource("4_inb0o")]
+layout_mode = 2
+cheat_name = "Free Craft"
+default_button_name = "Enable Free Craft"
+
+[node name="GiveItemsContainer" type="VBoxContainer" parent="." unique_id=1953823092]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = -459.0
+offset_right = 578.0
+offset_bottom = 459.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 117
+
+[node name="SearchBar" type="LineEdit" parent="GiveItemsContainer" unique_id=61270719]
+custom_minimum_size = Vector2(0, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.69550246, 0.6955034, 0.69550264, 0.6)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontVariation_inb0o")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_f301a")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qlb3v")
+placeholder_text = "Search for items"
+alignment = 1
+caret_blink = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GiveItemsContainer" unique_id=254722671]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="GiveItemsContainer/ScrollContainer" unique_id=327167959]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+theme_override_constants/h_separation = 173
+theme_override_constants/v_separation = 200
+columns = 5
+
+[node name="CraftingOptionDisplayButton" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1157705809 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_f301a")
+item_name = "Bells"
+result_item = SubResource("Resource_25cnh")
+
+[node name="CraftingOptionDisplayButton2" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=974050053 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+
+[node name="CraftingOptionDisplayButton3" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1118213752 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+
+[node name="CraftingOptionDisplayButton4" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1252143485 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+
+[node name="CraftingOptionDisplayButton5" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=410981037 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GiveItemsContainer" unique_id=1558863986]
+layout_mode = 2
+theme_override_constants/separation = 71
+alignment = 1
+
+[node name="Panel" type="Panel" parent="GiveItemsContainer/HBoxContainer" unique_id=1016091851]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_25cnh")
+
+[node name="SelectedItemTexture" type="TextureRect" parent="GiveItemsContainer/HBoxContainer/Panel" unique_id=1054427747]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
+
+[node name="GiveItemButton" type="Button" parent="GiveItemsContainer/HBoxContainer" unique_id=1683943815]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_doi5t")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_inb0o")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_doi5t")
+theme_override_styles/hover = SubResource("StyleBoxFlat_72u12")
+text = "Give Item"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="BG/OptionsBG/OptionsList/GeneralCheats" to="." method="_on_option_pressed" flags=18]
+[connection signal="pressed" from="BG/OptionsBG/OptionsList/GiveItems" to="." method="_on_option_pressed" flags=18]
+[connection signal="focus_exited" from="GiveItemsContainer/SearchBar" to="." method="_on_search_bar_focus_exited"]
+[connection signal="mouse_entered" from="GiveItemsContainer/SearchBar" to="." method="_on_search_bar_mouse_entered"]
+[connection signal="mouse_exited" from="GiveItemsContainer/SearchBar" to="." method="_on_search_bar_mouse_exited"]
+[connection signal="send_data" from="GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton" to="." method="_on_crafting_option_display_button_send_data"]
