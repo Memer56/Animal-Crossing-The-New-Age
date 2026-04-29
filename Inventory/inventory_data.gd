@@ -28,7 +28,7 @@ func drop_slot_data(grabbed_slot_data: SlotData, index : int) -> SlotData:
 	
 	var return_slot_data: SlotData
 	if slot_data and slot_data.can_drop_and_fully_merge_by_id(grabbed_slot_data):
-		slot_data.fully_merge_with(grabbed_slot_data)
+		slot_data.fully_merge_with(grabbed_slot_data, self)
 	else:
 		slot_datas[index] = grabbed_slot_data
 		return_slot_data = slot_data
@@ -37,12 +37,21 @@ func drop_slot_data(grabbed_slot_data: SlotData, index : int) -> SlotData:
 	inventory_updated.emit(self)
 	return return_slot_data
 
+func controller_drop_slot_data_on_ground(slot_data : SlotData, index : int):
+	var _slot_data = slot_datas[index]
+	
+	if slot_data:
+		slot_datas[index] = null
+		inventory_updated.emit(self)
+		return slot_data
+	else:
+		return null
+
 func drop_single_slot_data(grabbed_slot_data: SlotData, index : int) -> SlotData:
 	var slot_data = slot_datas[index]
 	
 	if not slot_data:
 		slot_datas[index] = grabbed_slot_data.create_single_slot_data()
-		print(grabbed_slot_data.item_data.name)
 		EventBus.armour_piece_equipped.emit(grabbed_slot_data, index)
 	elif slot_data.can_merge_with(grabbed_slot_data):
 		slot_data.fully_merge_with_without_slot_data_overflow(grabbed_slot_data.create_single_slot_data())
@@ -71,7 +80,7 @@ func use_slot_data(index: int) -> void:
 				slot_datas[index] = null
 	
 	if slot_data.item_data is ItemDataCurrency:
-		EventBus.coins += slot_data.quantity
+		EventBus.player_balance += slot_data.item_data.value
 		slot_datas[index] = null
 	
 	# Sometimes items need to hold off of being removed due to confirmation message box
@@ -84,34 +93,48 @@ func use_slot_data(index: int) -> void:
 func pick_up_slot_data(slot_data : SlotData) -> bool:
 	var copy_slot_data = get_slot_data_copy(slot_data)
 	
-	for index in slot_datas.size():
-		if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
-			slot_datas[index].fully_merge_with(slot_data)
-			inventory_updated.emit(self)
-			return true
-	
-	for index in slot_datas.size():
-		if not slot_datas[index]:
-			slot_datas[index] = copy_slot_data
-			inventory_updated.emit(self)
-			return true
+	if slot_data.item_data.stackable:
+		for index in slot_datas.size():
+			if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
+				slot_datas[index].fully_merge_with(slot_data, self)
+				inventory_updated.emit(self)
+				return true
+		
+		for index in slot_datas.size():
+			if not slot_datas[index]:
+				slot_datas[index] = copy_slot_data
+				inventory_updated.emit(self)
+				return true
+	else:
+		for index in slot_datas.size():
+			if not slot_datas[index]:
+				slot_datas[index] = copy_slot_data
+				inventory_updated.emit(self)
+				return true
 	
 	return false
 
 func add_to_inventory(slot_data : SlotData) -> bool:
 	var copy_slot_data = get_slot_data_copy(slot_data)
 	
-	for index in slot_datas.size():
-		if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
-			slot_datas[index].merge_by_one(copy_slot_data)
-			inventory_updated.emit(self)
-			return true
-	# The loop below triggers first if the slot is empty
-	for index in slot_datas.size():
-		if not slot_datas[index]:
-			slot_datas[index] = copy_slot_data
-			inventory_updated.emit(self)
-			return true
+	if slot_data.item_data.stackable:
+		for index in slot_datas.size():
+			if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
+				slot_datas[index].merge_by_one(copy_slot_data)
+				inventory_updated.emit(self)
+				return true
+		# The loop below triggers first if the slot is empty
+		for index in slot_datas.size():
+			if not slot_datas[index]:
+				slot_datas[index] = copy_slot_data
+				inventory_updated.emit(self)
+				return true
+	else:
+		for index in slot_datas.size():
+			if not slot_datas[index]:
+				slot_datas[index] = copy_slot_data
+				inventory_updated.emit(self)
+				return true
 	
 	return false
 
@@ -119,17 +142,24 @@ func add_to_inventory_with_quantity(slot_data : SlotData, quantity : int):
 	var copy_slot_data = get_slot_data_copy(slot_data)
 	copy_slot_data.quantity = quantity
 	
-	for index in slot_datas.size():
-		if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
-			slot_datas[index].fully_merge_with(copy_slot_data)
-			inventory_updated.emit(self)
-			return true
-	# The loop below triggers first if the slot is empty
-	for index in slot_datas.size():
-		if not slot_datas[index]:
-			slot_datas[index] = copy_slot_data
-			inventory_updated.emit(self)
-			return true
+	if slot_data.item_data.stackable:
+		for index in slot_datas.size():
+			if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
+				slot_datas[index].fully_merge_with(copy_slot_data, self)
+				inventory_updated.emit(self)
+				return true
+		# The loop below triggers first if the slot is empty
+		for index in slot_datas.size():
+			if not slot_datas[index]:
+				slot_datas[index] = copy_slot_data
+				inventory_updated.emit(self)
+				return true
+	else: ## find empty slot and place data there
+		for index in slot_datas.size():
+			if not slot_datas[index]:
+				slot_datas[index] = copy_slot_data
+				inventory_updated.emit(self)
+				return true
 	
 	return false
 
@@ -138,7 +168,7 @@ func add_to_inventory_at_index(slot_data : SlotData, quantity : int, index : int
 	copy_slot_data.quantity = quantity
 	
 	if slot_datas[index] and slot_datas[index].can_fully_merge_by_id(copy_slot_data):
-		slot_datas[index].fully_merge_with(copy_slot_data)
+		slot_datas[index].fully_merge_with(copy_slot_data, self)
 		inventory_updated.emit(self)
 		return true
 # The check below triggers first if the slot is empty
@@ -149,16 +179,33 @@ func add_to_inventory_at_index(slot_data : SlotData, quantity : int, index : int
 	
 	return false
 
+func create_new_slot_data(slot_data : SlotData):
+	var copy_slot_data = get_slot_data_copy(slot_data)
+	for index in slot_datas.size():
+		if not slot_datas[index]:
+			slot_datas[index] = copy_slot_data
+			return true
+	return false
+
 func get_slot_data_copy(slot_data : SlotData) -> SlotData:
 	var new_slot_data = SlotData.new()
 	if slot_data.item_data is ItemDataConsumable:
 		new_slot_data.item_data = ItemDataConsumable.new()
 	elif slot_data.item_data is ItemDataCurrency:
 		new_slot_data.item_data = ItemDataCurrency.new()
+		new_slot_data.item_data.value = slot_data.item_data.value
 	elif slot_data.item_data is ItemDataPositioning:
 		new_slot_data.item_data = ItemDataPositioning.new()
+	elif slot_data.item_data is ItemDataTool:
+		new_slot_data.item_data = ItemDataTool.new()
+		new_slot_data.item_data.item_type = slot_data.item_data.item_type
+		new_slot_data.item_data.item_strength = slot_data.item_data.item_strength
+		new_slot_data.item_data.can_display_in_hand = slot_data.item_data.can_display_in_hand
+		new_slot_data.item_data.can_do_action = slot_data.item_data.can_do_action
+		print(new_slot_data.item_data.can_do_action)
 	else:
 		new_slot_data.item_data = ItemData.new()
+	
 	duplicate_slot_data = false
 	new_slot_data.item_data.name = slot_data.item_data.name
 	new_slot_data.item_data.description = slot_data.item_data.description
@@ -170,6 +217,10 @@ func get_slot_data_copy(slot_data : SlotData) -> SlotData:
 	new_slot_data.item_data.mining_value = slot_data.item_data.mining_value
 	new_slot_data.item_data.ID = slot_data.item_data.ID
 	new_slot_data.quantity = slot_data.quantity
+	new_slot_data.item_data.can_display_in_hand = slot_data.item_data.can_display_in_hand
+	if slot_data.item_data is ItemDataPositioning:
+		new_slot_data.item_data.item_type = slot_data.item_data.item_type
+	
 	return new_slot_data
 
 
@@ -223,12 +274,9 @@ func is_item_in_inventory_return_bool(item_name : String) -> bool:
 
 func is_item_in_inventory_return_slot_data(item_name : String) -> SlotData:
 	var slot_data : SlotData
-	print("item name: ", item_name)
 	for index in slot_datas.size():
 		if slot_datas[index]:
-			print("Found slot data: ", slot_datas[index].item_data.name)
 			if slot_datas[index].item_data.name == item_name:
-				print("Item match found")
 				slot_data = slot_datas[index]
 				return slot_data
 	return null
@@ -270,6 +318,12 @@ func return_empty_slots() -> Array:
 		if !slot_datas[index]:
 			empty_slots.append(index)
 	return empty_slots
+
+func clear_inventory():
+	for index in slot_datas.size():
+		if slot_datas[index]:
+			slot_datas[index] = null
+			inventory_updated.emit(self)
 
 func on_slot_clicked(index : int, button : int) -> void:
 	inventory_interact.emit(self, index, button)
