@@ -3,6 +3,7 @@
 ## Alpha version 1.1.8 - Improvements Update
 - Updated cheat menu to give items but still incomplete
 - Updated inventory logic to hanlde full inventory events
+- Speech Bubble now displays when it should
 
 ## Alpha version 1.1.7 - Cheat Update
 - Fixed issues with pause menu not being clickable due to cheat menu
