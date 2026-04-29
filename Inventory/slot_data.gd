@@ -23,7 +23,7 @@ func can_fully_merge_by_id(other_slot_data : SlotData) -> bool:
 	#var total_quantity = quantity + other_slot_data.quantity
 	return item_data.ID == other_slot_data.item_data.ID and item_data.stackable and quantity < MAX_STACK_SIZE
 	
-func fully_merge_with(other_slot_data: SlotData) -> void:
+func fully_merge_with(other_slot_data: SlotData, inventory_data : InventoryData) -> void:
 	quantity += other_slot_data.quantity
 	if quantity >= MAX_STACK_SIZE:
 		var qty_overflow = quantity - MAX_STACK_SIZE
@@ -31,19 +31,19 @@ func fully_merge_with(other_slot_data: SlotData) -> void:
 			other_slot_data.quantity = qty_overflow
 		quantity = MAX_STACK_SIZE
 		EventBus.create_overflow_slot_data.emit(other_slot_data)
-		create_overflow_single_slot_data(other_slot_data)
+		create_overflow_single_slot_data(other_slot_data, inventory_data)
 
 func fully_merge_with_without_slot_data_overflow(other_slot_data: SlotData):
 	quantity += other_slot_data.quantity
-	if quantity >= MAX_STACK_SIZE:
-		create_overflow_single_slot_data(other_slot_data)
+	#if quantity >= MAX_STACK_SIZE:
+		#create_overflow_single_slot_data(other_slot_data)
 
 
 func merge_by_one(other_slot_data: SlotData) -> void:
 	quantity += 1
 	if quantity >= MAX_STACK_SIZE:
 		EventBus.duplicate_slot_data_info.emit()
-		create_overflow_single_slot_data(other_slot_data)
+		#create_overflow_single_slot_data(other_slot_data)
 
 func create_single_slot_data() -> SlotData:
 	var new_slot_data = duplicate()
@@ -51,11 +51,9 @@ func create_single_slot_data() -> SlotData:
 	quantity -= 1
 	return new_slot_data
 
-func create_overflow_single_slot_data(slot_data : SlotData):
-	# this does nothing
-	var new_slot_data = slot_data.duplicate()
-	return new_slot_data
-	#EventBus.send_slot_info_to_new_slot.emit(new_slot_data)
+func create_overflow_single_slot_data(slot_data : SlotData, inventory_data : InventoryData):
+	if inventory_data.create_new_slot_data(slot_data):
+		return
 
 func set_quantity(value: int) -> void:
 	quantity = value
