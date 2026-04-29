@@ -98,16 +98,16 @@ layout_mode = 0
 offset_left = -88.0
 offset_right = -24.0
 
-[node name="PauseMenu" parent="UI" unique_id=1077459076 instance=ExtResource("9_qgm3m")]
-visible = false
-
-[node name="SpeechBubble" parent="UI" unique_id=1320974294 instance=ExtResource("11_8um3o")]
-
 [node name="BuildMenuUI" parent="UI" unique_id=931941325 instance=ExtResource("12_ka5ae")]
 
 [node name="ATM_UI" parent="UI" unique_id=2134215228 instance=ExtResource("14_gvnox")]
 
 [node name="CraftingUI" parent="UI" unique_id=504809646 instance=ExtResource("16_dc8au")]
+
+[node name="SpeechBubble" parent="UI" unique_id=1320974294 instance=ExtResource("11_8um3o")]
+
+[node name="PauseMenu" parent="UI" unique_id=1077459076 instance=ExtResource("9_qgm3m")]
+visible = false
 
 [node name="FadeCanvasLayer" parent="." unique_id=1684301726 instance=ExtResource("8_hjiva")]
 
