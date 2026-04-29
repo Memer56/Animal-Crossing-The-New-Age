@@ -12,4 +12,4 @@
 ## Alpha Version 1.1.6 - Lighting Update
 - Added lighting improvements
 - Various fixes related to leaving the house
-- The house can now be upgraded from tent -> house, the interiors upgrade to
+- The house can now be upgraded from tent -> house, the interiors upgrade too
