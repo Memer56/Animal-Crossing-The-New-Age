@@ -8,6 +8,9 @@
 [ext_resource type="Resource" uid="uid://bcq6meneybdqa" path="res://Inventory/Item/Items/Bells/bells_item.tres" id="6_f301a"]
 [ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="6_qlb3v"]
 [ext_resource type="Script" uid="uid://bxpjsv4jkvmv4" path="res://Inventory/slot_data.gd" id="7_qlb3v"]
+[ext_resource type="Texture2D" uid="uid://mubxwitrl7rf" path="res://Inventory/Item/Items/Lantern/FtrLantern_Remake_3_0.png" id="9_q7rru"]
+[ext_resource type="Resource" uid="uid://d2mjr64tc2c4j" path="res://Inventory/Item/Items/Lantern/lantern.tres" id="10_11p2u"]
+[ext_resource type="Resource" uid="uid://ljg3w1keaqmf" path="res://Inventory/Item/Items/Tools/Axe/axe_item.tres" id="11_11p2u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4whup"]
 bg_color = Color(0.894118, 0.788235, 0.615686, 1)
@@ -80,6 +83,23 @@ region = Rect2(1206, 2258, 96, 104)
 [sub_resource type="Resource" id="Resource_25cnh"]
 script = ExtResource("7_qlb3v")
 item_data = ExtResource("6_f301a")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlb3v"]
+atlas = ExtResource("9_q7rru")
+
+[sub_resource type="Resource" id="Resource_vrnkk"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("10_11p2u")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7rru"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(411, 290, 106, 84)
+
+[sub_resource type="Resource" id="Resource_nykdf"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("11_11p2u")
 metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25cnh"]
@@ -189,7 +209,6 @@ toggle_mode = true
 text = "Give Items"
 
 [node name="GeneralCheatsContainer" type="VBoxContainer" parent="BG" unique_id=1101161665]
-visible = false
 layout_mode = 0
 offset_left = 428.5
 offset_top = 6.5
@@ -218,7 +237,13 @@ layout_mode = 2
 cheat_name = "Free Craft"
 default_button_name = "Enable Free Craft"
 
-[node name="GiveItemsContainer" type="VBoxContainer" parent="." unique_id=1953823092]
+[node name="CheatOptionButton2" parent="BG/GeneralCheatsContainer" unique_id=2070769274 instance=ExtResource("4_inb0o")]
+layout_mode = 2
+cheat_name = "Clear Inventory"
+default_button_name = "Clear Inventory"
+
+[node name="GiveItemsContainer" type="VBoxContainer" parent="BG" unique_id=1953823092]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -226,14 +251,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -246.0
-offset_top = -459.0
+offset_top = -464.0
 offset_right = 578.0
-offset_bottom = 459.0
+offset_bottom = 464.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 117
 
-[node name="SearchBar" type="LineEdit" parent="GiveItemsContainer" unique_id=61270719]
+[node name="SearchBar" type="LineEdit" parent="BG/GiveItemsContainer" unique_id=61270719]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -247,46 +272,55 @@ placeholder_text = "Search for items"
 alignment = 1
 caret_blink = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GiveItemsContainer" unique_id=254722671]
+[node name="ScrollContainer" type="ScrollContainer" parent="BG/GiveItemsContainer" unique_id=254722671]
 custom_minimum_size = Vector2(0, 600)
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="GiveItemsContainer/ScrollContainer" unique_id=327167959]
+[node name="GridContainer" type="GridContainer" parent="BG/GiveItemsContainer/ScrollContainer" unique_id=327167959]
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 theme_override_constants/h_separation = 173
 theme_override_constants/v_separation = 200
 columns = 5
 
-[node name="CraftingOptionDisplayButton" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1157705809 instance=ExtResource("5_doi5t")]
+[node name="CraftingOptionDisplayButton" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1157705809 instance=ExtResource("5_doi5t")]
 layout_mode = 2
 texture = SubResource("AtlasTexture_f301a")
 item_name = "Bells"
 result_item = SubResource("Resource_25cnh")
+display_name = true
 
-[node name="CraftingOptionDisplayButton2" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=974050053 instance=ExtResource("5_doi5t")]
+[node name="CraftingOptionDisplayButton2" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=974050053 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_qlb3v")
+item_name = "Lantern"
+result_item = SubResource("Resource_vrnkk")
+display_name = true
+
+[node name="CraftingOptionDisplayButton3" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1118213752 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_q7rru")
+item_name = "Axe"
+result_item = SubResource("Resource_nykdf")
+display_name = true
+
+[node name="CraftingOptionDisplayButton4" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1252143485 instance=ExtResource("5_doi5t")]
 layout_mode = 2
 
-[node name="CraftingOptionDisplayButton3" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1118213752 instance=ExtResource("5_doi5t")]
+[node name="CraftingOptionDisplayButton5" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=410981037 instance=ExtResource("5_doi5t")]
 layout_mode = 2
 
-[node name="CraftingOptionDisplayButton4" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1252143485 instance=ExtResource("5_doi5t")]
-layout_mode = 2
-
-[node name="CraftingOptionDisplayButton5" parent="GiveItemsContainer/ScrollContainer/GridContainer" unique_id=410981037 instance=ExtResource("5_doi5t")]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GiveItemsContainer" unique_id=1558863986]
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/GiveItemsContainer" unique_id=1558863986]
 layout_mode = 2
 theme_override_constants/separation = 71
 alignment = 1
 
-[node name="Panel" type="Panel" parent="GiveItemsContainer/HBoxContainer" unique_id=1016091851]
+[node name="Panel" type="Panel" parent="BG/GiveItemsContainer/HBoxContainer" unique_id=1016091851]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_25cnh")
 
-[node name="SelectedItemTexture" type="TextureRect" parent="GiveItemsContainer/HBoxContainer/Panel" unique_id=1054427747]
+[node name="SelectedItemTexture" type="TextureRect" parent="BG/GiveItemsContainer/HBoxContainer/Panel" unique_id=1054427747]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = 8
@@ -302,7 +336,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 3
 
-[node name="GiveItemButton" type="Button" parent="GiveItemsContainer/HBoxContainer" unique_id=1683943815]
+[node name="GiveItemButton" type="Button" parent="BG/GiveItemsContainer/HBoxContainer" unique_id=1683943815]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -317,7 +351,13 @@ text = "Give Item"
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="BG/OptionsBG/OptionsList/GeneralCheats" to="." method="_on_option_pressed" flags=18]
 [connection signal="pressed" from="BG/OptionsBG/OptionsList/GiveItems" to="." method="_on_option_pressed" flags=18]
-[connection signal="focus_exited" from="GiveItemsContainer/SearchBar" to="." method="_on_search_bar_focus_exited"]
-[connection signal="mouse_entered" from="GiveItemsContainer/SearchBar" to="." method="_on_search_bar_mouse_entered"]
-[connection signal="mouse_exited" from="GiveItemsContainer/SearchBar" to="." method="_on_search_bar_mouse_exited"]
-[connection signal="send_data" from="GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="focus_exited" from="BG/GiveItemsContainer/SearchBar" to="." method="_on_search_bar_focus_exited"]
+[connection signal="mouse_entered" from="BG/GiveItemsContainer/SearchBar" to="." method="_on_search_bar_mouse_entered"]
+[connection signal="mouse_exited" from="BG/GiveItemsContainer/SearchBar" to="." method="_on_search_bar_mouse_exited"]
+[connection signal="text_submitted" from="BG/GiveItemsContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton2" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton3" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton4" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton5" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="pressed" from="BG/GiveItemsContainer/HBoxContainer/GiveItemButton" to="." method="_on_give_item_button_pressed"]
