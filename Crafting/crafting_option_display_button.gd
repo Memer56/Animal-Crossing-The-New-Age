@@ -14,11 +14,17 @@ signal send_data(item_texture : AtlasTexture, slot_data : SlotData)
 ##Realates to which catagory this button belongs to e.g Furniture(index 2), be default all buttons will show in ALL,
 ## therefor, index 0 is not used
 @export var category_index : int
+@export var display_name : bool = false
 @onready var panel: Panel = $Panel
+@onready var item_name_label: Label = $Panel/ItemNameLabel
 
 func _ready() -> void:
 	if texture:
 		texture_rect.texture = texture
+	
+	if display_name:
+		item_name_label.show()
+		item_name_label.text = item_name
 
 
 func _on_panel_mouse_entered() -> void:
@@ -32,6 +38,7 @@ func _on_panel_mouse_exited() -> void:
 func _on_panel_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_MASK_LEFT:
+			print("This was clicked")
 			if CheatManager.cheat_menu_displayed:
 				send_data.emit(texture, result_item)
 			else:

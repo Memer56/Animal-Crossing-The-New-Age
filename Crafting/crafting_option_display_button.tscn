@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5afvfdm0pit6"]
 
 [ext_resource type="Script" uid="uid://hjmrjysbfmat" path="res://Crafting/crafting_option_display_button.gd" id="1_dxvxa"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="2_sx057"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptk88"]
 bg_color = Color(0.34619, 0.317654, 0.788282, 1)
@@ -28,6 +29,14 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sx057"]
+bg_color = Color(0.20392157, 0.20392157, 0.20392157, 0.54901963)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_270tt"]
+font = ExtResource("2_sx057")
 
 [node name="CraftingOptionDisplayButton" type="Control" unique_id=1157705809]
 layout_mode = 3
@@ -61,6 +70,22 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
 stretch_mode = 5
+
+[node name="ItemNameLabel" type="Label" parent="Panel" unique_id=1580882996]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_sx057")
+text = "Item name"
+label_settings = SubResource("LabelSettings_270tt")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
 [connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
