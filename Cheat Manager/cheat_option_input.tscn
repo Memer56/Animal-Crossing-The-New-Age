@@ -5,7 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_evjl7"]
 font = ExtResource("1_evjl7")
-font_size = 40
+font_size = 20
 
 [sub_resource type="FontVariation" id="FontVariation_jg6x4"]
 base_font = ExtResource("1_evjl7")
@@ -41,12 +41,14 @@ theme_override_constants/separation = 15
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1092321691]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_constants/separation = 136
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1734987277]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "Cheat Name"
 label_settings = SubResource("LabelSettings_evjl7")
 horizontal_alignment = 1
@@ -55,7 +57,7 @@ vertical_alignment = 1
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=2096337891]
 custom_minimum_size = Vector2(300, 35)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_fonts/font = SubResource("FontVariation_jg6x4")
 theme_override_font_sizes/font_size = 20
