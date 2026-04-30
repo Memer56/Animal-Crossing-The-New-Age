@@ -1,5 +1,10 @@
 # AC : The New Age
 
+## Alpha version 1.1.9 - Cheat Update 2
+- Cheat menu is fully operational
+- Fixed craft button expanding for no reason
+- Fixed dupe bug introduced by previous update
+
 ## Alpha version 1.1.8 - Improvements Update
 - Updated cheat menu to give items but still incomplete
 - Updated inventory logic to hanlde full inventory events
