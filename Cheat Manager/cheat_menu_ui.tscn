@@ -5,12 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://dguikd6g4jhl8" path="res://Cheat Manager/cheat_option_input.tscn" id="3_ip40x"]
 [ext_resource type="PackedScene" uid="uid://bampkycphxq12" path="res://Cheat Manager/cheat_option_button.tscn" id="4_inb0o"]
 [ext_resource type="PackedScene" uid="uid://c5afvfdm0pit6" path="res://Crafting/crafting_option_display_button.tscn" id="5_doi5t"]
-[ext_resource type="Resource" uid="uid://bcq6meneybdqa" path="res://Inventory/Item/Items/Bells/bells_item.tres" id="6_f301a"]
 [ext_resource type="Texture2D" uid="uid://e8rgtosbhs1" path="res://Inventory/Item/Items/Item Icons.png" id="6_qlb3v"]
+[ext_resource type="ArrayMesh" uid="uid://bornjhk5hkywq" path="res://Inventory/Item/Items/Bells/bells_mesh.tres" id="7_0rxn6"]
 [ext_resource type="Script" uid="uid://bxpjsv4jkvmv4" path="res://Inventory/slot_data.gd" id="7_qlb3v"]
+[ext_resource type="Script" uid="uid://c6wdytg25ar30" path="res://Inventory/Item/item_data_currency.gd" id="8_1q8dt"]
 [ext_resource type="Texture2D" uid="uid://mubxwitrl7rf" path="res://Inventory/Item/Items/Lantern/FtrLantern_Remake_3_0.png" id="9_q7rru"]
 [ext_resource type="Resource" uid="uid://d2mjr64tc2c4j" path="res://Inventory/Item/Items/Lantern/lantern.tres" id="10_11p2u"]
 [ext_resource type="Resource" uid="uid://ljg3w1keaqmf" path="res://Inventory/Item/Items/Tools/Axe/axe_item.tres" id="11_11p2u"]
+[ext_resource type="Resource" uid="uid://801bd84rk176" path="res://Inventory/Item/Items/Stone/stone_item.tres" id="12_vrnkk"]
+[ext_resource type="Resource" uid="uid://div4xixst6eek" path="res://Inventory/Item/Items/Tree Branch/tree_branch_item.tres" id="13_nykdf"]
+[ext_resource type="Resource" uid="uid://bd0jdrordyhms" path="res://Inventory/Item/Items/Wood/wood.tres" id="15_1q8dt"]
+[ext_resource type="Resource" uid="uid://bjvf5kbrpxeku" path="res://Inventory/Item/Items/Wood/softwood.tres" id="16_db885"]
+[ext_resource type="Resource" uid="uid://giyy320ucqqg" path="res://Inventory/Item/Items/Wood/hardwood.tres" id="17_jad7u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4whup"]
 bg_color = Color(0.894118, 0.788235, 0.615686, 1)
@@ -80,9 +86,23 @@ expand_margin_bottom = 2.0
 atlas = ExtResource("6_qlb3v")
 region = Rect2(1206, 2258, 96, 104)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dacui"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(1206, 2258, 96, 104)
+
+[sub_resource type="Resource" id="Resource_db885"]
+script = ExtResource("8_1q8dt")
+value = 1000000
+name = "Bells"
+description = "5,000 Bells"
+texture = SubResource("AtlasTexture_dacui")
+mesh = ExtResource("7_0rxn6")
+ID = 12
+metadata/_custom_type_script = "uid://c6wdytg25ar30"
+
 [sub_resource type="Resource" id="Resource_25cnh"]
 script = ExtResource("7_qlb3v")
-item_data = ExtResource("6_f301a")
+item_data = SubResource("Resource_db885")
 metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlb3v"]
@@ -95,11 +115,61 @@ metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q7rru"]
 atlas = ExtResource("6_qlb3v")
-region = Rect2(411, 290, 106, 84)
+region = Rect2(408, 272, 112, 112)
 
 [sub_resource type="Resource" id="Resource_nykdf"]
 script = ExtResource("7_qlb3v")
 item_data = ExtResource("11_11p2u")
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11p2u"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(2392, 1728, 104, 104)
+
+[sub_resource type="Resource" id="Resource_0rxn6"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("12_vrnkk")
+quantity = 64
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nykdf"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(928, 672, 120, 112)
+
+[sub_resource type="Resource" id="Resource_1q8dt"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("13_nykdf")
+quantity = 64
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rxn6"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(400, 936, 128, 104)
+
+[sub_resource type="Resource" id="Resource_jad7u"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("15_1q8dt")
+quantity = 64
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db885"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(528, 936, 128, 112)
+
+[sub_resource type="Resource" id="Resource_4vr2j"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("16_db885")
+quantity = 64
+metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jad7u"]
+atlas = ExtResource("6_qlb3v")
+region = Rect2(264, 936, 128, 112)
+
+[sub_resource type="Resource" id="Resource_omhmp"]
+script = ExtResource("7_qlb3v")
+item_data = ExtResource("17_jad7u")
+quantity = 64
 metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_25cnh"]
@@ -280,7 +350,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 theme_override_constants/h_separation = 173
-theme_override_constants/v_separation = 200
+theme_override_constants/v_separation = 232
 columns = 5
 
 [node name="CraftingOptionDisplayButton" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1157705809 instance=ExtResource("5_doi5t")]
@@ -306,9 +376,38 @@ display_name = true
 
 [node name="CraftingOptionDisplayButton4" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1252143485 instance=ExtResource("5_doi5t")]
 layout_mode = 2
+texture = SubResource("AtlasTexture_11p2u")
+item_name = "Stone"
+result_item = SubResource("Resource_0rxn6")
+display_name = true
 
 [node name="CraftingOptionDisplayButton5" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=410981037 instance=ExtResource("5_doi5t")]
 layout_mode = 2
+texture = SubResource("AtlasTexture_nykdf")
+item_name = "Tree Branch"
+result_item = SubResource("Resource_1q8dt")
+display_name = true
+
+[node name="CraftingOptionDisplayButton6" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=1410828266 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_0rxn6")
+item_name = "Wood"
+result_item = SubResource("Resource_jad7u")
+display_name = true
+
+[node name="CraftingOptionDisplayButton7" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=684957500 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_db885")
+item_name = "Soft Wood"
+result_item = SubResource("Resource_4vr2j")
+display_name = true
+
+[node name="CraftingOptionDisplayButton8" parent="BG/GiveItemsContainer/ScrollContainer/GridContainer" unique_id=471474580 instance=ExtResource("5_doi5t")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_jad7u")
+item_name = "Hard Wood"
+result_item = SubResource("Resource_omhmp")
+display_name = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BG/GiveItemsContainer" unique_id=1558863986]
 layout_mode = 2
@@ -349,6 +448,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_72u12")
 text = "Give Item"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="BG" to="." method="_on_bg_gui_input"]
 [connection signal="pressed" from="BG/OptionsBG/OptionsList/GeneralCheats" to="." method="_on_option_pressed" flags=18]
 [connection signal="pressed" from="BG/OptionsBG/OptionsList/GiveItems" to="." method="_on_option_pressed" flags=18]
 [connection signal="focus_exited" from="BG/GiveItemsContainer/SearchBar" to="." method="_on_search_bar_focus_exited"]
@@ -360,4 +460,7 @@ text = "Give Item"
 [connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton3" to="." method="_on_crafting_option_display_button_send_data"]
 [connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton4" to="." method="_on_crafting_option_display_button_send_data"]
 [connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton5" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton6" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton7" to="." method="_on_crafting_option_display_button_send_data"]
+[connection signal="send_data" from="BG/GiveItemsContainer/ScrollContainer/GridContainer/CraftingOptionDisplayButton8" to="." method="_on_crafting_option_display_button_send_data"]
 [connection signal="pressed" from="BG/GiveItemsContainer/HBoxContainer/GiveItemButton" to="." method="_on_give_item_button_pressed"]
