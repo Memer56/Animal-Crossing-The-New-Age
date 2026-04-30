@@ -25,7 +25,7 @@ func can_fully_merge_by_id(other_slot_data : SlotData) -> bool:
 	
 func fully_merge_with(other_slot_data: SlotData, inventory_data : InventoryData) -> void:
 	quantity += other_slot_data.quantity
-	if quantity >= MAX_STACK_SIZE:
+	if quantity > MAX_STACK_SIZE:
 		var qty_overflow = quantity - MAX_STACK_SIZE
 		if qty_overflow > 0:
 			other_slot_data.quantity = qty_overflow
