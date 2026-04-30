@@ -66,13 +66,13 @@ metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 [sub_resource type="AtlasTexture" id="AtlasTexture_riabd"]
 atlas = ExtResource("13_wn6a7")
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8v2xq"]
-atlas = ExtResource("10_wn6a7")
-region = Rect2(411, 948, 102, 84)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2m8xj"]
 atlas = ExtResource("10_wn6a7")
 region = Rect2(543, 948, 102, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v2xq"]
+atlas = ExtResource("10_wn6a7")
+region = Rect2(411, 948, 102, 84)
 
 [sub_resource type="Resource" id="Resource_riabd"]
 script = ExtResource("10_jn6bw")
@@ -94,15 +94,15 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 
-[sub_resource type="FontVariation" id="FontVariation_sgdi5"]
-base_font = ExtResource("9_laq0p")
-
 [sub_resource type="FontVariation" id="FontVariation_syvga"]
 base_font = ExtResource("9_laq0p")
 
 [sub_resource type="LabelSettings" id="LabelSettings_syvga"]
 font = ExtResource("9_laq0p")
 font_size = 30
+
+[sub_resource type="FontVariation" id="FontVariation_wn6a7"]
+base_font = ExtResource("9_laq0p")
 
 [node name="CraftingUI" type="Control" unique_id=504809646]
 process_mode = 3
@@ -274,42 +274,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 54
 
-[node name="Craft" type="Button" parent="BG/Panel/CraftingRequirements/Panel" unique_id=2135962723]
+[node name="CraftButtonsContainer" type="HBoxContainer" parent="BG/Panel/CraftingRequirements/Panel" unique_id=1318065419]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 78.0
-offset_top = -68.0
-offset_right = 254.0
-offset_bottom = -12.0
+offset_left = 47.0
+offset_top = -69.0
+offset_right = -19.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = SubResource("FontVariation_sgdi5")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("10_kictx")
-theme_override_styles/pressed = ExtResource("11_y13by")
-theme_override_styles/hover = ExtResource("12_vuido")
-theme_override_styles/disabled = ExtResource("13_sgdi5")
-theme_override_styles/focus = ExtResource("13_syvga")
-disabled = true
-text = "Craft"
+theme_override_constants/separation = 29
+alignment = 1
 
-[node name="Plus" type="Button" parent="BG/Panel/CraftingRequirements/Panel" unique_id=916998167]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -258.0
-offset_top = -68.0
-offset_right = -162.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Plus" type="Button" parent="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer" unique_id=916998167]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_syvga")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("10_kictx")
@@ -318,30 +300,16 @@ theme_override_styles/hover = ExtResource("12_vuido")
 theme_override_styles/focus = ExtResource("13_syvga")
 text = "+"
 
-[node name="QuantityLabel" type="Label" parent="BG/Panel/CraftingRequirements/Panel" unique_id=283642081]
-layout_mode = 0
-offset_left = 143.0
-offset_top = 585.0
-offset_right = 223.0
-offset_bottom = 625.0
+[node name="QuantityLabel" type="Label" parent="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer" unique_id=283642081]
+layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_syvga")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Minus" type="Button" parent="BG/Panel/CraftingRequirements/Panel" unique_id=1343580025]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -66.0
-offset_top = -68.0
-offset_right = 30.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Minus" type="Button" parent="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer" unique_id=1343580025]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_syvga")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = ExtResource("10_kictx")
@@ -349,6 +317,21 @@ theme_override_styles/pressed = ExtResource("11_y13by")
 theme_override_styles/hover = ExtResource("12_vuido")
 theme_override_styles/focus = ExtResource("13_syvga")
 text = "-"
+
+[node name="Craft" type="Button" parent="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer" unique_id=231435962]
+custom_minimum_size = Vector2(176, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_wn6a7")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("10_kictx")
+theme_override_styles/pressed = ExtResource("11_y13by")
+theme_override_styles/hover = ExtResource("12_vuido")
+theme_override_styles/disabled = ExtResource("13_sgdi5")
+theme_override_styles/focus = ExtResource("13_syvga")
+disabled = true
+text = "Craft"
 
 [connection signal="gui_input" from="BG/Panel/TabsBG/TabButtons/AllTabButton" to="." method="_on_tab_button_gui_input" flags=18]
 [connection signal="mouse_entered" from="BG/Panel/TabsBG/TabButtons/AllTabButton" to="." method="_on_tab_button_mouse_entered" flags=18]
@@ -364,6 +347,6 @@ text = "-"
 [connection signal="mouse_exited" from="BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton" to="." method="_on_tab_button_mouse_exited" flags=18]
 [connection signal="send_crafting_data" from="BG/Panel/CraftableButtonsScroll/CraftableButtons/CraftingOptionDisplayButton" to="." method="_on_crafting_option_display_button_send_crafting_data"]
 [connection signal="send_crafting_data" from="BG/Panel/CraftableButtonsScroll/CraftableButtons/CraftingOptionDisplayButton2" to="." method="_on_crafting_option_display_button_send_crafting_data"]
-[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Craft" to="." method="_on_craft_pressed"]
-[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Plus" to="." method="_on_plus_pressed"]
-[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/Minus" to="." method="_on_minus_pressed"]
+[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer/Plus" to="." method="_on_plus_pressed"]
+[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer/Minus" to="." method="_on_minus_pressed"]
+[connection signal="pressed" from="BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer/Craft" to="." method="_on_craft_pressed"]

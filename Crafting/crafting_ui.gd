@@ -6,12 +6,12 @@ const CRAFTING_OPTION_DISPLAY_BUTTON = preload("uid://c5afvfdm0pit6")
 
 @onready var required_items_list: VBoxContainer = $BG/Panel/CraftingRequirements/Panel/RequiredItemsList
 @onready var item_name_label: Label = $BG/Panel/CraftingRequirements/ItemName
-@onready var all_tab_button: TextureRect = $BG/Panel/TabButtons/AllTabButton
-@onready var tool_tab_button: TextureRect = $BG/Panel/TabButtons/ToolTabButton
-@onready var furniture_tab_button: TextureRect = $BG/Panel/TabButtons/FurnitureTabButton
-@onready var wallpaper_and_flooring_tab_button: TextureRect = $BG/Panel/TabButtons/WallpaperAndFlooringTabButton
-@onready var craft: Button = $BG/Panel/CraftingRequirements/Panel/Craft
-@onready var quantity_label: Label = $BG/Panel/CraftingRequirements/Panel/QuantityLabel
+@onready var all_tab_button: TextureRect = $BG/Panel/TabsBG/TabButtons/AllTabButton
+@onready var tool_tab_button: TextureRect = $BG/Panel/TabsBG/TabButtons/ToolTabButton
+@onready var furniture_tab_button: TextureRect = $BG/Panel/TabsBG/TabButtons/FurnitureTabButton
+@onready var wallpaper_and_flooring_tab_button: TextureRect = $BG/Panel/TabsBG/TabButtons/WallpaperAndFlooringTabButton
+@onready var craft: Button = $BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer/Craft
+@onready var quantity_label: Label = $BG/Panel/CraftingRequirements/Panel/CraftButtonsContainer/QuantityLabel
 @onready var craftable_buttons: GridContainer = $BG/Panel/CraftableButtonsScroll/CraftableButtons
 
 
@@ -56,6 +56,7 @@ func toggle_self_ui():
 		visible = false
 	else:
 		visible = true
+		craft.disabled = true
 
 func _on_crafting_option_display_button_send_crafting_data(crafting_requirements: Dictionary, button_texture: Variant, output_qty: Variant, result_item: Variant, button: Variant) -> void:
 		reset_everything()
@@ -94,8 +95,6 @@ func _on_crafting_option_display_button_send_crafting_data(crafting_requirements
 
 func can_craft(crafting_requirements, inventory, hotbar_inventory):
 	var can_craft_item : bool
-	
-	var quantity
 
 
 	for item in crafting_requirements:
@@ -104,13 +103,17 @@ func can_craft(crafting_requirements, inventory, hotbar_inventory):
 		
 		required_quantity *= quantity_multiplier
 		
-		if total_quantity >= required_quantity:
-			can_craft_item = true
-			#print("Item: %s, Required: %d, Found: %d" % [item, required_quantity, total_quantity])
+		if !CheatManager.free_craft_enabled:
+			if total_quantity >= required_quantity:
+				can_craft_item = true
+				#print("Item: %s, Required: %d, Found: %d" % [item, required_quantity, total_quantity])
+			else:
+				#print("Item: %s, Required: %d, Found: %d" % [item, required_quantity, total_quantity])
+				can_craft_item = false
+			spawn_and_load_requirement_info_button(item, total_quantity, required_quantity, crafting_requirements[item][1], can_craft_item)
 		else:
-			#print("Item: %s, Required: %d, Found: %d" % [item, required_quantity, total_quantity])
-			can_craft_item = false
-		spawn_and_load_requirement_info_button(item, total_quantity, required_quantity, crafting_requirements[item][1], can_craft_item)
+			can_craft_item = true
+			spawn_and_load_requirement_info_button(item, 0, 0, crafting_requirements[item][1], can_craft_item)
 
 	if can_craft_item:
 		#print("You have all the required items for crafting.")
@@ -176,7 +179,6 @@ func reset_everything():
 	crafting_requirement_item_names.clear()
 	crafting_requirement_item_quantities.clear()
 	crafting_requirement_item_textures.clear()
-	craft.disabled = true
 	#output_count.hide()
 	if can_begin_process:
 		can_begin_process = false
@@ -191,10 +193,14 @@ func _on_craft_pressed() -> void:
 	# find and remove items from hotbar
 	var num_of_items_removed = 0
 	var total_qty : int
-	find_and_remove_items_from_hotbar(total_qty, num_of_items_removed)
-	button_that_was_fired.resend_crafting_data()
-	give_player_crafted_item()
-	output_item = null
+	if can_player_accept_item():
+		if !CheatManager.free_craft_enabled:
+			find_and_remove_items_from_hotbar(total_qty, num_of_items_removed)
+		button_that_was_fired.resend_crafting_data()
+		give_player_crafted_item()
+		output_item = null
+	else:
+		EventBus.display_speech_bubble.emit(["Sorry, it looks like you won't have enough space in your inventory"], "Info", [], null)
 
 func find_and_remove_items_from_hotbar(total_qty, num_of_items_removed):
 	for item in listed_crafting_requirements:
@@ -253,33 +259,21 @@ func find_and_remove_items_from_inventory(item, total_qty, num_of_items_removed)
 				total_qty = 0
 			n += 1
 
-func give_player_crafted_item():
-	# need to check if slots are available, then if a stack exists and if 
-	# it can be combined, if theres no slots but a stack exists and can't be combined
-	# place in inventory, if that's not possible then reject ability to collect items
+func can_player_accept_item() -> bool:
+	if player_hotbar.are_there_slots_available():
+		return true
+	if player_inventory.are_there_slots_available():
+		return true
 	
-	# check if slots are available
-	# check if it can be stacked
-	# must prioritise hotbar
-	#craft.disabled = false
-	var is_there_an_empty_slot_hotbar = player_hotbar.are_there_slots_available()
-	var is_there_an_empty_slot_inventory = player_inventory.are_there_slots_available()
+	return false
 
-	var is_in_hot_bar : SlotData = player_hotbar.is_item_in_inventory_return_slot_data(output_item.item_data.name)
-	#var is_in_inventory : SlotData = player_inventory.is_item_in_inventory_return_slot_data(output_item.item_data.name)
-	#player_hotbar.add_to_inventory_with_quantity(output_item, output_item.quantity)
-	#player_inventory.add_to_inventory_with_quantity(output_item, output_item.quantity)
-	if is_in_hot_bar and is_in_hot_bar.quantity < 64 and is_there_an_empty_slot_hotbar:
-		player_hotbar.add_to_inventory_with_quantity(output_item, output_item.quantity)
-	if is_in_hot_bar and !is_there_an_empty_slot_hotbar:
-		if return_if_total_less_than_max_stack_size(is_in_hot_bar):
-			player_hotbar.add_to_inventory_with_quantity(output_item, output_item.quantity)
-		else:
-			player_inventory.add_to_inventory_with_quantity(output_item, output_item.quantity)
-	if !is_in_hot_bar and is_there_an_empty_slot_hotbar:
-		player_hotbar.add_to_inventory_with_quantity(output_item, output_item.quantity)
-	if !is_in_hot_bar and !is_there_an_empty_slot_hotbar:
-		player_inventory.add_to_inventory_with_quantity(output_item, output_item.quantity)
+func give_player_crafted_item():
+	if player_hotbar.add_to_inventory_with_quantity(output_item, output_item.quantity):
+		return
+	elif player_inventory.add_to_inventory_with_quantity(output_item, output_item.quantity):
+		return
+	else:
+		EventBus.display_speech_bubble.emit(["Inventory is [color=red]full[/color]."], "Info", [], null)
 
 func return_if_total_less_than_max_stack_size(slot_data : SlotData) -> bool:
 	var total = slot_data.quantity + output_item.quantity
