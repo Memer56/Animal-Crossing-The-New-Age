@@ -1,5 +1,10 @@
 # AC : The New Age
 
+## Alpha version 1.2.0 - Time Update
+- Buildings now have the "interior lights are on" effect at the windows
+- Buildings now close at certain times
+- Service buildings basically adhere to the time now
+
 ## Alpha version 1.1.9 - Cheat Update 2
 - Cheat menu is fully operational
 - Fixed craft button expanding for no reason
