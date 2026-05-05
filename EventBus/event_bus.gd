@@ -19,6 +19,7 @@ signal load_player_island_nav_mesh_bounds(island : String, node : Node)
 signal send_nav_region(nav_region : NavigationRegion3D)
 signal toggle_atm_ui
 signal toggle_crafting_ui
+signal toggle_service_buildings_lights(true_or_false : bool)
 
 var player
 var player_balance : int = 0
@@ -52,6 +53,9 @@ var tree_nav_mesh : NavigationRegion3D
 var current_trees : Array[Array]
 var house_level : int = 0
 var world_time : float = 0.3
+##For checking if shops and such have been set to close
+var service_buildings_closed : bool = false
+var service_buildings_lights_on : bool = false
 
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
@@ -65,7 +69,7 @@ func return_clothing_scene(clothing_name : String) -> PackedScene:
 	return clothing
 
 func deduct_funds_from_account(amount : int):
-	pass
+	savings_balance -= amount
 
 func add_funds_to_account(amount : int):
-	pass
+	savings_balance += amount
