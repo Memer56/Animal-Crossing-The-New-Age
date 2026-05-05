@@ -338,6 +338,8 @@ shadow_mesh = SubResource("ArrayMesh_8phoy")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5n574"]
 albedo_color = Color(0, 0, 0, 1)
+emission = Color(1, 0.9647059, 0.36862746, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ua4jx"]
 resource_name = "mWindow"
@@ -383,6 +385,8 @@ shadow_mesh = SubResource("ArrayMesh_2e52k")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42tm1"]
 albedo_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+emission = Color(1, 0.9647059, 0.36862746, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7x6di"]
 resource_name = "mDoor.001"
@@ -452,6 +456,11 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1b7sy"]
+albedo_color = Color(0.0253638, 0.0253638, 0.025363795, 1)
+emission = Color(1, 0.9647059, 0.36862746, 1)
+emission_energy_multiplier = 2.0
+
 [sub_resource type="Animation" id="Animation_ykere"]
 resource_name = "Toggle Door"
 length = 3.0
@@ -484,11 +493,13 @@ size = Vector3(3.8066401, 6.590332, 81.159134)
 height = 7.1428223
 radius = 4.3027344
 
-[node name="NooksCranny" type="StaticBody3D" unique_id=1435032849 node_paths=PackedStringArray("soft_mesh", "animation_player") groups=["Building"]]
+[node name="NooksCranny" type="StaticBody3D" unique_id=1435032849 node_paths=PackedStringArray("soft_mesh", "door_window", "animation_player", "building_windows") groups=["Building"]]
 collision_layer = 2
 script = ExtResource("1_5n574")
 soft_mesh = NodePath("NaC Model/SoftMesh__mSoftMesh")
+door_window = NodePath("Nook\'s Cranny Door Model/Armature/Skeleton3D/WindowGlass_low2__mDoorWindow")
 animation_player = NodePath("Nook\'s Cranny Door Model/AnimationPlayer")
+building_windows = [NodePath("NaC Model/Window6__mWindow")]
 
 [node name="NaC Model" type="Node3D" parent="." unique_id=1835926876]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
@@ -581,6 +592,7 @@ shape = SubResource("BoxShape3D_42tm1")
 [node name="WindowGlass_low2__mDoorWindow" type="MeshInstance3D" parent="Nook\'s Cranny Door Model/Armature/Skeleton3D" unique_id=1179068067]
 mesh = SubResource("ArrayMesh_k8dkm")
 skin = SubResource("Skin_8dmll")
+surface_material_override/0 = SubResource("StandardMaterial3D_1b7sy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Nook\'s Cranny Door Model" unique_id=1262205432]
 libraries/ = SubResource("AnimationLibrary_xn4x6")
