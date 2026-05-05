@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://buy4yln2yidq3"]
+[gd_scene format=4 uid="uid://buy4yln2yidq3"]
 
 [ext_resource type="Script" uid="uid://sl3f2o7ltmyd" path="res://Buildings/building.gd" id="1_3xqfy"]
 [ext_resource type="Texture2D" uid="uid://cyodggwayfwi2" path="res://Buildings/Town Hall/Town Hall_mWall_Alb.png" id="1_ciwnw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b8alu855v3uhn" path="res://Buildings/Town Hall/Town Hall_mRoof_Alb.png" id="3_4rj60"]
 [ext_resource type="Texture2D" uid="uid://86ltdj0f6efe" path="res://Buildings/Town Hall/Town Hall_mWindowL_Alb.png" id="4_kdvlo"]
 [ext_resource type="Texture2D" uid="uid://tgv3xskk1eye" path="res://Buildings/Town Hall/Town Hall_mWindowL_Emi.png" id="5_2ke24"]
+[ext_resource type="Texture2D" uid="uid://by64tohpmwbgt" path="res://dr house.jpg" id="5_kdvlo"]
 [ext_resource type="Texture2D" uid="uid://bh4nbfvcstdov" path="res://Buildings/Town Hall/Town Hall_mWindowR_Alb.png" id="6_7ghjm"]
 [ext_resource type="Texture2D" uid="uid://bvepa8mahw77t" path="res://Buildings/Town Hall/Town Hall_mWindowR_Emi.png" id="7_solkd"]
 [ext_resource type="Texture2D" uid="uid://dt6jgs8klipaa" path="res://Buildings/Town Hall/Town Hall_mDoor_Alb.png" id="8_p02b6"]
@@ -131,6 +132,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ke24"]
+albedo_texture = ExtResource("5_kdvlo")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45dop"]
 resource_name = "mWindowL"
 cull_mode = 2
@@ -160,6 +164,8 @@ blend_shape_mode = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rj60"]
 albedo_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+emission = Color(0.9999996, 0.96439224, 0.36916867, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2j07"]
 resource_name = "mWindowR"
@@ -190,6 +196,8 @@ blend_shape_mode = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xqfy"]
 albedo_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+emission = Color(1, 0.9647059, 0.36862746, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gak4"]
 resource_name = "mSideWindow"
@@ -268,6 +276,8 @@ blend_shape_mode = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ciwnw"]
 albedo_color = Color(0, 0, 0, 1)
+emission = Color(1, 0.9647059, 0.36862746, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0b80"]
 resource_name = "mDoor"
@@ -338,29 +348,30 @@ _data = {
 size = Vector3(65.420166, 31.905151, 24.811966)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rj60"]
-size = Vector3(19.376526, 2.0160217, 6.9432373)
+size = Vector3(23.439102, 2.0160217, 6.9432373)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kdvlo"]
+size = Vector3(5.616699, 3.8145752, 10.833099)
 
 [sub_resource type="PrismMesh" id="PrismMesh_3xqfy"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3xqfy"]
 points = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kdvlo"]
-size = Vector3(76.74014, 44.791016, 48.210556)
-
-[node name="TownHall" type="StaticBody3D" node_paths=PackedStringArray("soft_mesh", "animation_player")]
+[node name="TownHall" type="StaticBody3D" unique_id=1576930102 node_paths=PackedStringArray("soft_mesh", "animation_player", "building_windows") groups=["Building"]]
 collision_layer = 2
 script = ExtResource("1_3xqfy")
 soft_mesh = NodePath("Town Hall/Armature/Skeleton3D/SoftMesh__mSoftMesh")
 animation_player = NodePath("Town Hall/AnimationPlayer")
+building_windows = [NodePath("Town Hall/Armature/Skeleton3D/Glass1__mWindowL"), NodePath("Town Hall/Armature/Skeleton3D/Glass2__mWindowR"), NodePath("Town Hall/Armature/Skeleton3D/Glass3__mSideWindow")]
 
-[node name="Town Hall" type="Node3D" parent="."]
+[node name="Town Hall" type="Node3D" parent="." unique_id=21374900]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 
-[node name="Armature" type="Node3D" parent="Town Hall"]
+[node name="Armature" type="Node3D" parent="Town Hall" unique_id=530979168]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Town Hall/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Town Hall/Armature" unique_id=1182215704]
 bones/0/name = "Root"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
@@ -446,47 +457,48 @@ bones/11/position = Vector3(3.8827972, -0.3507641, 9.43166e-08)
 bones/11/rotation = Quaternion(0, -5.3876608e-14, 0, 1)
 bones/11/scale = Vector3(1, 1, 1)
 
-[node name="EntranceParts01_low__mWall" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="EntranceParts01_low__mWall" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=1198146501]
 mesh = SubResource("ArrayMesh_r2gci")
 skin = SubResource("Skin_bsstg")
 
-[node name="FlagBase01_low__mRoof" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="FlagBase01_low__mRoof" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=1835702786]
 mesh = SubResource("ArrayMesh_tsqg3")
 skin = SubResource("Skin_bsstg")
 
-[node name="FlagMain__mMyDesign" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="FlagMain__mMyDesign" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=1721176242]
 mesh = SubResource("ArrayMesh_v7yh7")
 skin = SubResource("Skin_bsstg")
+surface_material_override/0 = SubResource("StandardMaterial3D_2ke24")
 
-[node name="Glass1__mWindowL" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="Glass1__mWindowL" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=1876517048]
 mesh = SubResource("ArrayMesh_aip03")
 skin = SubResource("Skin_bsstg")
 surface_material_override/0 = SubResource("StandardMaterial3D_4rj60")
 
-[node name="Glass2__mWindowR" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="Glass2__mWindowR" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=1640142942]
 mesh = SubResource("ArrayMesh_bgd52")
 skin = SubResource("Skin_bsstg")
 surface_material_override/0 = SubResource("StandardMaterial3D_3xqfy")
 
-[node name="Glass3__mSideWindow" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="Glass3__mSideWindow" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=1794266807]
 mesh = SubResource("ArrayMesh_tvkwp")
 skin = SubResource("Skin_bsstg")
 surface_material_override/0 = SubResource("StandardMaterial3D_3xqfy")
 
-[node name="Snow19__mWinterSnow" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="Snow19__mWinterSnow" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=404091597]
 visible = false
 mesh = SubResource("ArrayMesh_qr4rl")
 skin = SubResource("Skin_bsstg")
 
-[node name="SoftMesh__mSoftMesh" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D"]
+[node name="SoftMesh__mSoftMesh" type="MeshInstance3D" parent="Town Hall/Armature/Skeleton3D" unique_id=683801449]
 mesh = SubResource("ArrayMesh_s0bbs")
 skin = SubResource("Skin_bsstg")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciwnw")
 
-[node name="Armature_001" type="Node3D" parent="Town Hall"]
+[node name="Armature_001" type="Node3D" parent="Town Hall" unique_id=1117777251]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Town Hall/Armature_001"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Town Hall/Armature_001" unique_id=819190843]
 bones/0/name = "Root"
 bones/0/parent = -1
 bones/0/rest = Transform3D(0.024601577, 5.9568116e-08, 0.99969727, -0.99969727, 6.108859e-08, 0.024601577, -5.960464e-08, -0.9999998, 6.1052965e-08, 0, 0, 0)
@@ -509,57 +521,52 @@ bones/2/position = Vector3(10.964229, 1.9985019, 8.301088)
 bones/2/rotation = Quaternion(0, -0.69835466, 0, 0.7157519)
 bones/2/scale = Vector3(1, 1, 1)
 
-[node name="DoorL__mDoor" type="MeshInstance3D" parent="Town Hall/Armature_001/Skeleton3D"]
+[node name="DoorL__mDoor" type="MeshInstance3D" parent="Town Hall/Armature_001/Skeleton3D" unique_id=2133310163]
 mesh = SubResource("ArrayMesh_iimlx")
 skin = SubResource("Skin_a2ag1")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor" node_paths=PackedStringArray("player_spawn_point") groups=["Door"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor" unique_id=799180557 node_paths=PackedStringArray("player_spawn_point") groups=["Door"]]
 collision_layer = 16
 script = ExtResource("10_4rj60")
 room = "Town Hall"
 player_spawn_point = NodePath("../../../../../PlayerSpawnPoint")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor/StaticBody3D" unique_id=918971107]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_4rj60")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Town Hall"]
-libraries = {
-&"": SubResource("AnimationLibrary_cj4pl")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Town Hall" unique_id=1686637902]
+libraries/ = SubResource("AnimationLibrary_cj4pl")
 
-[node name="WallsCollision" type="CollisionShape3D" parent="."]
+[node name="WallsCollision" type="CollisionShape3D" parent="." unique_id=140312927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012413025, 15.452576, -23.206367)
 shape = SubResource("BoxShape3D_3xqfy")
 
-[node name="Steps" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00680542, 0.99684143, -7.6157837)
+[node name="Steps" type="CollisionShape3D" parent="." unique_id=302007933]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014015198, 0.99684143, -7.6157837)
 shape = SubResource("BoxShape3D_4rj60")
 
-[node name="StepsRamp" type="MeshInstance3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1958094723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.445446, 1.9230347, -7.8403854)
+shape = SubResource("BoxShape3D_kdvlo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1944154931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.477135, 1.9230347, -7.8403854)
+shape = SubResource("BoxShape3D_kdvlo")
+
+[node name="StepsRamp" type="MeshInstance3D" parent="." unique_id=246911430]
 transform = Transform3D(2.1932292e-08, -2.1249694e-07, -19.245, -0.86501133, -2.8198483, 0, -0.5017524, 4.8613634, -8.412257e-07, 1.1095135e-06, 0.12575498, -1.7804692)
 visible = false
 mesh = SubResource("PrismMesh_3xqfy")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="StepsRamp"]
+[node name="StaticBody3D" type="StaticBody3D" parent="StepsRamp" unique_id=1285257499]
 collision_layer = 2
 
-[node name="StepsRamp" type="CollisionShape3D" parent="StepsRamp/StaticBody3D"]
+[node name="StepsRamp" type="CollisionShape3D" parent="StepsRamp/StaticBody3D" unique_id=1011374291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, -1.110223e-16, 8.881784e-16, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_3xqfy")
 
-[node name="PlayerSpawnPoint" type="Marker3D" parent="."]
+[node name="PlayerSpawnPoint" type="Marker3D" parent="." unique_id=1965956527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9918809, -20.290325)
 
-[node name="AllowPlayerNearArea" type="Area3D" parent="."]
-visible = false
-collision_layer = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AllowPlayerNearArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07826233, 21.895508, -19.12569)
-shape = SubResource("BoxShape3D_kdvlo")
-debug_color = Color(0.8978648, 0.00018116414, 0.76905715, 0.7921569)
-
 [connection signal="play" from="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor/StaticBody3D" to="." method="play_anim"]
-[connection signal="body_entered" from="AllowPlayerNearArea" to="." method="_on_allow_player_near_area_body_entered"]
-[connection signal="body_exited" from="AllowPlayerNearArea" to="." method="_on_allow_player_near_area_body_exited"]
