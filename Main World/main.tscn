@@ -284,7 +284,6 @@ visible = false
 [node name="Sky" type="Node3D" parent="." unique_id=422042603]
 process_mode = 1
 script = ExtResource("12_8tokv")
-start_time = 0.3
 sun_colour = SubResource("Gradient_8tokv")
 sun_intensity = SubResource("Curve_8tokv")
 moon_colour = SubResource("Gradient_mkcaw")
@@ -298,10 +297,11 @@ ambient_light_intensity = SubResource("Curve_5ynpn")
 star_intensity = SubResource("Curve_4aesc")
 
 [node name="Sun" type="DirectionalLight3D" parent="Sky" unique_id=1506419831]
-transform = Transform3D(-0.45243466, 0.5166016, 0.72692895, -7.1260736e-08, -0.8151278, 0.5792812, 0.89179754, 0.26208684, 0.36879212, -5.4254284, 223.46521, 64.717896)
+transform = Transform3D(1, 0, 0, 0, 0.6908824, 0.72296715, 0, -0.72296715, 0.6908824, -5.4254284, 223.46521, 64.717896)
 light_color = Color(0.94235694, 0.81477106, 0.628192, 1)
 shadow_enabled = true
 directional_shadow_blend_splits = true
+directional_shadow_max_distance = 300.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Sky" unique_id=1555121274]
 environment = ExtResource("3_nf8f0")
