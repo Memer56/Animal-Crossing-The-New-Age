@@ -1,17 +1,25 @@
 extends StaticBody3D
 
 @export var soft_mesh : MeshInstance3D
+@export var door_window : MeshInstance3D
 @export var animation_player : AnimationPlayer
+@export var self_slot_data : SlotData
+@export var building_windows : Array[MeshInstance3D]
+
+func _ready() -> void:
+	EventBus.toggle_service_buildings_lights.connect(toggle_lights)
+
+func toggle_lights(variant : bool):
+	for window in building_windows:
+		var material : StandardMaterial3D = window.get_surface_override_material(0)
+		material.emission_enabled = variant
+	
+	var soft_mesh_material : StandardMaterial3D = soft_mesh.get_surface_override_material(0)
+	soft_mesh_material.emission_enabled = variant
+	
+	if door_window:
+		var door_window_material : StandardMaterial3D = door_window.get_surface_override_material(0)
+		door_window_material.emission_enabled = variant
 
 func play_anim():
 	animation_player.play("Toggle Door")
-
-
-func _on_allow_player_near_area_body_entered(body: Node3D) -> void:
-	if body.get_collision_layer() == 1:
-		EventBus.player_can_leave_nav_mesh = true
-
-
-func _on_allow_player_near_area_body_exited(body: Node3D) -> void:
-	if body.get_collision_layer() == 1:
-		EventBus.player_can_leave_nav_mesh = false
