@@ -6,9 +6,11 @@ const SIMPLE_BED = preload("uid://c0ws7r3aiyogq")
 const CURSED_ITEM = preload("uid://b2h3ug1uscfdj")
 const GAZEBO = preload("uid://gm6h1bjrubvd")
 const LANTERN = preload("uid://cr88p8v5t1hdy")
+const WOODEN_CHEST = preload("uid://ceafewpkqnv1m")
 
 # Buildings that can spawn
 const PLAYER_TENT = preload("uid://du1vi2sn7tjhm")
+const PLAYER_HOUSE = preload("uid://bkaqsg7aftxh2")
 
 signal toggle_menu_ui
 signal send_data_to_ui(slot_data : SlotData)
@@ -31,13 +33,15 @@ var current_selectable : Object
 var allow_object_dragging : bool = false
 var exterior_objects : Dictionary[String, Transform3D]
 var interior_objects : Dictionary[String, Transform3D]
-var list_of_objects : Array[String] = [
-	"Simple Bed",
-	"Cursed Item",
-	"Gazebo",
-	"Tent"
-]
+#var list_of_objects : Array[String] = [
+	#"Simple Bed",
+	#"Cursed Item",
+	#"Gazebo",
+	#"Tent",
+	#"Wooden Chest"
+#]
 var gizmo : Gizmo3D
+var home_can_upgrade : bool = false
 
 
 func _ready() -> void:
@@ -80,14 +84,14 @@ func spawn_object():
 				interior_objects[current_object_name_to_spawn] = object.global_transform
 
 	else:
-		EventBus.display_speech_bubble.emit(["Sorry this can't be placed [color=red]here[/color]"], "Sorry!", [false, null])
+		EventBus.display_speech_bubble.emit(["Sorry this can't be placed [color=red]here[/color]"], "Sorry!", [], null)
 
 func get_object_to_spawn() -> Object:
 	var object
 	var current_object = current_object_name_to_spawn
-	for item_name in list_of_objects:
-		if current_object.contains(item_name):
-			current_object = item_name
+	#for item_name in list_of_objects:
+		#if current_object.contains(item_name):
+			#current_object = item_name
 	
 	match current_object:
 		###### Objects ######
@@ -100,10 +104,14 @@ func get_object_to_spawn() -> Object:
 			object = GAZEBO.instantiate()
 		"Lantern":
 			object = LANTERN.instantiate()
+		"Wooden Chest":
+			object = WOODEN_CHEST.instantiate()
 		
 		###### Buildings ######
 		"Tent":
 			object = PLAYER_TENT.instantiate()
+		"Player House":
+			object = PLAYER_HOUSE.instantiate()
 	return object
 
 func verify_valid_placement() -> bool:
@@ -200,3 +208,13 @@ func deselect_object():
 		gizmo.deselect(current_selectable)
 		current_selectable = null
 		send_data_to_ui.emit(null)
+
+func upgrade_home():
+	home_can_upgrade = false
+	var home = get_tree().get_nodes_in_group("Home")
+	if home:
+		if home[0].name == "PlayerTent":
+			var new_house = PLAYER_HOUSE.instantiate()
+			get_tree().root.get_node("Main/MainIslandNavMesh").add_child(new_house)
+			new_house.global_position = home[0].global_position
+			home[0].queue_free()
