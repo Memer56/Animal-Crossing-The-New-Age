@@ -2,7 +2,7 @@ extends Node3D
 
 @export var allow_day_night_cycle : bool = true
 @export var day_length : float = 1000.0
-@export var start_time : float = 1.0
+@export var start_time : float = 0.3
 @export var sun_colour : Gradient
 @export var sun_intensity : Curve
 @export var moon_colour : Gradient
@@ -35,6 +35,20 @@ func _physics_process(delta: float) -> void:
 	
 	if EventBus.world_time >= 1.0:
 		EventBus.world_time = 0.0
+	
+	if EventBus.world_time >= 0.03 and EventBus.world_time <= 0.15:
+		EventBus.service_buildings_closed = true
+		if EventBus.service_buildings_lights_on:
+			EventBus.service_buildings_lights_on = false
+			EventBus.toggle_service_buildings_lights.emit(false)
+	else:
+		EventBus.service_buildings_closed = false
+	
+	if EventBus.world_time >= 0.9:
+		if !EventBus.service_buildings_lights_on:
+			if !EventBus.service_buildings_closed:
+				EventBus.service_buildings_lights_on = true
+				EventBus.toggle_service_buildings_lights.emit(true)
 	
 	sun.rotation_degrees.x = EventBus.world_time * 360 + 90
 	sun.light_color = sun_colour.sample(EventBus.world_time)
