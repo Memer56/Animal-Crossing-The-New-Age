@@ -358,9 +358,10 @@ size = Vector3(5.616699, 3.8145752, 10.833099)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3xqfy"]
 points = PackedVector3Array(0, 0.5, 0.5, 0.5, -0.5, 0.5, 0, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[node name="TownHall" type="StaticBody3D" unique_id=1576930102 node_paths=PackedStringArray("soft_mesh", "animation_player", "building_windows") groups=["Building"]]
+[node name="TownHall" type="StaticBody3D" unique_id=1576930102 node_paths=PackedStringArray("building_lights", "soft_mesh", "animation_player", "building_windows") groups=["Building"]]
 collision_layer = 2
 script = ExtResource("1_3xqfy")
+building_lights = [NodePath("SpotLight3D")]
 soft_mesh = NodePath("Town Hall/Armature/Skeleton3D/SoftMesh__mSoftMesh")
 animation_player = NodePath("Town Hall/AnimationPlayer")
 building_windows = [NodePath("Town Hall/Armature/Skeleton3D/Glass1__mWindowL"), NodePath("Town Hall/Armature/Skeleton3D/Glass2__mWindowR"), NodePath("Town Hall/Armature/Skeleton3D/Glass3__mSideWindow")]
@@ -540,18 +541,22 @@ libraries/ = SubResource("AnimationLibrary_cj4pl")
 
 [node name="WallsCollision" type="CollisionShape3D" parent="." unique_id=140312927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012413025, 15.452576, -23.206367)
+visible = false
 shape = SubResource("BoxShape3D_3xqfy")
 
 [node name="Steps" type="CollisionShape3D" parent="." unique_id=302007933]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014015198, 0.99684143, -7.6157837)
+visible = false
 shape = SubResource("BoxShape3D_4rj60")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1958094723]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.445446, 1.9230347, -7.8403854)
+visible = false
 shape = SubResource("BoxShape3D_kdvlo")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1944154931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.477135, 1.9230347, -7.8403854)
+visible = false
 shape = SubResource("BoxShape3D_kdvlo")
 
 [node name="StepsRamp" type="MeshInstance3D" parent="." unique_id=246911430]
@@ -568,5 +573,18 @@ shape = SubResource("ConvexPolygonShape3D_3xqfy")
 
 [node name="PlayerSpawnPoint" type="Marker3D" parent="." unique_id=1965956527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9918809, -20.290325)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=160446791]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, 0.99999994, 0, -0.99999994, -4.3711385e-08, 0, 25.349882, -11.834069)
+visible = false
+light_color = Color(1, 1, 0.84313726, 1)
+light_energy = 0.8
+shadow_enabled = true
+shadow_blur = 0.5
+distance_fade_enabled = true
+distance_fade_begin = 200.0
+spot_range = 37.259846
+spot_attenuation = -0.4
+spot_angle = 49.95807
 
 [connection signal="play" from="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor/StaticBody3D" to="." method="play_anim"]
