@@ -248,6 +248,9 @@ func spawn_stones():
 			new_stone.global_position = spawn_point
 			objects_to_avoid.append(new_stone)
 
+func spawn_new_npc_house():
+	BuildManager
+
 func get_random_point_on_nav_mesh() -> Vector3:
 	await get_tree().process_frame
 	var random_point : Vector3
