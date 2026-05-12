@@ -3,6 +3,7 @@
 ## Alpha version 1.2.1 - NPC moving in update part 1
 - Began building the system for npc's to move to the island
 - Created NPC houses that can build themselves based on randomness
+- Service buildings now have exterior lights that turn on at night
 
 ## Alpha version 1.2.0 - Time Update
 - Buildings now have the "interior lights are on" effect at the windows
