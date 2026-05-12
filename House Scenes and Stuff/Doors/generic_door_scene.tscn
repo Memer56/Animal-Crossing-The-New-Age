@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bhso4wcldbmwn"]
+
+[ext_resource type="Script" uid="uid://c07dllnev0bbi" path="res://House Scenes and Stuff/Doors/generic_door_scene.gd" id="1_24c24"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u78lw"]
+size = Vector3(14.39917, 21.600586, 1.3144531)
+
+[sub_resource type="Animation" id="Animation_rf76o"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_24c24"]
+resource_name = "Toggle Door"
+length = 3.0666666
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.457158, -0.16666667, -0.24285966, 0, 0, 1.457158, -0.16666667, 0, 0, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 1, 2, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rf76o"]
+_data = {
+&"RESET": SubResource("Animation_rf76o"),
+&"Toggle Door": SubResource("Animation_24c24")
+}
+
+[node name="GenericDoorScene" type="StaticBody3D" unique_id=856272272]
+script = ExtResource("1_24c24")
+
+[node name="Door" type="Node3D" parent="." unique_id=723085644]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 7.190942, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2063342272]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00012207031, 10.7890625, -0.5966797)
+shape = SubResource("BoxShape3D_u78lw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=979897425]
+libraries/ = SubResource("AnimationLibrary_rf76o")
