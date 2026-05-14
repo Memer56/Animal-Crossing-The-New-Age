@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kerndcmqucd3" path="res://NPC House/npc_house.gd" id="1_d1h5q"]
 
-[node name="NPCHouse" type="Node3D" unique_id=62935535]
+[node name="NPCHouse" type="Node3D" unique_id=62935535 groups=["NPCStructure"]]
 script = ExtResource("1_d1h5q")
 
 [node name="HouseWalls" type="Node3D" parent="." unique_id=1359027796]
@@ -11,3 +11,4 @@ script = ExtResource("1_d1h5q")
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 
 [node name="HouseDoor" type="Node3D" parent="." unique_id=1312540493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9681277, 2.7055893, -0.8017769)
