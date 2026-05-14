@@ -5,6 +5,9 @@ const PICK_UP = preload("uid://c8p87t4ex6hyc")
 const TOM_NOOK = preload("uid://dhvnwgofhxw1i")
 const GENERIC_TREE = preload("uid://dc2iy76lfy0ow")
 
+##### NPC House
+const NPC_HOUSE = preload("uid://wkpv6yfvw85n")
+
 ###### Navigaton and boundry bullshit
 const PLAYER_NAV_BOUNDRY = preload("uid://cixmss1j0ygbm")
 
@@ -56,6 +59,11 @@ func _ready() -> void:
 		EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
 		EventBus.loan_balance = 140000
 		EventBus.previous_loan_balance = EventBus.loan_balance
+		EventBus.player_is_debt_free = false
+		EventBus.house_level = 0
+		EventBus.current_trees.clear()
+		EventBus.world_time = 0.3
+		EventBus.npc_houses.clear()
 		spawn_trees()
 	else:
 		load_game_data()
@@ -113,6 +121,7 @@ func bake_nav_mesh():
 func save_game_data():
 	var save = SaveGame.new()
 	var value : int = 2
+	var value_2 : int = 2
 
 	for node in get_tree().get_nodes_in_group("SaveObject"):
 		if save.exterior_object_info.has(node.self_slot_data.item_data.name):
@@ -121,8 +130,14 @@ func save_game_data():
 		else:
 			save.exterior_object_info[node.self_slot_data.item_data.name] = node.global_transform
 	
+	## This loop is for NPC's houses
+	for node in get_tree().get_nodes_in_group("NPCStructure"):
+		save.npc_houses[node.name] = node.house_data
+	
+	
 	BuildManager.exterior_objects = save.exterior_object_info
 	save.interior_object_info = BuildManager.interior_objects
+	EventBus.npc_houses = save.npc_houses
 	
 	save.inventory = EventBus.player.inventory_data
 	save.hotbar_inventory = EventBus.player.hotbar_inventory_data
@@ -134,6 +149,7 @@ func save_game_data():
 	save.house_level = EventBus.house_level
 	save.trees = EventBus.current_trees
 	save.world_time = EventBus.world_time
+	
 	
 	if EventBus.game_is_new_save:
 		EventBus.game_is_new_save = false
@@ -165,7 +181,14 @@ func load_object_data():
 		save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
 		var object
 		for new_object in save.exterior_object_info:
-			BuildManager.current_object_name_to_spawn = new_object
+			var current_new_object
+			if new_object == "Tent":
+				if EventBus.house_level == 1:
+					current_new_object = "Player House"
+			else:
+				current_new_object = new_object
+			
+			BuildManager.current_object_name_to_spawn = current_new_object
 			object = BuildManager.get_object_to_spawn()
 			if EventBus.is_in_overworld:
 				main_island_nav_mesh.add_child(object)
@@ -179,9 +202,16 @@ func load_object_data():
 			main_island_nav_mesh.add_child(new_tree)
 			new_tree.global_position = index[1]
 		
+		for key in save.npc_houses:
+			var new_house = NPC_HOUSE.instantiate()
+			new_house.house_data = save.npc_houses[key]
+			main_island_nav_mesh.add_child(new_house, true)
+			new_house.global_transform = save.npc_houses[key][0]
+		
 		BuildManager.interior_objects = save.interior_object_info
 		BuildManager.exterior_objects = save.exterior_object_info
 		EventBus.current_trees = save.trees
+		EventBus.npc_houses = save.npc_houses
 
 
 func generate_save_file_id() -> String:
