@@ -53,6 +53,7 @@ var tree_nav_mesh : NavigationRegion3D
 var current_trees : Array[Array]
 var house_level : int = 0
 var world_time : float = 0.3
+var npc_houses : Dictionary
 ##For checking if shops and such have been set to close
 var service_buildings_closed : bool = false
 var service_buildings_lights_on : bool = false
