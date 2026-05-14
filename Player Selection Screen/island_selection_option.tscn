@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://c1h0h7j047wrq"]
+
+[ext_resource type="Script" uid="uid://bm2ihr2pfjemm" path="res://Player Selection Screen/island_selection_option.gd" id="1_a5yt6"]
+[ext_resource type="Texture2D" uid="uid://by64tohpmwbgt" path="res://dr house.jpg" id="1_n5i0v"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="2_sw4ki"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5yt6"]
+bg_color = Color(0.6048404, 0.51441437, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e71d7"]
+bg_color = Color(0.6694125, 0.61080545, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yp8tm"]
+bg_color = Color(0.74295014, 0.7067081, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.52754533, 0.1259115, 0.99999994, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kf64b"]
+bg_color = Color(0.6039216, 0.5137255, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_a5yt6"]
+font = ExtResource("2_sw4ki")
+font_size = 28
+
+[node name="IslandSelectionOption" type="Control" unique_id=1666570070]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a5yt6")
+normal_stylebox = SubResource("StyleBoxFlat_a5yt6")
+hover_stylebox = SubResource("StyleBoxFlat_e71d7")
+pressed_stylebox = SubResource("StyleBoxFlat_yp8tm")
+
+[node name="Panel" type="Panel" parent="." unique_id=298873495]
+layout_mode = 0
+offset_right = 209.0
+offset_bottom = 282.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kf64b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1880172420]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 38
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/VBoxContainer" unique_id=1814956142]
+custom_minimum_size = Vector2(0, 78.015)
+layout_mode = 2
+texture = ExtResource("1_n5i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=1482283138]
+layout_mode = 2
+text = "Island"
+label_settings = SubResource("LabelSettings_a5yt6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="Panel" to="." method="_on_panel_gui_input"]
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]

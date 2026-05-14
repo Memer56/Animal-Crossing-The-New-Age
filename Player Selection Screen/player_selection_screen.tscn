@@ -1,0 +1,331 @@
+[gd_scene format=3 uid="uid://ilw4n5a2ll75"]
+
+[ext_resource type="Shader" uid="uid://eq5qprednxti" path="res://Shaders/scrolling_texure.gdshader" id="1_hbmpu"]
+[ext_resource type="Script" uid="uid://bviibvvmcsr5s" path="res://Player Selection Screen/player_selection_screen.gd" id="1_hctlx"]
+[ext_resource type="Texture2D" uid="uid://byhuk1x0n453r" path="res://UI Info and Message Boxes/ATM UI/Download Seamless background with yellow stars pattern on pastel purple background_ for free.jpg" id="2_k1m84"]
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="4_bnb2g"]
+[ext_resource type="PackedScene" uid="uid://4jy5g0g32q3n" path="res://UI Info and Message Boxes/Speech Bubble/speech_bubble.tscn" id="4_qies8"]
+[ext_resource type="PackedScene" uid="uid://c1h0h7j047wrq" path="res://Player Selection Screen/island_selection_option.tscn" id="5_5raub"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_k1m84"]
+load_path = "res://.godot/imported/Download Seamless background with yellow stars pattern on pastel purple background_ for free.jpg-1e587cf26c69821aa4224c61d5e7c218.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hctlx"]
+shader = ExtResource("1_hbmpu")
+shader_parameter/scroll_speed = 0.050000002375
+shader_parameter/angle_degrees = 218.2330103660675
+shader_parameter/repeat_x = 10.0000004275
+shader_parameter/repeat_y = 10.0000004275
+shader_parameter/row_offset = 0.0
+shader_parameter/texture_to_scroll = SubResource("CompressedTexture2D_k1m84")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qies8"]
+bg_color = Color(0.92828274, 0.8017973, 0.45230764, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+shadow_size = 19
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnb2g"]
+bg_color = Color(0.5238775, 0.4278216, 0.15007257, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+
+[sub_resource type="FontVariation" id="FontVariation_5raub"]
+base_font = ExtResource("4_bnb2g")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5raub"]
+bg_color = Color(0.6048404, 0.51441437, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1276s"]
+bg_color = Color(0.74295014, 0.7067081, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.52754533, 0.1259115, 0.99999994, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3qhb"]
+bg_color = Color(0.6694125, 0.61080545, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5pwn"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 20
+border_color = Color(0.5254902, 0.42745098, 0.14901961, 1)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_bnb2g"]
+font = ExtResource("4_bnb2g")
+font_size = 60
+
+[sub_resource type="FontVariation" id="FontVariation_bnb2g"]
+base_font = ExtResource("4_bnb2g")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whied"]
+bg_color = Color(0.59700984, 0.50819486, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_5raub"]
+font = ExtResource("4_bnb2g")
+font_size = 60
+
+[sub_resource type="FontVariation" id="FontVariation_1276s"]
+base_font = ExtResource("4_bnb2g")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fs60q"]
+bg_color = Color(0.6048404, 0.51441437, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qknh3"]
+bg_color = Color(0.74295014, 0.7067081, 1, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.52754533, 0.1259115, 0.99999994, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i48bq"]
+bg_color = Color(0.6694125, 0.61080545, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PlayerSelectionScreen" type="Control" unique_id=1840397645]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hctlx")
+
+[node name="BG" type="TextureRect" parent="." unique_id=33354793]
+material = SubResource("ShaderMaterial_hctlx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k1m84")
+
+[node name="Panel" type="Panel" parent="BG" unique_id=2011545637]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -870.5
+offset_top = -453.5
+offset_right = 870.5
+offset_bottom = 453.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qies8")
+
+[node name="Panel" type="Panel" parent="BG/Panel" unique_id=152161767]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 86.5
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bnb2g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BG/Panel/Panel" unique_id=916741842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 51
+alignment = 1
+
+[node name="PlayerCreation" type="Button" parent="BG/Panel/Panel/HBoxContainer" unique_id=863162085]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_5raub")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_5raub")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1276s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3qhb")
+toggle_mode = true
+text = "Player Creation"
+
+[node name="IslandSelection" type="Button" parent="BG/Panel/Panel/HBoxContainer" unique_id=1911418382]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_5raub")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_5raub")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1276s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f3qhb")
+toggle_mode = true
+text = "Island Selection"
+
+[node name="PlayerCreationHBox" type="HBoxContainer" parent="BG/Panel/Panel" unique_id=1451774498]
+visible = false
+layout_mode = 0
+offset_left = 2.5
+offset_top = 241.5
+offset_right = 1742.5
+offset_bottom = 680.5
+theme_override_constants/separation = 181
+alignment = 1
+
+[node name="PlayerNameContainer" type="VBoxContainer" parent="BG/Panel/Panel/PlayerCreationHBox" unique_id=31181131]
+layout_mode = 2
+theme_override_constants/separation = 68
+
+[node name="PlayerNameLabel" type="Label" parent="BG/Panel/Panel/PlayerCreationHBox/PlayerNameContainer" unique_id=2099700117]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_x5pwn")
+text = "Player Name"
+label_settings = SubResource("LabelSettings_bnb2g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="BG/Panel/Panel/PlayerCreationHBox/PlayerNameContainer" unique_id=33255442]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_bnb2g")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_whied")
+placeholder_text = "Enter Name"
+alignment = 1
+virtual_keyboard_enabled = false
+caret_blink = true
+
+[node name="SkinColourContainer" type="VBoxContainer" parent="BG/Panel/Panel/PlayerCreationHBox" unique_id=1650924923]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 68
+
+[node name="SkinColourLabel" type="Label" parent="BG/Panel/Panel/PlayerCreationHBox/SkinColourContainer" unique_id=1949228007]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_x5pwn")
+text = "Skin Colour"
+label_settings = SubResource("LabelSettings_bnb2g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorPicker" type="ColorPicker" parent="BG/Panel/Panel/PlayerCreationHBox/SkinColourContainer" unique_id=960622726]
+layout_mode = 2
+edit_alpha = false
+edit_intensity = false
+picker_shape = 2
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
+
+[node name="HairColourContainer" type="VBoxContainer" parent="BG/Panel/Panel/PlayerCreationHBox" unique_id=1896255929]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 68
+
+[node name="HairColourLabel" type="Label" parent="BG/Panel/Panel/PlayerCreationHBox/HairColourContainer" unique_id=66998329]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_x5pwn")
+text = "Hair Colour"
+label_settings = SubResource("LabelSettings_bnb2g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorPicker" type="ColorPicker" parent="BG/Panel/Panel/PlayerCreationHBox/HairColourContainer" unique_id=204714680]
+layout_mode = 2
+edit_alpha = false
+edit_intensity = false
+picker_shape = 2
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+presets_visible = false
+
+[node name="IslandSelectionVBox" type="VBoxContainer" parent="BG/Panel/Panel" unique_id=1145228915]
+layout_mode = 0
+offset_left = 30.5
+offset_top = 87.5
+offset_right = 1710.5
+offset_bottom = 906.5
+theme_override_constants/separation = 86
+alignment = 1
+
+[node name="Label" type="Label" parent="BG/Panel/Panel/IslandSelectionVBox" unique_id=555157269]
+layout_mode = 2
+text = "Select an Island"
+label_settings = SubResource("LabelSettings_5raub")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="BG/Panel/Panel/IslandSelectionVBox" unique_id=1269177588]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_constants/h_separation = 245
+columns = 7
+
+[node name="IslandSelectionOption" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=1666570070 instance=ExtResource("5_5raub")]
+layout_mode = 2
+island_name = "Island 1"
+island_scene = "res://Islands/Island 1/island_1.tscn"
+
+[node name="IslandSelectionOption2" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=918135762 instance=ExtResource("5_5raub")]
+layout_mode = 2
+
+[node name="IslandSelectionOption3" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=1836345871 instance=ExtResource("5_5raub")]
+layout_mode = 2
+
+[node name="IslandSelectionOption4" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=1831954307 instance=ExtResource("5_5raub")]
+layout_mode = 2
+
+[node name="IslandSelectionOption5" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=1357217452 instance=ExtResource("5_5raub")]
+layout_mode = 2
+
+[node name="IslandSelectionOption6" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=571530105 instance=ExtResource("5_5raub")]
+layout_mode = 2
+
+[node name="IslandSelectionOption7" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=191356508 instance=ExtResource("5_5raub")]
+layout_mode = 2
+
+[node name="ConfirmButton" type="Button" parent="BG/Panel/Panel/IslandSelectionVBox" unique_id=1881234156]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontVariation_1276s")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_fs60q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qknh3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i48bq")
+text = "Continue to Island"
+
+[node name="SpeechBubble" parent="." unique_id=1234763143 instance=ExtResource("4_qies8")]
+layout_mode = 1
+metadata/_edit_lock_ = true
