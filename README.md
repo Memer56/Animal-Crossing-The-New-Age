@@ -1,5 +1,13 @@
 # AC : The New Age
 
+## Alpha version 1.2.2 - NPC moving in update part 2
+- NPC's now have houses can that be contructed on randomness but have only matching components
+- NPC houses can now be saved and loaded
+- Added new selection screen after clicking "New Save" in main menu
+- Fixed infinite loading screen bug introduced by adding the selection screen
+- Started Implementation of new save events to introduce the player to the game and have the option of other islands
+- The system for NPC's arriving to the island doesn't actually exist but the much needed ground work is there
+
 ## Alpha version 1.2.1 - NPC moving in update part 1
 - Began building the system for npc's to move to the island
 - Created NPC houses that can build themselves based on randomness
