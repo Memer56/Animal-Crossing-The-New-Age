@@ -115,7 +115,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="PlayerSelectionScreen" type="Control" unique_id=1840397645]
+[node name="PlayerSelectionScreen" type="Control" unique_id=1840397645 node_paths=PackedStringArray("tab_buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -123,6 +123,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hctlx")
+tab_buttons = [NodePath("BG/Panel/Panel/HBoxContainer/PlayerCreation"), NodePath("BG/Panel/Panel/HBoxContainer/IslandSelection")]
 
 [node name="BG" type="TextureRect" parent="." unique_id=33354793]
 material = SubResource("ShaderMaterial_hctlx")
@@ -192,7 +193,6 @@ toggle_mode = true
 text = "Island Selection"
 
 [node name="PlayerCreationHBox" type="HBoxContainer" parent="BG/Panel/Panel" unique_id=1451774498]
-visible = false
 layout_mode = 0
 offset_left = 2.5
 offset_top = 241.5
@@ -270,6 +270,7 @@ hex_visible = false
 presets_visible = false
 
 [node name="IslandSelectionVBox" type="VBoxContainer" parent="BG/Panel/Panel" unique_id=1145228915]
+visible = false
 layout_mode = 0
 offset_left = 30.5
 offset_top = 87.5
@@ -329,3 +330,11 @@ text = "Continue to Island"
 [node name="SpeechBubble" parent="." unique_id=1234763143 instance=ExtResource("4_qies8")]
 layout_mode = 1
 metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="BG/Panel/Panel/HBoxContainer/PlayerCreation" to="." method="_on_tab_option_pressed" flags=18]
+[connection signal="pressed" from="BG/Panel/Panel/HBoxContainer/IslandSelection" to="." method="_on_tab_option_pressed" flags=18]
+[connection signal="text_changed" from="BG/Panel/Panel/PlayerCreationHBox/PlayerNameContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="BG/Panel/Panel/PlayerCreationHBox/PlayerNameContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="color_changed" from="BG/Panel/Panel/PlayerCreationHBox/SkinColourContainer/ColorPicker" to="." method="_on_skin_color_changed"]
+[connection signal="color_changed" from="BG/Panel/Panel/PlayerCreationHBox/HairColourContainer/ColorPicker" to="." method="_on_hair_color_changed"]
+[connection signal="pressed" from="BG/Panel/Panel/IslandSelectionVBox/ConfirmButton" to="." method="_on_confirm_button_pressed"]
