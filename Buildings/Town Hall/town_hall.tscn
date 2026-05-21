@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bvepa8mahw77t" path="res://Buildings/Town Hall/Town Hall_mWindowR_Emi.png" id="7_solkd"]
 [ext_resource type="Texture2D" uid="uid://dt6jgs8klipaa" path="res://Buildings/Town Hall/Town Hall_mDoor_Alb.png" id="8_p02b6"]
 [ext_resource type="Script" uid="uid://cwbv7gvi064iy" path="res://Buildings/play_interactable_anim.gd" id="10_4rj60"]
+[ext_resource type="PackedScene" uid="uid://b6cncudvp7p07" path="res://Buildings/Town Hall/Ground/ground_model.glb" id="12_2ke24"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr1gq"]
 resource_name = "mWall"
@@ -586,5 +587,12 @@ distance_fade_begin = 200.0
 spot_range = 37.259846
 spot_attenuation = -0.4
 spot_angle = 49.95807
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=1467531989]
+height = 63.57
+vertices = PackedVector3Array(36.093643, 0, -40.47641, -35.37178, 0, -40.089066, -35.372, 0, 0.5, 35.706, 0, 0.5)
+
+[node name="ground_model" parent="." unique_id=142403568 instance=ExtResource("12_2ke24")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0.286, 0)
 
 [connection signal="play" from="Town Hall/Armature_001/Skeleton3D/DoorL__mDoor/StaticBody3D" to="." method="play_anim"]
