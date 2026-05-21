@@ -2,7 +2,15 @@ extends CanvasLayer
 
 @onready var fade_panel: Panel = $Control/FadePanel
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hide_ugly_stuff_panel: Panel = $Control/HideUglyStuffPanel
 
+
+func _ready() -> void:
+	EventBus.toggle_fade.connect(trigger_scene_change_fade)
+	if EventBus.is_in_overworld:
+		if hide_ugly_stuff_panel.visible == false:
+			#print("Displaying ulgy panel")
+			hide_ugly_stuff_panel.show()
 
 func trigger_scene_change_fade(fade_out : bool):
 	#var fade_panel_material = fade_panel.material
