@@ -9,6 +9,8 @@ var time = Time.get_datetime_dict_from_system()
 @export var inventory : InventoryData
 @export var hotbar_inventory : InventoryData
 @export var player_balance : int
+## index 0 = Player Name / index 1 = Skin Colour / index 2 = Hair Colour / index 3 = Player Position
+@export var player_data : Array
 @export var savings_balance : int
 @export var loan_balance : int
 @export var previous_loan_balance : int
@@ -17,6 +19,7 @@ var time = Time.get_datetime_dict_from_system()
 @export var exterior_object_info : Dictionary[String, Transform3D]
 @export var interior_object_info : Dictionary[String, Transform3D]
 @export var trees : Array[Array]
+@export var npc_houses : Dictionary
 @export var world_time : float
 @export var this_save_date = str("%02d:%02d:%02d %02d:%02d:%02d" % [time.day, time.month, time.year, time.hour, time.minute, time.second])
 @export var game_version = ProjectSettings.get_setting("application/config/version")
