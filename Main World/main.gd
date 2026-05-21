@@ -18,12 +18,16 @@ const BLACK_SKY = preload("uid://dxvl6jpkjyy33")
 #### Item data resources #####
 const STONE_ITEM = preload("uid://801bd84rk176")
 
+#### Islands
+const ISLAND_1 = preload("uid://c1sfbvd3rjb32")
+
 @onready var inventory_interface: Control = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/InventoryInterface/HotBarInventory
 @onready var main_island_nav_mesh: NavigationRegion3D = $MainIslandNavMesh
 @onready var town_hall: StaticBody3D = $MainIslandNavMesh/TownHall
 @onready var world_environment: WorldEnvironment = $Sky/WorldEnvironment
 @onready var sun: DirectionalLight3D = $Sky/Sun
+@onready var island_node: Node3D = $MainIslandNavMesh/IslandNode
 @export var navigation_mesh : NavigationRegion3D
 @onready var build_camera: Camera3D = $BuildCamera
 @onready var transition_camera: Camera3D = $TransitionCamera
@@ -42,28 +46,19 @@ func _ready() -> void:
 	EventBus.bake_nav_mesh.connect(bake_nav_mesh)
 	EventBus.save_game_data.connect(save_game_data)
 	EventBus.load_game_data.connect(load_game_data)
-	EventBus.load_player_island_nav_mesh_bounds.connect(load_player_nav_refrence_island)
 	hot_bar_inventory.send_held_slot_data.connect(EventBus.player.set_item_in_hand)
 	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
-	load_player_nav_refrence_island("Island 1")
+	load_island_and_player_nav_mesh()
 	connect_toggle_external_inventory_signal()
 	send_nav_region_to_npcs()
 	BuildManager.build_camera = build_camera
 	BuildManager.transition_camera = transition_camera
 	BuildManager.speed = 10.0 # For build camera movement speed
-	EventBus.is_in_overworld = true
 	EventBus.is_in_player_house = false
 	EventBus.current_trees.clear()
 	if EventBus.game_is_new_save:
-		EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
-		EventBus.loan_balance = 140000
-		EventBus.previous_loan_balance = EventBus.loan_balance
-		EventBus.player_is_debt_free = false
-		EventBus.house_level = 0
-		EventBus.current_trees.clear()
-		EventBus.world_time = 0.3
-		EventBus.npc_houses.clear()
+		reset_all_event_bus_variables()
 		spawn_trees()
 	else:
 		load_game_data()
@@ -76,6 +71,16 @@ func init_new_savegame_events():
 	var tom = TOM_NOOK.instantiate()
 	add_child(tom)
 	tom.global_position = town_hall.global_position
+
+func reset_all_event_bus_variables():
+	EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
+	EventBus.loan_balance = 140000
+	EventBus.previous_loan_balance = EventBus.loan_balance
+	EventBus.player_is_debt_free = false
+	EventBus.house_level = 0
+	EventBus.current_trees.clear()
+	EventBus.world_time = 0.3
+	EventBus.npc_houses.clear()
 
 func connect_toggle_external_inventory_signal():
 	for node in get_tree().get_nodes_in_group("external_inventory"):
@@ -113,15 +118,16 @@ func _on_inventory_interface_drop_slot_data(slot_data):
 		pick_up.label_3d.text = slot_data.item_data.name
 
 func trigger_fade():
-	FadeCanvasLayer.trigger_scene_change_fade(false)
+	EventBus.toggle_fade.emit(false)
 
 func bake_nav_mesh():
+	# Allows objects to spawn first before baking the nav mesh
+	await get_tree().create_timer(0.5).timeout
 	main_island_nav_mesh.bake_navigation_mesh(true)
 
 func save_game_data():
 	var save = SaveGame.new()
 	var value : int = 2
-	var value_2 : int = 2
 
 	for node in get_tree().get_nodes_in_group("SaveObject"):
 		if save.exterior_object_info.has(node.self_slot_data.item_data.name):
@@ -144,6 +150,7 @@ func save_game_data():
 	save.player_balance = EventBus.player_balance
 	save.savings_balance = EventBus.savings_balance
 	save.loan_balance = EventBus.loan_balance
+	save.player_data = EventBus.player_customisations
 	save.previous_loan_balance = EventBus.previous_loan_balance
 	save.player_is_debt_free = EventBus.player_is_debt_free
 	save.house_level = EventBus.house_level
@@ -170,6 +177,7 @@ func load_player_data():
 		EventBus.player_balance = save.player_balance
 		EventBus.savings_balance = save.savings_balance
 		EventBus.loan_balance = save.loan_balance
+		EventBus.player_customisations = save.player_data
 		EventBus.previous_loan_balance = save.previous_loan_balance
 		EventBus.player_is_debt_free = save.player_is_debt_free
 		EventBus.house_level = save.house_level
@@ -181,13 +189,15 @@ func load_object_data():
 		save = SaveGame.load_savegame_data(EventBus.current_save_file_id)
 		var object
 		for new_object in save.exterior_object_info:
+			#print("New Object : ", new_object)
 			var current_new_object
 			if new_object == "Tent":
 				if EventBus.house_level == 1:
 					current_new_object = "Player House"
-			else:
-				current_new_object = new_object
+				else:
+					current_new_object = new_object
 			
+			#print("Current new object : ", current_new_object)
 			BuildManager.current_object_name_to_spawn = current_new_object
 			object = BuildManager.get_object_to_spawn()
 			if EventBus.is_in_overworld:
@@ -222,16 +232,23 @@ func generate_save_file_id() -> String:
 	return id
 
 ## Used for the player's navigtion, it's needed to reference a clean nav mesh
-func load_player_nav_refrence_island(island : String):
+func load_island_and_player_nav_mesh():
 	var i
-	match island:
+	var island_name
+	var island
+	
+	if EventBus.selected_island_info.is_empty():
+		island_name = "Island 1"
+	else:
+		island_name = EventBus.selected_island_info[0]
+	
+	match island_name:
 		"Island 1":
 			i = PLAYER_NAV_BOUNDRY.instantiate()
+			island = ISLAND_1.instantiate()
 	
-	#i.visible = false
 	get_tree().root.add_child.call_deferred(i)
-	#await get_tree().create_timer(1).timeout
-	#i.queue_free()
+	island_node.add_child.call_deferred(island)
 
 func trigger_save_fail_events():
 	var scene = SAVE_DIDNT_LOAD.instantiate()
