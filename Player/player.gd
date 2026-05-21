@@ -29,6 +29,7 @@ signal save_player_data
 @onready var item_ground_raycasts: Node3D = $PlayerNode/ItemDropPoint/ItemGroundRaycasts
 @onready var item_collision_checker: Area3D = $PlayerNode/ItemDropPoint/ItemCollisionChecker
 @onready var collision_checker: Area3D = $PlayerNode/ObjectDropPoint/CollisionChecker
+@onready var hair__m_hair: MeshInstance3D = $PlayerNode/Armature/Skeleton3D/Hair/HairPosNode/Armature/Skeleton3D/Hair__mHair
 
 var speed = 80.0 #30.0
 var direction = Vector3.ZERO
@@ -59,7 +60,6 @@ enum {
 func _ready() -> void:
 	EventBus.player = self
 	state = IDLE
-	set_skin_colour(skin_colour)
 	BuildManager.camera = camera_3d
 	if EventBus.trigger_building_exit_event:
 		state = RE_ENTER_OVERWORLD
@@ -77,6 +77,9 @@ func _ready() -> void:
 		if player_nav_mesh:
 			map_rid = player_nav_mesh.get_navigation_map()
 			#player_nav_mesh.bake_navigation_mesh(true)
+	await get_tree().create_timer(0.1).timeout
+	set_skin_colour()
+	set_hair_colour()
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Backwards")
@@ -189,7 +192,7 @@ func enter_door():
 		doorway_events_can_trigger = false
 		
 		if !scene_change_fade_called:
-			FadeCanvasLayer.trigger_scene_change_fade(true)
+			EventBus.toggle_fade.emit(true)
 			scene_change_fade_called =  true
 		
 		await get_tree().create_timer(2).timeout # wait then transition scene
@@ -236,9 +239,16 @@ func apply_gravity(delta):
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 
-func set_skin_colour(colour : Color):
+func set_skin_colour():
+	var new_colour : Color
 	var material_override = StandardMaterial3D.new()
-	material_override.albedo_color = colour
+	
+	if EventBus.player_customisations.is_empty():
+		new_colour = skin_colour
+	else:
+		new_colour = EventBus.player_customisations[1]
+	
+	material_override.albedo_color = new_colour
 	material_override.roughness = 0.5
 	material_override.normal_enabled = true
 	material_override.normal_scale = 0.1
@@ -249,8 +259,19 @@ func set_skin_colour(colour : Color):
 		if !node.name == "Nose00__mNose" and !node.name == "Nose01__mNose" and !node.name == "Nose02__mNose" and !node.name == "Body__mEye" and !node.name == "Body__mMouth" and !node.name == "ModifierBoneTarget3D" and !node.name == "Hair":
 			node.set_surface_override_material(0, material_override)
 	
-	eyes_mesh_setter.set_body_part_colour(colour)
-	mouth_mesh_setter.set_body_part_colour(colour)
+	eyes_mesh_setter.set_body_part_colour(new_colour)
+	mouth_mesh_setter.set_body_part_colour(new_colour)
+
+func set_hair_colour():
+	var new_colour : Color
+	var material_override : StandardMaterial3D = hair__m_hair.get_surface_override_material(0)
+	
+	if EventBus.player_customisations.is_empty():
+		new_colour = Color("b794fe")
+	else:
+		new_colour = EventBus.player_customisations[2]
+	
+	material_override.albedo_color = new_colour
 
 func eat_consumable():
 	pass
@@ -350,11 +371,12 @@ func detect_raycast_collision():
 			if collider.is_in_group("Door"):
 				raycasted_door_found = collider
 				if Input.is_action_just_pressed("Interact"):
-					doorway_events_can_trigger = true
-					toggle_collisions(2, false)
-					EventBus.last_building_entered["building pos"] = collider.return_spawn_point()
-					EventBus.last_building_entered["building node"] = collider
-					state = ENTER_DOOR
+					if !EventBus.service_buildings_closed:
+						doorway_events_can_trigger = true
+						toggle_collisions(2, false)
+						EventBus.last_building_entered["building pos"] = collider.return_spawn_point()
+						EventBus.last_building_entered["building node"] = collider
+						state = ENTER_DOOR
 					collider.play_anim()
 			
 			if collider.is_in_group("ThisNPCTalks"):
