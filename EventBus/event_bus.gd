@@ -15,13 +15,15 @@ signal bake_nav_mesh
 signal display_speech_bubble(speech_text_array : Array[String], npc_name : String, questions_at_index : Array, item_to_be_given : SlotData)
 signal save_game_data
 signal load_game_data
-signal load_player_island_nav_mesh_bounds(island : String, node : Node)
 signal send_nav_region(nav_region : NavigationRegion3D)
 signal toggle_atm_ui
 signal toggle_crafting_ui
 signal toggle_service_buildings_lights(true_or_false : bool)
+signal toggle_fade(true_or_false : bool)
 
 var player
+## Index 0 = Player Name / Index 1 = Skin Colour / Index 2 = Hair Colour / Index 3 = Player Position
+var player_customisations : Array
 var player_balance : int = 0
 var savings_balance : int = 999999999
 var loan_balance : int = 100
@@ -31,7 +33,7 @@ var can_place : bool = true
 var held_item_slot_data : SlotData
 var game_paused : bool = false
 var room_to_spawn : String
-var is_in_overworld : bool = true
+var is_in_overworld : bool = false
 var is_in_player_house : bool = false
 var trigger_building_exit_event : bool = false
 var player_can_leave_nav_mesh : bool = true # Defaulted to true to allow correct spanwing placement
@@ -57,6 +59,9 @@ var npc_houses : Dictionary
 ##For checking if shops and such have been set to close
 var service_buildings_closed : bool = false
 var service_buildings_lights_on : bool = false
+## index 0 = Island Name / index 1 = Island Scene String
+var selected_island_info : Array
+var next_scene : String
 
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
