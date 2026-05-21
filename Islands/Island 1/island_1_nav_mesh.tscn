@@ -1,0 +1,54 @@
+[gd_scene format=4 uid="uid://cc5yg27l0taa8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7f0k"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_40dva"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"format": 34896613377,
+"index_count": 102,
+"index_data": PackedByteArray("AAABAAIAAgACAAAAAgAAAAAAAQADAAQAAQAFAAMAAQAGAAUAAAAGAAEABgAAAAcABwAAAAgACQAKAAsACwALAAkACwAJAAkACQAMAAoADAAJAA0ACQAOAA0ADAANAA8AEAARABIAEAATABEAFAATABAAFAAVABMAEwAVABYAFAAXABUAFAAYABcAGQAYABQAGQAaABgAGwAaABkAGgAbABwAHAAbAB0AHQAbAB4AHgAeAB0AHgAdAB0AHAAdAB8AHAAfACAAIAAfACEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 34,
+"vertex_data": PackedByteArray("AAAAAP//AADDnQAAw8IAAHmdAAD//wAAqW0AANWLAABNkQAAvYoAAORpAAB7rwAAAisAAMGuAAAcKAAAGosAAAAAAAAyjAAAAAAAAAcEAAAGJgAAHG4AAAAAAADhbgAAdSgAACIpAABkjwAAAAAAAAAAAAAAAAAAso4AAEMoAAAbPAAAb0MAAJBcAACQlAAAZTwAAOyQAAC4XQAAjHAAAKmgAABAPQAAxIkAAIhQAAAPigAA6XAAABLIAAATSwAAz8kAACMIAACpoAAAAAAAAFflAACACAAA//8AAAAAAACL3wAARF0AAOuyAAD//wAA//8AAP//AADQtQAAqrEAADafAABzZwAAop4AAHV3AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gwscc"]
+resource_name = "Island 1 Simple Mesh_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("AAD//8Odw8J5nf//AAD//3md//8CK8GuHCgaiwAAMozkaXuvqW3Vi02RvYoAAAcEBiYcbgAA4W51KCIpAAAHBAAA4W5kjwAAAAAAALKOQygbPG9DkFyQlGU87JC4XYxwqaBAPcSJiFAPiulwEsgTS8/JIwipoAAAV+WACP//AACL30Rd67L////////rsv///////9C1qrE2n3Nnop51dw=="),
+"format": 34896613399,
+"index_count": 102,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAAAFAAEABQAAAAYABgAAAAcAAQAFAAgAAQAIAAkAAQAJAAoACwAMAA0ACwAOAAwADQAPAAsADQAQAA8ADgALABEACwASABEADgARABMAFAAVABYAFAAXABUAGAAXABQAGAAZABcAFwAZABoAGAAbABkAGAAcABsAHQAcABgAHQAeABwAHwAeAB0AHgAfACAAIAAfACEAIQAfACIAIgAjACEAIgAkACMAIAAhACUAIAAlACYAJgAlACcA"),
+"material": SubResource("StandardMaterial3D_n7f0k"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("AAAAAP///7/DnQAAw8L/v3mdAAD///+/AAAAAP///795nQAA////vwIrAADBrv+/HCgAABqL/78AAAAAMoz/v+RpAAB7r/+/qW0AANWL/79NkQAAvYr/vwAAAAAHBP+/BiYAABxu/78AAAAA4W7/v3UoAAAiKf+/AAAAAAcE/78AAAAA4W7/v2SPAAAAAP+/AAAAAAAA/7+yjgAAQyj/vxs8AABvQ/+/kFwAAJCU/79lPAAA7JD/v7hdAACMcP+/qaAAAEA9/7/EiQAAiFD/vw+KAADpcP+/EsgAABNL/7/PyQAAIwj/v6mgAAAAAP+/V+UAAIAI/7///wAAAAD/v4vfAABEXf+/67IAAP///7///wAA////v+uyAAD///+///8AAP///7/QtQAAqrH/vzafAABzZ/+/op4AAHV3/7////9/////f////3////9/////f/7//3/+//9/////f/7//3////9//v//f////3////9/////f////3////9/////f////3////9//v//f////3/+//9//v//f////3/+//9//v//f////3/+//9//v//f/7//3/+//9//v//f/7//3////9/////f////3////9/////f////3/+//9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_40dva")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4nng"]
+albedo_color = Color(0.47619838, 0.0026144623, 0.7992384, 1)
+
+[node name="Island1NavMesh" type="Node3D" unique_id=1065026040]
+
+[node name="Island 1 Simple Mesh" type="Node3D" parent="." unique_id=271774548]
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="Island 1 Simple Mesh" unique_id=1839259577]
+transform = Transform3D(477.87, 0, 0, 0, 400, 0, 0, 0, 380.65, -0.56, 16.21, 4.9002876)
+height = 0.28
+vertices = PackedVector3Array(-0.13841161, 0, 0.09704857, 0.13071375, 0, 0.09067111, 0.19326295, 0, 0.4772681, -0.1800577, 0, 0.4713525)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_layers = 2
+
+[node name="NavMeshVersion" type="MeshInstance3D" parent="Island 1 Simple Mesh" unique_id=1256346112]
+transform = Transform3D(477.87, 0, 0, 0, 400, 0, 0, 0, 380.65, -0.56, 16.21, 4.9002876)
+mesh = SubResource("ArrayMesh_gwscc")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_b4nng")
