@@ -5,6 +5,7 @@
 - Player creation menu and island selection is now working
 - Player details are now saved e.g hair colour
 - Islands are now dynamic, meaning the game loads the players selected island
+- Fixed issue were selecting "New Game" broke the fade effect
 
 ## Alpha version 1.2.2 - NPC moving in update part 2
 - NPC's now have houses can that be contructed on randomness but have only matching components
