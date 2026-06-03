@@ -1136,6 +1136,12 @@ shape = SubResource("BoxShape3D_gpjlu")
 collision_mask = 20
 debug_shape_custom_color = Color(9.62615e-08, 0.4775265, 0.75049263, 1)
 
+[node name="LedgeDetector" type="RayCast3D" parent="PlayerNode" unique_id=513808433]
+transform = Transform3D(1, 0, 0, 0, 18.03, 0, 0, 0, 1, 0, 7.5647035, 6.64576)
+enabled = false
+collision_mask = 2
+debug_shape_thickness = 5
+
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=791027408]
 root_node = NodePath("../PlayerNode")
 callback_mode_process = 2
@@ -1145,6 +1151,9 @@ anim_player = NodePath("../PlayerNode/AnimationPlayer")
 [node name="DoorwayEntryAnim" type="AnimationPlayer" parent="." unique_id=1152632725]
 libraries/ = SubResource("AnimationLibrary_gpjlu")
 speed_scale = 0.25
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1823081846]
+bus = &"SFX"
 
 [connection signal="body_entered" from="PlayerNode/ItemDropPoint/ItemCollisionChecker" to="." method="_on_item_collision_checker_body_entered"]
 [connection signal="body_exited" from="PlayerNode/ItemDropPoint/ItemCollisionChecker" to="." method="_on_item_collision_checker_body_exited"]
