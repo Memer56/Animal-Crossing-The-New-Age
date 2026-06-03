@@ -1,0 +1,43 @@
+[gd_scene format=4 uid="uid://dv7l7hfv8g52d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmbgo"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r8b2v"]
+_surfaces = [{
+"aabb": AABB(-450.76425, 27.195045, -371.06598, 906.83105, 1e-05, 734.5597),
+"format": 34896613377,
+"index_count": 87,
+"index_data": PackedByteArray("AAABAAIAAQAAAAMAAwAAAAQAAQADAAUAAQAFAAYABwAIAAkABwAKAAgACAAKAAsABwAMAAoABwANAAwACgAMAA4ADwANAAcACgAOABAACgAQABEAEQAQABIACgARABMADwAUAA0AFAAVABYADwAVABQADwAXABUAFwAPABgAGQAPABoAGAAPABkAGAAZABsAGAAbABwAGAAcAB0AHQAcAB4AGAAdAB8AHwAdACAA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 33,
+"vertex_data": PackedByteArray("AAAAABz+AACDxAAAT90AANDEAACS/wAAA4wAABm2AAAAAAAAQ3gAADOcAAAZtgAAy70AAJLIAAAAAAAAXgAAAMx/AAAqfQAAAAAAAHZXAAA4rgAAciYAAHWOAADBdgAA1K4AAEAZAAB+sgAApQUAAMW2AABqIAAA//8AAAAAAABDxwAAiyEAABzmAACpHwAASNkAAIceAAB/5QAAciYAAEvDAABEBQAAqe4AAGoJAACtzQAAagkAAPb5AAAWEgAAb/gAAMY0AAAQ6gAA2f8AAAj+AAD//wAAx94AAHm2AAAJ0QAAIaUAAHGvAADnkQAAxbYAAM6WAACT7wAAcj0AACfBAAAeRgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ountl"]
+resource_name = "island 2 model_Plane_004"
+_surfaces = [{
+"aabb": AABB(-450.76425, 27.195045, -371.06598, 906.83105, 1e-05, 734.5597),
+"attribute_data": PackedByteArray("8wgY8szA/dMUwW/z8IsAsPMIQXcVmwCwg7r1wPMINwmCgMB78wgmWfGrKiw5jt51g6wNIPCvDw7xs6AmcvjhCF7Dqic64O8lOtTmJKjfKiyov7YNOuiFEV/JhRHN8noZX/FQOe3jr/Oc9tLzX9lZsIPMbqAVrciO8bNIkxbpRkGovTtJ"),
+"format": 34896613399,
+"index_count": 87,
+"index_data": PackedByteArray("AAABAAIAAQAAAAMAAwAAAAQAAQADAAUAAQAFAAYABwAIAAkABwAKAAgACAAKAAsABwAMAAoABwANAAwACgAMAA4ADwANAAcACgAOABAACgAQABEAEQAQABIACgARABMADwAUAA0AFAAVABYADwAVABQADwAXABUAFwAPABgAGQAPABoAGAAPABkAGAAZABsAGAAbABwAGAAcAB0AHQAcAB4AGAAdAB8AHwAdACAA"),
+"material": SubResource("StandardMaterial3D_kmbgo"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 33,
+"vertex_data": PackedByteArray("AAAAABz+/7+DxAAAT93/v9DEAACS//+/A4wAABm2/78AAAAAQ3j/vzOcAAAZtv+/y70AAJLI/78AAAAAXgD/v8x/AAAqff+/AAAAAHZX/784rgAAcib/v3WOAADBdv+/1K4AAEAZ/79+sgAApQX/v8W2AABqIP+///8AAAAA/79DxwAAiyH/vxzmAACpH/+/SNkAAIce/79/5QAAcib/v0vDAABEBf+/qe4AAGoJ/7+tzQAAagn/v/b5AAAWEv+/b/gAAMY0/78Q6gAA2f//vwj+AAD///+/x94AAHm2/78J0QAAIaX/v3GvAADnkf+/xbYAAM6W/7+T7wAAcj3/vyfBAAAeRv+/////f////3////9//v//f/7//3/+//9//v//f////3/+//9//v//f/7//3/+//9//v//f////3/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9/////f////3/+//9//v//f/7//3////9//v//f/7//3/+//9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_r8b2v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ua3tj"]
+albedo_color = Color(0.77676356, 0.52224314, 1, 1)
+
+[node name="Island2NavMesh" type="Node3D" unique_id=400659259]
+
+[node name="NavMeshVersion" type="MeshInstance3D" parent="." unique_id=1415669494]
+mesh = SubResource("ArrayMesh_ountl")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_ua3tj")
