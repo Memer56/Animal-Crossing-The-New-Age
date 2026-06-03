@@ -12,7 +12,7 @@ class_name NpcDialogue
 	[["Hello, I'm [color=blue]<Insert fucking name>[/color], who are you?"], "Bunnie", [], null]
 ]
 @export var bob_dialogue : Array = [
-	[["Why hello there! I'm a [color=purple]CAT[/color]! You don't look like a cat", "I do need a potato...", "Can I take [color=blue]100,000[/color] bells?"], "Bob", [], null]
+	[["Why hello [color=green]" + EventBus.player_customisations[0] + "[/color]! I'm a [color=purple]CAT[/color]! You don't look like a cat", "I do need a potato...", "Can I take [color=blue]100,000[/color] bells?"], "Bob", [], null]
 ]
 
 @export var timmy_answer_button_options : Array = ["I'll take it!", "No thanks"]
