@@ -8,9 +8,6 @@ const GENERIC_TREE = preload("uid://dc2iy76lfy0ow")
 ##### NPC House
 const NPC_HOUSE = preload("uid://wkpv6yfvw85n")
 
-###### Navigaton and boundry bullshit
-const PLAYER_NAV_BOUNDRY = preload("uid://cixmss1j0ygbm")
-
 ### Spawmed if save didn't load ###
 const SAVE_DIDNT_LOAD = preload("uid://dlk1501txn687")
 const BLACK_SKY = preload("uid://dxvl6jpkjyy33")
@@ -20,11 +17,11 @@ const STONE_ITEM = preload("uid://801bd84rk176")
 
 #### Islands
 const ISLAND_1 = preload("uid://c1sfbvd3rjb32")
+const ISLAND_2 = preload("uid://cyrmqtrfwoaa0")
 
 @onready var inventory_interface: Control = $UI/InventoryInterface
 @onready var hot_bar_inventory: PanelContainer = $UI/InventoryInterface/HotBarInventory
 @onready var main_island_nav_mesh: NavigationRegion3D = $MainIslandNavMesh
-@onready var town_hall: StaticBody3D = $MainIslandNavMesh/TownHall
 @onready var world_environment: WorldEnvironment = $Sky/WorldEnvironment
 @onready var sun: DirectionalLight3D = $Sky/Sun
 @onready var island_node: Node3D = $MainIslandNavMesh/IslandNode
@@ -41,7 +38,6 @@ var min_distance : float = 50.0
 var objects_to_avoid : Array
 
 func _ready() -> void:
-	trigger_fade()
 	EventBus.player.toggle_inventory.connect(toggle_inventory_interface)
 	EventBus.bake_nav_mesh.connect(bake_nav_mesh)
 	EventBus.save_game_data.connect(save_game_data)
@@ -49,7 +45,6 @@ func _ready() -> void:
 	hot_bar_inventory.send_held_slot_data.connect(EventBus.player.set_item_in_hand)
 	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
-	load_island_and_player_nav_mesh()
 	connect_toggle_external_inventory_signal()
 	send_nav_region_to_npcs()
 	BuildManager.build_camera = build_camera
@@ -57,30 +52,24 @@ func _ready() -> void:
 	BuildManager.speed = 10.0 # For build camera movement speed
 	EventBus.is_in_player_house = false
 	EventBus.current_trees.clear()
-	if EventBus.game_is_new_save:
-		reset_all_event_bus_variables()
-		spawn_trees()
-	else:
+	if !EventBus.game_is_new_save:
 		load_game_data()
 		if BuildManager.home_can_upgrade:
 			BuildManager.upgrade_home()
+	
+	load_island()
 	spawn_stones()
 	bake_nav_mesh()
 
 func init_new_savegame_events():
 	var tom = TOM_NOOK.instantiate()
 	add_child(tom)
-	tom.global_position = town_hall.global_position
+	#tom.global_position = town_hall.global_position
 
-func reset_all_event_bus_variables():
-	EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
-	EventBus.loan_balance = 140000
-	EventBus.previous_loan_balance = EventBus.loan_balance
-	EventBus.player_is_debt_free = false
-	EventBus.house_level = 0
-	EventBus.current_trees.clear()
-	EventBus.world_time = 0.3
-	EventBus.npc_houses.clear()
+func _on_main_island_nav_mesh_bake_finished() -> void:
+	if EventBus.game_is_new_save:
+		spawn_trees()
+	trigger_fade()
 
 func connect_toggle_external_inventory_signal():
 	for node in get_tree().get_nodes_in_group("external_inventory"):
@@ -123,7 +112,7 @@ func trigger_fade():
 func bake_nav_mesh():
 	# Allows objects to spawn first before baking the nav mesh
 	await get_tree().create_timer(0.5).timeout
-	main_island_nav_mesh.bake_navigation_mesh(true)
+	main_island_nav_mesh.bake_navigation_mesh(false)
 
 func save_game_data():
 	var save = SaveGame.new()
@@ -140,6 +129,11 @@ func save_game_data():
 	for node in get_tree().get_nodes_in_group("NPCStructure"):
 		save.npc_houses[node.name] = node.house_data
 	
+	## If array is less that 3, player pos wasn't appened but if it was, overwrite that index
+	if EventBus.player_customisations.size() < 4:
+		EventBus.player_customisations.append(EventBus.player.global_position)
+	else:
+		EventBus.player_customisations[3] = EventBus.player.global_position
 	
 	BuildManager.exterior_objects = save.exterior_object_info
 	save.interior_object_info = BuildManager.interior_objects
@@ -156,6 +150,7 @@ func save_game_data():
 	save.house_level = EventBus.house_level
 	save.trees = EventBus.current_trees
 	save.world_time = EventBus.world_time
+	save.selected_island_info = EventBus.selected_island_info
 	
 	
 	if EventBus.game_is_new_save:
@@ -181,6 +176,7 @@ func load_player_data():
 		EventBus.previous_loan_balance = save.previous_loan_balance
 		EventBus.player_is_debt_free = save.player_is_debt_free
 		EventBus.house_level = save.house_level
+		EventBus.selected_island_info = save.selected_island_info
 		inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 		inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
 
@@ -196,6 +192,8 @@ func load_object_data():
 					current_new_object = "Player House"
 				else:
 					current_new_object = new_object
+			else:
+				current_new_object = new_object
 			
 			#print("Current new object : ", current_new_object)
 			BuildManager.current_object_name_to_spawn = current_new_object
@@ -232,8 +230,7 @@ func generate_save_file_id() -> String:
 	return id
 
 ## Used for the player's navigtion, it's needed to reference a clean nav mesh
-func load_island_and_player_nav_mesh():
-	var i
+func load_island():
 	var island_name
 	var island
 	
@@ -244,10 +241,12 @@ func load_island_and_player_nav_mesh():
 	
 	match island_name:
 		"Island 1":
-			i = PLAYER_NAV_BOUNDRY.instantiate()
+			island_node.global_position.y = -1.145
 			island = ISLAND_1.instantiate()
+		"Island 2":
+			island_node.global_position.y = -12.555
+			island = ISLAND_2.instantiate()
 	
-	get_tree().root.add_child.call_deferred(i)
 	island_node.add_child.call_deferred(island)
 
 func trigger_save_fail_events():
@@ -296,14 +295,14 @@ func spawn_stones():
 			objects_to_avoid.append(new_stone)
 
 func spawn_new_npc_house():
-	BuildManager
+	pass
 
 func get_random_point_on_nav_mesh() -> Vector3:
 	await get_tree().process_frame
 	var random_point : Vector3
 	
 	if EventBus.tree_nav_mesh:
-		map_rid = EventBus.tree_nav_mesh.get_region_rid()
+		map_rid = EventBus.tree_nav_mesh.get_rid()
 		random_point = NavigationServer3D.region_get_random_point(map_rid, 2, false)
 	
 	return random_point
