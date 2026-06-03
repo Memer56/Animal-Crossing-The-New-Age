@@ -5,7 +5,7 @@
 - Player customisations options and now saved and loaded
 - Player position is now saved and loaded
 - Added icon at the bottom right of the screen to indicate the game is loading
-- Fixed issue that caused one save files values carry over is a new game save was created during runtime
+- Fixed issue that caused one save files values carry over if a new game save was created during runtime
 - Villager's now say your name
 
 ## Alpha version 1.2.3 - The Functional Update
