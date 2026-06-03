@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c103pdsycn4dl" path="res://Fade Canvas Layer/fade_canvas_layer.gd" id="1_4nwfv"]
 [ext_resource type="Shader" uid="uid://dpe4xfa6krxg3" path="res://Shaders/circle_shrink_transition.gdshader" id="1_qjg0o"]
+[ext_resource type="Texture2D" uid="uid://brm854u3w7dmc" path="res://acnh game icon.png" id="3_r408e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4nwfv"]
 shader = ExtResource("1_qjg0o")
@@ -28,6 +29,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/LoadingIcon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_u4w1y"]
@@ -57,6 +70,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/LoadingIcon:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_4nwfv"]
 resource_name = "fade_out"
@@ -79,6 +104,67 @@ _data = {
 &"RESET": SubResource("Animation_r408e"),
 &"fade_in": SubResource("Animation_u4w1y"),
 &"fade_out": SubResource("Animation_4nwfv")
+}
+
+[sub_resource type="Animation" id="Animation_335te"]
+resource_name = "Fade"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/LoadingIcon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.3137255)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/LoadingIcon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_txr7l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/LoadingIcon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/LoadingIcon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_txr7l"]
+_data = {
+&"Fade": SubResource("Animation_335te"),
+&"RESET": SubResource("Animation_txr7l")
 }
 
 [node name="FadeCanvasLayer" type="CanvasLayer" unique_id=33571830]
@@ -115,5 +201,29 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4nwfv")
 
+[node name="LoadingIcon" type="TextureRect" parent="Control" unique_id=516417521]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -134.81824
+offset_right = -40.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_r408e")
+expand_mode = 5
+stretch_mode = 5
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1251826522]
 libraries/ = SubResource("AnimationLibrary_r408e")
+
+[node name="LoadIconAnim" type="AnimationPlayer" parent="." unique_id=404107106]
+libraries/ = SubResource("AnimationLibrary_txr7l")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="LoadIconAnim" to="." method="_on_load_icon_anim_animation_started"]
