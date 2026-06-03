@@ -7,6 +7,7 @@
 - Added icon at the bottom right of the screen to indicate the game is loading
 - Fixed issue that caused one save files values carry over if a new game save was created during runtime
 - Villager's now say your name
+- Overhauled ledge detection system, this avoids issues allowing the player to slowly pass through where they shouldn't
 
 ## Alpha version 1.2.3 - The Functional Update
 - The fading effect now works as intended
