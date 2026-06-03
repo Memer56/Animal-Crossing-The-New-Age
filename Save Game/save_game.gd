@@ -21,6 +21,7 @@ var time = Time.get_datetime_dict_from_system()
 @export var trees : Array[Array]
 @export var npc_houses : Dictionary
 @export var world_time : float
+@export var selected_island_info : Array
 @export var this_save_date = str("%02d:%02d:%02d %02d:%02d:%02d" % [time.day, time.month, time.year, time.hour, time.minute, time.second])
 @export var game_version = ProjectSettings.get_setting("application/config/version")
 
