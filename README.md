@@ -1,5 +1,13 @@
 # AC : The New Age
 
+## Alpha version 1.2.4 - Another Island Update
+- Added a 2nd island
+- Player customisations options and now saved and loaded
+- Player position is now saved and loaded
+- Added icon at the bottom right of the screen to indicate the game is loading
+- Fixed issue that caused one save files values carry over is a new game save was created during runtime
+- Villager's now say your name
+
 ## Alpha version 1.2.3 - The Functional Update
 - The fading effect now works as intended
 - Player creation menu and island selection is now working
