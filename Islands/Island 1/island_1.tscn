@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cc5yg27l0taa8" path="res://Islands/Island 1/island_1_nav_mesh.tscn" id="2_c7yrb"]
 [ext_resource type="PackedScene" uid="uid://buy4yln2yidq3" path="res://Buildings/Town Hall/town_hall.tscn" id="4_tdofs"]
 [ext_resource type="PackedScene" uid="uid://brs6dqa3tsdbl" path="res://Bridges/Wooden Bridges/wooden_bridge_small.tscn" id="5_yvgo1"]
+[ext_resource type="PackedScene" uid="uid://dv53gxd1trk8d" path="res://Buildings/Airport/airport.tscn" id="6_a7ard"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbo04"]
 resource_name = "Material.001"
@@ -94,3 +95,6 @@ transform = Transform3D(-0.043590657, 0, 1.809475, 0, 1.81, 0, -1.809475, 0, -0.
 
 [node name="wooden_bridge_small3" parent="BridgesNavMesh" unique_id=1320937122 instance=ExtResource("5_yvgo1")]
 transform = Transform3D(-0.23105226, 0, 1.7951924, 0, 1.81, 0, -1.7951924, 0, -0.23105226, -194.48424, 15.916474, -221.18108)
+
+[node name="Airport" parent="." unique_id=1751176815 instance=ExtResource("6_a7ard")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 428.71893, -36.91991, 582.7434)
