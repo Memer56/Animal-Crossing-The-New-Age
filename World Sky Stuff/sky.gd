@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		EventBus.service_buildings_closed = false
 	
-	if EventBus.world_time >= 0.9:
+	if EventBus.world_time >= 0.8:
 		if !EventBus.service_buildings_lights_on:
 			if !EventBus.service_buildings_closed:
 				EventBus.service_buildings_lights_on = true
