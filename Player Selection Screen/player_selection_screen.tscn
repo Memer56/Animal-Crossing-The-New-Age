@@ -193,6 +193,7 @@ toggle_mode = true
 text = "Island Selection"
 
 [node name="PlayerCreationHBox" type="HBoxContainer" parent="BG/Panel/Panel" unique_id=1451774498]
+visible = false
 layout_mode = 0
 offset_left = 2.5
 offset_top = 241.5
@@ -270,7 +271,6 @@ hex_visible = false
 presets_visible = false
 
 [node name="IslandSelectionVBox" type="VBoxContainer" parent="BG/Panel/Panel" unique_id=1145228915]
-visible = false
 layout_mode = 0
 offset_left = 30.5
 offset_top = 87.5
@@ -299,6 +299,8 @@ island_scene = "res://Islands/Island 1/island_1.tscn"
 
 [node name="IslandSelectionOption2" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=918135762 instance=ExtResource("5_5raub")]
 layout_mode = 2
+island_name = "Island 2"
+island_scene = "res://Islands/Island 2/island_2.tscn"
 
 [node name="IslandSelectionOption3" parent="BG/Panel/Panel/IslandSelectionVBox/GridContainer" unique_id=1836345871 instance=ExtResource("5_5raub")]
 layout_mode = 2
