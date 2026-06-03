@@ -5,6 +5,10 @@ signal toggle_pause
 signal save_outside_data
 signal save_player_data
 
+### Audio ###
+const FOOTSTEPS_GRASS_DIRT_1_V_2 = preload("uid://dmbju2vqduvs7")
+const FOOTSTEPS_SAND_2__571950_ = preload("uid://bnh5lwb8vllbk")
+
 @export var inventory_data : InventoryData
 @export var hotbar_inventory_data : InventoryData
 @export var skin_colour : Color
@@ -30,6 +34,8 @@ signal save_player_data
 @onready var item_collision_checker: Area3D = $PlayerNode/ItemDropPoint/ItemCollisionChecker
 @onready var collision_checker: Area3D = $PlayerNode/ObjectDropPoint/CollisionChecker
 @onready var hair__m_hair: MeshInstance3D = $PlayerNode/Armature/Skeleton3D/Hair/HairPosNode/Armature/Skeleton3D/Hair__mHair
+@onready var ledge_detector: RayCast3D = $PlayerNode/LedgeDetector
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var speed = 80.0 #30.0
 var direction = Vector3.ZERO
@@ -45,7 +51,6 @@ var doorway_events_can_trigger : bool = false
 var raycasted_door_found : StaticBody3D
 var map_rid : RID
 var edge_push_strength : float = 50.0
-var player_nav_mesh : NavigationRegion3D
 
 enum {
 	IDLE,
@@ -73,13 +78,11 @@ func _ready() -> void:
 	# Timer give the below a chance for is_in_overworld to be in correct state
 	await get_tree().create_timer(0.4).timeout
 	if EventBus.is_in_overworld:
-		player_nav_mesh = get_tree().root.get_node("PlayerNavBoundry")
-		if player_nav_mesh:
-			map_rid = player_nav_mesh.get_navigation_map()
-			#player_nav_mesh.bake_navigation_mesh(true)
+		ledge_detector.enabled = true
 	await get_tree().create_timer(0.1).timeout
 	set_skin_colour()
 	set_hair_colour()
+	set_player_position()
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("Left", "Right", "Forward", "Backwards")
@@ -111,10 +114,16 @@ func _physics_process(delta: float) -> void:
 	detect_raycast_collision()
 	
 	if EventBus.is_in_overworld:
-		is_player_on_nav_mesh()
+		is_player_on_land()
 
 	apply_gravity(delta)
 	move_and_slide()
+
+func set_player_position():
+	if EventBus.is_in_overworld:
+		if !EventBus.player_customisations.is_empty():
+			if EventBus.player_customisations.size() > 3:
+				global_position = EventBus.player_customisations[3]
 
 func disable_and_enable_nav_mesh_limit(time : float):
 	await get_tree().create_timer(time).timeout
@@ -145,6 +154,7 @@ func move_player(delta, _direction, input_dir):
 		if direction :
 			velocity.x = _direction.x * speed
 			velocity.z = _direction.z * speed
+			play_footsteps()
 		#else:
 			#velocity.x = move_toward(velocity.x, 0, speed)
 			#velocity.z = move_toward(velocity.z, 0, speed)
@@ -154,8 +164,15 @@ func move_player(delta, _direction, input_dir):
 	
 	if input_dir == Vector2.ZERO:
 		state = IDLE
+		audio_stream_player.stop()
 	
 	player_node.rotation.y = lerp_angle(player_node.rotation.y, atan2(velocity.x, velocity.z) - rotation.y, delta * 10)
+
+func play_footsteps():
+	if audio_stream_player.playing == false:
+		audio_stream_player.stream = FOOTSTEPS_GRASS_DIRT_1_V_2
+		audio_stream_player.pitch_scale = randf_range(0.8, 1.1)
+		audio_stream_player.play()
 
 func do_action():
 	anim_speed = 2.0
@@ -425,15 +442,15 @@ func detect_raycast_collision():
 							collider.damage_object(EventBus.held_item_slot_data)
 						state = ACTION
 
-func is_player_on_nav_mesh():
+func is_player_on_land():
 	# All this prevents the player from falling off the edges of rivers and such
-	if !EventBus.player_can_leave_nav_mesh and EventBus.is_in_overworld and player_nav_mesh:
+	if !EventBus.player_can_leave_nav_mesh and EventBus.is_in_overworld:
 		var player_pos = global_position
-		var closest_nav_point = NavigationServer3D.map_get_closest_point(map_rid, player_pos)
-		var distance = player_pos.distance_to(closest_nav_point)
 		
-		if distance > 0.9:
-			global_position = lerp(global_position, closest_nav_point, 0.3)
+		if !ledge_detector.is_colliding():
+			#global_position = lerp(global_position, player_pos, 0.3)
+			velocity.x = 0.0
+			velocity.z = 0.0
 
 func toggle_collisions(layer_value : int, bool_value : bool):
 	set_collision_mask_value(layer_value, bool_value)
