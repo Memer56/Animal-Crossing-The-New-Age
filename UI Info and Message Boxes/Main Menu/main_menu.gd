@@ -26,6 +26,7 @@ var new_game_button_has_grabbed_focus : bool = false
 
 
 func _ready() -> void:
+	reset_all_event_bus_variables()
 	get_tree().paused = false
 	any_button_was_pressed = false
 	EventBus.player_can_leave_nav_mesh = true
@@ -50,6 +51,18 @@ func _input(_event: InputEvent) -> void:
 		await get_tree().create_timer(0.2).timeout
 		any_button_was_pressed = true
 
+func reset_all_event_bus_variables():
+	EventBus.nooks_cranny_has_set_items = false # in the event player doesn't close game before starting new save
+	EventBus.loan_balance = 140000
+	EventBus.previous_loan_balance = EventBus.loan_balance
+	EventBus.player_is_debt_free = false
+	EventBus.house_level = 0
+	EventBus.current_trees.clear()
+	EventBus.world_time = 0.3
+	EventBus.npc_houses.clear()
+	EventBus.player_customisations.clear()
+	EventBus.selected_island_info.clear()
+
 func fade_out_label():
 	var tween = get_tree().create_tween()
 	tween.tween_property(press_any_button, "modulate:a", 0, 1.0)
@@ -67,7 +80,7 @@ func _on_new_game_pressed() -> void:
 		EventBus.is_in_overworld = true
 		EventBus.game_is_new_save = true
 		EventBus.next_scene = "res://Main World/main.tscn"
-		get_tree().change_scene_to_file("res://UI Info and Message Boxes/Load Screen/load_screen.tscn")
+		get_tree().change_scene_to_file("res://Player Selection Screen/player_selection_screen.tscn")
 
 
 func _on_load_game_pressed() -> void:
@@ -92,6 +105,7 @@ func display_and_init_save_slots():
 		
 		if EventBus.found_save_file_ids:
 			var data = EventBus.found_save_file_ids
+			data.reverse() #Ensures save list is in the order players would expect
 			for index in data.size():
 				var new_slot = SAVE_SLOT.instantiate()
 				save_slots.add_child(new_slot)
