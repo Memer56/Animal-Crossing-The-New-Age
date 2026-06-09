@@ -1,36 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvyftmwfpksm5"]
+[gd_scene format=3 uid="uid://cvyftmwfpksm5"]
 
 [ext_resource type="Script" uid="uid://b6j7it0k88p43" path="res://Inventory/slot.gd" id="1_khur4"]
 [ext_resource type="Texture2D" uid="uid://lxqy6bcmdak0" path="res://Inventory/UI/item_slot.png" id="2_cahxb"]
+[ext_resource type="Texture2D" uid="uid://f3pylhsk8j0c" path="res://Inventory/UI/item_slot_highlight V2.png" id="3_8fqbu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufgh3"]
 bg_color = Color(0, 0, 0, 0)
 
-[node name="Slot" type="PanelContainer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4f18"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8059326, 0.3378052, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Slot" type="PanelContainer" unique_id=1536499688]
 custom_minimum_size = Vector2(64, 64)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 64.0
+offset_bottom = 64.0
+focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ufgh3")
 script = ExtResource("1_khur4")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=133141858]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Slot" type="TextureRect" parent="MarginContainer"]
+[node name="Slot" type="TextureRect" parent="MarginContainer" unique_id=426957071]
 texture_filter = 3
 layout_mode = 2
 texture = ExtResource("2_cahxb")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=1163200477]
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="QuantityLabel" type="Label" parent="MarginContainer/TextureRect"]
+[node name="QuantityLabel" type="Label" parent="MarginContainer/TextureRect" unique_id=1932628059]
 visible = false
 z_index = 1
 layout_mode = 1
@@ -48,4 +62,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "x99"
 
+[node name="Highlight" type="Panel" parent="." unique_id=8232873]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s4f18")
+
+[node name="HotBarHighlight" type="TextureRect" parent="." unique_id=20934278]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_8fqbu")
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

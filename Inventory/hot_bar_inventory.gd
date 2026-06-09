@@ -6,7 +6,7 @@ signal send_held_slot_data(slot_data : SlotData)
 const Slot = preload("res://Inventory/slot.tscn")
 
 @onready var h_box_container = $MarginContainer/HBoxContainer
-@onready var item_slot_highlight: Sprite2D = $ItemSlotHighlight
+
 
 var array : Array
 var slot_array : Array
@@ -25,11 +25,14 @@ func sort_slot_array():
 				slot_array.append(element)
 		
 		if game_start_up:
-			item_slot_highlight.global_position = slot_array[0].global_position
+			#item_slot_highlight.global_position = slot_array[0].global_position
 			current_position = current_position % slot_array.size()
-			item = EventBus.player.hot_bar_inventory_data.return_slot_data_by_index(current_position)
+			slot_array[0].toggle_hotbar_highlight(true)
+			item = EventBus.player.hotbar_inventory_data.return_slot_data_by_index(current_position)
 			EventBus.held_item_slot_data = item
 			game_start_up = false
+		else:
+			highlight_correct_slot(current_position)
 
 func _unhandled_key_input(event):
 	if not visible or not event.is_pressed():
@@ -38,26 +41,40 @@ func _unhandled_key_input(event):
 	if range(KEY_1, KEY_7).has(event.keycode):
 		hot_bar_use.emit(event.keycode - KEY_1)
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_released("MouseWheelDown"):
-		current_position = (current_position + 1) % slot_array.size()
-		item_slot_highlight.global_position = slot_array[current_position].global_position
-		item = EventBus.player.hot_bar_inventory_data.return_slot_data_by_index(current_position)
-		EventBus.held_item_slot_data = item
-		send_set_hand_item_signal(item)
-	if Input.is_action_just_released("MouseWheelUp"):
-		current_position = (current_position - 1) % slot_array.size()
-		item_slot_highlight.global_position = slot_array[current_position].global_position
-		item = EventBus.player.hot_bar_inventory_data.return_slot_data_by_index(current_position)
-		EventBus.held_item_slot_data = item
-		send_set_hand_item_signal(item)
+func _input(_event: InputEvent) -> void:
+	if !BuildManager.is_in_build_mode:
+		if Input.is_action_just_released("MouseWheelDown"):
+			current_position = (current_position + 1) % slot_array.size()
+			if current_position > 5:
+				current_position = 0
+			#item_slot_highlight.global_position = slot_array[current_position].global_position
+			highlight_correct_slot(current_position)
+			item = EventBus.player.hotbar_inventory_data.return_slot_data_by_index(current_position)
+			EventBus.held_item_slot_data = item
+			send_set_hand_item_signal(item)
+		if Input.is_action_just_released("MouseWheelUp"):
+			current_position = (current_position - 1) % slot_array.size()
+			if current_position < 0:
+				current_position = 5
+			#item_slot_highlight.global_position = slot_array[current_position].global_position
+			highlight_correct_slot(current_position)
+			item = EventBus.player.hotbar_inventory_data.return_slot_data_by_index(current_position)
+			EventBus.held_item_slot_data = item
+			send_set_hand_item_signal(item)
+
+func highlight_correct_slot(index_to_highlight : int):
+	for index in slot_array.size():
+		if index == index_to_highlight:
+			slot_array[index].toggle_hotbar_highlight(true)
+		else:
+			slot_array[index].toggle_hotbar_highlight(false)
 
 func send_set_hand_item_signal(_item : SlotData):
 	send_held_slot_data.emit(_item)
 
 func set_held_item():
 	# Called when items are clicked and dragged into place
-	item = EventBus.player.hot_bar_inventory_data.return_slot_data_by_index(current_position)
+	item = EventBus.player.hotbar_inventory_data.return_slot_data_by_index(current_position)
 	EventBus.held_item_slot_data = item
 	send_set_hand_item_signal(item)
 
