@@ -4,7 +4,7 @@
 - New saves now have an intro sequence
 - UI audio for hovering and selecting UI has been added
 - Fixed issue that caused the fade effect to trigger after placing down a tent
-- Settings button now displays optons for setting the audio levels
+- Settings button now displays options for setting the audio levels
 - Settings are correctly saved and loaded
 - It's now possible to enter the Airport (interior has not been added yet)
 - Changed how the hotbar highlight works to make it much more easier to work with
