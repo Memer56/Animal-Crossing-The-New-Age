@@ -3,6 +3,9 @@ extends Node
 const DRESS_1 = preload("uid://duepwdb7eo68a")
 const DRESS_2 = preload("uid://npvkb08frqdy")
 
+### Button sounds ###
+const MENU_HOVER_SOUND_EFFECT = preload("uid://7krrlm2un7o6")
+const MENU_SELECTION_SOUND_EFFECT = preload("uid://cbk6420stpgs6")
 
 signal create_overflow_slot_data(slot_data : SlotData)
 signal duplicate_slot_data_info
@@ -20,6 +23,7 @@ signal toggle_atm_ui
 signal toggle_crafting_ui
 signal toggle_service_buildings_lights(true_or_false : bool)
 signal toggle_fade(true_or_false : bool)
+signal remove_tom_and_free_player
 
 var player
 ## Index 0 = Player Name / Index 1 = Skin Colour / Index 2 = Hair Colour / Index 3 = Player Position
@@ -36,7 +40,6 @@ var room_to_spawn : String
 var is_in_overworld : bool = false
 var is_in_player_house : bool = false
 var trigger_building_exit_event : bool = false
-var player_can_leave_nav_mesh : bool = true # Defaulted to true to allow correct spanwing placement
 var game_in_start_up : bool = true
 var game_is_new_save : bool = true
 var current_save_file_id : String
@@ -61,8 +64,64 @@ var service_buildings_closed : bool = false
 var service_buildings_lights_on : bool = false
 ## index 0 = Island Name / index 1 = Island Scene String
 var selected_island_info : Array
+var sound_settings : Array[float] = [100.0, 100.0, 100.0]
 var next_scene : String
+var playback
+var game_state
+var quest_level : int = 1
 
+enum {
+	PLAY,
+	INTRO
+}
+
+func _ready() -> void:
+	game_state = PLAY
+
+func _enter_tree() -> void:
+	var audio_player : AudioStreamPlayer = AudioStreamPlayer.new()
+	add_child(audio_player)
+	audio_player.process_mode = Node.PROCESS_MODE_ALWAYS
+	audio_player.bus = &"SFX"
+	
+	var stream : AudioStreamPolyphonic = AudioStreamPolyphonic.new()
+	stream.polyphony = 32
+	audio_player.stream = stream
+	audio_player.play()
+	playback = audio_player.get_stream_playback()
+	
+	get_tree().node_added.connect(_on_node_added)
+
+func _on_node_added(node : Node):
+	if node is Button:
+		if !node.mouse_entered.is_connected(_play_hover):
+			node.mouse_entered.connect(_play_hover)
+
+		if !node.pressed.is_connected(_play_pressed):
+			node.pressed.connect(_play_pressed)
+	
+	if node is Panel:
+		if node.has_meta("Sound"):
+			if !node.mouse_entered.is_connected(_play_hover):
+				node.mouse_entered.connect(_play_hover)
+
+			if !node.gui_input.is_connected(_play_gui_input):
+				node.gui_input.connect(_play_gui_input)
+
+func _play_hover():
+	playback.play_stream(MENU_HOVER_SOUND_EFFECT)
+
+func _play_pressed():
+	playback.play_stream(MENU_SELECTION_SOUND_EFFECT)
+
+func _play_gui_input(event : InputEvent):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_MASK_LEFT and event.is_released():
+			playback.play_stream(MENU_SELECTION_SOUND_EFFECT)
+
+func increase_quest_level():
+	##Increases the quest level, this tracks how far along the player is in their quests
+	quest_level += 1
 
 func return_clothing_scene(clothing_name : String) -> PackedScene:
 	var clothing : PackedScene
