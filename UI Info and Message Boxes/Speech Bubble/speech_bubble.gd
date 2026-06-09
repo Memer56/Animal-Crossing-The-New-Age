@@ -55,11 +55,17 @@ func progress_speech_bubble():
 		clear_previous_text()
 		if text_index < text_to_say.size() and allow_text_progression:
 			rich_text_label.append_text(text_to_say[text_index])
-			print(text_index)
 			if question_at_index():
 				toggle_answer_panel()
 		else:
 			hide_speech_bubble()
+			if EventBus.game_state == EventBus.INTRO and EventBus.is_in_overworld:
+				EventBus.game_state = EventBus.PLAY
+				await get_tree().create_timer(1).timeout
+				EventBus.toggle_fade.emit(true)
+				await get_tree().create_timer(2).timeout
+				EventBus.remove_tom_and_free_player.emit()
+				EventBus.toggle_fade.emit(false)
 	else:
 		print("can't close this, answer panel is active")
 
@@ -81,8 +87,9 @@ func handle_question_result(button_name : String):
 				#House can be upgraded
 				text_index = (4 - 1)
 				BuildManager.home_can_upgrade = true
-				EventBus.loan_balance = 1200000
+				EventBus.loan_balance = give_player_debt()
 				EventBus.player_is_debt_free = false
+				EventBus.house_level += 1
 			else:
 				#House cannot be upgraded
 				text_index = (3 - 1)
@@ -112,8 +119,8 @@ func handle_question_result(button_name : String):
 			hide_speech_bubble()
 
 func give_player_debt() -> int:
-	var new_debt : int
-	return 10
+	var new_debt : int = EventBus.previous_loan_balance * 8
+	return new_debt
 
 func hide_speech_bubble():
 	animation_player.play_backwards("anim")
