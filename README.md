@@ -1,5 +1,17 @@
 # AC : The New Age
 
+## Alpha version 1.2.5 - The Intro Update
+- New saves now have an intro sequence
+- UI audio for hovering and selecting UI has been added
+- Fixed issue that caused the fade effect to trigger after placing down a tent
+- Settings button now displays optons for setting the audio levels
+- Settings are correctly saved and loaded
+- It's now possible to enter the Airport (interior has not been added yet)
+- Changed how the hotbar highlight works to make it much more easier to work with
+- Fixed collision issue with the bridges
+- The Plane now has the ability to rotate the propellers
+- Tom now spawns in the intro to welcome and instruct the player on first task
+
 ## Alpha version 1.2.4 - Another Island Update
 - Added a 2nd island
 - Player customisations options and now saved and loaded
