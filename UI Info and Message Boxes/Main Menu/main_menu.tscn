@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cdia1v1d6037p"]
+[gd_scene format=3 uid="uid://cdia1v1d6037p"]
 
 [ext_resource type="Script" uid="uid://cm0i43eibyqvm" path="res://UI Info and Message Boxes/Main Menu/main_menu.gd" id="1_6crhk"]
 [ext_resource type="Shader" uid="uid://btckd8ikemt25" path="res://Shaders/space_background_shader.gdshader" id="1_xg1hq"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cbbtgce3tp5l5" path="res://Fade Canvas Layer/fade_canvas_layer.tscn" id="5_srxi2"]
 [ext_resource type="StyleBox" uid="uid://dlusgwld66go8" path="res://Button Styles/pressed_button.tres" id="6_ubjpa"]
 [ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="7_srxi2"]
+[ext_resource type="StyleBox" uid="uid://d1i0p8d83a5df" path="res://Button Styles/focus_button.tres" id="8_wp0hy"]
+[ext_resource type="PackedScene" uid="uid://d05ga1drtqyfy" path="res://UI Info and Message Boxes/Settings Menu/settings_menu.tscn" id="9_xmwmh"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xg1hq"]
 
@@ -44,7 +46,7 @@ base_font = ExtResource("3_5kbvv")
 [sub_resource type="FontVariation" id="FontVariation_5kbvv"]
 base_font = ExtResource("3_5kbvv")
 
-[sub_resource type="FontVariation" id="FontVariation_am42e"]
+[sub_resource type="FontVariation" id="FontVariation_wp0hy"]
 base_font = ExtResource("3_5kbvv")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_srxi2"]
@@ -54,7 +56,17 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="FontVariation" id="FontVariation_am42e"]
+base_font = ExtResource("3_5kbvv")
+
+[sub_resource type="FontVariation" id="FontVariation_srxi2"]
+base_font = ExtResource("3_5kbvv")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wp0hy"]
+font = SubResource("FontVariation_srxi2")
+font_size = 20
+
+[node name="MainMenu" type="Control" unique_id=303117203]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -64,7 +76,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6crhk")
 
-[node name="BG" type="Panel" parent="."]
+[node name="BG" type="Panel" parent="." unique_id=1631263121]
 material = SubResource("ShaderMaterial_kew41")
 layout_mode = 1
 anchors_preset = 15
@@ -74,7 +86,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PressAnyButton" type="RichTextLabel" parent="BG"]
+[node name="PressAnyButton" type="RichTextLabel" parent="BG" unique_id=901647685]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -92,7 +104,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_5kbvv")
 bbcode_enabled = true
 text = "[pulse freq=1.0 color=#ffffff40 ease=-2.0]Press any button[/pulse]"
 
-[node name="Logo" type="TextureRect" parent="BG"]
+[node name="Logo" type="TextureRect" parent="BG" unique_id=1403675051]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -109,7 +121,7 @@ texture = ExtResource("2_kew41")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BG/Logo"]
+[node name="RichTextLabel" type="RichTextLabel" parent="BG/Logo" unique_id=1056302614]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -131,8 +143,7 @@ text = "[color=f7f5d1]The[/color]
 [color=60c3d8]New Age[/color]"
 scroll_active = false
 
-[node name="MainButtons" type="VBoxContainer" parent="BG"]
-visible = false
+[node name="MainButtons" type="VBoxContainer" parent="BG" unique_id=1097959969]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -140,52 +151,60 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -204.0
-offset_top = 67.5
-offset_right = 204.0
-offset_bottom = 348.5
+offset_left = -235.5
+offset_top = 50.0
+offset_right = 235.5
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 20
 alignment = 1
 
-[node name="NewGame" type="Button" parent="BG/MainButtons"]
+[node name="NewGame" type="Button" parent="BG/MainButtons" unique_id=1298618161]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = SubResource("FontVariation_am42e")
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = SubResource("FontVariation_wp0hy")
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = ExtResource("5_am42e")
 theme_override_styles/pressed = ExtResource("6_ubjpa")
 theme_override_styles/hover = ExtResource("7_srxi2")
-disabled = true
+theme_override_styles/focus = ExtResource("8_wp0hy")
 text = "New Game"
 
-[node name="LoadGame" type="Button" parent="BG/MainButtons"]
+[node name="LoadGame" type="Button" parent="BG/MainButtons" unique_id=1139954965]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = SubResource("FontVariation_am42e")
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = SubResource("FontVariation_wp0hy")
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = ExtResource("5_am42e")
 theme_override_styles/pressed = ExtResource("6_ubjpa")
 theme_override_styles/hover = ExtResource("7_srxi2")
-disabled = true
+theme_override_styles/focus = ExtResource("8_wp0hy")
 text = "Load Game"
 
-[node name="Quit" type="Button" parent="BG/MainButtons"]
+[node name="Settings" type="Button" parent="BG/MainButtons" unique_id=334967833]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-focus_mode = 0
-theme_override_fonts/font = SubResource("FontVariation_am42e")
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = SubResource("FontVariation_wp0hy")
+theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = ExtResource("5_am42e")
 theme_override_styles/pressed = ExtResource("6_ubjpa")
 theme_override_styles/hover = ExtResource("7_srxi2")
-disabled = true
+theme_override_styles/focus = ExtResource("8_wp0hy")
+text = "Settings"
+
+[node name="Quit" type="Button" parent="BG/MainButtons" unique_id=1833764578]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_wp0hy")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("5_am42e")
+theme_override_styles/pressed = ExtResource("6_ubjpa")
+theme_override_styles/hover = ExtResource("7_srxi2")
+theme_override_styles/focus = ExtResource("8_wp0hy")
 text = "Quit"
 
-[node name="Container" type="Control" parent="BG"]
+[node name="Container" type="Control" parent="BG" unique_id=2098328080]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -195,7 +214,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BG/Container"]
+[node name="ScrollContainer" type="ScrollContainer" parent="BG/Container" unique_id=573607564]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -212,7 +231,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_srxi2")
 horizontal_scroll_mode = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="BG/Container/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BG/Container/ScrollContainer" unique_id=1897810203]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -220,13 +239,13 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="SaveSlots" type="VBoxContainer" parent="BG/Container/ScrollContainer/MarginContainer"]
+[node name="SaveSlots" type="VBoxContainer" parent="BG/Container/ScrollContainer/MarginContainer" unique_id=2126091752]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="Back" type="Button" parent="BG/Container"]
+[node name="Back" type="Button" parent="BG/Container" unique_id=2021007082]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 1
 anchors_preset = 7
@@ -248,9 +267,28 @@ theme_override_styles/pressed = ExtResource("6_ubjpa")
 theme_override_styles/hover = ExtResource("7_srxi2")
 text = "Back"
 
-[node name="FadeCanvasLayer" parent="." instance=ExtResource("5_srxi2")]
+[node name="GameVersionLabel" type="Label" parent="BG" unique_id=2098065738]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -61.0
+offset_right = 189.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "Game Version: null"
+label_settings = SubResource("LabelSettings_wp0hy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsMenu" parent="BG" unique_id=1893792982 instance=ExtResource("9_xmwmh")]
+layout_mode = 1
+
+[node name="FadeCanvasLayer" parent="." unique_id=868790695 instance=ExtResource("5_srxi2")]
 
 [connection signal="pressed" from="BG/MainButtons/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="BG/MainButtons/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="BG/MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="BG/MainButtons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="BG/Container/Back" to="." method="_on_back_pressed"]

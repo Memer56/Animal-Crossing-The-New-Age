@@ -13,6 +13,7 @@ const CONFIRM_MESSAGE = preload("uid://btn78ebu7dnjd")
 @onready var game_version_label: Label = $BG/GameVersionLabel
 @onready var new_game: Button = $BG/MainButtons/NewGame
 @onready var fade_canvas_layer: CanvasLayer = $FadeCanvasLayer
+@onready var settings_menu: Control = $BG/SettingsMenu
 
 var save : SaveGame
 var save_json_ids : SaveGame
@@ -29,7 +30,6 @@ func _ready() -> void:
 	reset_all_event_bus_variables()
 	get_tree().paused = false
 	any_button_was_pressed = false
-	EventBus.player_can_leave_nav_mesh = true
 	game_version_label.text = "Game Version: " + ProjectSettings.get_setting("application/config/version")
 	open_game_data_folder(SAVE_GAME_PATH)
 	if EventBus.is_returning_to_main_menu:
@@ -77,7 +77,6 @@ func fade_in_main_buttons():
 
 func _on_new_game_pressed() -> void:
 	if any_button_was_pressed:
-		EventBus.is_in_overworld = true
 		EventBus.game_is_new_save = true
 		EventBus.next_scene = "res://Main World/main.tscn"
 		get_tree().change_scene_to_file("res://Player Selection Screen/player_selection_screen.tscn")
@@ -88,9 +87,13 @@ func _on_load_game_pressed() -> void:
 		display_and_init_save_slots()
 		toggle_main_buttons_and_save_slots()
 
+func _on_settings_pressed() -> void:
+	if settings_menu.visible == false:
+		settings_menu.show()
 
 func _on_quit_pressed() -> void:
 	if any_button_was_pressed:
+		await get_tree().create_timer(0.4).timeout
 		get_tree().quit()
 
 func display_and_init_save_slots():
@@ -137,6 +140,7 @@ func _on_save_button_pressed(id : String):
 	EventBus.is_in_overworld = true
 	EventBus.current_save_file_id = id
 	EventBus.next_scene = "res://Main World/main.tscn"
+	await get_tree().create_timer(0.4).timeout
 	get_tree().change_scene_to_file("res://UI Info and Message Boxes/Load Screen/load_screen.tscn")
 
 func _on_delete_button_pressed(id : String):
