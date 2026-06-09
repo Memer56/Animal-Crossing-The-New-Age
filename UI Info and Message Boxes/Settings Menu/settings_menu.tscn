@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://d05ga1drtqyfy"]
+
+[ext_resource type="FontFile" uid="uid://cjw8yi8nmjntr" path="res://Fonts/Animal-Crossing-Font/FinkHeavy.ttf" id="1_1w36y"]
+[ext_resource type="Script" uid="uid://c2ikquguequeh" path="res://UI Info and Message Boxes/Settings Menu/settings_menu.gd" id="1_f2726"]
+[ext_resource type="PackedScene" uid="uid://bgn1ooceyxm31" path="res://UI Info and Message Boxes/Settings Menu/sound_setting_element.tscn" id="2_ikktu"]
+[ext_resource type="StyleBox" uid="uid://b2uekixfds4px" path="res://Button Styles/normal_button.tres" id="4_mv364"]
+[ext_resource type="StyleBox" uid="uid://dlusgwld66go8" path="res://Button Styles/pressed_button.tres" id="5_5tuas"]
+[ext_resource type="StyleBox" uid="uid://beos1nb5pl78b" path="res://Button Styles/hover_button.tres" id="6_jvoce"]
+[ext_resource type="StyleBox" uid="uid://d1i0p8d83a5df" path="res://Button Styles/focus_button.tres" id="7_xm75w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykh28"]
+bg_color = Color(0.87522477, 0.74652106, 0.5406403, 1)
+border_width_left = 40
+border_width_top = 40
+border_width_right = 40
+border_width_bottom = 40
+border_color = Color(0.6627451, 0.5294118, 0.3137255, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_ikktu"]
+font = ExtResource("1_1w36y")
+font_size = 40
+
+[sub_resource type="FontVariation" id="FontVariation_f2726"]
+base_font = ExtResource("1_1w36y")
+
+[node name="SettingsMenu" type="Control" unique_id=1893792982]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f2726")
+
+[node name="Panel" type="Panel" parent="." unique_id=172884082]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -447.5
+offset_top = -314.5
+offset_right = 447.5
+offset_bottom = 314.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ykh28")
+
+[node name="Label" type="Label" parent="Panel" unique_id=554099678]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -69.0
+offset_top = 48.0
+offset_right = 69.0
+offset_bottom = 87.0
+grow_horizontal = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_ikktu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundVBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1205655237]
+layout_mode = 0
+offset_left = 41.5
+offset_top = 100.5
+offset_right = 856.5
+offset_bottom = 528.5
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="SoundSettingElement" parent="Panel/SoundVBoxContainer" unique_id=1704762297 instance=ExtResource("2_ikktu")]
+layout_mode = 2
+setting_name = "Master Volume"
+audio_bus_name = &"Master"
+
+[node name="SoundSettingElement2" parent="Panel/SoundVBoxContainer" unique_id=772069687 instance=ExtResource("2_ikktu")]
+layout_mode = 2
+setting_name = "Music Volume"
+audio_bus_name = &"Music"
+
+[node name="SoundSettingElement3" parent="Panel/SoundVBoxContainer" unique_id=674873742 instance=ExtResource("2_ikktu")]
+layout_mode = 2
+setting_name = "SFX Volume"
+audio_bus_name = &"SFX"
+
+[node name="Close" type="Button" parent="Panel" unique_id=564981943]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -171.5
+offset_top = -108.5
+offset_right = 171.5
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = SubResource("FontVariation_f2726")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("4_mv364")
+theme_override_styles/pressed = ExtResource("5_5tuas")
+theme_override_styles/hover = ExtResource("6_jvoce")
+theme_override_styles/focus = ExtResource("7_xm75w")
+text = "Close"
+
+[connection signal="pressed" from="Panel/Close" to="." method="_on_close_pressed"]
