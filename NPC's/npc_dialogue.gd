@@ -2,6 +2,10 @@ extends Resource
 class_name NpcDialogue
 ## Index of an npc's array indicates where the player is of possible interactions
 
+@export var tom_intro_dialogue : Array = [
+	[["Welcome to this new island...", "Here, you will be crushed with horrible debt...", "You will owe debt to me since I own this island...hehe", "Anyway, I've given you this tent, place the tent down and come see me in the [color=orange]Town Hall![/color]"], "Tom", [], null]
+]
+
 @export var tom_dialogue : Array = [
 	[["I'm fucking [color=red]Tom[/color]", "What the fuck do you want?", "What should you do", "I'm sorry, no home upgrade for you", "Yes yes, enjoy the bigger house"], "Tom", [1], null]
 ]
@@ -20,6 +24,8 @@ class_name NpcDialogue
 func get_correct_dialogue(npc_name : String, dialogue_index : int) -> Array:
 	var dialogue_array : Array
 	match npc_name:
+		"Tom Intro":
+			dialogue_array = tom_intro_dialogue[dialogue_index]
 		"Tom":
 			dialogue_array = tom_dialogue[dialogue_index]
 		"Timmy":
