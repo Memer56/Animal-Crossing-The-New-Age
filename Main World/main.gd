@@ -36,12 +36,15 @@ var map_rid : RID
 var max_attempts : int = 10
 var min_distance : float = 50.0
 var objects_to_avoid : Array
+var can_trigger_fade_in : bool = true
+var tom
 
 func _ready() -> void:
 	EventBus.player.toggle_inventory.connect(toggle_inventory_interface)
 	EventBus.bake_nav_mesh.connect(bake_nav_mesh)
 	EventBus.save_game_data.connect(save_game_data)
 	EventBus.load_game_data.connect(load_game_data)
+	EventBus.remove_tom_and_free_player.connect(remove_tom_and_free_player)
 	hot_bar_inventory.send_held_slot_data.connect(EventBus.player.set_item_in_hand)
 	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
@@ -51,8 +54,15 @@ func _ready() -> void:
 	BuildManager.transition_camera = transition_camera
 	BuildManager.speed = 10.0 # For build camera movement speed
 	EventBus.is_in_player_house = false
+	EventBus.is_in_overworld = true
 	EventBus.current_trees.clear()
-	if !EventBus.game_is_new_save:
+	if EventBus.game_is_new_save:
+		if EventBus.game_state == EventBus.INTRO:
+			init_new_savegame_events()
+		else:
+			EventBus.player.allow_gravity = true
+	else:
+		EventBus.game_state = EventBus.PLAY
 		load_game_data()
 		if BuildManager.home_can_upgrade:
 			BuildManager.upgrade_home()
@@ -62,14 +72,53 @@ func _ready() -> void:
 	bake_nav_mesh()
 
 func init_new_savegame_events():
-	var tom = TOM_NOOK.instantiate()
+	var tom_spawn_position : Vector3
+	var player_spawn_position : Vector3
+	var player_secondary_position : Vector3
+	var npc_dialgue = NpcDialogue.new()
+	var speech_data = npc_dialgue.get_correct_dialogue("Tom Intro", 0)
+	inventory_interface.hide()
+	
+	await get_tree().process_frame #  Allows the island and town hall to spawn
+	for building in get_tree().get_nodes_in_group("Building"):
+		if building.has_meta("Intro"):
+			tom_spawn_position = building.return_tom_spawn_point()
+			player_spawn_position = building.return_player_spawn_point()
+			player_secondary_position = building.return_player_secondary_point()
+			
+	tom = TOM_NOOK.instantiate()
+	tom.global_position = tom_spawn_position
 	add_child(tom)
-	#tom.global_position = town_hall.global_position
+	EventBus.player.toggle_collisions(2, false)
+	EventBus.player.global_position = player_spawn_position
+	EventBus.player.player_secondary_position = player_secondary_position
+	await get_tree().create_timer(5).timeout
+	EventBus.player.trigger_intro_sequence()
+	await get_tree().create_timer(1.2).timeout
+	EventBus.player.state = EventBus.player.INTRO_SEQUENCE
+	await get_tree().create_timer(2).timeout
+	EventBus.player.state = EventBus.player.FREEZE_PLAYER
+	EventBus.display_speech_bubble.emit(speech_data[0], speech_data[1], speech_data[2], speech_data[3])
+
+func remove_tom_and_free_player():
+	tom.queue_free()
+	await get_tree().create_timer(2).timeout
+	EventBus.player.state = EventBus.player.IDLE
+	EventBus.player.toggle_collisions(2, true)
+	EventBus.player.allow_gravity = true
+	
+	var tween : Tween = get_tree().create_tween()
+	inventory_interface.global_position.y = 120
+	inventory_interface.show()
+	tween.tween_property(inventory_interface, "global_position:y", 0.0, 0.5)
 
 func _on_main_island_nav_mesh_bake_finished() -> void:
 	if EventBus.game_is_new_save:
 		spawn_trees()
-	trigger_fade()
+	
+	if can_trigger_fade_in:
+		can_trigger_fade_in = false
+		trigger_fade()
 
 func connect_toggle_external_inventory_signal():
 	for node in get_tree().get_nodes_in_group("external_inventory"):
@@ -112,7 +161,7 @@ func trigger_fade():
 func bake_nav_mesh():
 	# Allows objects to spawn first before baking the nav mesh
 	await get_tree().create_timer(0.5).timeout
-	main_island_nav_mesh.bake_navigation_mesh(false)
+	main_island_nav_mesh.bake_navigation_mesh(true)
 
 func save_game_data():
 	var save = SaveGame.new()
@@ -163,6 +212,8 @@ func load_game_data():
 	if SaveGame.save_exists(EventBus.current_save_file_id) == true:
 		load_player_data()
 		load_object_data()
+		EventBus.player.allow_gravity = true
+		EventBus.player.toggle_collisions(2, true)
 
 func load_player_data():
 	if EventBus.current_save_file_id:
@@ -310,6 +361,7 @@ func get_random_point_on_nav_mesh() -> Vector3:
 
 func is_too_close(new_point : Vector3, world_objects : Array) -> bool:
 	for point in world_objects:
-		if new_point.distance_to(point.global_position) < min_distance:
-			return true
+		if point:
+			if new_point.distance_to(point.global_position) < min_distance:
+				return true
 	return false
