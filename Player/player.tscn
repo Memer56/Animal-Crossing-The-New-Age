@@ -6,69 +6,43 @@
 [ext_resource type="Resource" uid="uid://crs6qbagtqlbh" path="res://Inventory/Item/Items/Positioning Item/positioning_item.tres" id="4_hshwv"]
 [ext_resource type="Texture2D" uid="uid://dgd2okoaypvt4" path="res://Player/Player_mCheek_Alb.png" id="4_vtle1"]
 [ext_resource type="Texture2D" uid="uid://cubvbj2ihcxlo" path="res://Player Eyes/Textures/Eyes_Albedo.png" id="5_5htga"]
-[ext_resource type="Resource" uid="uid://6h2skx11an10" path="res://Inventory/Item/Items/Furniture/Beds/Simple Bed/simple_bed_item.tres" id="5_gpjlu"]
 [ext_resource type="Texture2D" uid="uid://6fs3v77g501w" path="res://Player/Player_mSkin_Alb.png" id="5_od3ui"]
 [ext_resource type="Texture2D" uid="uid://c1ouxgebuj7so" path="res://Player/Player_mNose_Alb.png" id="6_00tjw"]
 [ext_resource type="Script" uid="uid://bh4g2chmocfi4" path="res://Player/external_body_part.gd" id="6_apopc"]
-[ext_resource type="Resource" uid="uid://bp554kqh6cbmy" path="res://Inventory/Item/Items/Cursed Item/cursed_item.tres" id="6_qemgg"]
-[ext_resource type="Resource" uid="uid://kwin7thjkdv3" path="res://Inventory/Item/Items/Gazebo/gazebo_item.tres" id="7_8viyr"]
 [ext_resource type="PackedScene" uid="uid://b8m3m81u8vkq4" path="res://Inventory/Item/Items/Positioning Item/positioning_tent.tscn" id="7_gpjlu"]
 [ext_resource type="Texture2D" uid="uid://yam7w3vbhitp" path="res://Player/Player_mPaint_Alb.png" id="7_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://blhkh3ttpj6s5" path="res://Player Mouth/Mouth_Albedo.png" id="8_5htga"]
 [ext_resource type="PackedScene" uid="uid://c0ws7r3aiyogq" path="res://Inventory/Item/Items/Furniture/Beds/Simple Bed/simple_bed.tscn" id="8_8mwp6"]
 [ext_resource type="Shader" uid="uid://10it47r2wi6k" path="res://Shaders/colour_swap.gdshader" id="8_dkpta"]
-[ext_resource type="Resource" uid="uid://bcq6meneybdqa" path="res://Inventory/Item/Items/Bells/bells_item.tres" id="8_sm0op"]
 [ext_resource type="Texture2D" uid="uid://c18g2ef7fohm8" path="res://Player Eyes/Textures/Eyes_Skin_Mask.png" id="9_lfmf2"]
 [ext_resource type="Texture2D" uid="uid://ccov6hp61a2wn" path="res://Player Mouth/Mouth_Mask.png" id="9_p5o4e"]
-[ext_resource type="Resource" uid="uid://ljg3w1keaqmf" path="res://Inventory/Item/Items/Tools/Axe/axe_item.tres" id="10_efx54"]
-[ext_resource type="Resource" uid="uid://dt351v7xcoswo" path="res://Inventory/Item/Items/Tools/Flimsy Axe/flimsy_axe.tres" id="11_bbimk"]
 [ext_resource type="PackedScene" uid="uid://dfqxmmy2p4std" path="res://Inventory/Item/Items/Tools/Flimsy Axe/flimsy_axe.tscn" id="14_755ss"]
 [ext_resource type="PackedScene" uid="uid://dhlfrgbt4uaru" path="res://Inventory/Item/Items/Tools/Axe/axe.tscn" id="15_dkpta"]
+[ext_resource type="AudioStream" uid="uid://0mnwe0fojmjp" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk1.ogg" id="15_j2n6q"]
+[ext_resource type="AudioStream" uid="uid://bq5udco1ubbrp" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk2.ogg" id="16_c6x0f"]
 [ext_resource type="Animation" uid="uid://bp46xdrc2ky1a" path="res://Animations Resources/swing.res" id="16_lfmf2"]
 [ext_resource type="AnimationLibrary" uid="uid://nm2pblg6cvih" path="res://Animations Resources/Player Anims.res" id="16_pisgm"]
+[ext_resource type="AudioStream" uid="uid://c8d4gj72r3tml" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk3.ogg" id="17_jp1hh"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://u7wuklcyfjpt" path="res://Animations Resources/anim_node_state.tres" id="18_b1ygp"]
 [ext_resource type="Texture2D" uid="uid://bgwylhyv54581" path="res://Player Hair/Hair 1/hair 1_mHair_AlbGry.png" id="18_n471f"]
+[ext_resource type="AudioStream" uid="uid://bsvjkkgh36hsm" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk4.ogg" id="18_qs4pp"]
 [ext_resource type="Texture2D" uid="uid://bswj701166p4k" path="res://Player Hair/Hair 1/mHair_Nrm.png" id="19_7emwf"]
+[ext_resource type="AudioStream" uid="uid://y4wwjk2xgmkw" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk5.ogg" id="19_8ynux"]
 [ext_resource type="PackedScene" uid="uid://duepwdb7eo68a" path="res://Clothes/Dress 1/dress_1.tscn" id="19_o28un"]
+[ext_resource type="AudioStream" uid="uid://cr2ydx4bm532i" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk6.ogg" id="20_d30e8"]
+[ext_resource type="AudioStream" uid="uid://c6kselnbuovwk" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk7.ogg" id="21_6pogt"]
+[ext_resource type="AudioStream" uid="uid://b3de2ty64ntb8" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk8.ogg" id="22_ie76m"]
+[ext_resource type="AudioStream" uid="uid://bllnneawwhcva" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk9.ogg" id="23_dy65m"]
+[ext_resource type="AudioStream" uid="uid://dovp8egca2yl" path="res://Audio/SFX/Grass Foostep Sounds/grass_walk10.ogg" id="24_maysp"]
 
-[sub_resource type="Resource" id="Resource_gpjlu"]
+[sub_resource type="Resource" id="Resource_j2n6q"]
 script = ExtResource("3_gu6f8")
 item_data = ExtResource("4_hshwv")
 metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
 
-[sub_resource type="Resource" id="Resource_8mwp6"]
-script = ExtResource("3_gu6f8")
-item_data = ExtResource("5_gpjlu")
-metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
-
-[sub_resource type="Resource" id="Resource_qemgg"]
-script = ExtResource("3_gu6f8")
-item_data = ExtResource("6_qemgg")
-metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
-
-[sub_resource type="Resource" id="Resource_sm0op"]
-script = ExtResource("3_gu6f8")
-item_data = ExtResource("7_8viyr")
-metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
-
-[sub_resource type="Resource" id="Resource_76lrf"]
-script = ExtResource("3_gu6f8")
-item_data = ExtResource("8_sm0op")
-metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
-
-[sub_resource type="Resource" id="Resource_755ss"]
-script = ExtResource("3_gu6f8")
-item_data = ExtResource("10_efx54")
-metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
-
-[sub_resource type="Resource" id="Resource_m0h3t"]
-script = ExtResource("3_gu6f8")
-item_data = ExtResource("11_bbimk")
-metadata/_custom_type_script = "uid://bxpjsv4jkvmv4"
-
 [sub_resource type="Resource" id="Resource_p5o4e"]
 script = ExtResource("2_p5o4e")
-slot_datas = Array[ExtResource("3_gu6f8")]([SubResource("Resource_gpjlu"), SubResource("Resource_8mwp6"), SubResource("Resource_qemgg"), SubResource("Resource_sm0op"), SubResource("Resource_76lrf"), null, SubResource("Resource_755ss"), SubResource("Resource_m0h3t"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("3_gu6f8")]([SubResource("Resource_j2n6q"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://c0lx51tfcrb2m"
 
 [sub_resource type="Resource" id="Resource_hshwv"]
@@ -564,6 +538,21 @@ size = Vector3(79.84534, 57.006287, 44.53131)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gpjlu"]
 
+[sub_resource type="Animation" id="Animation_d30e8"]
+resource_name = "Enter Airport"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(20.55134, 0, -17.20714)]
+}
+
 [sub_resource type="Animation" id="Animation_7emwf"]
 resource_name = "Enter Building"
 length = 2.0
@@ -578,6 +567,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, -67.49976)]
+}
+
+[sub_resource type="Animation" id="Animation_6pogt"]
+resource_name = "Exit Airport"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-17.817863, 0, 17.580042)]
 }
 
 [sub_resource type="Animation" id="Animation_gpjlu"]
@@ -613,7 +617,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpjlu"]
 _data = {
+&"Enter Airport": SubResource("Animation_d30e8"),
 &"Enter Building": SubResource("Animation_7emwf"),
+&"Exit Airport": SubResource("Animation_6pogt"),
 &"Leave Building": SubResource("Animation_gpjlu"),
 &"RESET": SubResource("Animation_hshwv")
 }
@@ -631,10 +637,12 @@ held_items = Dictionary[String, PackedScene]({
 "Simple Bed": ExtResource("8_8mwp6"),
 "Tent": ExtResource("7_gpjlu")
 })
+footstep_audio = Array[AudioStreamOggVorbis]([ExtResource("15_j2n6q"), ExtResource("16_c6x0f"), ExtResource("17_jp1hh"), ExtResource("18_qs4pp"), ExtResource("19_8ynux"), ExtResource("20_d30e8"), ExtResource("21_6pogt"), ExtResource("22_ie76m"), ExtResource("23_dy65m"), ExtResource("24_maysp")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=686033127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4297905, 0)
 shape = SubResource("CapsuleShape3D_k53q1")
+debug_color = Color(0.9007318, 0.85988384, 0, 0.41960785)
 
 [node name="EyesMeshSetter" type="Node3D" parent="." unique_id=954823739 node_paths=PackedStringArray("node_to_set")]
 script = ExtResource("6_apopc")
@@ -651,6 +659,7 @@ script = ExtResource("6_apopc")
 node_to_set = NodePath("../PlayerNode/Armature/Skeleton3D/Body__mMouth")
 
 [node name="PlayerNode" type="Node3D" parent="." unique_id=1395006145]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Armature" type="Node3D" parent="PlayerNode" unique_id=2095930203]
 transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
@@ -1057,34 +1066,41 @@ visible = false
 
 [node name="ItemGroundRaycasts" type="Node3D" parent="PlayerNode/ItemDropPoint" unique_id=1088135465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.537348)
+visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="PlayerNode/ItemDropPoint/ItemGroundRaycasts" unique_id=1059857896]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -10.842301, 0, -20.380188)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="RayCast3D2" type="RayCast3D" parent="PlayerNode/ItemDropPoint/ItemGroundRaycasts" unique_id=796343175]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 11.02688, 0, -20.448215)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="RayCast3D3" type="RayCast3D" parent="PlayerNode/ItemDropPoint/ItemGroundRaycasts" unique_id=2027565278]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 11.002295, 0, -4.253256)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="RayCast3D4" type="RayCast3D" parent="PlayerNode/ItemDropPoint/ItemGroundRaycasts" unique_id=821858764]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -10.903172, 0, -4.1970615)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="ItemCollisionChecker" type="Area3D" parent="PlayerNode/ItemDropPoint" unique_id=1235153038]
+visible = false
 collision_layer = 0
 collision_mask = 6
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerNode/ItemDropPoint/ItemCollisionChecker" unique_id=1538561554]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07611084, 2.4246368, 2.225212)
+visible = false
 shape = SubResource("BoxShape3D_qemgg")
 debug_color = Color(0.7606972, 0.17736357, 1, 1)
 
@@ -1093,28 +1109,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.1677856, 24.634346)
 visible = false
 
 [node name="GroundDetectionRaycasts" type="Node3D" parent="PlayerNode/ObjectDropPoint" unique_id=123497855]
+visible = false
 
 [node name="RayCast3D" type="RayCast3D" parent="PlayerNode/ObjectDropPoint/GroundDetectionRaycasts" unique_id=1907160618]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -39.191273, 0, -18.557861)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="RayCast3D2" type="RayCast3D" parent="PlayerNode/ObjectDropPoint/GroundDetectionRaycasts" unique_id=1439217058]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 40.29009, 0, -18.557861)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="RayCast3D3" type="RayCast3D" parent="PlayerNode/ObjectDropPoint/GroundDetectionRaycasts" unique_id=469544660]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, 40.29009, 0, 26.015587)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="RayCast3D4" type="RayCast3D" parent="PlayerNode/ObjectDropPoint/GroundDetectionRaycasts" unique_id=1080373985]
 transform = Transform3D(14, 0, 0, 0, 14, 0, 0, 0, 14, -39.315517, 0, 26.015587)
+visible = false
 enabled = false
 collision_mask = 2
 
 [node name="CollisionChecker" type="Area3D" parent="PlayerNode/ObjectDropPoint" unique_id=123498475]
+visible = false
 collision_layer = 0
 collision_mask = 6
 monitoring = false
@@ -1137,8 +1159,8 @@ collision_mask = 20
 debug_shape_custom_color = Color(9.62615e-08, 0.4775265, 0.75049263, 1)
 
 [node name="LedgeDetector" type="RayCast3D" parent="PlayerNode" unique_id=513808433]
-transform = Transform3D(1, 0, 0, 0, 18.03, 0, 0, 0, 1, 0, 7.5647035, 6.64576)
-enabled = false
+transform = Transform3D(21.945, 0, 0, 0, 18.03, 0, 0, 0, 23.655, 0, 7.5647035, 6.64576)
+visible = false
 collision_mask = 2
 debug_shape_thickness = 5
 

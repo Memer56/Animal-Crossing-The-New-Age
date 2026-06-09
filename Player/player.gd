@@ -5,14 +5,11 @@ signal toggle_pause
 signal save_outside_data
 signal save_player_data
 
-### Audio ###
-const FOOTSTEPS_GRASS_DIRT_1_V_2 = preload("uid://dmbju2vqduvs7")
-const FOOTSTEPS_SAND_2__571950_ = preload("uid://bnh5lwb8vllbk")
-
 @export var inventory_data : InventoryData
 @export var hotbar_inventory_data : InventoryData
 @export var skin_colour : Color
 @export var held_items : Dictionary[String, PackedScene]
+@export var footstep_audio : Array[AudioStreamOggVorbis]
 @export var forced_rotation_y : float = 0.0
 @export var is_entering_building : bool = true
 @export var should_force_rotation_for_entry : bool = true
@@ -45,12 +42,14 @@ var jumpforce = 40.0
 var gravity = 80.0
 var state
 var anim_speed : float = 1.0
-var allow_gravity : bool = true
+var allow_gravity : bool = false
 var scene_change_fade_called : bool = false
 var doorway_events_can_trigger : bool = false
 var raycasted_door_found : StaticBody3D
 var map_rid : RID
 var edge_push_strength : float = 50.0
+var doorway_is_airport : bool = false
+var player_secondary_position : Vector3
 
 enum {
 	IDLE,
@@ -59,7 +58,8 @@ enum {
 	ACTION,
 	ENTER_DOOR,
 	FREEZE_PLAYER,
-	RE_ENTER_OVERWORLD
+	RE_ENTER_OVERWORLD,
+	INTRO_SEQUENCE
 }
 
 func _ready() -> void:
@@ -69,16 +69,10 @@ func _ready() -> void:
 	if EventBus.trigger_building_exit_event:
 		state = RE_ENTER_OVERWORLD
 		EventBus.trigger_building_exit_event = false
-		disable_and_enable_nav_mesh_limit(6.0)
-	else:
-		disable_and_enable_nav_mesh_limit(1.0)
+
 	if doorway_events_can_trigger == false:
 		doorway_events_can_trigger = true
 	
-	# Timer give the below a chance for is_in_overworld to be in correct state
-	await get_tree().create_timer(0.4).timeout
-	if EventBus.is_in_overworld:
-		ledge_detector.enabled = true
 	await get_tree().create_timer(0.1).timeout
 	set_skin_colour()
 	set_hair_colour()
@@ -106,9 +100,15 @@ func _physics_process(delta: float) -> void:
 		ENTER_DOOR:
 			enter_door()
 		FREEZE_PLAYER:
-			velocity = Vector3.ZERO
+			var anim_state = animation_tree.get("parameters/playback")
+			anim_state.travel("Idle")
+			EventBus.update_clothes_anim.emit("Idle", anim_speed)
+			velocity.x = move_toward(velocity.x, 0, speed)
+			velocity.z = move_toward(velocity.z, 0, speed)
 		RE_ENTER_OVERWORLD:
 			leave_building_doorway()
+		INTRO_SEQUENCE:
+			trigger_intro_sequence()
 	
 	animation_tree.advance(delta * anim_speed)
 	detect_raycast_collision()
@@ -124,11 +124,6 @@ func set_player_position():
 		if !EventBus.player_customisations.is_empty():
 			if EventBus.player_customisations.size() > 3:
 				global_position = EventBus.player_customisations[3]
-
-func disable_and_enable_nav_mesh_limit(time : float):
-	await get_tree().create_timer(time).timeout
-	if EventBus.is_in_overworld:
-		EventBus.player_can_leave_nav_mesh = false
 
 func idle(input_dir):
 	var anim_state = animation_tree.get("parameters/playback")
@@ -164,13 +159,13 @@ func move_player(delta, _direction, input_dir):
 	
 	if input_dir == Vector2.ZERO:
 		state = IDLE
-		audio_stream_player.stop()
 	
 	player_node.rotation.y = lerp_angle(player_node.rotation.y, atan2(velocity.x, velocity.z) - rotation.y, delta * 10)
 
 func play_footsteps():
 	if audio_stream_player.playing == false:
-		audio_stream_player.stream = FOOTSTEPS_GRASS_DIRT_1_V_2
+		var random_index : int = randi_range(0, 9)
+		audio_stream_player.stream = footstep_audio[random_index]
 		audio_stream_player.pitch_scale = randf_range(0.8, 1.1)
 		audio_stream_player.play()
 
@@ -189,9 +184,14 @@ func enter_door():
 		anim_state.travel("Walk")
 		EventBus.update_clothes_anim.emit("Walk", anim_speed)
 		EventBus.save_game_data.emit()
+		
 		if should_force_rotation_for_entry:
-			#Makes player face forward
-			forced_rotation_y = 180 if player_node.rotation.y > 0 else -180.0
+			#Makes player face forward or angled
+			if doorway_is_airport:
+				forced_rotation_y = 130
+			else:
+				forced_rotation_y = 180 if player_node.rotation.y > 0 else -180.0
+			
 			is_entering_building = true
 		else:
 			# if not walk forward change walk direction
@@ -199,9 +199,16 @@ func enter_door():
 		
 		
 		if is_entering_building and !EventBus.trigger_building_exit_event:
-			doorway_entry_anim.play("Enter Building")
+			if doorway_is_airport:
+				doorway_entry_anim.play("Enter Airport")
+			else:
+				doorway_entry_anim.play("Enter Building")
 		else:
-			doorway_entry_anim.play("Leave Building")
+			if doorway_is_airport:
+				doorway_entry_anim.play("Exit Airport")
+			else:
+				doorway_entry_anim.play("Leave Building")
+		
 		player_node.rotation.y = lerp_angle(player_node.rotation.y, deg_to_rad(forced_rotation_y), 0.25)
 		camera_3d.top_level = true
 		await get_tree().create_timer(2.1).timeout # Move player for 2 secs
@@ -215,9 +222,9 @@ func enter_door():
 		await get_tree().create_timer(2).timeout # wait then transition scene
 		
 		if EventBus.is_in_overworld:
-			get_tree().change_scene_to_file("res://Room/room.tscn")
+			get_tree().change_scene_to_file.call_deferred("res://Room/room.tscn")
 		else:
-			get_tree().change_scene_to_file("res://Main World/main.tscn")
+			get_tree().change_scene_to_file.call_deferred("res://Main World/main.tscn")
 
 func leave_building_doorway():
 	if doorway_events_can_trigger:
@@ -227,13 +234,21 @@ func leave_building_doorway():
 		doorway_events_can_trigger = false
 		await get_tree().create_timer(2).timeout
 		if raycasted_door_found:
-			raycasted_door_found.play_anim()
+			if raycasted_door_found.has_meta("Airport"):
+				raycasted_door_found.send_room_to_event_bus()
+				# I dont know why this has to be -160 degrees you'd think it'd be -45
+				player_node.rotation.y = lerp_angle(player_node.rotation.y, deg_to_rad(-160), 0.25)
+			else:
+				raycasted_door_found.play_anim()
 		await get_tree().create_timer(1).timeout
 		var anim_state = animation_tree.get("parameters/playback")
 		anim_state.travel("Walk")
 		EventBus.update_clothes_anim.emit("Walk", anim_speed)
 		#EventBus.last_building_entered["building node"].play_anim()
-		doorway_entry_anim.play("Leave Building")
+		if raycasted_door_found.has_meta("Airport"):
+			doorway_entry_anim.play("Exit Airport")
+		else:
+			doorway_entry_anim.play("Leave Building")
 		await get_tree().create_timer(1.5).timeout
 		global_position = player_node.global_position
 		doorway_entry_anim.stop()
@@ -241,7 +256,18 @@ func leave_building_doorway():
 		state = IDLE
 		allow_gravity = true
 		toggle_collisions(2, true)
-		EventBus.player_can_leave_nav_mesh = false
+
+func trigger_intro_sequence():
+	player_node.rotation.y = lerp_angle(player_node.rotation.y, deg_to_rad(-160), 0.25)
+	var anim_state = animation_tree.get("parameters/playback")
+	anim_state.travel("Walk")
+	EventBus.update_clothes_anim.emit("Walk", anim_speed)
+	var tween : Tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", player_secondary_position, 2)
+
+func update_root_to_real_position():
+	print("Moving root to player_node")
+	global_position = lerp(global_position, player_node.global_position, 0.25)
 
 func exit_state():
 	anim_speed = 1.0
@@ -389,12 +415,17 @@ func detect_raycast_collision():
 				raycasted_door_found = collider
 				if Input.is_action_just_pressed("Interact"):
 					if !EventBus.service_buildings_closed:
+						if collider.has_meta("Airport"):
+							doorway_is_airport = true
+							collider.send_room_to_event_bus()
+						else:
+							collider.play_anim()
 						doorway_events_can_trigger = true
 						toggle_collisions(2, false)
 						EventBus.last_building_entered["building pos"] = collider.return_spawn_point()
 						EventBus.last_building_entered["building node"] = collider
 						state = ENTER_DOOR
-					collider.play_anim()
+						
 			
 			if collider.is_in_group("ThisNPCTalks"):
 				if Input.is_action_just_pressed("Interact"):
@@ -444,8 +475,7 @@ func detect_raycast_collision():
 
 func is_player_on_land():
 	# All this prevents the player from falling off the edges of rivers and such
-	if !EventBus.player_can_leave_nav_mesh and EventBus.is_in_overworld:
-		var player_pos = global_position
+	if EventBus.is_in_overworld:
 		
 		if !ledge_detector.is_colliding():
 			#global_position = lerp(global_position, player_pos, 0.3)
