@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dv53gxd1trk8d"]
 
 [ext_resource type="Texture2D" uid="uid://drr76vg3r380l" path="res://Buildings/Airport/Raw files/airport_model_mWall_Alb.png" id="1_ed300"]
+[ext_resource type="Script" uid="uid://dg7jxbxvtn0ge" path="res://Buildings/Airport/airport.gd" id="1_glvps"]
 [ext_resource type="Texture2D" uid="uid://cxye1r0781r3u" path="res://Buildings/Airport/Raw files/airport_model_mLobby_Alb.png" id="2_4ogp6"]
 [ext_resource type="Texture2D" uid="uid://cx77skrnq8722" path="res://Buildings/Airport/Raw files/airport_model_mLobby_Emi.png" id="3_ljb58"]
 [ext_resource type="Texture2D" uid="uid://cp7n5dgdrqp7m" path="res://Buildings/Airport/Raw files/airport_model_mWindow_Alb.png" id="4_glvps"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c1jrh0cgylrtf" path="res://Buildings/Airport/Raw files/airport_model_mGlassSide_Emi.png" id="10_r3ovy"]
 [ext_resource type="Texture2D" uid="uid://rbwj45o02axm" path="res://Buildings/Airport/Raw files/airport_model_mDeck_Alb.png" id="11_cw2y5"]
 [ext_resource type="PackedScene" uid="uid://bo817j1k6njfy" path="res://Buildings/Airport/plane.tscn" id="12_4ogp6"]
+[ext_resource type="Script" uid="uid://n20x3gdmudna" path="res://Buildings/Airport/airport_doorway.gd" id="13_ljb58"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiim1"]
 resource_name = "mWall"
@@ -497,7 +499,12 @@ size = Vector3(31.441898, 27.362793, 19.320671)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jfe8p"]
 size = Vector3(20.460907, 27.362793, 5.7972636)
 
-[node name="Airport" type="Node3D" unique_id=1751176815]
+[sub_resource type="BoxShape3D" id="BoxShape3D_vsv4a"]
+size = Vector3(3.6313477, 27.026978, 15.192871)
+
+[node name="Airport" type="Node3D" unique_id=1751176815 groups=["Building"]]
+script = ExtResource("1_glvps")
+metadata/Intro = "Intro"
 
 [node name="airport_model" type="Node3D" parent="." unique_id=2054597688]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
@@ -586,3 +593,25 @@ shape = SubResource("BoxShape3D_jfe8p")
 
 [node name="Plane" parent="." unique_id=1448923874 instance=ExtResource("12_4ogp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.76586, 41.676765, -18.01591)
+
+[node name="AirportDoorway" type="StaticBody3D" parent="." unique_id=573085694 node_paths=PackedStringArray("player_spawn_point") groups=["Door"]]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("13_ljb58")
+room = "Nook's Cranny"
+player_spawn_point = NodePath("../PlayerSpawnPoint")
+metadata/Airport = "Airport"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AirportDoorway" unique_id=198788559]
+transform = Transform3D(0.68865836, 0, 0.7250859, 0, 1, 0, -0.7250859, 0, 0.68865836, -25.352728, 52.020287, -64.46728)
+shape = SubResource("BoxShape3D_vsv4a")
+debug_color = Color(0.9259828, 4.2643846e-05, 0.67609453, 0.41960785)
+
+[node name="PlayerSpawnPoint" type="Marker3D" parent="." unique_id=696234816]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.134117, 42.406242, -72.09673)
+
+[node name="PlayerSecondaryPoint" type="Marker3D" parent="." unique_id=2100786365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.180252, 42.406242, -48.90036)
+
+[node name="TomSpawnPoint" type="Marker3D" parent="." unique_id=1881983413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.71057, 42.351894, -75.48929)
