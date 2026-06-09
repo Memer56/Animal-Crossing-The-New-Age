@@ -1,9 +1,10 @@
 extends Control
 
 @onready var resume: Button = $Panel/VBoxContainer/Resume
+@onready var settings_menu: Control = $SettingsMenu
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Pause"):
 		toggle_game_pause()
 		toggle_self()
@@ -29,7 +30,8 @@ func _on_resume_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	if !settings_menu.visible:
+		settings_menu.show()
 
 
 func _on_save_pressed() -> void:
@@ -42,6 +44,6 @@ func _on_save_pressed() -> void:
 func _on_save_and_quit_pressed() -> void:
 	EventBus.is_returning_to_main_menu = true
 	EventBus.save_game_data.emit()
-	FadeCanvasLayer.trigger_scene_change_fade(true)
+	EventBus.toggle_fade.emit(true)
 	await get_tree().create_timer(0.6).timeout
 	get_tree().change_scene_to_file.bind("res://UI Info and Message Boxes/Main Menu/main_menu.tscn").call_deferred()
