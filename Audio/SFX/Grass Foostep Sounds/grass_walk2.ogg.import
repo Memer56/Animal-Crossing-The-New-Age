@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bq5udco1ubbrp"
+path="res://.godot/imported/grass_walk2.ogg-6b6ebb0f4a1a8a7ffa5e4d1a56f10ed8.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/SFX/Grass Foostep Sounds/grass_walk2.ogg"
+dest_files=["res://.godot/imported/grass_walk2.ogg-6b6ebb0f4a1a8a7ffa5e4d1a56f10ed8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
