@@ -8,6 +8,7 @@ const PICK_UP = preload("uid://c8p87t4ex6hyc")
 @onready var player_spawn_point: Marker3D = $PlayerSpawnPoint
 @onready var build_camera: Camera3D = $BuildCamera
 @onready var transition_camera: Camera3D = $TransitionCamera
+@onready var fade_canvas_layer: CanvasLayer = $FadeCanvasLayer
 
 var lights : Array
 var save : SaveGame
@@ -15,6 +16,8 @@ var save_json_ids : SaveGame
 var characters  = "abcdefghijklmnopqrstuvwxyz"
 
 func _ready() -> void:
+	# for some fucking reason I must emit this signal rather than call directly / what the fuck
+	EventBus.toggle_fade.emit(false)
 	EventBus.player.toggle_inventory.connect(toggle_inventory_interface)
 	EventBus.save_game_data.connect(save_game_data)
 	hot_bar_inventory.send_held_slot_data.connect(EventBus.player.set_item_in_hand)
@@ -24,9 +27,7 @@ func _ready() -> void:
 	spawn_room()
 	EventBus.player.global_position = player_spawn_point.global_position
 	EventBus.player.player_node.global_rotation_degrees = Vector3(0, 180, 0)
-	FadeCanvasLayer.trigger_scene_change_fade(false)
 	EventBus.is_in_overworld = false
-	EventBus.player_can_leave_nav_mesh = true
 	BuildManager.build_camera = build_camera
 	BuildManager.transition_camera = transition_camera
 	BuildManager.speed = 1.0 # For build camera movement speed
@@ -115,10 +116,13 @@ func save_game_data():
 	save.savings_balance = EventBus.savings_balance
 	save.loan_balance = EventBus.loan_balance
 	save.previous_loan_balance = EventBus.previous_loan_balance
+	save.player_data = EventBus.player_customisations
 	save.player_is_debt_free = EventBus.player_is_debt_free
 	save.trees = EventBus.current_trees
 	save.house_level = EventBus.house_level
 	save.world_time = EventBus.world_time
+	save.npc_houses = EventBus.npc_houses
+	save.selected_island_info = EventBus.selected_island_info
 	
 	save.write_savegame_data(EventBus.current_save_file_id)
 
@@ -135,7 +139,9 @@ func load_game_data():
 	EventBus.loan_balance = save.loan_balance
 	EventBus.previous_loan_balance = save.previous_loan_balance
 	EventBus.player_is_debt_free = save.player_is_debt_free
+	EventBus.player_customisations = save.player_data
 	EventBus.house_level = save.house_level
+	EventBus.selected_island_info = save.selected_island_info
 	inventory_interface.set_player_inventory_data(EventBus.player.inventory_data)
 	inventory_interface.set_player_hot_bar_inventory(EventBus.player.hotbar_inventory_data)
 	load_object_data()
